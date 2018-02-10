@@ -195,8 +195,8 @@ namespace CaritasManager
 				sqlk.CommandText = "CREATE TABLE password " +
 									"( " +
 										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"password TEXT" +
-									"); INSERT INTO password (password) VALUES ('')";
+                                        "passwd TEXT" +
+                                    "); INSERT INTO password (passwd) VALUES ('')";
 
 				executeNonQuery(sqlk);
 			}

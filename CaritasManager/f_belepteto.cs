@@ -25,17 +25,33 @@ namespace CaritasManager
 
 		private void F_belepteto_Load(object sender, EventArgs e)
 		{
-			sqlc = c_DBHandler.connectToDB();
-			sqlc.Open();
-			if (!c_DBHandler.checkPassword(sqlc))
-			{
-				MessageBox.Show("Jelenleg nincs a programban jelszó beállítva.\r\nAz OK gombra kattintás után, megjelenő ablakban állíthat be új érvényes jelszót.", "Nincs jelszó Beállítva", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				f_EditPassword fe = new f_EditPassword();
-				fe.empty = true;
-				fe.sqlc = sqlc;
-				fe.ShowDialog();
-			}
+            try
+            {
+                c_DBHandler.createDBFile();
+                sqlc = c_DBHandler.connectToDB();
+                sqlc.Open();
+                c_DBHandler.createTables(sqlc);
+            }
+            catch
+            {
+                //TODO: valami szöveget írjunk ki
+            }
 
+            try
+            {
+                if (!c_DBHandler.checkPassword(sqlc))
+                {
+                    MessageBox.Show("Jelenleg nincs a programban jelszó beállítva.\r\nAz OK gombra kattintás után, megjelenő ablakban állíthat be új érvényes jelszót.", "Nincs jelszó Beállítva", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    f_EditPassword fe = new f_EditPassword();
+                    fe.empty = true;
+                    fe.sqlc = sqlc;
+                    fe.ShowDialog();
+                }
+            }
+            catch
+            {
+                //TODO: valami szöveget írjunk ki
+            }
 
 		}
 
