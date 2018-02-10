@@ -35,12 +35,12 @@
 			this.label5 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.p_Color3 = new System.Windows.Forms.Panel();
+			this.p_Color2 = new System.Windows.Forms.Panel();
+			this.p_Color1 = new System.Windows.Forms.Panel();
+			this.tb_ProfileName = new System.Windows.Forms.TextBox();
 			this.btn_SelectFont = new System.Windows.Forms.Button();
 			this.p_FontColor = new System.Windows.Forms.Panel();
-			this.p_Color1 = new System.Windows.Forms.Panel();
-			this.p_Color2 = new System.Windows.Forms.Panel();
-			this.p_Color3 = new System.Windows.Forms.Panel();
 			this.btn_Cancel = new System.Windows.Forms.Button();
 			this.btn_Save = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
@@ -122,13 +122,47 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Színek";
 			// 
-			// textBox1
+			// p_Color3
 			// 
-			this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.textBox1.Location = new System.Drawing.Point(124, 3);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(245, 29);
-			this.textBox1.TabIndex = 8;
+			this.p_Color3.BackColor = System.Drawing.Color.LightPink;
+			this.p_Color3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.p_Color3.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.p_Color3.Location = new System.Drawing.Point(281, 105);
+			this.p_Color3.Name = "p_Color3";
+			this.p_Color3.Size = new System.Drawing.Size(72, 24);
+			this.p_Color3.TabIndex = 14;
+			this.p_Color3.Click += new System.EventHandler(this.p_FontColor_Click);
+			// 
+			// p_Color2
+			// 
+			this.p_Color2.BackColor = System.Drawing.Color.Moccasin;
+			this.p_Color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.p_Color2.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.p_Color2.Location = new System.Drawing.Point(281, 68);
+			this.p_Color2.Name = "p_Color2";
+			this.p_Color2.Size = new System.Drawing.Size(72, 24);
+			this.p_Color2.TabIndex = 13;
+			this.p_Color2.Click += new System.EventHandler(this.p_FontColor_Click);
+			// 
+			// p_Color1
+			// 
+			this.p_Color1.BackColor = System.Drawing.Color.LightGreen;
+			this.p_Color1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.p_Color1.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.p_Color1.Location = new System.Drawing.Point(281, 31);
+			this.p_Color1.Name = "p_Color1";
+			this.p_Color1.Size = new System.Drawing.Size(72, 24);
+			this.p_Color1.TabIndex = 12;
+			this.p_Color1.Click += new System.EventHandler(this.p_FontColor_Click);
+			// 
+			// tb_ProfileName
+			// 
+			this.tb_ProfileName.BackColor = System.Drawing.Color.White;
+			this.tb_ProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.tb_ProfileName.Location = new System.Drawing.Point(124, 3);
+			this.tb_ProfileName.Name = "tb_ProfileName";
+			this.tb_ProfileName.Size = new System.Drawing.Size(245, 29);
+			this.tb_ProfileName.TabIndex = 8;
 			// 
 			// btn_SelectFont
 			// 
@@ -151,39 +185,6 @@
 			this.p_FontColor.TabIndex = 11;
 			this.p_FontColor.Click += new System.EventHandler(this.p_FontColor_Click);
 			// 
-			// p_Color1
-			// 
-			this.p_Color1.BackColor = System.Drawing.Color.LightGreen;
-			this.p_Color1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.p_Color1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color1.Location = new System.Drawing.Point(281, 31);
-			this.p_Color1.Name = "p_Color1";
-			this.p_Color1.Size = new System.Drawing.Size(72, 24);
-			this.p_Color1.TabIndex = 12;
-			this.p_Color1.Click += new System.EventHandler(this.p_FontColor_Click);
-			// 
-			// p_Color2
-			// 
-			this.p_Color2.BackColor = System.Drawing.Color.Moccasin;
-			this.p_Color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.p_Color2.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color2.Location = new System.Drawing.Point(281, 68);
-			this.p_Color2.Name = "p_Color2";
-			this.p_Color2.Size = new System.Drawing.Size(72, 24);
-			this.p_Color2.TabIndex = 13;
-			this.p_Color2.Click += new System.EventHandler(this.p_FontColor_Click);
-			// 
-			// p_Color3
-			// 
-			this.p_Color3.BackColor = System.Drawing.Color.LightPink;
-			this.p_Color3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.p_Color3.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color3.Location = new System.Drawing.Point(281, 105);
-			this.p_Color3.Name = "p_Color3";
-			this.p_Color3.Size = new System.Drawing.Size(72, 24);
-			this.p_Color3.TabIndex = 14;
-			this.p_Color3.Click += new System.EventHandler(this.p_FontColor_Click);
-			// 
 			// btn_Cancel
 			// 
 			this.btn_Cancel.Location = new System.Drawing.Point(16, 308);
@@ -192,6 +193,7 @@
 			this.btn_Cancel.TabIndex = 12;
 			this.btn_Cancel.Text = "Mégse";
 			this.btn_Cancel.UseVisualStyleBackColor = true;
+			this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
 			// 
 			// btn_Save
 			// 
@@ -212,14 +214,16 @@
 			this.Controls.Add(this.btn_Cancel);
 			this.Controls.Add(this.p_FontColor);
 			this.Controls.Add(this.btn_SelectFont);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.tb_ProfileName);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "f_EditProfile";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Profil Módosítása";
+			this.Load += new System.EventHandler(this.form_loaded);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
@@ -239,7 +243,7 @@
 		private System.Windows.Forms.Panel p_Color3;
 		private System.Windows.Forms.Panel p_Color2;
 		private System.Windows.Forms.Panel p_Color1;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox tb_ProfileName;
 		private System.Windows.Forms.Button btn_SelectFont;
 		private System.Windows.Forms.Panel p_FontColor;
 		private System.Windows.Forms.Button btn_Cancel;

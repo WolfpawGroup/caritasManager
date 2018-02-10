@@ -231,7 +231,7 @@ namespace CaritasManager
 			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
 			return sqlc;
 		}
-
+		
 		/// <summary>
 		/// Adds new profile line or edits an existing one
 		/// </summary>
@@ -242,6 +242,8 @@ namespace CaritasManager
 		public static string editProfile(SQLiteConnection sqlc, profile p, bool edit)
 		{
 			if (!connectioinOpen(sqlc)) { return "ERROR:-1"; }
+
+			//TODO: NE ENGEDJÜK MEG, HOGY ÜRES LEGYEN A NEVE!!!!!
 
 			string command = string.Format("SELECT id FROM profilok WHERE lower(profil_name)='{0}'", p.name.ToLower());
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
@@ -320,6 +322,41 @@ namespace CaritasManager
 			return "";
 		}
 
+		public static List<profile> getProfiles(SQLiteConnection sqlc)
+		{
+			if (!connectioinOpen(sqlc)) { return null; }
+
+			List<profile> proflist = new List<profile>();
+
+			SQLiteCommand sqlk = new SQLiteCommand("SELECT * FROM profilok", sqlc);
+			SQLiteDataReader r = sqlk.ExecuteReader();
+			while (r.Read())
+			{
+				try
+				{
+					profile p = new profile();
+					p.name = r.GetString(r.GetOrdinal("profil_name"));
+					p.fontStyle = r.GetString(r.GetOrdinal("font_style"));
+					p.fontSize = r.GetString(r.GetOrdinal("font_size"));
+					p.fontFamily = r.GetString(r.GetOrdinal("font_family"));
+					p.fontColor = r.GetString(r.GetOrdinal("font_color"));
+					p.color_1 = r.GetString(r.GetOrdinal("color_1"));
+					p.color_2 = r.GetString(r.GetOrdinal("color_2"));
+					p.color_3 = r.GetString(r.GetOrdinal("color_3"));
+					p.last_login = r.GetString(r.GetOrdinal("last_login"));
+
+					proflist.Add(p);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.ToString());
+					System.Media.SystemSounds.Asterisk.Play();
+				}
+			}
+
+			return proflist;
+		}
+
 		/// <summary>
 		/// Edits password line //There is only one line in password table
 		/// </summary>
@@ -349,7 +386,7 @@ namespace CaritasManager
 		/// <param name="sqlc">Current open SQLiteConnection</param>
 		/// <param name="password">String containing password</param>
 		/// <returns>Bool, true if Password is OK</returns>
-		public static bool login(SQLiteConnection sqlc, string password)
+		public static bool login(SQLiteConnection sqlc, string password, profile prof)
 		{
 			if (!connectioinOpen(sqlc)) { return false; }
 
@@ -366,6 +403,13 @@ namespace CaritasManager
 			SQLiteCommand sqlk = new SQLiteCommand("SELECT id FROM password WHERE passwd='" + pwd + "';", sqlc);
 
 			ret = sqlk.ExecuteScalar() == null ? false : true;
+
+			//Updateljük a last login-t a profilon
+			if (ret)
+			{
+				sqlk = new SQLiteCommand("UPDATE profilok SET last_login='" + DateTime.Now.ToShortDateString() + "' WHERE lower(profil_name) = '" + prof.name.ToLower() + "';", sqlc);
+				executeNonQuery(sqlk);
+			}
 
 			return ret;
 		}
@@ -868,6 +912,7 @@ namespace CaritasManager
 		public string color_1 { get; set; }
 		public string color_2 { get; set; }
 		public string color_3 { get; set; }
+		public string last_login { get; set; }
 	}
 
 }

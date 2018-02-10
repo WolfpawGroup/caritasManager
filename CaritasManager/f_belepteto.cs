@@ -15,6 +15,7 @@ namespace CaritasManager
 	public partial class f_belepteto : Form
 	{
 		SQLiteConnection sqlc;
+		List<profile> profs = new List<profile>();
 
 		public f_belepteto()
 		{
@@ -22,7 +23,7 @@ namespace CaritasManager
 
 			Load += F_belepteto_Load;
 		}
-
+		
 		private void F_belepteto_Load(object sender, EventArgs e)
 		{
             try
@@ -53,6 +54,20 @@ namespace CaritasManager
                 //TODO: valami szöveget írjunk ki
             }
 
+			fillProfiles();
+
+		}
+
+		public void fillProfiles()
+		{
+			cb_UserProfile.Items.Clear();
+			lbl_LastLoginInfo.Text = "";
+
+			profs = c_DBHandler.getProfiles(sqlc);
+			foreach(profile p in profs)
+			{
+				cb_UserProfile.Items.Add(p.name);
+			}
 		}
 
 		private void btn_AllSeeingEye_Click(object sender, EventArgs e)
@@ -74,14 +89,33 @@ namespace CaritasManager
 
 		private void btn_Login_Click(object sender, EventArgs e)
 		{
-			//TODO: kezelni a profilokat
+			if(cb_UserProfile.SelectedIndex < 0) {
+				MessageBox.Show("Jelenleg nincs profil kiválasztva.\r\nKérjük válasszon ki egy profilt a belépéshez.\r\nHa nincs profilja, hozzon létre egyet.","Válasszon ki egy profilt!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+				return;
+			}
 
-			if (c_DBHandler.login(sqlc, tb_Password.Text))
+			profile p = new profile();
+
+			foreach (profile pp in profs)
+			{
+				if (cb_UserProfile.Text == pp.name)
+				{
+					p = pp;
+					break;
+				}
+			}
+
+			//TODO: handle profile
+
+			if (c_DBHandler.login(sqlc, tb_Password.Text, p))
 			{
 				Form1 f = new Form1();
 				this.Hide();
 				f.ShowDialog();
 				this.Show();
+				fillProfiles();
+				tb_Password.Text = "";
+				cb_UserProfile.SelectedIndex = -1;
 			}
 		}
 
@@ -91,6 +125,19 @@ namespace CaritasManager
 			ep.sqlc = sqlc;
 			ep.edit = false;
 			ep.ShowDialog();
+			fillProfiles();
+		}
+
+		private void cb_UserProfile_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			foreach(profile p in profs)
+			{
+				if(cb_UserProfile.Text == p.name)
+				{
+					lbl_LastLoginInfo.Text = p.last_login;
+					return;
+				}
+			}
 		}
 	}
 }

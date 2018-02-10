@@ -14,6 +14,7 @@ namespace CaritasManager
 	public partial class f_EditProfile : Form
 	{
 		public bool edit = false;
+		public profile prof { get; set; }
 		public SQLiteConnection sqlc { get; set; }
 		
 		string fontFamily = "";
@@ -27,6 +28,41 @@ namespace CaritasManager
 		public f_EditProfile()
 		{
 			InitializeComponent();
+		}
+
+		public void fillData()
+		{
+			if(prof != null)
+			{
+				tb_ProfileName.Text = prof.name;
+				fontFamily = prof.fontFamily;
+				fontSize = prof.fontSize;
+				fontStyle = prof.fontStyle;
+				fontColor = prof.fontColor;
+				color_2 = prof.color_1;
+				color_2 = prof.color_2;
+				color_3 = prof.color_3;
+				
+				p_FontColor.BackColor = Color.FromArgb(Convert.ToInt32(fontColor));
+				p_Color1.BackColor = Color.FromArgb(Convert.ToInt32(color_1));
+				p_Color2.BackColor = Color.FromArgb(Convert.ToInt32(color_2));
+				p_Color3.BackColor = Color.FromArgb(Convert.ToInt32(color_3));
+
+
+			}
+		}
+
+		private void form_loaded(object sender, EventArgs e)
+		{
+			if (edit)
+			{
+				tb_ProfileName.Enabled = false;
+				fillData();
+			}
+			else
+			{
+				Text = "Új Profil Létrehozása";
+			}
 		}
 
 		private void btn_SelectFont_Click(object sender, EventArgs e)
@@ -63,7 +99,7 @@ namespace CaritasManager
 			color_3 = p_Color3.BackColor.ToArgb().ToString();
 
 			profile p = new profile();
-			p.name = textBox1.Text;
+			p.name = tb_ProfileName.Text;
 			p.fontFamily = fontFamily;
 			p.fontSize = fontSize;
 			p.fontStyle = fontStyle;
@@ -74,6 +110,12 @@ namespace CaritasManager
 
 			c_DBHandler.editProfile(sqlc, p, edit);
 
+			this.Close();
+		}
+
+		private void btn_Cancel_Click(object sender, EventArgs e)
+		{
+			this.Close();
 		}
 	}
 }

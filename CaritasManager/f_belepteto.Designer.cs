@@ -36,6 +36,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_Password = new System.Windows.Forms.TextBox();
 			this.btn_AllSeeingEye = new System.Windows.Forms.Button();
+			this.lbl_LastLoginInfo = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btn_Login
@@ -73,12 +74,14 @@
 			// 
 			// cb_UserProfile
 			// 
+			this.cb_UserProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cb_UserProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.cb_UserProfile.FormattingEnabled = true;
 			this.cb_UserProfile.Location = new System.Drawing.Point(119, 14);
 			this.cb_UserProfile.Name = "cb_UserProfile";
 			this.cb_UserProfile.Size = new System.Drawing.Size(176, 26);
 			this.cb_UserProfile.TabIndex = 3;
+			this.cb_UserProfile.SelectedIndexChanged += new System.EventHandler(this.cb_UserProfile_SelectedIndexChanged);
 			// 
 			// label1
 			// 
@@ -120,11 +123,21 @@
 			this.btn_AllSeeingEye.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye.Click += new System.EventHandler(this.btn_AllSeeingEye_Click);
 			// 
+			// lbl_LastLoginInfo
+			// 
+			this.lbl_LastLoginInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lbl_LastLoginInfo.AutoSize = true;
+			this.lbl_LastLoginInfo.Location = new System.Drawing.Point(0, 117);
+			this.lbl_LastLoginInfo.Name = "lbl_LastLoginInfo";
+			this.lbl_LastLoginInfo.Size = new System.Drawing.Size(0, 13);
+			this.lbl_LastLoginInfo.TabIndex = 8;
+			// 
 			// f_belepteto
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(388, 130);
+			this.Controls.Add(this.lbl_LastLoginInfo);
 			this.Controls.Add(this.btn_AllSeeingEye);
 			this.Controls.Add(this.tb_Password);
 			this.Controls.Add(this.label2);
@@ -152,5 +165,6 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox tb_Password;
 		private System.Windows.Forms.Button btn_AllSeeingEye;
+		private System.Windows.Forms.Label lbl_LastLoginInfo;
 	}
 }
