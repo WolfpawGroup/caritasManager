@@ -17,7 +17,9 @@ namespace CaritasManager
 	{
 		public SQLiteConnection sqlc = null;
 		public bool showKin = false;
+		public profile login_profile { get; set; }
 		DataGridViewCellEventArgs showKinArgs = null;
+
 		int showKinCheck = 0;
 
 		public Form1()
@@ -30,7 +32,14 @@ namespace CaritasManager
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			//TODO: Remove This!
+			sqlc = c_DBHandler.connectToDB();
+			sqlc.Open();
+			login_profile = c_DBHandler.getProfiles(sqlc)[0];
+
 			createIdFile();
+
+			fillMainList();
 		}
 
 		public void createIdFile()
@@ -42,17 +51,7 @@ namespace CaritasManager
 				//TODO: Warn that file changed
 			}
 		}
-
-		public void TEST()
-		{
-			
-
-			c_DBHandler.addRowToUgyfel(sqlc, "Pogány Dani", "Pogány Dani", "19988776BA", "Szekszárd", "Bada U. 3", "1766.10.12", "Buktabest", 0, "", "McDonalds Frittőzös", "Programozó", "", "", "2018.01.20", "0001", "2018.01.01", "T","OK","Marika Néni");
-
-
-		}
-
-
+		
 		private void dg_DataTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
 			showKin = false;
@@ -89,9 +88,9 @@ namespace CaritasManager
 		{
 			try
 			{
-				if(e.RowIndex > -1)
+				if (e.RowIndex > -1)
 				{
-					List<string> k = dg_DataTable[e.ColumnIndex, e.RowIndex].Tag as List<string>;
+					List<string> k = (dg_DataTable[e.ColumnIndex, e.RowIndex].Tag as object[])[0] as List<string>;
 					string kin = "";
 
 					foreach (string s in k)
@@ -125,23 +124,24 @@ namespace CaritasManager
 					}
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Console.WriteLine(ex);
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void fillMainList()
 		{
-			TEST();
+			dg_DataTable.Rows.Clear();
+
 			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(sqlc);
 			int I = 0;
 
 			Bitmap img = new Bitmap(22, 22);
 			using (Graphics g = Graphics.FromImage(img))
 			{
-				g.Clear(Color.White);
-				g.DrawString("✓", this.Font, Brushes.Green, new Point(3, 3));
+				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
+				g.DrawImage(Properties.Resources.checkmark_icon_2, new Point(0, 0));
 			}
 
 			foreach (c_MainDataRow mdr in lst)
@@ -149,9 +149,20 @@ namespace CaritasManager
 				DateTime n = DateTime.Now;
 				int lasts = (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - mdr.lastSupport).TotalDays);
 
-
-				dg_DataTable.Rows.Insert(I, new object[] { mdr.name + (mdr.kin.Count > 0 ? "  (" + (mdr.kin.Count + 1) + ")" : ""), mdr.j == true ? img : null, mdr.identification, mdr.city, mdr.state, mdr.dateAdded, mdr.lastSupport, "Támogatás" });
-				dg_DataTable.Rows[I].Cells[0].Tag = mdr.kin;
+				dg_DataTable.Rows.Insert(
+					I,
+					new object[] {
+						mdr.name + (mdr.kin.Count > 0 ? "  (" + (mdr.kin.Count + 1) + ")" : ""),
+						mdr.j == true ? img : null,
+						mdr.identification,
+						mdr.city,
+						mdr.state,
+						mdr.dateAdded.ToShortDateString(),
+						mdr.lastSupport.ToShortDateString(),
+						"Támogatás"
+					}
+				);
+				dg_DataTable.Rows[I].Cells[0].Tag = new object[] { mdr.kin, mdr.id };
 
 				Color c = lasts <= 28 ? Color.LightGreen : (lasts <= 365 ? Color.Orange : Color.LightPink);
 
@@ -160,6 +171,7 @@ namespace CaritasManager
 				I++;
 			}
 
+			lbl_NumOfCustomers.Text = "Ügyfelek száma: " + dg_DataTable.Rows.Count;
 		}
 
 		private void t_Timer_Tick(object sender, EventArgs e)
@@ -185,7 +197,74 @@ namespace CaritasManager
 		private void btn_NewCustomer_Click(object sender, EventArgs e)
 		{
 			f_AddCustomer fad = new f_AddCustomer();
+			fad.login_profile = login_profile;
 			fad.ShowDialog();
+		}
+
+		int selectedrow = 0;
+
+		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			selectedrow = e.RowIndex;
+			//dg_DataTable.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+
+			//TODO: add some form of selection marker to this thing...
+			/*
+				foreach(DataGridViewRow v in dg_DataTable.Rows)
+				{
+					v.DefaultCellStyle = new DataGridViewCellStyle() { Font = new Font(dg_DataTable.Font.FontFamily, dg_DataTable.Font.Size, FontStyle.Regular) };
+				}
+
+				dg_DataTable[e.ColumnIndex, e.RowIndex].Style = new DataGridViewCellStyle()
+				{
+					Font = new Font(dg_DataTable.Font.FontFamily, dg_DataTable.Font.Size, FontStyle.Underline)
+				};
+			*/
+		}
+
+		private void dg_DataTable_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+		{
+			try
+			{
+				if(e.RowIndex == selectedrow)
+				{
+					//e.Graphics.DrawRectangle(Pens.Black, e.RowBounds);
+				}
+			}
+			catch
+			{
+
+			}
+			
+		}
+
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			f_Aids faids = new f_Aids();
+			faids.ShowDialog();
+		}
+
+		private void dg_DataTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if(e.ColumnIndex == 7)
+			{
+				try
+				{
+					f_Aids fa = new f_Aids()
+					{
+						sqlc = sqlc,
+						customer_id = Convert.ToInt32((dg_DataTable.Rows[e.RowIndex].Cells[0].Tag as object[])[1].ToString())
+					};
+					fa.ShowDialog();
+
+					fillMainList();
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine("ERROR:\r\n" + ex);
+				}
+			}
 		}
 	}
 }

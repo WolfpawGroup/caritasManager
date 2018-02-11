@@ -93,11 +93,23 @@
     <Compile Include="f_AddCustomer.Designer.cs">
       <DependentUpon>f_AddCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="f_Aids.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f_Aids.Designer.cs">
+      <DependentUpon>f_Aids.cs</DependentUpon>
+    </Compile>
     <Compile Include="f_belepteto.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="f_belepteto.Designer.cs">
       <DependentUpon>f_belepteto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="f_DateSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f_DateSelector.Designer.cs">
+      <DependentUpon>f_DateSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="f_EditPassword.cs">
       <SubType>Form</SubType>
@@ -110,6 +122,12 @@
     </Compile>
     <Compile Include="f_EditProfile.Designer.cs">
       <DependentUpon>f_EditProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="f_Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f_Settings.Designer.cs">
+      <DependentUpon>f_Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,8 +143,14 @@
     <EmbeddedResource Include="f_AddCustomer.resx">
       <DependentUpon>f_AddCustomer.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="f_Aids.resx">
+      <DependentUpon>f_Aids.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="f_belepteto.resx">
       <DependentUpon>f_belepteto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="f_DateSelector.resx">
+      <DependentUpon>f_DateSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="f_EditPassword.resx">
       <DependentUpon>f_EditPassword.cs</DependentUpon>
@@ -187,6 +211,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\plus_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkmark_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\checkmark_icon_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clothes_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\extreme_aid_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\food_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\furniture_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meal_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medicine_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\utility_0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.107.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.107.0\build\net46\System.Data.SQLite.Core.targets')" />

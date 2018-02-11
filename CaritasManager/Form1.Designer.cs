@@ -30,9 +30,16 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ts_Tools = new System.Windows.Forms.ToolStrip();
+			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
+			this.btn_Exit = new System.Windows.Forms.ToolStripButton();
+			this.btn_Settings = new System.Windows.Forms.ToolStripButton();
+			this.btn_DatabaseBackup = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.t_Timer = new System.Windows.Forms.Timer(this.components);
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.button1 = new System.Windows.Forms.Button();
 			this.dg_DataTable = new System.Windows.Forms.DataGridView();
 			this.ch_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_jovedelemig = new System.Windows.Forms.DataGridViewImageColumn();
@@ -43,14 +50,9 @@
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
-			this.t_Timer = new System.Windows.Forms.Timer(this.components);
-			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
-			this.btn_Exit = new System.Windows.Forms.ToolStripButton();
-			this.btn_Settings = new System.Windows.Forms.ToolStripButton();
-			this.btn_DatabaseBackup = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+			this.lbl_NumOfCustomers = new System.Windows.Forms.ToolStripStatusLabel();
 			this.ts_Tools.SuspendLayout();
-			this.panel1.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -73,29 +75,83 @@
 			this.ts_Tools.TabIndex = 0;
 			this.ts_Tools.Text = "toolStrip1";
 			// 
+			// btn_NewCustomer
+			// 
+			this.btn_NewCustomer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btn_NewCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btn_NewCustomer.Image")));
+			this.btn_NewCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_NewCustomer.Name = "btn_NewCustomer";
+			this.btn_NewCustomer.Size = new System.Drawing.Size(133, 47);
+			this.btn_NewCustomer.Text = "Új Ügyfél";
+			this.btn_NewCustomer.Click += new System.EventHandler(this.btn_NewCustomer_Click);
+			// 
+			// btn_Exit
+			// 
+			this.btn_Exit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_Exit.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.btn_Exit.Image = ((System.Drawing.Image)(resources.GetObject("btn_Exit.Image")));
+			this.btn_Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_Exit.Name = "btn_Exit";
+			this.btn_Exit.Size = new System.Drawing.Size(116, 47);
+			this.btn_Exit.Text = "Kilépés";
+			this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+			// 
+			// btn_Settings
+			// 
+			this.btn_Settings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.btn_Settings.Image = ((System.Drawing.Image)(resources.GetObject("btn_Settings.Image")));
+			this.btn_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_Settings.Name = "btn_Settings";
+			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
+			this.btn_Settings.Text = "Beállítások";
+			// 
+			// btn_DatabaseBackup
+			// 
+			this.btn_DatabaseBackup.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_DatabaseBackup.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.btn_DatabaseBackup.Image = ((System.Drawing.Image)(resources.GetObject("btn_DatabaseBackup.Image")));
+			this.btn_DatabaseBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_DatabaseBackup.Name = "btn_DatabaseBackup";
+			this.btn_DatabaseBackup.Size = new System.Drawing.Size(210, 47);
+			this.btn_DatabaseBackup.Text = "Biztonsági Mentés";
+			// 
+			// toolStripButton1
+			// 
+			this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton1.Name = "toolStripButton1";
+			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
+			this.toolStripButton1.Text = "Adatlap Szerkesztése";
+			// 
+			// t_Timer
+			// 
+			this.t_Timer.Tick += new System.EventHandler(this.t_Timer_Tick);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lbl_NumOfCustomers});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 477);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(1049, 22);
+			this.statusStrip1.TabIndex = 4;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
 			// panel1
 			// 
-			this.panel1.Controls.Add(this.button1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 402);
+			this.panel1.Location = new System.Drawing.Point(0, 380);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(1049, 97);
-			this.panel1.TabIndex = 1;
-			// 
-			// button1
-			// 
-			this.button1.Location = new System.Drawing.Point(109, 58);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(75, 23);
-			this.button1.TabIndex = 0;
-			this.button1.Text = "button1";
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.panel1.TabIndex = 5;
 			// 
 			// dg_DataTable
 			// 
 			this.dg_DataTable.AllowUserToAddRows = false;
 			this.dg_DataTable.AllowUserToDeleteRows = false;
+			this.dg_DataTable.AllowUserToResizeRows = false;
 			this.dg_DataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dg_DataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ch_CustomerName,
@@ -106,16 +162,28 @@
             this.ch_DateAdded,
             this.ch_LastSupport,
             this.ch_AddSupport});
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Transparent;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Red;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dg_DataTable.DefaultCellStyle = dataGridViewCellStyle1;
 			this.dg_DataTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dg_DataTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.dg_DataTable.Location = new System.Drawing.Point(0, 50);
+			this.dg_DataTable.MultiSelect = false;
 			this.dg_DataTable.Name = "dg_DataTable";
 			this.dg_DataTable.ReadOnly = true;
 			this.dg_DataTable.RowHeadersVisible = false;
-			this.dg_DataTable.Size = new System.Drawing.Size(1049, 352);
-			this.dg_DataTable.TabIndex = 2;
+			this.dg_DataTable.ShowEditingIcon = false;
+			this.dg_DataTable.Size = new System.Drawing.Size(1049, 330);
+			this.dg_DataTable.TabIndex = 6;
+			this.dg_DataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellContentClick);
 			this.dg_DataTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
 			this.dg_DataTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellMouseLeave);
+			this.dg_DataTable.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dg_DataTable_RowPostPaint);
 			// 
 			// ch_CustomerName
 			// 
@@ -173,68 +241,20 @@
 			// 
 			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
 			this.tt_Tooltip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.tt_Tooltip.font = null;
+			this.tt_Tooltip.font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.tt_Tooltip.Location = new System.Drawing.Point(-100, -100);
 			this.tt_Tooltip.Name = "tt_Tooltip";
-			this.tt_Tooltip.position = new System.Drawing.Point(0, 0);
-			this.tt_Tooltip.Size = new System.Drawing.Size(10, 10);
+			this.tt_Tooltip.position = new System.Drawing.Point(10, 10);
+			this.tt_Tooltip.Size = new System.Drawing.Size(13, 18);
 			this.tt_Tooltip.TabIndex = 3;
-			this.tt_Tooltip.text = null;
+			this.tt_Tooltip.text = "poop";
 			this.tt_Tooltip.title = null;
 			// 
-			// t_Timer
+			// lbl_NumOfCustomers
 			// 
-			this.t_Timer.Tick += new System.EventHandler(this.t_Timer_Tick);
-			// 
-			// btn_NewCustomer
-			// 
-			this.btn_NewCustomer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btn_NewCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btn_NewCustomer.Image")));
-			this.btn_NewCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_NewCustomer.Name = "btn_NewCustomer";
-			this.btn_NewCustomer.Size = new System.Drawing.Size(133, 47);
-			this.btn_NewCustomer.Text = "Új Ügyfél";
-			this.btn_NewCustomer.Click += new System.EventHandler(this.btn_NewCustomer_Click);
-			// 
-			// btn_Exit
-			// 
-			this.btn_Exit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btn_Exit.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_Exit.Image = ((System.Drawing.Image)(resources.GetObject("btn_Exit.Image")));
-			this.btn_Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_Exit.Name = "btn_Exit";
-			this.btn_Exit.Size = new System.Drawing.Size(116, 47);
-			this.btn_Exit.Text = "Kilépés";
-			this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
-			// 
-			// btn_Settings
-			// 
-			this.btn_Settings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_Settings.Image = ((System.Drawing.Image)(resources.GetObject("btn_Settings.Image")));
-			this.btn_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_Settings.Name = "btn_Settings";
-			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
-			this.btn_Settings.Text = "Beállítások";
-			// 
-			// btn_DatabaseBackup
-			// 
-			this.btn_DatabaseBackup.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btn_DatabaseBackup.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_DatabaseBackup.Image = ((System.Drawing.Image)(resources.GetObject("btn_DatabaseBackup.Image")));
-			this.btn_DatabaseBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_DatabaseBackup.Name = "btn_DatabaseBackup";
-			this.btn_DatabaseBackup.Size = new System.Drawing.Size(210, 47);
-			this.btn_DatabaseBackup.Text = "Biztonsági Mentés";
-			// 
-			// toolStripButton1
-			// 
-			this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
-			this.toolStripButton1.Text = "Adatlap Szerkesztése";
+			this.lbl_NumOfCustomers.Name = "lbl_NumOfCustomers";
+			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(95, 17);
+			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
 			// 
 			// Form1
 			// 
@@ -244,14 +264,17 @@
 			this.Controls.Add(this.tt_Tooltip);
 			this.Controls.Add(this.dg_DataTable);
 			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.ts_Tools);
 			this.Name = "Form1";
 			this.Text = "Caritas Manager";
 			this.ts_Tools.ResumeLayout(false);
 			this.ts_Tools.PerformLayout();
-			this.panel1.ResumeLayout(false);
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -260,8 +283,13 @@
 		private System.Windows.Forms.ToolStrip ts_Tools;
 		private System.Windows.Forms.ToolStripButton btn_NewCustomer;
 		private System.Windows.Forms.ToolStripButton btn_Settings;
-		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private uc_Tooltip tt_Tooltip;
+		private System.Windows.Forms.Timer t_Timer;
+		private System.Windows.Forms.ToolStripButton btn_Exit;
+		private System.Windows.Forms.ToolStripButton btn_DatabaseBackup;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.DataGridView dg_DataTable;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_CustomerName;
 		private System.Windows.Forms.DataGridViewImageColumn ch_jovedelemig;
@@ -271,11 +299,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_DateAdded;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_LastSupport;
 		private System.Windows.Forms.DataGridViewButtonColumn ch_AddSupport;
-		private System.Windows.Forms.Button button1;
-		private uc_Tooltip tt_Tooltip;
-		private System.Windows.Forms.Timer t_Timer;
-		private System.Windows.Forms.ToolStripButton btn_Exit;
-		private System.Windows.Forms.ToolStripButton btn_DatabaseBackup;
+		private System.Windows.Forms.ToolStripStatusLabel lbl_NumOfCustomers;
 	}
 }
 

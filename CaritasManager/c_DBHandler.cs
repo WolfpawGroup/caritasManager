@@ -186,7 +186,10 @@ namespace CaritasManager
 										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 										"ugyfel_id INTEGER, " +
 										"datum TEXT, " +
-										"tamogatas TEXT" +
+										"tamogatas TEXT, " +
+										"tamogatas_mennyisege TEXT, " + 
+										"tamogatas_egysége TEXT, " + 
+										"megjegyzes TEXT" +
 									")";
 
 				executeNonQuery(sqlk);
@@ -794,7 +797,7 @@ namespace CaritasManager
 		/// <param name="ugyfel_id">ID of customer</param>
 		/// <param name="datum">Date of last support</param>
 		/// <param name="tamogatas">Type of support</param>
-		public static void addRowToTamogatasok(SQLiteConnection sqlc, int ugyfel_id, string datum, string tamogatas)
+		public static void addRowToTamogatasok(SQLiteConnection sqlc, int ugyfel_id, string datum, string tamogatas, string mennyiseg, string mertekegyseg, string megjegyzes)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
 
@@ -802,15 +805,24 @@ namespace CaritasManager
 												"(" +
 													"ugyfel_id, " +
 													"datum, " +
-													"tamogatas " +
+													"tamogatas, " +
+													"tamogatas_mennyisege, " +
+													"tamogatas_egysége, " +
+													"megjegyzes" +
 												") VALUES (" +
 													"{0}, " +
 													"'{1}', " +
-													"'{2}' " +
+													"'{2}', " +
+													"'{3}', " +
+													"'{4}', " + 
+													"'{5}'" + 
 												")",
 													ugyfel_id,
 													datum,
-													tamogatas
+													tamogatas,
+													mennyiseg,
+													mertekegyseg,
+													megjegyzes
 											);
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
 			executeNonQuery(sqlk);
@@ -825,7 +837,7 @@ namespace CaritasManager
 		/// <param name="datum">Date of last support</param>
 		/// <param name="tamogatas">Type of support</param>
 		/// <param name="delete">Bool, if true than delete else update</param>
-		public static void modifyTamogatasok(SQLiteConnection sqlc, int ugyfel_id, string datum, string tamogatas, bool delete)
+		public static void modifyTamogatasok(SQLiteConnection sqlc, int ugyfel_id, string datum, string tamogatas, string mennyiseg, string mertekegyseg, string megjegyzes, bool delete)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
 
@@ -837,7 +849,7 @@ namespace CaritasManager
 			}
 			else
 			{
-				command = "UPDATE tamogatasok SET datum='" + datum + "', tamogatas='" + tamogatas + "' WHERE ugyfel_id=" + ugyfel_id;
+				command = "UPDATE tamogatasok SET datum='" + datum + "', tamogatas='" + tamogatas + "', tamogatas_mennyisege='" + mennyiseg + "', tamogatas_egysége='" + mertekegyseg + "', megjegyzes='" + megjegyzes + "' WHERE ugyfel_id=" + ugyfel_id;
 			}
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
