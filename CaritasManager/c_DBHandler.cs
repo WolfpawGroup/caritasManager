@@ -125,7 +125,10 @@ namespace CaritasManager
 										"azonosito TEXT, " +
 										"utolso_tamogatas_idopontja TEXT, " +
 										"jovedelem_igazolas TEXT, " +
-										"allapot TEXT" +
+										"allapot TEXT," +
+										"felvevo_profil TEXT," +
+										"legutobb_modositotta TEXT," +
+										"legutobbi_modositas_datuma TEXT" + 
 									")";
 
 				executeNonQuery(sqlk);
@@ -458,13 +461,16 @@ namespace CaritasManager
 		/// <param name="jovedelem_igazolas">Customer income certificate</param>
 		/// <param name="allapot">Customer state</param>
 		/// <param name="hozzaado_neve">Profile who added customer</param>
+		/// <param name="modosito_neve">Profile last modified the customer</param>
+		/// <param name="modositas_idopontja">Date and time of last modification</param>
 		public static void addRowToUgyfel(SQLiteConnection sqlc, string nev, string születesi_nev, string szig_szam,
 										string lakcim_varos, string lakcim_uh, string szul_datum,
 										string szul_hely, int csaladi_allapot, string anyja_neve,
 										string vegzettseg, string foglalkozas, string szakkepzettseg,
 										string munkaltato, string hozzaadas_datuma, string azonosito,
 										string utolso_tamogatas_idopontja, string jovedelem_igazolas,
-										string allapot, string hozzaado_neve)
+										string allapot, string hozzaado_neve, 
+										string modosito_neve, string modositas_idopontja)
 		{
 
 			if (!connectioinOpen(sqlc)) { return; }
@@ -489,7 +495,10 @@ namespace CaritasManager
 													"azonosito," +
 													"utolso_tamogatas_idopontja, " +
 													"jovedelem_igazolas, " +
-													"allapot" +
+													"allapot," +
+													"felvevo_profil," +
+													"legutobb_modositotta," +
+													"legutobbi_modositas_datuma" +
 												") VALUES (" +
 													"'{0}', " +
 													"'{1}', " +
@@ -508,7 +517,10 @@ namespace CaritasManager
 													"'{14}', " +
 													"'{15}', " +
 													"'{16}', " +
-													"'{17}'" +
+													"'{17}', " +
+													"'{18}', " +
+													"'{19}', " +
+													"'{20}'" +
 												")",
 													nev,
 													születesi_nev,
@@ -527,7 +539,10 @@ namespace CaritasManager
 													azonosito,
 													utolso_tamogatas_idopontja,
 													jovedelem_igazolas,
-													allapot
+													allapot,
+													hozzaado_neve,
+													modosito_neve,
+													modositas_idopontja
 										);
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);

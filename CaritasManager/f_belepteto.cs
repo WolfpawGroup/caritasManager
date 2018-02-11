@@ -87,10 +87,11 @@ namespace CaritasManager
 			Application.Exit();
 		}
 
-		private void btn_Login_Click(object sender, EventArgs e)
+		public void login()
 		{
-			if(cb_UserProfile.SelectedIndex < 0) {
-				MessageBox.Show("Jelenleg nincs profil kiválasztva.\r\nKérjük válasszon ki egy profilt a belépéshez.\r\nHa nincs profilja, hozzon létre egyet.","Válasszon ki egy profilt!",MessageBoxButtons.OK,MessageBoxIcon.Error);
+			if (cb_UserProfile.SelectedIndex < 0)
+			{
+				MessageBox.Show("Jelenleg nincs profil kiválasztva.\r\nKérjük válasszon ki egy profilt a belépéshez.\r\nHa nincs profilja, hozzon létre egyet.", "Válasszon ki egy profilt!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 
@@ -116,7 +117,17 @@ namespace CaritasManager
 				fillProfiles();
 				tb_Password.Text = "";
 				cb_UserProfile.SelectedIndex = -1;
+				lbl_BadPass.Visible = false;
 			}
+			else
+			{
+				lbl_BadPass.Visible = true;
+			}
+		}
+
+		private void btn_Login_Click(object sender, EventArgs e)
+		{
+			login();
 		}
 
 		private void btn_NewProfile_Click(object sender, EventArgs e)
@@ -138,6 +149,23 @@ namespace CaritasManager
 					return;
 				}
 			}
+		}
+
+		private void keyDown1(object sender, PreviewKeyDownEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				login();
+			}
+			else if (e.KeyCode == Keys.Escape)
+			{
+				Application.Exit();
+			}
+		}
+
+		private void keyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			keyDown1(sender, e);
 		}
 	}
 }

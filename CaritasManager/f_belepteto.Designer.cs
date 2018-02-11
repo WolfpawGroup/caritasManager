@@ -37,6 +37,7 @@
 			this.tb_Password = new System.Windows.Forms.TextBox();
 			this.btn_AllSeeingEye = new System.Windows.Forms.Button();
 			this.lbl_LastLoginInfo = new System.Windows.Forms.Label();
+			this.lbl_BadPass = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btn_Login
@@ -49,6 +50,7 @@
 			this.btn_Login.Text = "Belépés";
 			this.btn_Login.UseVisualStyleBackColor = true;
 			this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
+			this.btn_Login.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// btn_NewProfile
 			// 
@@ -60,6 +62,7 @@
 			this.btn_NewProfile.Text = "Új Profil";
 			this.btn_NewProfile.UseVisualStyleBackColor = true;
 			this.btn_NewProfile.Click += new System.EventHandler(this.btn_NewProfile_Click);
+			this.btn_NewProfile.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// btn_Exit
 			// 
@@ -71,6 +74,7 @@
 			this.btn_Exit.Text = "Kilépés";
 			this.btn_Exit.UseVisualStyleBackColor = true;
 			this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+			this.btn_Exit.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// cb_UserProfile
 			// 
@@ -82,6 +86,7 @@
 			this.cb_UserProfile.Size = new System.Drawing.Size(176, 26);
 			this.cb_UserProfile.TabIndex = 3;
 			this.cb_UserProfile.SelectedIndexChanged += new System.EventHandler(this.cb_UserProfile_SelectedIndexChanged);
+			this.cb_UserProfile.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// label1
 			// 
@@ -111,17 +116,19 @@
 			this.tb_Password.PasswordChar = '•';
 			this.tb_Password.Size = new System.Drawing.Size(146, 24);
 			this.tb_Password.TabIndex = 6;
+			this.tb_Password.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// btn_AllSeeingEye
 			// 
 			this.btn_AllSeeingEye.BackgroundImage = global::CaritasManager.Properties.Resources.eye;
 			this.btn_AllSeeingEye.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_AllSeeingEye.Location = new System.Drawing.Point(263, 66);
+			this.btn_AllSeeingEye.Location = new System.Drawing.Point(263, 65);
 			this.btn_AllSeeingEye.Name = "btn_AllSeeingEye";
-			this.btn_AllSeeingEye.Size = new System.Drawing.Size(32, 25);
+			this.btn_AllSeeingEye.Size = new System.Drawing.Size(32, 26);
 			this.btn_AllSeeingEye.TabIndex = 7;
 			this.btn_AllSeeingEye.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye.Click += new System.EventHandler(this.btn_AllSeeingEye_Click);
+			this.btn_AllSeeingEye.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown);
 			// 
 			// lbl_LastLoginInfo
 			// 
@@ -132,11 +139,24 @@
 			this.lbl_LastLoginInfo.Size = new System.Drawing.Size(0, 13);
 			this.lbl_LastLoginInfo.TabIndex = 8;
 			// 
+			// lbl_BadPass
+			// 
+			this.lbl_BadPass.AutoSize = true;
+			this.lbl_BadPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.lbl_BadPass.ForeColor = System.Drawing.Color.Red;
+			this.lbl_BadPass.Location = new System.Drawing.Point(155, 92);
+			this.lbl_BadPass.Name = "lbl_BadPass";
+			this.lbl_BadPass.Size = new System.Drawing.Size(106, 18);
+			this.lbl_BadPass.TabIndex = 9;
+			this.lbl_BadPass.Text = "Hibás Jelszó";
+			this.lbl_BadPass.Visible = false;
+			// 
 			// f_belepteto
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(388, 130);
+			this.Controls.Add(this.lbl_BadPass);
 			this.Controls.Add(this.lbl_LastLoginInfo);
 			this.Controls.Add(this.btn_AllSeeingEye);
 			this.Controls.Add(this.tb_Password);
@@ -147,9 +167,11 @@
 			this.Controls.Add(this.btn_NewProfile);
 			this.Controls.Add(this.btn_Login);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.KeyPreview = true;
 			this.Name = "f_belepteto";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "CaritasManager - Belépés";
+			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.keyDown1);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -166,5 +188,6 @@
 		private System.Windows.Forms.TextBox tb_Password;
 		private System.Windows.Forms.Button btn_AllSeeingEye;
 		private System.Windows.Forms.Label lbl_LastLoginInfo;
+		private System.Windows.Forms.Label lbl_BadPass;
 	}
 }

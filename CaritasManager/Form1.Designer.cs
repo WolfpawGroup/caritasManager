@@ -31,9 +31,6 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			this.ts_Tools = new System.Windows.Forms.ToolStrip();
-			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
-			this.btn_Settings = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.button1 = new System.Windows.Forms.Button();
 			this.dg_DataTable = new System.Windows.Forms.DataGridView();
@@ -47,8 +44,11 @@
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
 			this.t_Timer = new System.Windows.Forms.Timer(this.components);
+			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
 			this.btn_Exit = new System.Windows.Forms.ToolStripButton();
+			this.btn_Settings = new System.Windows.Forms.ToolStripButton();
 			this.btn_DatabaseBackup = new System.Windows.Forms.ToolStripButton();
+			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.ts_Tools.SuspendLayout();
 			this.panel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
@@ -72,34 +72,6 @@
 			this.ts_Tools.Size = new System.Drawing.Size(1049, 50);
 			this.ts_Tools.TabIndex = 0;
 			this.ts_Tools.Text = "toolStrip1";
-			// 
-			// btn_NewCustomer
-			// 
-			this.btn_NewCustomer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btn_NewCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btn_NewCustomer.Image")));
-			this.btn_NewCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_NewCustomer.Name = "btn_NewCustomer";
-			this.btn_NewCustomer.Size = new System.Drawing.Size(133, 47);
-			this.btn_NewCustomer.Text = "Új Ügyfél";
-			// 
-			// btn_Settings
-			// 
-			this.btn_Settings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_Settings.Image = ((System.Drawing.Image)(resources.GetObject("btn_Settings.Image")));
-			this.btn_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btn_Settings.Name = "btn_Settings";
-			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
-			this.btn_Settings.Text = "Beállítások";
-			// 
-			// toolStripButton1
-			// 
-			this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton1.Name = "toolStripButton1";
-			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
-			this.toolStripButton1.Text = "Adatlap Szerkesztése";
 			// 
 			// panel1
 			// 
@@ -214,6 +186,16 @@
 			// 
 			this.t_Timer.Tick += new System.EventHandler(this.t_Timer_Tick);
 			// 
+			// btn_NewCustomer
+			// 
+			this.btn_NewCustomer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btn_NewCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btn_NewCustomer.Image")));
+			this.btn_NewCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_NewCustomer.Name = "btn_NewCustomer";
+			this.btn_NewCustomer.Size = new System.Drawing.Size(133, 47);
+			this.btn_NewCustomer.Text = "Új Ügyfél";
+			this.btn_NewCustomer.Click += new System.EventHandler(this.btn_NewCustomer_Click);
+			// 
 			// btn_Exit
 			// 
 			this.btn_Exit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -223,6 +205,17 @@
 			this.btn_Exit.Name = "btn_Exit";
 			this.btn_Exit.Size = new System.Drawing.Size(116, 47);
 			this.btn_Exit.Text = "Kilépés";
+			this.btn_Exit.Click += new System.EventHandler(this.btn_Exit_Click);
+			// 
+			// btn_Settings
+			// 
+			this.btn_Settings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.btn_Settings.Image = ((System.Drawing.Image)(resources.GetObject("btn_Settings.Image")));
+			this.btn_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_Settings.Name = "btn_Settings";
+			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
+			this.btn_Settings.Text = "Beállítások";
 			// 
 			// btn_DatabaseBackup
 			// 
@@ -233,6 +226,15 @@
 			this.btn_DatabaseBackup.Name = "btn_DatabaseBackup";
 			this.btn_DatabaseBackup.Size = new System.Drawing.Size(210, 47);
 			this.btn_DatabaseBackup.Text = "Biztonsági Mentés";
+			// 
+			// toolStripButton1
+			// 
+			this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
+			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.toolStripButton1.Name = "toolStripButton1";
+			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
+			this.toolStripButton1.Text = "Adatlap Szerkesztése";
 			// 
 			// Form1
 			// 

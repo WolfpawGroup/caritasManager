@@ -176,5 +176,16 @@ namespace CaritasManager
 
 			showKinCheck++;
 		}
+
+		private void btn_Exit_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void btn_NewCustomer_Click(object sender, EventArgs e)
+		{
+			f_AddCustomer fad = new f_AddCustomer();
+			fad.ShowDialog();
+		}
 	}
 }

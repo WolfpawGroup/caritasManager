@@ -27,6 +27,7 @@ namespace CaritasManager
 		{
 			if (empty)
 			{
+				tb_NewPassWord.Select();
 				btn_AllSeeingEye_Old.Enabled = false;
 				tb_OldPassWord.Enabled = false;
 				btn_Cancel.Enabled = false;
@@ -41,14 +42,23 @@ namespace CaritasManager
 
 		private void btn_SetPassword_Click(object sender, EventArgs e)
 		{
+			save();
+		}
+
+		private void save()
+		{
+			//VERY IMPORTANT:add modify as well!!!
 			if (empty)
 			{
-				if(tb_NewPassWord.Text.Length > 0)
+				if (tb_NewPassWord.Text.Length > 0)
 				{
 					c_DBHandler.editPassword(sqlc, tb_NewPassWord.Text);
 				}
 			}
+
+			this.Close();
 		}
+
 
 		private void btn_AllSeeingEye_Old_Click(object sender, EventArgs e)
 		{
@@ -72,6 +82,23 @@ namespace CaritasManager
 			{
 				tb_NewPassWord.PasswordChar = '•';
 			}
+		}
+
+		private void f_EditPassword_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				save();
+			}
+			else if (e.KeyCode == Keys.Escape)
+			{
+				this.Close();
+			}
+		}
+
+		private void tb_OldPassWord_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+		{
+			f_EditPassword_PreviewKeyDown(sender, e);
 		}
 	}
 }

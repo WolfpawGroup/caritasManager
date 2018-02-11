@@ -65,6 +65,7 @@
 			this.btn_Cancel.Text = "Mégse";
 			this.btn_Cancel.UseVisualStyleBackColor = true;
 			this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+			this.btn_Cancel.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// btn_SetPassword
 			// 
@@ -75,6 +76,7 @@
 			this.btn_SetPassword.Text = "Beállítás";
 			this.btn_SetPassword.UseVisualStyleBackColor = true;
 			this.btn_SetPassword.Click += new System.EventHandler(this.btn_SetPassword_Click);
+			this.btn_SetPassword.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// btn_AllSeeingEye_Old
 			// 
@@ -86,6 +88,7 @@
 			this.btn_AllSeeingEye_Old.TabIndex = 8;
 			this.btn_AllSeeingEye_Old.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye_Old.Click += new System.EventHandler(this.btn_AllSeeingEye_Old_Click);
+			this.btn_AllSeeingEye_Old.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// tb_OldPassWord
 			// 
@@ -95,6 +98,7 @@
 			this.tb_OldPassWord.PasswordChar = '•';
 			this.tb_OldPassWord.Size = new System.Drawing.Size(259, 24);
 			this.tb_OldPassWord.TabIndex = 9;
+			this.tb_OldPassWord.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// tb_NewPassWord
 			// 
@@ -104,6 +108,7 @@
 			this.tb_NewPassWord.PasswordChar = '•';
 			this.tb_NewPassWord.Size = new System.Drawing.Size(259, 24);
 			this.tb_NewPassWord.TabIndex = 11;
+			this.tb_NewPassWord.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// btn_AllSeeingEye_New
 			// 
@@ -115,6 +120,7 @@
 			this.btn_AllSeeingEye_New.TabIndex = 10;
 			this.btn_AllSeeingEye_New.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye_New.Click += new System.EventHandler(this.btn_AllSeeingEye_New_Click);
+			this.btn_AllSeeingEye_New.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// f_EditPassword
 			// 
@@ -130,9 +136,11 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.KeyPreview = true;
 			this.Name = "f_EditPassword";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Jelszó Módosítása";
+			this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.f_EditPassword_PreviewKeyDown);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
