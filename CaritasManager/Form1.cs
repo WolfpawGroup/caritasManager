@@ -33,11 +33,13 @@ namespace CaritasManager
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			//TODO: Remove This!
-			sqlc = c_DBHandler.connectToDB();
-			sqlc.Open();
-			login_profile = c_DBHandler.getProfiles(sqlc)[0];
+			//sqlc = c_DBHandler.connectToDB();
+			//sqlc.Open();
+			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
 
 			createIdFile();
+
+			lbl_LoggedInAs.Text = "Belépve mint: " + login_profile.name;
 
 			fillMainList();
 		}
@@ -47,6 +49,7 @@ namespace CaritasManager
 			if (!File.Exists("last_id.ini"))
 			{
 				File.Create("last_id.ini").Close();
+				File.WriteAllText("last_id.ini", "0");
 
 				//TODO: Warn that file changed
 			}

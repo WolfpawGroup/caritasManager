@@ -111,6 +111,8 @@ namespace CaritasManager
 			if (c_DBHandler.login(sqlc, tb_Password.Text, p))
 			{
 				Form1 f = new Form1();
+				f.login_profile = p;
+				f.sqlc = sqlc;
 				this.Hide();
 				f.ShowDialog();
 				this.Show();

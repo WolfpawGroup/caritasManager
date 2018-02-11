@@ -39,6 +39,7 @@
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.t_Timer = new System.Windows.Forms.Timer(this.components);
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.lbl_NumOfCustomers = new System.Windows.Forms.ToolStripStatusLabel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.dg_DataTable = new System.Windows.Forms.DataGridView();
 			this.ch_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,8 +50,8 @@
 			this.ch_DateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.lbl_LoggedInAs = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
-			this.lbl_NumOfCustomers = new System.Windows.Forms.ToolStripStatusLabel();
 			this.ts_Tools.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
@@ -132,12 +133,21 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lbl_NumOfCustomers});
+            this.lbl_NumOfCustomers,
+            this.lbl_LoggedInAs});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 477);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(1049, 22);
 			this.statusStrip1.TabIndex = 4;
 			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// lbl_NumOfCustomers
+			// 
+			this.lbl_NumOfCustomers.Name = "lbl_NumOfCustomers";
+			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(955, 17);
+			this.lbl_NumOfCustomers.Spring = true;
+			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
+			this.lbl_NumOfCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// panel1
 			// 
@@ -166,8 +176,8 @@
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Transparent;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Red;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.dg_DataTable.DefaultCellStyle = dataGridViewCellStyle1;
 			this.dg_DataTable.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -237,6 +247,12 @@
 			this.ch_AddSupport.Name = "ch_AddSupport";
 			this.ch_AddSupport.ReadOnly = true;
 			// 
+			// lbl_LoggedInAs
+			// 
+			this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
+			this.lbl_LoggedInAs.Size = new System.Drawing.Size(79, 17);
+			this.lbl_LoggedInAs.Text = "Belépve mint:";
+			// 
 			// tt_Tooltip
 			// 
 			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
@@ -249,12 +265,6 @@
 			this.tt_Tooltip.TabIndex = 3;
 			this.tt_Tooltip.text = "poop";
 			this.tt_Tooltip.title = null;
-			// 
-			// lbl_NumOfCustomers
-			// 
-			this.lbl_NumOfCustomers.Name = "lbl_NumOfCustomers";
-			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(95, 17);
-			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
 			// 
 			// Form1
 			// 
@@ -300,6 +310,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_LastSupport;
 		private System.Windows.Forms.DataGridViewButtonColumn ch_AddSupport;
 		private System.Windows.Forms.ToolStripStatusLabel lbl_NumOfCustomers;
+		private System.Windows.Forms.ToolStripStatusLabel lbl_LoggedInAs;
 	}
 }
 
