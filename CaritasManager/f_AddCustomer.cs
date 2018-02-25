@@ -55,7 +55,7 @@ namespace CaritasManager
 			tb_Customer_BirthPlace.AutoCompleteSource = AutoCompleteSource.CustomSource;
 			tb_Customer_BirthPlace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 
-			lbl_ProfileName.Text = login_profile.name;
+			lbl_ProfileName.Text = login_profile.name; 
 
 			if (edit)
 			{
