@@ -17,7 +17,10 @@ namespace CaritasManager
 		public bool otherReligion = false;
 		public profile login_profile { get; set; }
 		public bool edit { get; set; }
+		public int customer_id { get; set; }
 		public string current_id = "";
+
+		public List<string> States { get; set; }
 
 		public f_AddCustomer()
 		{
@@ -39,11 +42,20 @@ namespace CaritasManager
 		public void loadData()
 		{
 			//TODO: load data from DB
+
+			
 		}
 
 		private void F_AddCustomer_Load(object sender, EventArgs e)
 		{
 			tb_Customer_Name.Select();
+
+			tb_Customer_BirthPlace.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+			tb_Customer_BirthPlace.AutoCompleteCustomSource.AddRange(Properties.Resources.telepulesek.Replace("\r", "").Split('\n'));
+			tb_Customer_BirthPlace.AutoCompleteSource = AutoCompleteSource.CustomSource;
+			tb_Customer_BirthPlace.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+
+			lbl_ProfileName.Text = login_profile.name;
 
 			if (edit)
 			{
@@ -52,7 +64,8 @@ namespace CaritasManager
 			}
 			else
 			{
-				
+				States = new List<string>();
+				lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
 			}
 		}
 
@@ -74,6 +87,8 @@ namespace CaritasManager
 				lbl_OtherReligion.Visible = true;
 				tb_OtherReligion.Visible = true;
 				otherReligion = true;
+				tb_OtherReligion.Focus();
+				tb_OtherReligion.Select();
 			}
 			else
 			{
@@ -87,7 +102,7 @@ namespace CaritasManager
 		{
 			f_DateSelector date = new f_DateSelector();
 			date.ShowDialog();
-			if(date.selection != null) { tb_Customer_BirthDate.Text = date.selection.ToShortDateString(); }
+			if(date.selection != null && date.OK) { tb_Customer_BirthDate.Text = date.selection.ToShortDateString(); }
 		}
 
 		private void tb_Customer_BirthDate_Leave(object sender, EventArgs e)
@@ -106,6 +121,82 @@ namespace CaritasManager
 			{
 				tb_Customer_BirthDate.BackColor = Color.LightPink;
 				Console.WriteLine("Error:\r\n" + ex);
+			}
+		}
+
+		private void btn_SelectStudyDate_Click(object sender, EventArgs e)
+		{
+			f_DateSelector date = new f_DateSelector();
+			date.selection = DateTime.Now;
+			date.ShowDialog();
+			if (date.selection != null && date.OK) { tb_StudyOn.Text = date.selection.ToShortDateString(); }
+		}
+
+		private void btn_SameAsCreator_Click(object sender, EventArgs e)
+		{
+			tb_StudyBy.Text = lbl_ProfileName.Text;
+		}
+
+		private void btn_State_Add_Click(object sender, EventArgs e)
+		{
+			f_AddState fads = new f_AddState();
+			fads.custName = tb_Customer_Name.Text;
+			fads.edit = false;
+			fads.ShowDialog();
+			if (fads.OK)
+			{
+				if(fads.state != "" && !States.Contains(fads.state))
+				{
+					States.Add(fads.state);
+					loadCustomerStates();
+				}
+			}
+		}
+
+		public void loadCustomerStates()
+		{
+			lv_States.Items.Clear();
+
+			foreach(string s in States)
+			{
+				ListViewItem lvi = new ListViewItem();
+
+				lvi.Text = (States.IndexOf(s) + 1) + "";
+				lvi.SubItems.Add(s);
+
+				lv_States.Items.Add(lvi);
+			}
+		}
+
+		private void btn_State_Remove_Click(object sender, EventArgs e)
+		{
+			if(lv_States.FocusedItem != null)
+			{
+				string s = lv_States.FocusedItem.SubItems[1].Text;
+				States.Remove(s);
+				loadCustomerStates();
+			}
+		}
+
+		private void btn_State_Edit_Click(object sender, EventArgs e)
+		{
+			if (lv_States.FocusedItem != null)
+			{
+				string s = lv_States.FocusedItem.SubItems[1].Text;
+
+				f_AddState fads = new f_AddState();
+				fads.custName = tb_Customer_Name.Text;
+				fads.edit = true;
+				fads.previousState = s;
+				fads.ShowDialog();
+				if (fads.OK)
+				{
+					if (fads.state != "" && !States.Contains(fads.state))
+					{
+						States[States.IndexOf(s)] = fads.state;
+						loadCustomerStates();
+					}
+				}
 			}
 		}
 	}

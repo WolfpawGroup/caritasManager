@@ -13,6 +13,7 @@ namespace CaritasManager
 	public partial class f_DateSelector : Form
 	{
 		public DateTime selection { get; set; }
+		public bool OK = false;
 
 		public f_DateSelector()
 		{
@@ -22,11 +23,13 @@ namespace CaritasManager
 		private void btn_Save_Click(object sender, EventArgs e)
 		{
 			selection = cal.SelectionStart;
+			OK = true;
 			this.Close();
 		}
 
 		private void btn_Cancel_Click(object sender, EventArgs e)
 		{
+			OK = false;
 			this.Close();
 		}
 	}

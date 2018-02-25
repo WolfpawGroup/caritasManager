@@ -15,6 +15,7 @@ namespace CaritasManager
 	public partial class f_belepteto : Form
 	{
 		SQLiteConnection sqlc;
+		SQLiteConnection sqlc2;
 		List<profile> profs = new List<profile>();
 
 		public f_belepteto()
@@ -29,9 +30,15 @@ namespace CaritasManager
             try
             {
                 c_DBHandler.createDBFile();
-                sqlc = c_DBHandler.connectToDB();
+				SQLiteConnection[] conns = c_DBHandler.connectToDB();
+
+				sqlc = conns[0];
                 sqlc.Open();
-                c_DBHandler.createTables(sqlc);
+
+				sqlc2 = conns[1];
+				sqlc2.Open();
+
+                c_DBHandler.createTables(sqlc, sqlc2);
             }
             catch
             {

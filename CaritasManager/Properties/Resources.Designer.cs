@@ -163,6 +163,16 @@ namespace CaritasManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap homeless_0 {
+            get {
+                object obj = ResourceManager.GetObject("homeless_0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap meal_0 {
             get {
                 object obj = ResourceManager.GetObject("meal_0", resourceCulture);
@@ -197,6 +207,67 @@ namespace CaritasManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("plus_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aba
+        ///Abádszalók
+        ///Abaliget
+        ///Abasár
+        ///Abaújalpár
+        ///Abaújkér
+        ///Abaújlak
+        ///Abaújszántó
+        ///Abaújszolnok
+        ///Abaújvár
+        ///Abda
+        ///Abod
+        ///Abony
+        ///Ábrahámhegy
+        ///Ács
+        ///Acsa
+        ///Acsád
+        ///Acsalag
+        ///Ácsteszér
+        ///Adács
+        ///Ádánd
+        ///Adásztevel
+        ///Adony
+        ///Adorjánháza
+        ///Adorjás
+        ///Ág
+        ///Ágasegyháza
+        ///Ágfalva
+        ///Aggtelek
+        ///Agyagosszergény
+        ///Ajak
+        ///Ajka
+        ///Aka
+        ///Akasztó
+        ///Alacska
+        ///Alap
+        ///Alattyán
+        ///Albertirsa
+        ///Alcsútdoboz
+        ///Aldebrő
+        ///Algyő
+        ///Alibánfa
+        ///Almamellék
+        ///Almásfüzitő
+        ///Almásháza
+        ///Almáskamarás
+        ///Almáskeresztúr
+        ///Álmosd
+        ///Alsóberecki
+        ///Alsóbogát
+        ///Alsódobsza
+        ///Alsógagy
+        ///Alsómocs [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string telepulesek {
+            get {
+                return ResourceManager.GetString("telepulesek", resourceCulture);
             }
         }
         

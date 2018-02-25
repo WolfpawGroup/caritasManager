@@ -33,13 +33,21 @@ namespace CaritasManager
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			//TODO: Remove This!
-			//sqlc = c_DBHandler.connectToDB();
-			//sqlc.Open();
-			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
+			sqlc = c_DBHandler.connectToDB()[0];
+			sqlc.Open();
+			login_profile = c_DBHandler.getProfiles(sqlc)[0];
 
 			createIdFile();
 
 			lbl_LoggedInAs.Text = "Belépve mint: " + login_profile.name;
+
+			Color[] c = new Color[] {
+				Color.FromArgb(Convert.ToInt32(login_profile.color_1)),
+				Color.FromArgb(Convert.ToInt32(login_profile.color_2)),
+				Color.FromArgb(Convert.ToInt32(login_profile.color_3))
+			};
+
+			dg_DataTable.colors = c;
 
 			fillMainList();
 		}
@@ -170,6 +178,7 @@ namespace CaritasManager
 				Color c = lasts <= 28 ? Color.LightGreen : (lasts <= 365 ? Color.Orange : Color.LightPink);
 
 				dg_DataTable.Rows[I].DefaultCellStyle.BackColor = c;
+				dg_DataTable.Rows[I].DefaultCellStyle.SelectionBackColor = c;
 
 				I++;
 			}
@@ -268,6 +277,11 @@ namespace CaritasManager
 					Console.WriteLine("ERROR:\r\n" + ex);
 				}
 			}
+		}
+
+		private void dg_DataTable_KeyDown(object sender, KeyEventArgs e)
+		{
+			
 		}
 	}
 }

@@ -40,8 +40,10 @@
 			this.t_Timer = new System.Windows.Forms.Timer(this.components);
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.lbl_NumOfCustomers = new System.Windows.Forms.ToolStripStatusLabel();
+			this.lbl_LoggedInAs = new System.Windows.Forms.ToolStripStatusLabel();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.dg_DataTable = new System.Windows.Forms.DataGridView();
+			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
+			this.dg_DataTable = new CaritasManager.myDataGridView();
 			this.ch_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_jovedelemig = new System.Windows.Forms.DataGridViewImageColumn();
 			this.ch_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,8 +52,6 @@
 			this.ch_DateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.lbl_LoggedInAs = new System.Windows.Forms.ToolStripStatusLabel();
-			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
 			this.ts_Tools.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
@@ -149,6 +149,12 @@
 			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
 			this.lbl_NumOfCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// lbl_LoggedInAs
+			// 
+			this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
+			this.lbl_LoggedInAs.Size = new System.Drawing.Size(79, 17);
+			this.lbl_LoggedInAs.Text = "Belépve mint:";
+			// 
 			// panel1
 			// 
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -156,6 +162,19 @@
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(1049, 97);
 			this.panel1.TabIndex = 5;
+			// 
+			// tt_Tooltip
+			// 
+			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
+			this.tt_Tooltip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.tt_Tooltip.font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.tt_Tooltip.Location = new System.Drawing.Point(-100, -100);
+			this.tt_Tooltip.Name = "tt_Tooltip";
+			this.tt_Tooltip.position = new System.Drawing.Point(10, 10);
+			this.tt_Tooltip.Size = new System.Drawing.Size(13, 18);
+			this.tt_Tooltip.TabIndex = 3;
+			this.tt_Tooltip.text = "poop";
+			this.tt_Tooltip.title = null;
 			// 
 			// dg_DataTable
 			// 
@@ -176,7 +195,7 @@
 			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
 			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveCaption;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
 			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
 			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
 			this.dg_DataTable.DefaultCellStyle = dataGridViewCellStyle1;
@@ -187,6 +206,7 @@
 			this.dg_DataTable.Name = "dg_DataTable";
 			this.dg_DataTable.ReadOnly = true;
 			this.dg_DataTable.RowHeadersVisible = false;
+			this.dg_DataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dg_DataTable.ShowEditingIcon = false;
 			this.dg_DataTable.Size = new System.Drawing.Size(1049, 330);
 			this.dg_DataTable.TabIndex = 6;
@@ -194,6 +214,7 @@
 			this.dg_DataTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
 			this.dg_DataTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellMouseLeave);
 			this.dg_DataTable.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dg_DataTable_RowPostPaint);
+			this.dg_DataTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_DataTable_KeyDown);
 			// 
 			// ch_CustomerName
 			// 
@@ -247,25 +268,6 @@
 			this.ch_AddSupport.Name = "ch_AddSupport";
 			this.ch_AddSupport.ReadOnly = true;
 			// 
-			// lbl_LoggedInAs
-			// 
-			this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
-			this.lbl_LoggedInAs.Size = new System.Drawing.Size(79, 17);
-			this.lbl_LoggedInAs.Text = "Belépve mint:";
-			// 
-			// tt_Tooltip
-			// 
-			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
-			this.tt_Tooltip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.tt_Tooltip.font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.tt_Tooltip.Location = new System.Drawing.Point(-100, -100);
-			this.tt_Tooltip.Name = "tt_Tooltip";
-			this.tt_Tooltip.position = new System.Drawing.Point(10, 10);
-			this.tt_Tooltip.Size = new System.Drawing.Size(13, 18);
-			this.tt_Tooltip.TabIndex = 3;
-			this.tt_Tooltip.text = "poop";
-			this.tt_Tooltip.title = null;
-			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,7 +302,6 @@
 		private System.Windows.Forms.ToolStripButton btn_DatabaseBackup;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.DataGridView dg_DataTable;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_CustomerName;
 		private System.Windows.Forms.DataGridViewImageColumn ch_jovedelemig;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_ID;
@@ -311,6 +312,7 @@
 		private System.Windows.Forms.DataGridViewButtonColumn ch_AddSupport;
 		private System.Windows.Forms.ToolStripStatusLabel lbl_NumOfCustomers;
 		private System.Windows.Forms.ToolStripStatusLabel lbl_LoggedInAs;
+		private myDataGridView dg_DataTable;
 	}
 }
 

@@ -11,233 +11,206 @@ namespace CaritasManager
 	public static class c_DBHandler
 	{
 		public static SHA512CryptoServiceProvider sha5 = new SHA512CryptoServiceProvider();
+		private static string ptwvnq9 = "fDo6Y2FyaXRh";
+		private static string pfoaywe = "c19jaGFuZ2Vz";
+		private static string powv89w = "OjpjYXJpdGFz";
+		private static string pfinwhk = "LnNxbGl0ZTo6";
+		private static string pthwnqc = "X2RhdGFiYXNl";
+		
+		//Metódusok amik lekérdeznek adatokat az adatbázis(ok)ból
+		#region Lekérdezés
 
 		/// <summary>
-		/// Létrehozza a DB fájlt
+		/// Get list of user profiles
 		/// </summary>
-		public static void createDBFile()
+		/// <param name="sqlc">Current open SQLite Connection</param>
+		/// <returns>List of profile objects</returns>
+		public static List<profile> getProfiles(SQLiteConnection sqlc)
 		{
-			if (!File.Exists("database.sqlite"))
+			if (!connectioinOpen(sqlc)) { return null; }
+
+			List<profile> proflist = new List<profile>();
+
+			SQLiteCommand sqlk = new SQLiteCommand("SELECT * FROM profilok", sqlc);
+			SQLiteDataReader r = sqlk.ExecuteReader();
+			while (r.Read())
 			{
-				File.Create("database.sqlite").Close();
+				try
+				{
+					profile p = new profile();
+					p.name = r.GetString(r.GetOrdinal("profil_name"));
+					p.fontStyle = r.GetString(r.GetOrdinal("font_style"));
+					p.fontSize = r.GetString(r.GetOrdinal("font_size"));
+					p.fontFamily = r.GetString(r.GetOrdinal("font_family"));
+					p.fontColor = r.GetString(r.GetOrdinal("font_color"));
+					p.color_1 = r.GetString(r.GetOrdinal("color_1"));
+					p.color_2 = r.GetString(r.GetOrdinal("color_2"));
+					p.color_3 = r.GetString(r.GetOrdinal("color_3"));
+					p.last_login = r.GetString(r.GetOrdinal("last_login"));
+
+					proflist.Add(p);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex.ToString());
+					System.Media.SystemSounds.Asterisk.Play();
+				}
 			}
+
+			return proflist;
 		}
 
 		/// <summary>
-		/// Checks if the current SQLiteConnection (sqlc) is available and open
-		/// </summary>
-		/// <param name="sqlc">The current SQLiteConnection sqlc</param>
-		/// <returns>Bool, true if sqlc is available and open</returns>
-		public static bool connectioinOpen(SQLiteConnection sqlc)
-		{
-			bool ret = false;
-
-			if (sqlc != null && sqlc.State == System.Data.ConnectionState.Open) { ret = true; }
-
-			return ret;
-		}
-
-		/// <summary>
-		/// Checks if the table 'tableName' exists
+		/// Returns current user identification number
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <param name="tableName">The name of the table in question</param>
-		/// <returns>Bool, true if the table exists</returns>
-		public static bool tableExists(SQLiteConnection sqlc, string tableName)
+		/// <returns>string type user identification number</returns>
+		public static string get_azonosito(SQLiteConnection sqlc)
 		{
-			bool ret = true;
-
-			SQLiteCommand sqlk = new SQLiteCommand() { Connection = sqlc };
-			sqlk.CommandText = ("SELECT name FROM sqlite_master WHERE type='table' AND name='" + tableName + "'");
-			if (sqlk.ExecuteScalar() is null) { ret = false; }
-
-			return ret;
-		}
-
-		/// <summary>
-		/// Runs the executeNonQuery for an SQLiteCommand centrally so I can manage the exceptions
-		/// </summary>
-		/// <param name="sqlk">SQL Command containing command text and open connection</param>
-		/// <returns>Bool, true if command ran successfully</returns>
-		public static bool executeNonQuery(SQLiteCommand sqlk)
-		{
-			bool ret = false;
-
-			if (sqlk.Connection == null || sqlk.Connection.State != System.Data.ConnectionState.Open)
-			{
-				Console.WriteLine("==================== START EXCEPTION ====================");
-				Console.WriteLine("Command has no open connection");
-				Console.WriteLine("===================== END EXCEPTION =====================");
-
-				return false;
-			}
+			if (!connectioinOpen(sqlc)) { return ""; }
+			string azonosito = "";
 
 			try
 			{
-				sqlk.ExecuteNonQuery();
-				ret = true;
-
+				SQLiteCommand sqlk = new SQLiteCommand("SELECT ugyfel_azonosito FROM ugyfel_azonosito WHERE id=1", sqlc);
+				azonosito = sqlk.ExecuteScalar() as String;
 			}
-			catch (Exception ex)
+			catch
 			{
-				Console.WriteLine("\r\n==================== START EXCEPTION ====================");
-				Console.WriteLine("=========== c_DBHandler - executeNonQuery (ln:65) ===========");
-				Console.WriteLine(ex);
-				Console.WriteLine("===================== END EXCEPTION =====================\r\n");
+				azonosito = "";
 			}
 
-			return ret;
+			return azonosito;
 		}
 
 		/// <summary>
-		/// Létrehozza a táblákat az adatbázisban
+		/// Get all rows for the mainData type (the type that is used to fill the main data table)
 		/// </summary>
-		/// <param name="sqlc">Jelenlegi nyitott SQL kapcsolat</param>
-		public static void createTables(SQLiteConnection sqlc)
+		/// <param name="sqlc">Current open SQLiteConnection</param>
+		/// <returns>List containing every row in c_MainDataRow objects</returns>
+		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc)
 		{
-			//Kilép a method-ból, ha nincs nyitott SQLite kapcsolat (sqlc)
-			//Ezt minden lekérdezős method-ba beletesszük, hogy ne legyen problémája
+			if (!connectioinOpen(sqlc)) { return null; }
+
+			List<c_MainDataRow> lst = new List<c_MainDataRow>();
+
+			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel";
+
+			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);
+
+			SQLiteDataReader r = sqlk.ExecuteReader();
+
+			string current_azonosito = get_azonosito(sqlc);
+
+			while (r.Read())
+			{
+				c_MainDataRow mdr = new c_MainDataRow();
+				mdr.id = r.GetInt32(r.GetOrdinal("id"));
+				mdr.name = r.GetString(r.GetOrdinal("nev"));
+				mdr.j = (r.GetString(r.GetOrdinal("jovedelem_igazolas")) == "T" ? true : false);
+				mdr.identification = r.GetString(r.GetOrdinal("azonosito"));
+				mdr.city = r.GetString(r.GetOrdinal("lakcim_varos"));
+				mdr.houseno = r.GetString(r.GetOrdinal("lakcim_uh"));
+				mdr.state = r.GetString(r.GetOrdinal("allapot"));
+				mdr.dateAdded = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("hozzaadas_datuma"))));
+				mdr.lastSupport = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja"))));
+				mdr.kin = new List<string>();
+
+				string kin_command = "SELECT * FROM haztartasban_elok WHERE ugyfel_id=" + mdr.id;
+				SQLiteCommand sqlk2 = new SQLiteCommand(kin_command, sqlc);
+				SQLiteDataReader rr = sqlk2.ExecuteReader();
+				while (rr.Read())
+				{
+					mdr.kin.Add(rr.GetString(rr.GetOrdinal("rokoni_kapcsolat")) + ":" + rr.GetString(rr.GetOrdinal("nev")));
+				}
+
+
+				if (greater(current_azonosito, mdr.identification))
+				{
+					current_azonosito = mdr.identification;
+				}
+
+				set_azonosito(sqlc, current_azonosito);
+
+				lst.Add(mdr);
+			}
+
+
+			return lst;
+		}
+
+		public static List<string> getCustomerAllData(SQLiteConnection sqlc, int custid)
+		{
+			return null;
+		}
+
+		#endregion
+
+		/*
+				Vallás:
+				0 : Római katolikus 
+				1 : Evangélikus 
+				2 : Református 
+				3 : Metodista 
+				4 : Baptista 
+				5 : Unitárius 
+				6 : Nem hívő
+				7 : Egyéb
+
+				Lakás:
+				0 : Saját Lakás
+				1 : Albérlő
+				2 : Társbérlő
+				3 : Hajléktalan
+				4 : Szívességi Lakáshasználó
+
+				Ált. Szoc. Helyzet:
+				0 : Jó
+				1 : Közepes
+				2 : Megfelelő
+				3 : Rossz
+
+				Rendszeres segítségre szorul:
+				0 : Igen
+				1 : Nem
+				2 : Esetenként
+
+				Családi állapot:
+				0 : nős
+				1 : nőtlen
+				2 : férjezett
+				3 : hajadon
+				4 : özvegy
+				5 : elvált
+				
+		*/
+
+		//Metódusok amik írnak adatokat az adatbázis(ok)ba (új sor vagy update)
+		#region Új Sor és Módosítás
+
+		/// <summary>
+		/// Edits password line //There is only one line in password table
+		/// </summary>
+		/// <param name="sqlc">Current Open SQLiteConnection</param>
+		/// <param name="password">Password string</param>
+		public static void editPassword(SQLiteConnection sqlc, string password)
+		{
 			if (!connectioinOpen(sqlc)) { return; }
 
-			SQLiteCommand sqlk = new SQLiteCommand(sqlc);
-
-			//Ellenőrzi, hogy létezik-e a tábla, ha nem, létrehozza
-			if (!tableExists(sqlc, "ugyfel"))               //------- UGYFEL tábla
+			if (password.Length > 0)
 			{
-				//TODO: HOZZÁADTA oszlop
-				sqlk.CommandText = "CREATE TABLE ugyfel " +
-									"(" +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"nev TEXT, " +
-										"születesi_nev TEXT, " +
-										"szig_szam TEXT, " +
-										"lakcim_varos TEXT, " +
-										"lakcim_uh TEXT, " +
-										"szul_datum TEXT, " +
-										"szul_hely TEXT, " +
-										"csaladi_allapot INTEGER, " +
-										"anyja_neve TEXT, " +
-										"vegzettseg TEXT, " +
-										"foglalkozas TEXT, " +
-										"szakkepzettseg TEXT, " +
-										"munkaltato TEXT, " +
-										"hozzaadas_datuma TEXT, " +
-										"azonosito TEXT, " +
-										"utolso_tamogatas_idopontja TEXT, " +
-										"jovedelem_igazolas TEXT, " +
-										"allapot TEXT," +
-										"felvevo_profil TEXT," +
-										"legutobb_modositotta TEXT," +
-										"legutobbi_modositas_datuma TEXT" + 
-									")";
-
-				executeNonQuery(sqlk);
-			}
-
-
-			if (!tableExists(sqlc, "vagyon"))               //------- VAGYON tábla
-			{
-				sqlk.CommandText = "CREATE TABLE vagyon " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"szoveg TEXT, " +
-										"osszeg INTEGER, " +
-										"tipus TEXT" +
-									")";
-
-				executeNonQuery(sqlk);
-			}
-
-			if (!tableExists(sqlc, "szoc_helyzet"))         //------- SZOCIALIS HELYZET 1 tábla
-			{
-				sqlk.CommandText = "CREATE TABLE szoc_helyzet " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"lakas INTEGER, " +
-										"altalanos_szoc_helyzet INTEGER, " +
-										"rendszeres_segitsegre_szorul INTEGER" +
-									")";
-
-				executeNonQuery(sqlk);
-			}
-
-
-			if (!tableExists(sqlc, "haztartasban_elok"))    //------- SZOCIALIS HELYZET 2 tábla
-			{
-				sqlk.CommandText = "CREATE TABLE haztartasban_elok " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"nev TEXT, " +
-										"rokoni_kapcsolat TEXT, " +
-										"havi_jovedelem INTEGER" +
-									")";
-
-				executeNonQuery(sqlk);
-			}
-
-
-			if (!tableExists(sqlc, "tamogatasok"))          //------- TAMOGATASOK tábla
-			{
-				sqlk.CommandText = "CREATE TABLE tamogatasok " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"datum TEXT, " +
-										"tamogatas TEXT, " +
-										"tamogatas_mennyisege TEXT, " + 
-										"tamogatas_egysége TEXT, " + 
-										"megjegyzes TEXT" +
-									")";
-
-				executeNonQuery(sqlk);
-			}
-
-
-			if (!tableExists(sqlc, "password"))             //------- Felhasználói Profilok
-			{
-				sqlk.CommandText = "CREATE TABLE password " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                        "passwd TEXT" +
-                                    "); INSERT INTO password (passwd) VALUES ('')";
-
-				executeNonQuery(sqlk);
-			}
-
-
-			if (!tableExists(sqlc, "profilok"))             //------- Felhasználói Profilok
-			{
-				sqlk.CommandText = "CREATE TABLE profilok " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"profil_name INTEGER, " +
-										"last_login TEXT, " +
-										"font_family TEXT, " +
-										"font_size TEXT, " +
-										"font_style TEXT, " +
-										"font_color TEXT, " +
-										"color_1 TEXT, " +      //zöld ügyfél
-										"color_2 TEXT, " +      //sárga ügyfél
-										"color_3 TEXT  " +      //piros ügyfél
-									")";
-
-				executeNonQuery(sqlk);
+				string pwd = password;
+				byte[] bytes = Encoding.UTF8.GetBytes(pwd);     //Generates byte[] from string
+				pwd = "";
+				foreach (byte b in sha5.ComputeHash(bytes))     //Iterates through bytes in array
+				{
+					pwd += b.ToString("X2");                        //adds new hexadecimal characters to password string (byte.tostring(x2))
+				}
+				SQLiteCommand sqlk = new SQLiteCommand("UPDATE password SET passwd='" + pwd + "'", sqlc);
+				sqlk.ExecuteNonQuery();
 			}
 		}
 
-		/// <summary>
-		/// Connects to the default database file
-		/// </summary>
-		/// <returns>Current SQLiteConnection</returns>
-		public static SQLiteConnection connectToDB()
-		{
-			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
-			return sqlc;
-		}
-		
 		/// <summary>
 		/// Adds new profile line or edits an existing one
 		/// </summary>
@@ -328,152 +301,13 @@ namespace CaritasManager
 			return "";
 		}
 
-		public static List<profile> getProfiles(SQLiteConnection sqlc)
-		{
-			if (!connectioinOpen(sqlc)) { return null; }
-
-			List<profile> proflist = new List<profile>();
-
-			SQLiteCommand sqlk = new SQLiteCommand("SELECT * FROM profilok", sqlc);
-			SQLiteDataReader r = sqlk.ExecuteReader();
-			while (r.Read())
-			{
-				try
-				{
-					profile p = new profile();
-					p.name = r.GetString(r.GetOrdinal("profil_name"));
-					p.fontStyle = r.GetString(r.GetOrdinal("font_style"));
-					p.fontSize = r.GetString(r.GetOrdinal("font_size"));
-					p.fontFamily = r.GetString(r.GetOrdinal("font_family"));
-					p.fontColor = r.GetString(r.GetOrdinal("font_color"));
-					p.color_1 = r.GetString(r.GetOrdinal("color_1"));
-					p.color_2 = r.GetString(r.GetOrdinal("color_2"));
-					p.color_3 = r.GetString(r.GetOrdinal("color_3"));
-					p.last_login = r.GetString(r.GetOrdinal("last_login"));
-
-					proflist.Add(p);
-				}
-				catch (Exception ex)
-				{
-					Console.WriteLine(ex.ToString());
-					System.Media.SystemSounds.Asterisk.Play();
-				}
-			}
-
-			return proflist;
-		}
-
-		/// <summary>
-		/// Edits password line //There is only one line in password table
-		/// </summary>
-		/// <param name="sqlc">Current Open SQLiteConnection</param>
-		/// <param name="password">Password string</param>
-		public static void editPassword(SQLiteConnection sqlc, string password)
-		{
-			if (!connectioinOpen(sqlc)) { return; }
-
-			if (password.Length > 0)
-			{
-				string pwd = password;
-				byte[] bytes = Encoding.UTF8.GetBytes(pwd);     //Generates byte[] from string
-				pwd = "";
-				foreach (byte b in sha5.ComputeHash(bytes))     //Iterates through bytes in array
-				{
-					pwd += b.ToString("X2");                        //adds new hexadecimal characters to password string (byte.tostring(x2))
-				}
-				SQLiteCommand sqlk = new SQLiteCommand("UPDATE password SET passwd='" + pwd + "'", sqlc);
-				sqlk.ExecuteNonQuery();
-			}
-		}
-
-		/// <summary>
-		/// Login - Checks password againstr the one saved in DB
-		/// </summary>
-		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <param name="password">String containing password</param>
-		/// <returns>Bool, true if Password is OK</returns>
-		public static bool login(SQLiteConnection sqlc, string password, profile prof)
-		{
-			if (!connectioinOpen(sqlc)) { return false; }
-
-			bool ret = false;
-			string pwd = password;
-			byte[] bytes = Encoding.UTF8.GetBytes(pwd);
-			//pwd = Encoding.UTF8.GetString();
-			pwd = "";
-			foreach (byte b in sha5.ComputeHash(bytes))
-			{
-				pwd += b.ToString("X2");
-			}
-
-			SQLiteCommand sqlk = new SQLiteCommand("SELECT id FROM password WHERE passwd='" + pwd + "';", sqlc);
-
-			ret = sqlk.ExecuteScalar() == null ? false : true;
-
-			//Updateljük a last login-t a profilon
-			if (ret)
-			{
-				sqlk = new SQLiteCommand("UPDATE profilok SET last_login='" + DateTime.Now.ToShortDateString() + "' WHERE lower(profil_name) = '" + prof.name.ToLower() + "';", sqlc);
-				executeNonQuery(sqlk);
-			}
-
-			return ret;
-		}
-
-		/// <summary>
-		/// Checks if password is filled out in DB
-		/// </summary>
-		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <returns></returns>
-		public static bool checkPassword(SQLiteConnection sqlc)
-		{
-			if (!connectioinOpen(sqlc)) { return false; }
-
-			bool ret = false;
-
-			SQLiteCommand sqlk = new SQLiteCommand("SELECT passwd FROM password WHERE id=1;", sqlc);
-
-			ret = sqlk.ExecuteScalar().ToString() == "" ? false : true;
-
-			return ret;
-		}
-
-		#region Új Sor és Módosítás
-
 		//--------------------------- ÜGYFÉL TÁBLA
 		/// <summary>
 		/// Sort ad hozzá az ugyfel táblához
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConneciton</param>
-		/// <param name="nev">Customer name</param>
-		/// <param name="születesi_nev">Customer original name</param>
-		/// <param name="szig_szam">Customer PID number</param>
-		/// <param name="lakcim_varos">Customer Current residence (City)</param>
-		/// <param name="lakcim_uh">Customer Current residence (Rest)</param>
-		/// <param name="szul_datum">Customer DOB</param>
-		/// <param name="szul_hely">Customer City of birth</param>
-		/// <param name="csaladi_allapot">Customer Family</param>
-		/// <param name="anyja_neve">Customer Mothers name</param>
-		/// <param name="vegzettseg">Customer education</param>
-		/// <param name="foglalkozas">Customer profession</param>
-		/// <param name="szakkepzettseg">Customer Occupational Skills</param>
-		/// <param name="munkaltato">Customer employer</param>
-		/// <param name="hozzaadas_datuma">Customer Date Added</param>
-		/// <param name="azonosito">Customer ID number</param>
-		/// <param name="utolso_tamogatas_idopontja">Customer Date of last dupport</param>
-		/// <param name="jovedelem_igazolas">Customer income certificate</param>
-		/// <param name="allapot">Customer state</param>
-		/// <param name="hozzaado_neve">Profile who added customer</param>
-		/// <param name="modosito_neve">Profile last modified the customer</param>
-		/// <param name="modositas_idopontja">Date and time of last modification</param>
-		public static void addRowToUgyfel(SQLiteConnection sqlc, string nev, string születesi_nev, string szig_szam,
-										string lakcim_varos, string lakcim_uh, string szul_datum,
-										string szul_hely, int csaladi_allapot, string anyja_neve,
-										string vegzettseg, string foglalkozas, string szakkepzettseg,
-										string munkaltato, string hozzaadas_datuma, string azonosito,
-										string utolso_tamogatas_idopontja, string jovedelem_igazolas,
-										string allapot, string hozzaado_neve, 
-										string modosito_neve, string modositas_idopontja)
+		/// <param name="cust">mainData class containing all customer data</param>
+		public static void addRowToUgyfel(SQLiteConnection sqlc, mainData cust)
 		{
 
 			if (!connectioinOpen(sqlc)) { return; }
@@ -494,12 +328,15 @@ namespace CaritasManager
 													"foglalkozas, " +
 													"szakkepzettseg, " +
 													"munkaltato, " +
-													"hozzaadas_datuma, " +
 													"azonosito," +
 													"utolso_tamogatas_idopontja, " +
 													"jovedelem_igazolas, " +
 													"allapot," +
+													"elhunyt, " + 
+													"környezettanulmanyt_végezte, " +
+													"környezettanulmany_idopontja, " + 
 													"felvevo_profil," +
+													"hozzaadas_datuma, " +
 													"legutobb_modositotta," +
 													"legutobbi_modositas_datuma" +
 												") VALUES (" +
@@ -523,37 +360,41 @@ namespace CaritasManager
 													"'{17}', " +
 													"'{18}', " +
 													"'{19}', " +
-													"'{20}'" +
+													"'{20}', " +
+													"'{21}', " + 
+													"'{22}', " +
+													"'{23}' " +
 												")",
-													nev,
-													születesi_nev,
-													szig_szam,
-													lakcim_varos,
-													lakcim_uh,
-													szul_datum,
-													szul_hely,
-													csaladi_allapot,
-													anyja_neve,
-													vegzettseg,
-													foglalkozas,
-													szakkepzettseg,
-													munkaltato,
-													hozzaadas_datuma,
-													azonosito,
-													utolso_tamogatas_idopontja,
-													jovedelem_igazolas,
-													allapot,
-													hozzaado_neve,
-													modosito_neve,
-													modositas_idopontja
+													cust.nev,
+													cust.születesi_nev,					//Empty (or '-' ?) for same as name
+													cust.szig_szam,                     //Can be empty?
+													cust.lakcim_varos,
+													cust.lakcim_uh,
+													cust.szul_datum,					//Can be empty
+													cust.szul_hely,                     //Can be empty
+													cust.csaladi_allapot,				//From enums->családi_állapot
+													cust.anyja_neve,
+													cust.vegzettseg,
+													cust.foglalkozas,
+													cust.szakkepzettseg,
+													cust.munkaltato,
+													cust.azonosito,
+													cust.utolso_tamogatas_idopontja,	//Can be empty
+													cust.jovedelem_igazolas,			//T=true | F=false
+													cust.allapot,
+													cust.elhunyt,						//T=true | F=false
+													cust.környezettanulmanyt_végezte,	//Can be empty - Checkbox for 'Same as creator'
+													cust.környezettanulmany_idopontja,	//Can be empty
+													cust.felvevo_profil,				//!!Can NOT be empty
+													cust.hozzaadas_datuma,				//!!Can NOT be empty
+													cust.legutobb_modositotta,          //Can be empty
+													cust.legutobbi_modositas_datuma     //Can be empty
 										);
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
 			executeNonQuery(sqlk);
 		}
 
-
-		//Ez a bonyolult de szép megoldás
 		/// <summary>
 		/// Modify or delete line from ugyfel table
 		/// </summary>
@@ -814,8 +655,8 @@ namespace CaritasManager
 													"'{1}', " +
 													"'{2}', " +
 													"'{3}', " +
-													"'{4}', " + 
-													"'{5}'" + 
+													"'{4}', " +
+													"'{5}'" +
 												")",
 													ugyfel_id,
 													datum,
@@ -857,6 +698,27 @@ namespace CaritasManager
 		}
 
 		/// <summary>
+		/// Sets new value for user_identification number
+		/// </summary>
+		/// <param name="sqlc">Current open SQLiteConnection</param>
+		/// <param name="azonosito">User identification number to set</param>
+		public static void set_azonosito(SQLiteConnection sqlc, string azonosito)
+		{
+			if (!connectioinOpen(sqlc)) { return; }
+
+			SQLiteCommand sqlk = new SQLiteCommand("UPDATE ugyfel_azonosito SET ugyfel_azonosito = '" + azonosito + "' WHERE id=1;", sqlc);
+			executeNonQuery(sqlk);
+		}
+
+
+		#endregion
+
+
+
+		//Metódusok amik segédfeladatokat hajtanak végre
+		#region Management functions
+
+		/// <summary>
 		/// Check input date, fix if it's faulty
 		/// </summary>
 		/// <param name="date">String date</param>
@@ -870,59 +732,566 @@ namespace CaritasManager
 			}
 			catch
 			{
+				date = date.Replace(" ", "").Replace("\\", ".").Replace(",", ".").Replace("-", ".").Replace("|", ".").Replace("/", ".").Replace("_", ".").Replace("*", ".");
+
+				if (!date.Contains("."))
+				{
+					//TODO: FINISH
+
+					int year = 0;
+					int month = 0;
+					int day = 0;
+
+					if (date.Length > 6)
+					{
+						year = Convert.ToInt32(date.Substring(0, 4));
+						date = date.Remove(0, 4);
+
+						if (date.Length == 4)
+						{
+							month = Convert.ToInt32(date.Substring(0, 2));
+							date = date.Remove(0, 2);
+							day = Convert.ToInt32(date);
+						}
+						else
+						{
+							if (date[0] == '0')
+							{
+								month = Convert.ToInt32(date.Substring(0, 2));
+								day = Convert.ToInt32(date[2].ToString());
+							}
+							else if (date[2] == '0')
+							{
+								month = Convert.ToInt32(date.Substring(0, 1));
+								day = Convert.ToInt32(date.Substring(1, 2));
+							}
+							else
+							{
+								month = Convert.ToInt32(date.Substring(0, 2));
+								day = Convert.ToInt32(date[2].ToString());
+							}
+						}
+					}
+					else if (date.Length == 6)
+					{
+
+					}
+					else if (date.Length > 3)
+					{
+
+					}
+					else
+					{
+
+					}
+
+					DateTime correct = new DateTime(year, month, day);
+
+				}
+				else
+				{
+					try
+					{
+						DateTime d = Convert.ToDateTime(date);
+						return date;
+					}
+					catch { }
+				}
+
 				//TODO: helyes dátum létrehozása
 				return DateTime.Now.ToShortDateString();
 			}
 		}
 
 		/// <summary>
-		/// Get all rows for the mainData type (the type that is used to fill the main data table)
+		/// checks which of 2 numbers (stored as strings) are greater
+		/// </summary>
+		/// <param name="current_id"></param>
+		/// <param name="new_id"></param>
+		/// <returns></returns>
+		public static bool greater(string current_id, string new_id)
+		{
+			bool ret = false;
+
+			try
+			{
+				int _current = -1;
+				int _new = -1;
+
+				int.TryParse(current_id, out _current);
+				int.TryParse(new_id, out _new);
+
+				ret = _new > _current;
+
+				if (_current == -1 || _new == -1) { Console.WriteLine("PARSE ERROR! @ c_DBHandler -> greater"); return false; }
+			}
+			catch (Exception ex) { Console.WriteLine(ex); }
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Létrehozza a DB fájlt
+		/// </summary>
+		public static void createDBFile()
+		{
+			string p = genp();
+
+
+			if (!File.Exists("database.sqlite"))
+			{
+				File.Create("database.sqlite").Close();
+
+				SQLiteConnection conn = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+				conn.SetPassword(p.Split('|')[0]);
+				conn.Open();
+			}
+
+			if (!File.Exists("changes.sqlite"))
+			{
+				File.Create("changes.sqlite").Close();
+
+				SQLiteConnection conn = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+				conn.SetPassword(p.Split('|')[1]);
+				conn.Open();
+			}
+		}
+
+		/// <summary>
+		/// Checks if the current SQLiteConnection (sqlc) is available and open
+		/// </summary>
+		/// <param name="sqlc">The current SQLiteConnection sqlc</param>
+		/// <returns>Bool, true if sqlc is available and open</returns>
+		public static bool connectioinOpen(SQLiteConnection sqlc)
+		{
+			bool ret = false;
+
+			if (sqlc != null && sqlc.State == System.Data.ConnectionState.Open) { ret = true; }
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Checks if the table 'tableName' exists
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <returns>List containing every row in c_MainDataRow objects</returns>
-		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc)
+		/// <param name="tableName">The name of the table in question</param>
+		/// <returns>Bool, true if the table exists</returns>
+		public static bool tableExists(SQLiteConnection sqlc, string tableName)
 		{
-			if (!connectioinOpen(sqlc)) { return null; }
+			bool ret = true;
 
-			List<c_MainDataRow> lst = new List<c_MainDataRow>();
+			SQLiteCommand sqlk = new SQLiteCommand() { Connection = sqlc };
+			sqlk.CommandText = ("SELECT name FROM sqlite_master WHERE type='table' AND name='" + tableName + "'");
+			if (sqlk.ExecuteScalar() is null) { ret = false; }
 
-			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel";
+			return ret;
+		}
 
-			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);
+		/// <summary>
+		/// Runs the executeNonQuery for an SQLiteCommand centrally so I can manage the exceptions
+		/// </summary>
+		/// <param name="sqlk">SQL Command containing command text and open connection</param>
+		/// <returns>Bool, true if command ran successfully</returns>
+		public static bool executeNonQuery(SQLiteCommand sqlk)
+		{
+			bool ret = false;
 
-			SQLiteDataReader r = sqlk.ExecuteReader();
-
-			while (r.Read())
+			if (sqlk.Connection == null || sqlk.Connection.State != System.Data.ConnectionState.Open)
 			{
-				c_MainDataRow mdr = new c_MainDataRow();
-				mdr.id = r.GetInt32(r.GetOrdinal("id"));
-				mdr.name = r.GetString(r.GetOrdinal("nev"));
-				mdr.j = (r.GetString(r.GetOrdinal("jovedelem_igazolas")) == "T" ? true : false);
-				mdr.identification = r.GetString(r.GetOrdinal("azonosito"));
-				mdr.city = r.GetString(r.GetOrdinal("lakcim_varos"));
-				mdr.houseno = r.GetString(r.GetOrdinal("lakcim_uh"));
-				mdr.state = r.GetString(r.GetOrdinal("allapot"));
-				mdr.dateAdded = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("hozzaadas_datuma"))));
-				mdr.lastSupport = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja"))));
-				mdr.kin = new List<string>();
+				Console.WriteLine("==================== START EXCEPTION ====================");
+				Console.WriteLine("Command has no open connection");
+				Console.WriteLine("===================== END EXCEPTION =====================");
 
-				string kin_command = "SELECT * FROM haztartasban_elok WHERE ugyfel_id=" + mdr.id;
-				SQLiteCommand sqlk2 = new SQLiteCommand(kin_command, sqlc);
-				SQLiteDataReader rr = sqlk2.ExecuteReader();
-				while (rr.Read())
-				{
-					mdr.kin.Add(rr.GetString(rr.GetOrdinal("rokoni_kapcsolat")) + ":" + rr.GetString(rr.GetOrdinal("nev")));
-				}
+				return false;
+			}
 
-				lst.Add(mdr);
+			try
+			{
+				sqlk.ExecuteNonQuery();
+				ret = true;
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine("\r\n==================== START EXCEPTION ====================");
+				Console.WriteLine("=========== c_DBHandler - executeNonQuery (ln:65) ===========");
+				Console.WriteLine(ex);
+				Console.WriteLine("===================== END EXCEPTION =====================\r\n");
+			}
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Létrehozza a táblákat az adatbázisban
+		/// </summary>
+		/// <param name="sqlc">Jelenlegi nyitott SQL kapcsolat</param>
+		public static void createTables(SQLiteConnection sqlc, SQLiteConnection sqlc2)
+		{
+			//Kilép a method-ból, ha nincs nyitott SQLite kapcsolat (sqlc)
+			//Ezt minden lekérdezős method-ba beletesszük, hogy ne legyen problémája
+			if (!connectioinOpen(sqlc)) { return; }
+
+			SQLiteCommand sqlk = new SQLiteCommand(sqlc);
+
+			//Ellenőrzi, hogy létezik-e a tábla, ha nem, létrehozza
+			if (!tableExists(sqlc, "ugyfel"))               //------- UGYFEL tábla
+			{
+				//TODO: HOZZÁADTA oszlop
+				sqlk.CommandText = "CREATE TABLE ugyfel " +     //TODO: STUDY BY, STUDY ON, ELHUNYT
+									"(" +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"nev TEXT, " +
+										"születesi_nev TEXT, " +
+										"szig_szam TEXT, " +
+										"lakcim_varos TEXT, " +
+										"lakcim_uh TEXT, " +
+										"szul_datum TEXT, " +
+										"szul_hely TEXT, " +
+										"csaladi_allapot INTEGER, " +
+										"anyja_neve TEXT, " +
+										"vegzettseg TEXT, " +
+										"foglalkozas TEXT, " +
+										"szakkepzettseg TEXT, " +
+										"munkaltato TEXT, " +
+										"azonosito TEXT, " +
+										"utolso_tamogatas_idopontja TEXT, " +
+										"jovedelem_igazolas TEXT, " +
+										"elhunyt TEXT, " +
+										"allapot TEXT," +   //nagycsaládos, hajléktalan, hátrányos helyzetű...
+										"vallas TEXT, " +	//INT if general religion, name of religion if MISC
+										"környezettanulmanyt_végezte TEXT, " +
+										"környezettanulmany_idopontja TEXT, " +
+										"hozzaadas_datuma TEXT, " +
+										"felvevo_profil TEXT," +
+										"legutobb_modositotta TEXT," +
+										"legutobbi_modositas_datuma TEXT" +
+									")";
+
+				executeNonQuery(sqlk);
+			}
+
+			if (!tableExists(sqlc, "ugyfel_azonosito"))               //------- VAGYON tábla
+			{
+				sqlk.CommandText = "CREATE TABLE ugyfel_azonosito " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_azonosito TEXT" +
+									"); INSERT INTO ugyfel_azonosito (ugyfel_azonosito) VALUES ('000000');";
+
+				executeNonQuery(sqlk);
+			}
+
+			if (!tableExists(sqlc, "vagyon"))               //------- VAGYON tábla
+			{
+				sqlk.CommandText = "CREATE TABLE vagyon " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +		//Ügyfél
+										"szoveg TEXT, " +			//kiadás vagy bevétel megnevezése ill megjegyzés szövege
+										"osszeg INTEGER, " +		//Összeg (0 if megjegyzés)
+										"tipus TEXT" +				//Tipus: K=Kiadás, B=Bevétel, M=Megjegyzés
+									")";
+
+				executeNonQuery(sqlk);
+			}
+
+			if (!tableExists(sqlc, "szoc_helyzet"))         //------- SZOCIALIS HELYZET 1 tábla
+			{
+				sqlk.CommandText = "CREATE TABLE szoc_helyzet " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"lakas INTEGER, " +
+										"altalanos_szoc_helyzet INTEGER, " +
+										"rendszeres_segitsegre_szorul INTEGER" +
+									")";
+
+				executeNonQuery(sqlk);
 			}
 
 
-			return lst;
+			if (!tableExists(sqlc, "haztartasban_elok"))    //------- SZOCIALIS HELYZET 2 tábla
+			{
+				sqlk.CommandText = "CREATE TABLE haztartasban_elok " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"nev TEXT, " +
+										"rokoni_kapcsolat TEXT, " +
+										"havi_jovedelem INTEGER" +
+									")";
+
+				executeNonQuery(sqlk);
+			}
+
+
+			if (!tableExists(sqlc, "tamogatasok"))          //------- TAMOGATASOK tábla
+			{
+				sqlk.CommandText = "CREATE TABLE tamogatasok " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"datum TEXT, " +
+										"tamogatas TEXT, " +
+										"tamogatas_mennyisege TEXT, " +
+										"tamogatas_egysége TEXT, " +
+										"megjegyzes TEXT" +
+									")";
+
+				executeNonQuery(sqlk);
+			}
+
+
+			if (!tableExists(sqlc, "password"))             //------- Felhasználói Profilok
+			{
+				sqlk.CommandText = "CREATE TABLE password " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"passwd TEXT" +
+									"); INSERT INTO password (passwd) VALUES ('')";
+
+				executeNonQuery(sqlk);
+			}
+
+
+			if (!tableExists(sqlc, "profilok"))             //------- Felhasználói Profilok
+			{
+				sqlk.CommandText = "CREATE TABLE profilok " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"profil_name INTEGER, " +
+										"last_login TEXT, " +
+										"font_family TEXT, " +
+										"font_size TEXT, " +
+										"font_style TEXT, " +
+										"font_color TEXT, " +
+										"color_1 TEXT, " +      //zöld ügyfél
+										"color_2 TEXT, " +      //sárga ügyfél
+										"color_3 TEXT  " +      //piros ügyfél
+									")";
+
+				executeNonQuery(sqlk);
+			}
+
+			//TODO: add table creation for backups db
+		}
+
+		/// <summary>
+		/// Connects to the default database file
+		/// </summary>
+		/// <returns>Current SQLiteConnection</returns>
+		public static SQLiteConnection[] connectToDB()
+		{
+			string p = genp();
+
+			//IMPORTANT:!!CHANGE THIS!!
+
+			//SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;Password=" + p.Split('|')[0] + ";");
+			//SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;Password=" + p.Split('|')[1] + ";");
+
+			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+			SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;");
+			return new SQLiteConnection[] { sqlc, sqlc2 };
+		}
+
+		/// <summary>
+		/// Generates pwd
+		/// </summary>
+		/// <returns>pwd</returns>
+		public static string genp()
+		{
+			FromBase64Transform fbt = new FromBase64Transform();
+			List<byte> ib = new List<byte>();
+			List<byte> ob = new List<byte>();
+
+			byte[] b = new byte[8881];
+			byte[] bb = new byte[3311];
+
+			ib.AddRange(Encoding.UTF8.GetBytes(powv89w));
+			ib.AddRange(Encoding.UTF8.GetBytes(pthwnqc));
+			ib.AddRange(Encoding.UTF8.GetBytes(pfinwhk));
+			ib.AddRange(Encoding.UTF8.GetBytes(ptwvnq9));
+			ib.AddRange(Encoding.UTF8.GetBytes(pfoaywe));
+			ib.AddRange(Encoding.UTF8.GetBytes(pfinwhk));
+
+			b = ib.ToArray();
+			bb = new byte[b.Length];
+			fbt.TransformBlock(b, 0, b.Length, bb, 0);
+
+			string tmp = "";
+
+			foreach (byte _bb_ in bb)
+			{ tmp += ((char)_bb_).ToString(); }
+
+			tmp = tmp.Trim('\0');
+
+			string poiohgwuj = tmp.Split('|')[0];
+			string ptsdvlsfd = tmp.Split('|')[1];
+
+			MD5CryptoServiceProvider m5 = new MD5CryptoServiceProvider();
+
+			tmp = "";
+
+			foreach (byte _b__ in m5.ComputeHash(Encoding.UTF8.GetBytes(poiohgwuj)))
+			{
+				tmp += _b__.ToString("X2");
+			}
+
+			poiohgwuj = "";
+
+			tmp += "|";
+
+			foreach (byte __b in m5.ComputeHash(Encoding.UTF8.GetBytes(ptsdvlsfd)))
+			{
+				tmp += __b.ToString("X2");
+			}
+
+			ptsdvlsfd = ""; b = null; bb = null; ib = null; ob = null; GC.Collect(); return tmp;
+		}
+
+		/// <summary>
+		/// Checks if password is filled out in DB
+		/// </summary>
+		/// <param name="sqlc">Current open SQLiteConnection</param>
+		/// <returns></returns>
+		public static bool checkPassword(SQLiteConnection sqlc)
+		{
+			if (!connectioinOpen(sqlc)) { return false; }
+
+			bool ret = false;
+
+			SQLiteCommand sqlk = new SQLiteCommand("SELECT passwd FROM password WHERE id=1;", sqlc);
+
+			ret = sqlk.ExecuteScalar().ToString() == "" ? false : true;
+
+			return ret;
+		}
+
+		/// <summary>
+		/// Login - Checks password againstr the one saved in DB
+		/// </summary>
+		/// <param name="sqlc">Current open SQLiteConnection</param>
+		/// <param name="password">String containing password</param>
+		/// <returns>Bool, true if Password is OK</returns>
+		public static bool login(SQLiteConnection sqlc, string password, profile prof)
+		{
+			if (!connectioinOpen(sqlc)) { return false; }
+
+			bool ret = false;
+			string pwd = password;
+			byte[] bytes = Encoding.UTF8.GetBytes(pwd);
+			//pwd = Encoding.UTF8.GetString();
+			pwd = "";
+			foreach (byte b in sha5.ComputeHash(bytes))
+			{
+				pwd += b.ToString("X2");
+			}
+
+			SQLiteCommand sqlk = new SQLiteCommand("SELECT id FROM password WHERE passwd='" + pwd + "';", sqlc);
+
+			ret = sqlk.ExecuteScalar() == null ? false : true;
+
+			//Updateljük a last login-t a profilon
+			if (ret)
+			{
+				sqlk = new SQLiteCommand("UPDATE profilok SET last_login='" + DateTime.Now.ToShortDateString() + "' WHERE lower(profil_name) = '" + prof.name.ToLower() + "';", sqlc);
+				executeNonQuery(sqlk);
+			}
+
+			return ret;
 		}
 
 		#endregion
 		
+	}
+
+
+	/// <summary>
+	/// Enums for later
+	/// </summary>
+	public class enums
+	{
+		public enum vallás
+		{
+			Római_katolikus,
+			Evangélikus,
+			Református,
+			Metodista,
+			Baptista,
+			Unitárius,
+			Nem_hívő,
+			Egyéb
+		}
+
+		public enum lakás
+		{
+			Saját_Lakás,
+			Albérlő,
+			Társbérlő,
+			Hajléktalan,
+			Szívességi_Lakáshasználó
+		}
+
+		public enum általános_szociális_helyzet
+		{
+			Jó,
+			Közepes,
+			Megfelelő,
+			Rossz
+		}
+
+		public enum rendszeres_segítségre_szorul
+		{
+			Igen,
+			Nem,
+			Esetenként
+		}
+
+		public enum családi_állapot
+		{
+			Nős,
+			Nőtlen,
+			Férjezett,
+			Hajadon,
+			Özvegy,
+			Elvált
+		}
+	}
+
+
+	/// <summary>
+	/// Contains all the data required for the main customer data lines
+	/// </summary>
+	public class mainData
+	{
+		public int		id								{ get; set; }
+		public string	nev								{ get; set; }
+		public string	születesi_nev					{ get; set; }
+		public string	szig_szam						{ get; set; }
+		public string	lakcim_varos					{ get; set; }
+		public string	lakcim_uh						{ get; set; }
+		public string	szul_datum						{ get; set; }
+		public string	szul_hely						{ get; set; }
+		public int		csaladi_allapot					{ get; set; }
+		public string	anyja_neve						{ get; set; }
+		public string	vegzettseg						{ get; set; }
+		public string	foglalkozas						{ get; set; }
+		public string	szakkepzettseg					{ get; set; }
+		public string	munkaltato						{ get; set; }
+		public string	azonosito						{ get; set; }
+		public string	utolso_tamogatas_idopontja		{ get; set; }
+		public bool		jovedelem_igazolas				{ get; set; }
+		public bool		elhunyt							{ get; set; }
+		public int		allapot							{ get; set; }
+		public string	vallas							{ get; set; }
+		public string	környezettanulmanyt_végezte		{ get; set; }
+		public string	környezettanulmany_idopontja	{ get; set; }
+		public string	hozzaadas_datuma				{ get; set; }
+		public string	felvevo_profil					{ get; set; }
+		public string	legutobb_modositotta			{ get; set; }
+		public string	legutobbi_modositas_datuma		{ get; set; }
 	}
 
 	/// <summary>
@@ -942,4 +1311,8 @@ namespace CaritasManager
 		public string last_login { get; set; }
 	}
 
+	public class customerAllData
+	{
+		public mainData cust_mainData { get; set; }
+	}
 }

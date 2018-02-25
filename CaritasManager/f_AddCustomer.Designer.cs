@@ -34,7 +34,7 @@
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tp_PersonalData = new System.Windows.Forms.TabPage();
 			this.gb_Religion = new System.Windows.Forms.GroupBox();
-			this.tb_OtherReligion = new System.Windows.Forms.TextBox();
+			this.tb_OtherReligion = new System.Windows.Forms.ComboBox();
 			this.lbl_OtherReligion = new System.Windows.Forms.Label();
 			this.cb_Religion = new System.Windows.Forms.ComboBox();
 			this.label12 = new System.Windows.Forms.Label();
@@ -51,6 +51,7 @@
 			this.tb_Customer_MothersName = new System.Windows.Forms.TextBox();
 			this.tb_Customer_PIDNum = new System.Windows.Forms.TextBox();
 			this.tb_Customer_BirthPlace = new System.Windows.Forms.TextBox();
+			this.btn_SelectBirthDate = new System.Windows.Forms.Button();
 			this.tb_Customer_BirthDate = new System.Windows.Forms.TextBox();
 			this.label7 = new System.Windows.Forms.Label();
 			this.label6 = new System.Windows.Forms.Label();
@@ -74,20 +75,33 @@
 			this.ch_Income_Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_CustomerIncomeSource = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_CustomerIncomeAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.btn_Income_Add = new System.Windows.Forms.Button();
+			this.btn_Income_Remove = new System.Windows.Forms.Button();
+			this.btn_Income_Edit = new System.Windows.Forms.Button();
 			this.tb_Income_Sum = new System.Windows.Forms.TextBox();
 			this.label15 = new System.Windows.Forms.Label();
 			this.label27 = new System.Windows.Forms.Label();
 			this.label26 = new System.Windows.Forms.Label();
 			this.label14 = new System.Windows.Forms.Label();
+			this.btn_Expenditure_Edit = new System.Windows.Forms.Button();
 			this.lv_CustomerExpenditure = new System.Windows.Forms.ListView();
 			this.ch_ExpenditureId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_CustomerExpenditureType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_CustomerExpenditureValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.btn_Expenditure_Remove = new System.Windows.Forms.Button();
 			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.btn_Expenditure_Add = new System.Windows.Forms.Button();
 			this.label16 = new System.Windows.Forms.Label();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.btn_State_Add = new System.Windows.Forms.Button();
+			this.btn_State_Remove = new System.Windows.Forms.Button();
+			this.btn_State_Edit = new System.Windows.Forms.Button();
+			this.lv_States = new System.Windows.Forms.ListView();
+			this.ch_State_ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.ch_State = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.label35 = new System.Windows.Forms.Label();
 			this.label24 = new System.Windows.Forms.Label();
 			this.tb_FamilyIncomeSum = new System.Windows.Forms.TextBox();
 			this.label23 = new System.Windows.Forms.Label();
@@ -95,6 +109,9 @@
 			this.cb_GeneralSocialState = new System.Windows.Forms.ComboBox();
 			this.label22 = new System.Windows.Forms.Label();
 			this.label21 = new System.Windows.Forms.Label();
+			this.btn_SocialState_Add = new System.Windows.Forms.Button();
+			this.btn_SocialState_Remove = new System.Windows.Forms.Button();
+			this.btn_SocialState_Edit = new System.Windows.Forms.Button();
 			this.lv_CustomerSocialState = new System.Windows.Forms.ListView();
 			this.ch_PPLID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_PPL_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -104,6 +121,12 @@
 			this.cb_Dwelling = new System.Windows.Forms.ComboBox();
 			this.label19 = new System.Windows.Forms.Label();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.btn_SameAsCreator = new System.Windows.Forms.Button();
+			this.tb_StudyBy = new System.Windows.Forms.TextBox();
+			this.btn_SelectStudyDate = new System.Windows.Forms.Button();
+			this.tb_StudyOn = new System.Windows.Forms.TextBox();
+			this.label34 = new System.Windows.Forms.Label();
+			this.label32 = new System.Windows.Forms.Label();
 			this.lbl_LastUpdateDate = new System.Windows.Forms.Label();
 			this.label31 = new System.Windows.Forms.Label();
 			this.lbl_LastUpdatedBy = new System.Windows.Forms.Label();
@@ -113,23 +136,14 @@
 			this.lbl_ProfileName = new System.Windows.Forms.Label();
 			this.label28 = new System.Windows.Forms.Label();
 			this.tabPage5 = new System.Windows.Forms.TabPage();
+			this.btn_EditAid = new System.Windows.Forms.Button();
 			this.label30 = new System.Windows.Forms.Label();
 			this.lv_Aids = new System.Windows.Forms.ListView();
 			this.ch_AidID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.btn_SelectBirthDate = new System.Windows.Forms.Button();
-			this.btn_Income_Add = new System.Windows.Forms.Button();
-			this.btn_Income_Remove = new System.Windows.Forms.Button();
-			this.btn_Income_Edit = new System.Windows.Forms.Button();
-			this.btn_Expenditure_Edit = new System.Windows.Forms.Button();
-			this.btn_Expenditure_Remove = new System.Windows.Forms.Button();
-			this.btn_Expenditure_Add = new System.Windows.Forms.Button();
-			this.btn_SocialState_Add = new System.Windows.Forms.Button();
-			this.btn_SocialState_Remove = new System.Windows.Forms.Button();
-			this.btn_SocialState_Edit = new System.Windows.Forms.Button();
-			this.btn_EditAid = new System.Windows.Forms.Button();
+			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tp_PersonalData.SuspendLayout();
@@ -153,7 +167,7 @@
 			this.panel1.Controls.Add(this.btn_Cancel);
 			this.panel1.Controls.Add(this.btn_Save);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 465);
+			this.panel1.Location = new System.Drawing.Point(0, 449);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(695, 31);
 			this.panel1.TabIndex = 0;
@@ -189,11 +203,12 @@
 			this.tabControl1.Location = new System.Drawing.Point(0, 0);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
-			this.tabControl1.Size = new System.Drawing.Size(695, 465);
+			this.tabControl1.Size = new System.Drawing.Size(695, 449);
 			this.tabControl1.TabIndex = 1;
 			// 
 			// tp_PersonalData
 			// 
+			this.tp_PersonalData.Controls.Add(this.cbb_PassedAway);
 			this.tp_PersonalData.Controls.Add(this.gb_Religion);
 			this.tp_PersonalData.Controls.Add(this.gb_WorkStuff);
 			this.tp_PersonalData.Controls.Add(this.gb_PersonalData);
@@ -203,7 +218,7 @@
 			this.tp_PersonalData.Location = new System.Drawing.Point(4, 22);
 			this.tp_PersonalData.Name = "tp_PersonalData";
 			this.tp_PersonalData.Padding = new System.Windows.Forms.Padding(3);
-			this.tp_PersonalData.Size = new System.Drawing.Size(687, 439);
+			this.tp_PersonalData.Size = new System.Drawing.Size(687, 423);
 			this.tp_PersonalData.TabIndex = 0;
 			this.tp_PersonalData.Text = "Személyes Adatok";
 			this.tp_PersonalData.UseVisualStyleBackColor = true;
@@ -227,10 +242,104 @@
 			// 
 			this.tb_OtherReligion.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_OtherReligion.AutoCompleteCustomSource.AddRange(new string[] {
+            "Ortodox",
+            "Ókeleti",
+            "Keleti katolikus",
+            "Szunnita",
+            "Síita",
+            "Háridzsita",
+            "Ahmadik",
+            "Drúz",
+            "Koranista",
+            "Szúfista",
+            "Vahhábita",
+            "Konzervatív zsidó",
+            "Ortodox zsidó",
+            "Reform tsidó",
+            "Karaitaista",
+            "Haszidista",
+            "Neológus",
+            "Vaisnavista",
+            "Saktista",
+            "Saivista",
+            "Mahájána",
+            "Théraváda",
+            "Vadzsrajána",
+            "Digambara",
+            "Svétámbara",
+            "Konfucianista",
+            "Taoista",
+            "Kínai buddhista",
+            "Vuduista",
+            "Santeríaista",
+            "Candomblé",
+            "Bahái hitű",
+            "Dzsainista",
+            "Mormonista",
+            "Misztériumvallások",
+            "Sámánista",
+            "Sátánista",
+            "Sintó",
+            "Szikhista",
+            "Újpogány",
+            "Unitárius",
+            "Zoroasztrista",
+            "Panteista",
+            "Spiritualista",
+            "Scientológus"});
+			this.tb_OtherReligion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.tb_OtherReligion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			this.tb_OtherReligion.Items.AddRange(new object[] {
+            "Ortodox",
+            "Ókeleti",
+            "Keleti katolikus",
+            "Szunnita",
+            "Síita",
+            "Háridzsita",
+            "Ahmadik",
+            "Drúz",
+            "Koranista",
+            "Szúfista",
+            "Vahhábita",
+            "Konzervatív zsidó",
+            "Ortodox zsidó",
+            "Reform tsidó",
+            "Karaitaista",
+            "Haszidista",
+            "Neológus",
+            "Vaisnavista",
+            "Saktista",
+            "Saivista",
+            "Mahájána",
+            "Théraváda",
+            "Vadzsrajána",
+            "Digambara",
+            "Svétámbara",
+            "Konfucianista",
+            "Taoista",
+            "Kínai buddhista",
+            "Vuduista",
+            "Santeríaista",
+            "Candomblé",
+            "Bahái hitű",
+            "Dzsainista",
+            "Mormonista",
+            "Misztériumvallások",
+            "Sámánista",
+            "Sátánista",
+            "Sintó",
+            "Szikhista",
+            "Újpogány",
+            "Unitárius",
+            "Zoroasztrista",
+            "Panteista",
+            "Spiritualista",
+            "Scientológus"});
 			this.tb_OtherReligion.Location = new System.Drawing.Point(396, 24);
 			this.tb_OtherReligion.Name = "tb_OtherReligion";
-			this.tb_OtherReligion.Size = new System.Drawing.Size(265, 20);
-			this.tb_OtherReligion.TabIndex = 14;
+			this.tb_OtherReligion.Size = new System.Drawing.Size(265, 21);
+			this.tb_OtherReligion.TabIndex = 16;
 			this.tb_OtherReligion.Visible = false;
 			// 
 			// lbl_OtherReligion
@@ -403,6 +512,22 @@
 			this.tb_Customer_BirthPlace.Size = new System.Drawing.Size(265, 20);
 			this.tb_Customer_BirthPlace.TabIndex = 6;
 			// 
+			// btn_SelectBirthDate
+			// 
+			this.btn_SelectBirthDate.BackgroundImage = global::CaritasManager.Properties.Resources.calendar;
+			this.btn_SelectBirthDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btn_SelectBirthDate.FlatAppearance.BorderSize = 0;
+			this.btn_SelectBirthDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.btn_SelectBirthDate.Location = new System.Drawing.Point(272, 26);
+			this.btn_SelectBirthDate.Margin = new System.Windows.Forms.Padding(0);
+			this.btn_SelectBirthDate.Name = "btn_SelectBirthDate";
+			this.btn_SelectBirthDate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+			this.btn_SelectBirthDate.Size = new System.Drawing.Size(22, 20);
+			this.btn_SelectBirthDate.TabIndex = 5;
+			this.btn_SelectBirthDate.TabStop = false;
+			this.btn_SelectBirthDate.UseVisualStyleBackColor = true;
+			this.btn_SelectBirthDate.Click += new System.EventHandler(this.btn_SelectBirthDate_Click);
+			// 
 			// tb_Customer_BirthDate
 			// 
 			this.tb_Customer_BirthDate.Location = new System.Drawing.Point(109, 26);
@@ -491,6 +616,118 @@
 			// 
 			// tb_Customer_City
 			// 
+			this.tb_Customer_City.AutoCompleteCustomSource.AddRange(new string[] {
+            "Szekszárd",
+            "Paks",
+            "Dombóvár",
+            "Bonyhád",
+            "Tolna",
+            "Dunaföldvár",
+            "Tamási",
+            "Bátaszék",
+            "Simontornya",
+            "Nagymányok",
+            "Gyönk",
+            "Alsónána",
+            "Alsónyék",
+            "Aparhant",
+            "Attala",
+            "Báta",
+            "Bátaapáti",
+            "Belecska",
+            "Bikács",
+            "Bogyiszló",
+            "Bonyhádvarasd",
+            "Bölcske",
+            "Cikó",
+            "Csibrák",
+            "Csikóstőttős",
+            "Dalmand",
+            "Decs",
+            "Diósberény",
+            "Döbrököz",
+            "Dunaszentgyörgy",
+            "Dúzs",
+            "Értény",
+            "Fadd",
+            "Fácánkert",
+            "Felsőnána",
+            "Felsőnyék",
+            "Fürged",
+            "Gerjen",
+            "Grábóc",
+            "Györe",
+            "Györköny",
+            "Gyulaj",
+            "Harc",
+            "Hőgyész",
+            "Iregszemcse",
+            "Izmény",
+            "Jágónak",
+            "Kajdacs",
+            "Kakasd",
+            "Kalaznó",
+            "Kapospula",
+            "Kaposszekcső",
+            "Keszőhidegkút",
+            "Kéty",
+            "Kisdorog",
+            "Kismányok",
+            "Kisszékely",
+            "Kistormás",
+            "Kisvejke",
+            "Kocsola",
+            "Koppányszántó",
+            "Kölesd",
+            "Kurd",
+            "Lápafő",
+            "Lengyel",
+            "Madocsa",
+            "Magyarkeszi",
+            "Medina",
+            "Miszla",
+            "Mórágy",
+            "Mőcsény",
+            "Mucsfa",
+            "Mucsi",
+            "Murga",
+            "Nagydorog",
+            "Nagykónyi",
+            "Nagyszékely",
+            "Nagyszokoly",
+            "Nagyvejke",
+            "Nak",
+            "Németkér",
+            "Ozora",
+            "Őcsény",
+            "Pálfa",
+            "Pári",
+            "Pincehely",
+            "Pörböly",
+            "Pusztahencse",
+            "Regöly",
+            "Sárpilis",
+            "Sárszentlőrinc",
+            "Sióagárd",
+            "Szakadát",
+            "Szakály",
+            "Szakcs",
+            "Szálka",
+            "Szárazd",
+            "Szedres",
+            "Tengelic",
+            "Tevel",
+            "Tolnanémedi",
+            "Udvari",
+            "Újireg",
+            "Varsád",
+            "Váralja",
+            "Várdomb",
+            "Várong",
+            "Závod",
+            "Zomba"});
+			this.tb_Customer_City.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.tb_Customer_City.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
 			this.tb_Customer_City.Location = new System.Drawing.Point(109, 21);
 			this.tb_Customer_City.Name = "tb_Customer_City";
 			this.tb_Customer_City.Size = new System.Drawing.Size(185, 20);
@@ -503,7 +740,7 @@
 			this.tb_Customer_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.tb_Customer_Name.Location = new System.Drawing.Point(121, 15);
 			this.tb_Customer_Name.Name = "tb_Customer_Name";
-			this.tb_Customer_Name.Size = new System.Drawing.Size(558, 29);
+			this.tb_Customer_Name.Size = new System.Drawing.Size(466, 29);
 			this.tb_Customer_Name.TabIndex = 1;
 			// 
 			// label1
@@ -523,7 +760,7 @@
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(687, 439);
+			this.tabPage2.Size = new System.Drawing.Size(687, 423);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Vagyoni Helyzet";
 			this.tabPage2.UseVisualStyleBackColor = true;
@@ -533,7 +770,7 @@
 			this.panel2.Controls.Add(this.textBox3);
 			this.panel2.Controls.Add(this.label18);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(3, 356);
+			this.panel2.Location = new System.Drawing.Point(3, 340);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(681, 80);
 			this.panel2.TabIndex = 23;
@@ -590,15 +827,15 @@
 			this.splitContainer1.Panel2.Controls.Add(this.label16);
 			this.splitContainer1.Panel2.Controls.Add(this.textBox2);
 			this.splitContainer1.Panel2.Controls.Add(this.label17);
-			this.splitContainer1.Size = new System.Drawing.Size(681, 433);
-			this.splitContainer1.SplitterDistance = 174;
+			this.splitContainer1.Size = new System.Drawing.Size(681, 417);
+			this.splitContainer1.SplitterDistance = 167;
 			this.splitContainer1.TabIndex = 22;
 			// 
 			// label25
 			// 
 			this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label25.AutoSize = true;
-			this.label25.Location = new System.Drawing.Point(629, 154);
+			this.label25.Location = new System.Drawing.Point(629, 147);
 			this.label25.Name = "label25";
 			this.label25.Size = new System.Drawing.Size(16, 13);
 			this.label25.TabIndex = 12;
@@ -626,7 +863,7 @@
 			this.lv_CustomerIncome.GridLines = true;
 			this.lv_CustomerIncome.Location = new System.Drawing.Point(3, 16);
 			this.lv_CustomerIncome.Name = "lv_CustomerIncome";
-			this.lv_CustomerIncome.Size = new System.Drawing.Size(642, 129);
+			this.lv_CustomerIncome.Size = new System.Drawing.Size(642, 122);
 			this.lv_CustomerIncome.TabIndex = 0;
 			this.lv_CustomerIncome.UseCompatibleStateImageBehavior = false;
 			this.lv_CustomerIncome.View = System.Windows.Forms.View.Details;
@@ -646,10 +883,43 @@
 			this.ch_CustomerIncomeAmount.Text = "Összeg";
 			this.ch_CustomerIncomeAmount.Width = 387;
 			// 
+			// btn_Income_Add
+			// 
+			this.btn_Income_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Income_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
+			this.btn_Income_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Income_Add.Location = new System.Drawing.Point(651, 16);
+			this.btn_Income_Add.Name = "btn_Income_Add";
+			this.btn_Income_Add.Size = new System.Drawing.Size(23, 23);
+			this.btn_Income_Add.TabIndex = 1;
+			this.btn_Income_Add.UseVisualStyleBackColor = true;
+			// 
+			// btn_Income_Remove
+			// 
+			this.btn_Income_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Income_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
+			this.btn_Income_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Income_Remove.Location = new System.Drawing.Point(651, 45);
+			this.btn_Income_Remove.Name = "btn_Income_Remove";
+			this.btn_Income_Remove.Size = new System.Drawing.Size(23, 23);
+			this.btn_Income_Remove.TabIndex = 2;
+			this.btn_Income_Remove.UseVisualStyleBackColor = true;
+			// 
+			// btn_Income_Edit
+			// 
+			this.btn_Income_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Income_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
+			this.btn_Income_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Income_Edit.Location = new System.Drawing.Point(651, 74);
+			this.btn_Income_Edit.Name = "btn_Income_Edit";
+			this.btn_Income_Edit.Size = new System.Drawing.Size(23, 23);
+			this.btn_Income_Edit.TabIndex = 3;
+			this.btn_Income_Edit.UseVisualStyleBackColor = true;
+			// 
 			// tb_Income_Sum
 			// 
 			this.tb_Income_Sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.tb_Income_Sum.Location = new System.Drawing.Point(528, 151);
+			this.tb_Income_Sum.Location = new System.Drawing.Point(528, 144);
 			this.tb_Income_Sum.Name = "tb_Income_Sum";
 			this.tb_Income_Sum.Size = new System.Drawing.Size(100, 20);
 			this.tb_Income_Sum.TabIndex = 7;
@@ -658,7 +928,7 @@
 			// 
 			this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label15.AutoSize = true;
-			this.label15.Location = new System.Drawing.Point(395, 154);
+			this.label15.Location = new System.Drawing.Point(395, 147);
 			this.label15.Name = "label15";
 			this.label15.Size = new System.Drawing.Size(127, 13);
 			this.label15.TabIndex = 8;
@@ -668,7 +938,7 @@
 			// 
 			this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label27.AutoSize = true;
-			this.label27.Location = new System.Drawing.Point(629, 153);
+			this.label27.Location = new System.Drawing.Point(629, 144);
 			this.label27.Name = "label27";
 			this.label27.Size = new System.Drawing.Size(16, 13);
 			this.label27.TabIndex = 23;
@@ -678,7 +948,7 @@
 			// 
 			this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label26.AutoSize = true;
-			this.label26.Location = new System.Drawing.Point(629, 126);
+			this.label26.Location = new System.Drawing.Point(629, 117);
 			this.label26.Name = "label26";
 			this.label26.Size = new System.Drawing.Size(16, 13);
 			this.label26.TabIndex = 22;
@@ -693,6 +963,17 @@
 			this.label14.TabIndex = 6;
 			this.label14.Text = "Rendszeres Kiadás: ";
 			// 
+			// btn_Expenditure_Edit
+			// 
+			this.btn_Expenditure_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Expenditure_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
+			this.btn_Expenditure_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Expenditure_Edit.Location = new System.Drawing.Point(651, 74);
+			this.btn_Expenditure_Edit.Name = "btn_Expenditure_Edit";
+			this.btn_Expenditure_Edit.Size = new System.Drawing.Size(23, 23);
+			this.btn_Expenditure_Edit.TabIndex = 21;
+			this.btn_Expenditure_Edit.UseVisualStyleBackColor = true;
+			// 
 			// lv_CustomerExpenditure
 			// 
 			this.lv_CustomerExpenditure.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -706,7 +987,7 @@
 			this.lv_CustomerExpenditure.GridLines = true;
 			this.lv_CustomerExpenditure.Location = new System.Drawing.Point(3, 16);
 			this.lv_CustomerExpenditure.Name = "lv_CustomerExpenditure";
-			this.lv_CustomerExpenditure.Size = new System.Drawing.Size(642, 101);
+			this.lv_CustomerExpenditure.Size = new System.Drawing.Size(642, 92);
 			this.lv_CustomerExpenditure.TabIndex = 5;
 			this.lv_CustomerExpenditure.UseCompatibleStateImageBehavior = false;
 			this.lv_CustomerExpenditure.View = System.Windows.Forms.View.Details;
@@ -725,19 +1006,41 @@
 			// 
 			this.ch_CustomerExpenditureValue.Width = 408;
 			// 
+			// btn_Expenditure_Remove
+			// 
+			this.btn_Expenditure_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Expenditure_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
+			this.btn_Expenditure_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Expenditure_Remove.Location = new System.Drawing.Point(651, 45);
+			this.btn_Expenditure_Remove.Name = "btn_Expenditure_Remove";
+			this.btn_Expenditure_Remove.Size = new System.Drawing.Size(23, 23);
+			this.btn_Expenditure_Remove.TabIndex = 20;
+			this.btn_Expenditure_Remove.UseVisualStyleBackColor = true;
+			// 
 			// textBox1
 			// 
 			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.Location = new System.Drawing.Point(528, 123);
+			this.textBox1.Location = new System.Drawing.Point(528, 114);
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(100, 20);
 			this.textBox1.TabIndex = 9;
+			// 
+			// btn_Expenditure_Add
+			// 
+			this.btn_Expenditure_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Expenditure_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
+			this.btn_Expenditure_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_Expenditure_Add.Location = new System.Drawing.Point(651, 16);
+			this.btn_Expenditure_Add.Name = "btn_Expenditure_Add";
+			this.btn_Expenditure_Add.Size = new System.Drawing.Size(23, 23);
+			this.btn_Expenditure_Add.TabIndex = 19;
+			this.btn_Expenditure_Add.UseVisualStyleBackColor = true;
 			// 
 			// label16
 			// 
 			this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label16.AutoSize = true;
-			this.label16.Location = new System.Drawing.Point(399, 126);
+			this.label16.Location = new System.Drawing.Point(399, 117);
 			this.label16.Name = "label16";
 			this.label16.Size = new System.Drawing.Size(123, 13);
 			this.label16.TabIndex = 10;
@@ -746,7 +1049,7 @@
 			// textBox2
 			// 
 			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox2.Location = new System.Drawing.Point(528, 150);
+			this.textBox2.Location = new System.Drawing.Point(528, 141);
 			this.textBox2.Name = "textBox2";
 			this.textBox2.Size = new System.Drawing.Size(100, 20);
 			this.textBox2.TabIndex = 16;
@@ -755,7 +1058,7 @@
 			// 
 			this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label17.AutoSize = true;
-			this.label17.Location = new System.Drawing.Point(425, 154);
+			this.label17.Location = new System.Drawing.Point(425, 145);
 			this.label17.Name = "label17";
 			this.label17.Size = new System.Drawing.Size(97, 13);
 			this.label17.TabIndex = 17;
@@ -763,6 +1066,11 @@
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.btn_State_Add);
+			this.tabPage3.Controls.Add(this.btn_State_Remove);
+			this.tabPage3.Controls.Add(this.btn_State_Edit);
+			this.tabPage3.Controls.Add(this.lv_States);
+			this.tabPage3.Controls.Add(this.label35);
 			this.tabPage3.Controls.Add(this.label24);
 			this.tabPage3.Controls.Add(this.tb_FamilyIncomeSum);
 			this.tabPage3.Controls.Add(this.label23);
@@ -780,16 +1088,88 @@
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage3.Size = new System.Drawing.Size(687, 439);
+			this.tabPage3.Size = new System.Drawing.Size(687, 423);
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Szociális Helyzet";
 			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// btn_State_Add
+			// 
+			this.btn_State_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_State_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
+			this.btn_State_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_State_Add.Location = new System.Drawing.Point(656, 307);
+			this.btn_State_Add.Name = "btn_State_Add";
+			this.btn_State_Add.Size = new System.Drawing.Size(23, 23);
+			this.btn_State_Add.TabIndex = 16;
+			this.btn_State_Add.UseVisualStyleBackColor = true;
+			this.btn_State_Add.Click += new System.EventHandler(this.btn_State_Add_Click);
+			// 
+			// btn_State_Remove
+			// 
+			this.btn_State_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_State_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
+			this.btn_State_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_State_Remove.Location = new System.Drawing.Point(656, 336);
+			this.btn_State_Remove.Name = "btn_State_Remove";
+			this.btn_State_Remove.Size = new System.Drawing.Size(23, 23);
+			this.btn_State_Remove.TabIndex = 17;
+			this.btn_State_Remove.UseVisualStyleBackColor = true;
+			this.btn_State_Remove.Click += new System.EventHandler(this.btn_State_Remove_Click);
+			// 
+			// btn_State_Edit
+			// 
+			this.btn_State_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_State_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
+			this.btn_State_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_State_Edit.Location = new System.Drawing.Point(656, 365);
+			this.btn_State_Edit.Name = "btn_State_Edit";
+			this.btn_State_Edit.Size = new System.Drawing.Size(23, 23);
+			this.btn_State_Edit.TabIndex = 18;
+			this.btn_State_Edit.UseVisualStyleBackColor = true;
+			this.btn_State_Edit.Click += new System.EventHandler(this.btn_State_Edit_Click);
+			// 
+			// lv_States
+			// 
+			this.lv_States.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.lv_States.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ch_State_ID,
+            this.ch_State});
+			this.lv_States.FullRowSelect = true;
+			this.lv_States.GridLines = true;
+			this.lv_States.Location = new System.Drawing.Point(408, 308);
+			this.lv_States.Name = "lv_States";
+			this.lv_States.Size = new System.Drawing.Size(242, 109);
+			this.lv_States.TabIndex = 15;
+			this.lv_States.UseCompatibleStateImageBehavior = false;
+			this.lv_States.View = System.Windows.Forms.View.Details;
+			// 
+			// ch_State_ID
+			// 
+			this.ch_State_ID.Text = "#";
+			this.ch_State_ID.Width = 39;
+			// 
+			// ch_State
+			// 
+			this.ch_State.Text = "Állapot";
+			this.ch_State.Width = 198;
+			// 
+			// label35
+			// 
+			this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label35.AutoSize = true;
+			this.label35.Location = new System.Drawing.Point(357, 311);
+			this.label35.Name = "label35";
+			this.label35.Size = new System.Drawing.Size(45, 13);
+			this.label35.TabIndex = 14;
+			this.label35.Text = "Állapot: ";
 			// 
 			// label24
 			// 
 			this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label24.AutoSize = true;
-			this.label24.Location = new System.Drawing.Point(629, 285);
+			this.label24.Location = new System.Drawing.Point(629, 269);
 			this.label24.Name = "label24";
 			this.label24.Size = new System.Drawing.Size(16, 13);
 			this.label24.TabIndex = 13;
@@ -798,7 +1178,7 @@
 			// tb_FamilyIncomeSum
 			// 
 			this.tb_FamilyIncomeSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.tb_FamilyIncomeSum.Location = new System.Drawing.Point(528, 281);
+			this.tb_FamilyIncomeSum.Location = new System.Drawing.Point(528, 265);
 			this.tb_FamilyIncomeSum.Name = "tb_FamilyIncomeSum";
 			this.tb_FamilyIncomeSum.Size = new System.Drawing.Size(100, 20);
 			this.tb_FamilyIncomeSum.TabIndex = 12;
@@ -807,7 +1187,7 @@
 			// 
 			this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.label23.AutoSize = true;
-			this.label23.Location = new System.Drawing.Point(295, 284);
+			this.label23.Location = new System.Drawing.Point(295, 268);
 			this.label23.Name = "label23";
 			this.label23.Size = new System.Drawing.Size(227, 13);
 			this.label23.TabIndex = 11;
@@ -816,12 +1196,13 @@
 			// cb_RequiresConstantCare
 			// 
 			this.cb_RequiresConstantCare.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.cb_RequiresConstantCare.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cb_RequiresConstantCare.FormattingEnabled = true;
 			this.cb_RequiresConstantCare.Items.AddRange(new object[] {
             "Igen",
             "Nem",
             "Esetenként"});
-			this.cb_RequiresConstantCare.Location = new System.Drawing.Point(167, 346);
+			this.cb_RequiresConstantCare.Location = new System.Drawing.Point(167, 335);
 			this.cb_RequiresConstantCare.Name = "cb_RequiresConstantCare";
 			this.cb_RequiresConstantCare.Size = new System.Drawing.Size(146, 21);
 			this.cb_RequiresConstantCare.TabIndex = 10;
@@ -829,13 +1210,14 @@
 			// cb_GeneralSocialState
 			// 
 			this.cb_GeneralSocialState.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.cb_GeneralSocialState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cb_GeneralSocialState.FormattingEnabled = true;
 			this.cb_GeneralSocialState.Items.AddRange(new object[] {
             "Jó",
             "Közepes",
             "Megfelelő",
             "Rossz"});
-			this.cb_GeneralSocialState.Location = new System.Drawing.Point(167, 319);
+			this.cb_GeneralSocialState.Location = new System.Drawing.Point(167, 308);
 			this.cb_GeneralSocialState.Name = "cb_GeneralSocialState";
 			this.cb_GeneralSocialState.Size = new System.Drawing.Size(146, 21);
 			this.cb_GeneralSocialState.TabIndex = 9;
@@ -844,7 +1226,7 @@
 			// 
 			this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label22.AutoSize = true;
-			this.label22.Location = new System.Drawing.Point(17, 351);
+			this.label22.Location = new System.Drawing.Point(17, 340);
 			this.label22.Name = "label22";
 			this.label22.Size = new System.Drawing.Size(152, 13);
 			this.label22.TabIndex = 8;
@@ -854,11 +1236,44 @@
 			// 
 			this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(18, 322);
+			this.label21.Location = new System.Drawing.Point(18, 311);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(134, 13);
 			this.label21.TabIndex = 7;
 			this.label21.Text = "Általános szociális helyzet: ";
+			// 
+			// btn_SocialState_Add
+			// 
+			this.btn_SocialState_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_SocialState_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
+			this.btn_SocialState_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_SocialState_Add.Location = new System.Drawing.Point(656, 94);
+			this.btn_SocialState_Add.Name = "btn_SocialState_Add";
+			this.btn_SocialState_Add.Size = new System.Drawing.Size(23, 23);
+			this.btn_SocialState_Add.TabIndex = 4;
+			this.btn_SocialState_Add.UseVisualStyleBackColor = true;
+			// 
+			// btn_SocialState_Remove
+			// 
+			this.btn_SocialState_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_SocialState_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
+			this.btn_SocialState_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_SocialState_Remove.Location = new System.Drawing.Point(656, 123);
+			this.btn_SocialState_Remove.Name = "btn_SocialState_Remove";
+			this.btn_SocialState_Remove.Size = new System.Drawing.Size(23, 23);
+			this.btn_SocialState_Remove.TabIndex = 5;
+			this.btn_SocialState_Remove.UseVisualStyleBackColor = true;
+			// 
+			// btn_SocialState_Edit
+			// 
+			this.btn_SocialState_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_SocialState_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
+			this.btn_SocialState_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_SocialState_Edit.Location = new System.Drawing.Point(656, 152);
+			this.btn_SocialState_Edit.Name = "btn_SocialState_Edit";
+			this.btn_SocialState_Edit.Size = new System.Drawing.Size(23, 23);
+			this.btn_SocialState_Edit.TabIndex = 6;
+			this.btn_SocialState_Edit.UseVisualStyleBackColor = true;
 			// 
 			// lv_CustomerSocialState
 			// 
@@ -874,7 +1289,7 @@
 			this.lv_CustomerSocialState.GridLines = true;
 			this.lv_CustomerSocialState.Location = new System.Drawing.Point(20, 94);
 			this.lv_CustomerSocialState.Name = "lv_CustomerSocialState";
-			this.lv_CustomerSocialState.Size = new System.Drawing.Size(630, 180);
+			this.lv_CustomerSocialState.Size = new System.Drawing.Size(630, 164);
 			this.lv_CustomerSocialState.TabIndex = 3;
 			this.lv_CustomerSocialState.UseCompatibleStateImageBehavior = false;
 			this.lv_CustomerSocialState.View = System.Windows.Forms.View.Details;
@@ -934,6 +1349,12 @@
 			// 
 			// tabPage4
 			// 
+			this.tabPage4.Controls.Add(this.btn_SameAsCreator);
+			this.tabPage4.Controls.Add(this.tb_StudyBy);
+			this.tabPage4.Controls.Add(this.btn_SelectStudyDate);
+			this.tabPage4.Controls.Add(this.tb_StudyOn);
+			this.tabPage4.Controls.Add(this.label34);
+			this.tabPage4.Controls.Add(this.label32);
 			this.tabPage4.Controls.Add(this.lbl_LastUpdateDate);
 			this.tabPage4.Controls.Add(this.label31);
 			this.tabPage4.Controls.Add(this.lbl_LastUpdatedBy);
@@ -945,10 +1366,68 @@
 			this.tabPage4.Location = new System.Drawing.Point(4, 22);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage4.Size = new System.Drawing.Size(687, 439);
+			this.tabPage4.Size = new System.Drawing.Size(687, 423);
 			this.tabPage4.TabIndex = 3;
 			this.tabPage4.Text = "Felhasználói Információ";
 			this.tabPage4.UseVisualStyleBackColor = true;
+			// 
+			// btn_SameAsCreator
+			// 
+			this.btn_SameAsCreator.Location = new System.Drawing.Point(224, 283);
+			this.btn_SameAsCreator.Name = "btn_SameAsCreator";
+			this.btn_SameAsCreator.Size = new System.Drawing.Size(165, 23);
+			this.btn_SameAsCreator.TabIndex = 13;
+			this.btn_SameAsCreator.Text = "Megegyezik a létrehozóval";
+			this.btn_SameAsCreator.UseVisualStyleBackColor = true;
+			this.btn_SameAsCreator.Click += new System.EventHandler(this.btn_SameAsCreator_Click);
+			// 
+			// tb_StudyBy
+			// 
+			this.tb_StudyBy.Location = new System.Drawing.Point(224, 261);
+			this.tb_StudyBy.Name = "tb_StudyBy";
+			this.tb_StudyBy.Size = new System.Drawing.Size(165, 20);
+			this.tb_StudyBy.TabIndex = 12;
+			// 
+			// btn_SelectStudyDate
+			// 
+			this.btn_SelectStudyDate.BackgroundImage = global::CaritasManager.Properties.Resources.calendar;
+			this.btn_SelectStudyDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.btn_SelectStudyDate.FlatAppearance.BorderSize = 0;
+			this.btn_SelectStudyDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.btn_SelectStudyDate.Location = new System.Drawing.Point(387, 317);
+			this.btn_SelectStudyDate.Margin = new System.Windows.Forms.Padding(0);
+			this.btn_SelectStudyDate.Name = "btn_SelectStudyDate";
+			this.btn_SelectStudyDate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+			this.btn_SelectStudyDate.Size = new System.Drawing.Size(22, 20);
+			this.btn_SelectStudyDate.TabIndex = 11;
+			this.btn_SelectStudyDate.TabStop = false;
+			this.btn_SelectStudyDate.UseVisualStyleBackColor = true;
+			this.btn_SelectStudyDate.Click += new System.EventHandler(this.btn_SelectStudyDate_Click);
+			// 
+			// tb_StudyOn
+			// 
+			this.tb_StudyOn.Location = new System.Drawing.Point(224, 317);
+			this.tb_StudyOn.Name = "tb_StudyOn";
+			this.tb_StudyOn.Size = new System.Drawing.Size(165, 20);
+			this.tb_StudyOn.TabIndex = 10;
+			// 
+			// label34
+			// 
+			this.label34.AutoSize = true;
+			this.label34.Location = new System.Drawing.Point(18, 320);
+			this.label34.Name = "label34";
+			this.label34.Size = new System.Drawing.Size(200, 13);
+			this.label34.TabIndex = 9;
+			this.label34.Text = "Környezettanulmány készítésének ideje: ";
+			// 
+			// label32
+			// 
+			this.label32.AutoSize = true;
+			this.label32.Location = new System.Drawing.Point(18, 264);
+			this.label32.Name = "label32";
+			this.label32.Size = new System.Drawing.Size(161, 13);
+			this.label32.TabIndex = 8;
+			this.label32.Text = "Környezettanulmányt készítette: ";
 			// 
 			// lbl_LastUpdateDate
 			// 
@@ -1034,10 +1513,21 @@
 			this.tabPage5.Location = new System.Drawing.Point(4, 22);
 			this.tabPage5.Name = "tabPage5";
 			this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage5.Size = new System.Drawing.Size(687, 439);
+			this.tabPage5.Size = new System.Drawing.Size(687, 423);
 			this.tabPage5.TabIndex = 4;
 			this.tabPage5.Text = "Támogatások";
 			this.tabPage5.UseVisualStyleBackColor = true;
+			// 
+			// btn_EditAid
+			// 
+			this.btn_EditAid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_EditAid.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
+			this.btn_EditAid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.btn_EditAid.Location = new System.Drawing.Point(658, 34);
+			this.btn_EditAid.Name = "btn_EditAid";
+			this.btn_EditAid.Size = new System.Drawing.Size(23, 23);
+			this.btn_EditAid.TabIndex = 9;
+			this.btn_EditAid.UseVisualStyleBackColor = true;
 			// 
 			// label30
 			// 
@@ -1062,7 +1552,7 @@
 			this.lv_Aids.GridLines = true;
 			this.lv_Aids.Location = new System.Drawing.Point(8, 34);
 			this.lv_Aids.Name = "lv_Aids";
-			this.lv_Aids.Size = new System.Drawing.Size(644, 318);
+			this.lv_Aids.Size = new System.Drawing.Size(644, 302);
 			this.lv_Aids.TabIndex = 0;
 			this.lv_Aids.UseCompatibleStateImageBehavior = false;
 			this.lv_Aids.View = System.Windows.Forms.View.Details;
@@ -1087,137 +1577,25 @@
 			this.ch_AidComment.Text = "Megjegyzés";
 			this.ch_AidComment.Width = 253;
 			// 
-			// btn_SelectBirthDate
+			// cbb_PassedAway
 			// 
-			this.btn_SelectBirthDate.BackgroundImage = global::CaritasManager.Properties.Resources.calendar;
-			this.btn_SelectBirthDate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-			this.btn_SelectBirthDate.FlatAppearance.BorderSize = 0;
-			this.btn_SelectBirthDate.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.btn_SelectBirthDate.Location = new System.Drawing.Point(272, 26);
-			this.btn_SelectBirthDate.Margin = new System.Windows.Forms.Padding(0);
-			this.btn_SelectBirthDate.Name = "btn_SelectBirthDate";
-			this.btn_SelectBirthDate.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-			this.btn_SelectBirthDate.Size = new System.Drawing.Size(22, 20);
-			this.btn_SelectBirthDate.TabIndex = 5;
-			this.btn_SelectBirthDate.TabStop = false;
-			this.btn_SelectBirthDate.UseVisualStyleBackColor = true;
-			this.btn_SelectBirthDate.Click += new System.EventHandler(this.btn_SelectBirthDate_Click);
-			// 
-			// btn_Income_Add
-			// 
-			this.btn_Income_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Income_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
-			this.btn_Income_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Income_Add.Location = new System.Drawing.Point(651, 16);
-			this.btn_Income_Add.Name = "btn_Income_Add";
-			this.btn_Income_Add.Size = new System.Drawing.Size(23, 23);
-			this.btn_Income_Add.TabIndex = 1;
-			this.btn_Income_Add.UseVisualStyleBackColor = true;
-			// 
-			// btn_Income_Remove
-			// 
-			this.btn_Income_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Income_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
-			this.btn_Income_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Income_Remove.Location = new System.Drawing.Point(651, 45);
-			this.btn_Income_Remove.Name = "btn_Income_Remove";
-			this.btn_Income_Remove.Size = new System.Drawing.Size(23, 23);
-			this.btn_Income_Remove.TabIndex = 2;
-			this.btn_Income_Remove.UseVisualStyleBackColor = true;
-			// 
-			// btn_Income_Edit
-			// 
-			this.btn_Income_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Income_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
-			this.btn_Income_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Income_Edit.Location = new System.Drawing.Point(651, 74);
-			this.btn_Income_Edit.Name = "btn_Income_Edit";
-			this.btn_Income_Edit.Size = new System.Drawing.Size(23, 23);
-			this.btn_Income_Edit.TabIndex = 3;
-			this.btn_Income_Edit.UseVisualStyleBackColor = true;
-			// 
-			// btn_Expenditure_Edit
-			// 
-			this.btn_Expenditure_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Expenditure_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
-			this.btn_Expenditure_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Expenditure_Edit.Location = new System.Drawing.Point(651, 74);
-			this.btn_Expenditure_Edit.Name = "btn_Expenditure_Edit";
-			this.btn_Expenditure_Edit.Size = new System.Drawing.Size(23, 23);
-			this.btn_Expenditure_Edit.TabIndex = 21;
-			this.btn_Expenditure_Edit.UseVisualStyleBackColor = true;
-			// 
-			// btn_Expenditure_Remove
-			// 
-			this.btn_Expenditure_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Expenditure_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
-			this.btn_Expenditure_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Expenditure_Remove.Location = new System.Drawing.Point(651, 45);
-			this.btn_Expenditure_Remove.Name = "btn_Expenditure_Remove";
-			this.btn_Expenditure_Remove.Size = new System.Drawing.Size(23, 23);
-			this.btn_Expenditure_Remove.TabIndex = 20;
-			this.btn_Expenditure_Remove.UseVisualStyleBackColor = true;
-			// 
-			// btn_Expenditure_Add
-			// 
-			this.btn_Expenditure_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Expenditure_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
-			this.btn_Expenditure_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_Expenditure_Add.Location = new System.Drawing.Point(651, 16);
-			this.btn_Expenditure_Add.Name = "btn_Expenditure_Add";
-			this.btn_Expenditure_Add.Size = new System.Drawing.Size(23, 23);
-			this.btn_Expenditure_Add.TabIndex = 19;
-			this.btn_Expenditure_Add.UseVisualStyleBackColor = true;
-			// 
-			// btn_SocialState_Add
-			// 
-			this.btn_SocialState_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_SocialState_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
-			this.btn_SocialState_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Add.Location = new System.Drawing.Point(656, 94);
-			this.btn_SocialState_Add.Name = "btn_SocialState_Add";
-			this.btn_SocialState_Add.Size = new System.Drawing.Size(23, 23);
-			this.btn_SocialState_Add.TabIndex = 4;
-			this.btn_SocialState_Add.UseVisualStyleBackColor = true;
-			// 
-			// btn_SocialState_Remove
-			// 
-			this.btn_SocialState_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_SocialState_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
-			this.btn_SocialState_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Remove.Location = new System.Drawing.Point(656, 123);
-			this.btn_SocialState_Remove.Name = "btn_SocialState_Remove";
-			this.btn_SocialState_Remove.Size = new System.Drawing.Size(23, 23);
-			this.btn_SocialState_Remove.TabIndex = 5;
-			this.btn_SocialState_Remove.UseVisualStyleBackColor = true;
-			// 
-			// btn_SocialState_Edit
-			// 
-			this.btn_SocialState_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_SocialState_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
-			this.btn_SocialState_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Edit.Location = new System.Drawing.Point(656, 152);
-			this.btn_SocialState_Edit.Name = "btn_SocialState_Edit";
-			this.btn_SocialState_Edit.Size = new System.Drawing.Size(23, 23);
-			this.btn_SocialState_Edit.TabIndex = 6;
-			this.btn_SocialState_Edit.UseVisualStyleBackColor = true;
-			// 
-			// btn_EditAid
-			// 
-			this.btn_EditAid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_EditAid.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
-			this.btn_EditAid.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_EditAid.Location = new System.Drawing.Point(658, 34);
-			this.btn_EditAid.Name = "btn_EditAid";
-			this.btn_EditAid.Size = new System.Drawing.Size(23, 23);
-			this.btn_EditAid.TabIndex = 9;
-			this.btn_EditAid.UseVisualStyleBackColor = true;
+			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbb_PassedAway.Checked = false;
+			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.cbb_PassedAway.Location = new System.Drawing.Point(593, 14);
+			this.cbb_PassedAway.Name = "cbb_PassedAway";
+			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 31);
+			this.cbb_PassedAway.TabIndex = 9;
+			this.cbb_PassedAway.Text = "Elhunyt";
+			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_PassedAway.UseVisualStyleBackColor = true;
 			// 
 			// f_AddCustomer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(695, 496);
+			this.ClientSize = new System.Drawing.Size(695, 480);
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.panel1);
 			this.Name = "f_AddCustomer";
@@ -1291,7 +1669,6 @@
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.Label label8;
 		private System.Windows.Forms.GroupBox gb_Religion;
-		private System.Windows.Forms.TextBox tb_OtherReligion;
 		private System.Windows.Forms.Label lbl_OtherReligion;
 		private System.Windows.Forms.ComboBox cb_Religion;
 		private System.Windows.Forms.Label label12;
@@ -1357,5 +1734,20 @@
 		private System.Windows.Forms.ColumnHeader ch_AidDate;
 		private System.Windows.Forms.ColumnHeader ch_AidType;
 		private System.Windows.Forms.ColumnHeader ch_AidComment;
+		private System.Windows.Forms.ComboBox tb_OtherReligion;
+		private System.Windows.Forms.Button btn_SameAsCreator;
+		private System.Windows.Forms.TextBox tb_StudyBy;
+		private System.Windows.Forms.Button btn_SelectStudyDate;
+		private System.Windows.Forms.TextBox tb_StudyOn;
+		private System.Windows.Forms.Label label34;
+		private System.Windows.Forms.Label label32;
+		private System.Windows.Forms.ListView lv_States;
+		private System.Windows.Forms.Label label35;
+		private System.Windows.Forms.Button btn_State_Add;
+		private System.Windows.Forms.Button btn_State_Remove;
+		private System.Windows.Forms.Button btn_State_Edit;
+		private System.Windows.Forms.ColumnHeader ch_State_ID;
+		private System.Windows.Forms.ColumnHeader ch_State;
+		private uc_cb_Button cbb_PassedAway;
 	}
 }
