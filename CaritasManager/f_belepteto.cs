@@ -63,6 +63,11 @@ namespace CaritasManager
 
 			fillProfiles();
 
+
+			//TODO::TESTING
+			cb_UserProfile.SelectedIndex = 0;
+			tb_Password.Text = "test";
+			btn_Login_Click(null, null);
 		}
 
 		public void fillProfiles()

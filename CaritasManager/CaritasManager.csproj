@@ -207,6 +207,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\db_files_for_testing\changes.sqlite" />
+    <None Include="Resources\db_files_for_testing\database.sqlite" />
     <None Include="Resources\eye.png" />
   </ItemGroup>
   <ItemGroup>

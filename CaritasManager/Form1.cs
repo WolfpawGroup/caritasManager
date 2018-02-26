@@ -33,9 +33,9 @@ namespace CaritasManager
 		private void Form1_Load(object sender, EventArgs e)
 		{
 			//TODO: Remove This!
-			sqlc = c_DBHandler.connectToDB()[0];
-			sqlc.Open();
-			login_profile = c_DBHandler.getProfiles(sqlc)[0];
+			//sqlc = c_DBHandler.connectToDB()[0];
+			//sqlc.Open();
+			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
 
 			createIdFile();
 
@@ -50,6 +50,8 @@ namespace CaritasManager
 			dg_DataTable.colors = c;
 
 			fillMainList();
+
+			dg_DataTable.Invalidate();
 		}
 
 		public void createIdFile()
@@ -149,6 +151,7 @@ namespace CaritasManager
 			int I = 0;
 
 			Bitmap img = new Bitmap(22, 22);
+			Bitmap img2 = new Bitmap(22, 22);
 			using (Graphics g = Graphics.FromImage(img))
 			{
 				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
@@ -158,18 +161,18 @@ namespace CaritasManager
 			foreach (c_MainDataRow mdr in lst)
 			{
 				DateTime n = DateTime.Now;
-				int lasts = (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - mdr.lastSupport).TotalDays);
+				int lasts = (mdr.lastSupport as DateTime?) != null ? (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - (DateTime)mdr.lastSupport).TotalDays) : 30;
 
 				dg_DataTable.Rows.Insert(
 					I,
 					new object[] {
 						mdr.name + (mdr.kin.Count > 0 ? "  (" + (mdr.kin.Count + 1) + ")" : ""),
-						mdr.j == true ? img : null,
+						mdr.j == true ? img : img2,
 						mdr.identification,
 						mdr.city,
 						mdr.state,
 						mdr.dateAdded.ToShortDateString(),
-						mdr.lastSupport.ToShortDateString(),
+						mdr.lastSupport != null ? ((DateTime)mdr.lastSupport).ToShortDateString() : "",
 						"Támogatás"
 					}
 				);

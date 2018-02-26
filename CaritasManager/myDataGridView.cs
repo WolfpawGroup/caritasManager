@@ -53,7 +53,11 @@ namespace CaritasManager
 			{
 				Color cc = new Color();
 
-				DateTime ls = Convert.ToDateTime(this[6, selectedRow].Value);
+				string date = this[6, selectedRow].Value.ToString();
+
+				if(date == "") { date = (DateTime.Now - new TimeSpan(30, 0, 0, 0, 0)).ToShortDateString(); }
+
+				DateTime ls = Convert.ToDateTime(date);
 				DateTime n = DateTime.Now;
 				int lasts = (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - ls).TotalDays);
 				c = lasts <= 28 ? Color.LightGreen : (lasts <= 365 ? Color.Orange : Color.LightPink);

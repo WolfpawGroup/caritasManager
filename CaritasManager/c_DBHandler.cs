@@ -113,7 +113,8 @@ namespace CaritasManager
 				mdr.houseno = r.GetString(r.GetOrdinal("lakcim_uh"));
 				mdr.state = r.GetString(r.GetOrdinal("allapot"));
 				mdr.dateAdded = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("hozzaadas_datuma"))));
-				mdr.lastSupport = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja"))));
+				string d = r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")).ToString();
+				mdr.lastSupport = d != "" ? Convert.ToDateTime(checkDate(d)) : (DateTime?)null;
 				mdr.kin = new List<string>();
 
 				string kin_command = "SELECT * FROM haztartasban_elok WHERE ugyfel_id=" + mdr.id;
@@ -1088,11 +1089,11 @@ namespace CaritasManager
 
 			//IMPORTANT:!!CHANGE THIS!!
 
-			//SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;Password=" + p.Split('|')[0] + ";");
-			//SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;Password=" + p.Split('|')[1] + ";");
+			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;Password=" + p.Split('|')[0] + ";");
+			SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;Password=" + p.Split('|')[1] + ";");
 
-			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
-			SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;");
+			//SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
+			//SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;");
 			return new SQLiteConnection[] { sqlc, sqlc2 };
 		}
 

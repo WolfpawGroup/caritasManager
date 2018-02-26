@@ -51,7 +51,7 @@ namespace CaritasManager
 		/// <summary>
 		/// Mikor kapott utoljára segélyt az ügyfél
 		/// </summary>
-		public DateTime lastSupport { get; set; }
+		public DateTime? lastSupport { get; set; }
 
 		/// <summary>
 		/// Ügyfél hozzátartozói

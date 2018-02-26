@@ -199,5 +199,17 @@ namespace CaritasManager
 				}
 			}
 		}
+
+		private void cb_Customer_OriginalName_CheckedChanged(object sender, EventArgs e)
+		{
+			if (cb_Customer_OriginalName.Checked)
+			{
+				tb_Customer_OriginalName.Visible = true;
+			}
+			else
+			{
+				tb_Customer_OriginalName.Visible = false;
+			}
+		}
 	}
 }

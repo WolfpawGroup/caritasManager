@@ -16,8 +16,8 @@ namespace CaritasManager
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			//Application.Run(new f_belepteto());
-			Application.Run(new Form1());
+			Application.Run(new f_belepteto());
+			//Application.Run(new Form1());
 			//IMPORTANT: REPLACE CORRECT STARTING FORM
 		}
 	}
