@@ -125,6 +125,7 @@
 			this.toolStripButton1.Name = "toolStripButton1";
 			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
 			this.toolStripButton1.Text = "Adatlap Szerkesztése";
+			this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
 			// 
 			// t_Timer
 			// 
@@ -181,6 +182,7 @@
 			this.dg_DataTable.AllowUserToAddRows = false;
 			this.dg_DataTable.AllowUserToDeleteRows = false;
 			this.dg_DataTable.AllowUserToResizeRows = false;
+			this.dg_DataTable.colors = null;
 			this.dg_DataTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dg_DataTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ch_CustomerName,

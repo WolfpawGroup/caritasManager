@@ -9,15 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Data.SQLite;
 
 namespace CaritasManager
 {
 	public partial class f_AddCustomer : Form
 	{
-		public bool otherReligion = false;
+		public SQLiteConnection sqlc { get; set; }
 		public profile login_profile { get; set; }
-		public bool edit { get; set; }
 		public int customer_id { get; set; }
+		public bool edit { get; set; }
+		public bool otherReligion = false;
 		public string current_id = "";
 
 		public List<string> States { get; set; }
@@ -42,7 +44,7 @@ namespace CaritasManager
 		public void loadData()
 		{
 			//TODO: load data from DB
-
+			customerAllData cad = c_DBHandler.getCustomerAllData(sqlc, customer_id);
 			
 		}
 

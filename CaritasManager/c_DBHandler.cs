@@ -91,35 +91,34 @@ namespace CaritasManager
 		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc)
 		{
 			if (!connectioinOpen(sqlc)) { return null; }
-
-			List<c_MainDataRow> lst = new List<c_MainDataRow>();
-
+			
 			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel";
 
+			List<c_MainDataRow> lst = new List<c_MainDataRow>();
 			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);
-
 			SQLiteDataReader r = sqlk.ExecuteReader();
-
 			string current_azonosito = get_azonosito(sqlc);
 
 			while (r.Read())
 			{
-				c_MainDataRow mdr = new c_MainDataRow();
-				mdr.id = r.GetInt32(r.GetOrdinal("id"));
-				mdr.name = r.GetString(r.GetOrdinal("nev"));
-				mdr.j = (r.GetString(r.GetOrdinal("jovedelem_igazolas")) == "T" ? true : false);
-				mdr.identification = r.GetString(r.GetOrdinal("azonosito"));
-				mdr.city = r.GetString(r.GetOrdinal("lakcim_varos"));
-				mdr.houseno = r.GetString(r.GetOrdinal("lakcim_uh"));
-				mdr.state = r.GetString(r.GetOrdinal("allapot"));
-				mdr.dateAdded = Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("hozzaadas_datuma"))));
-				string d = r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")).ToString();
-				mdr.lastSupport = d != "" ? Convert.ToDateTime(checkDate(d)) : (DateTime?)null;
-				mdr.kin = new List<string>();
+				c_MainDataRow mdr =		new c_MainDataRow();
+				mdr.id =				r.GetInt32(r.GetOrdinal("id"));
+				mdr.name =				r.GetString(r.GetOrdinal("nev"))												?? "";
+				mdr.j =					((r.GetString(r.GetOrdinal("jovedelem_igazolas"))								?? "F") == "T" ? true : false);
+				mdr.identification =	r.GetString(r.GetOrdinal("azonosito"))											?? "";
+				mdr.city =				r.GetString(r.GetOrdinal("lakcim_varos"))										?? "";
+				mdr.houseno =			r.GetString(r.GetOrdinal("lakcim_uh"))											?? "";
+				mdr.state =				r.GetString(r.GetOrdinal("allapot"))											?? "";
+				mdr.dateAdded =			Convert.ToDateTime(checkDate((r.GetString(r.GetOrdinal("hozzaadas_datuma")))	?? ""));
+				string d =				r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")).ToString()				?? "";
+				mdr.lastSupport =		(d != "" ? Convert.ToDateTime(checkDate(d)) : (DateTime?)null);
+				mdr.kin =				new List<string>();
+
 
 				string kin_command = "SELECT * FROM haztartasban_elok WHERE ugyfel_id=" + mdr.id;
 				SQLiteCommand sqlk2 = new SQLiteCommand(kin_command, sqlc);
 				SQLiteDataReader rr = sqlk2.ExecuteReader();
+
 				while (rr.Read())
 				{
 					mdr.kin.Add(rr.GetString(rr.GetOrdinal("rokoni_kapcsolat")) + ":" + rr.GetString(rr.GetOrdinal("nev")));
@@ -135,60 +134,155 @@ namespace CaritasManager
 
 				lst.Add(mdr);
 			}
-
-
+			
 			return lst;
 		}
 
-		public static List<string> getCustomerAllData(SQLiteConnection sqlc, int custid)
+		//MEMO: ===== Return all customer data!!
+		//MEMO: Le kell kezelni, hogy ne lehessen <NULL> értéket menteni
+		//MEMO: Biztosra kell menni, hogy nincs szám értékként string oszlop lekérve
+		public static customerAllData getCustomerAllData(SQLiteConnection sqlc, int custid)
 		{
-			return null;
+			customerAllData cad = new customerAllData();
+			mainData md = new mainData();
+			List<vagyon> _v = new List<vagyon>();
+			List<rokon> _r = new List<rokon>();
+			List<tamogatas> t = new List<tamogatas>();
+
+			//========== MainData
+
+			string command = string.Format("SELECT * FROM ugyfel WHERE id={0}", custid);
+
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
+			SQLiteDataReader r = sqlk.ExecuteReader();
+			r.Read();
+
+			//Változó neve					--	Táblából lekérdezett érték								--	Üres érték kezelése
+
+			md.id =								custid;
+			md.nev =							r.GetString(r.GetOrdinal("nev"))							?? "";
+			md.születesi_nev =					r.GetString(r.GetOrdinal("születesi_nev"))					?? "";
+			md.szig_szam =						r.GetString(r.GetOrdinal("szig_szam"))						?? "";
+			md.lakcim_varos =					r.GetString(r.GetOrdinal("lakcim_varos"))					?? "";
+			md.lakcim_uh =						r.GetString(r.GetOrdinal("lakcim_uh"))						?? "";
+			md.szul_datum =						r.GetString(r.GetOrdinal("szul_datum"))						?? "";
+			md.szul_hely =						r.GetString(r.GetOrdinal("szul_hely"))						?? "";
+			md.csaladi_allapot =				r.GetInt32(r.GetOrdinal("csaladi_allapot"));
+			md.anyja_neve =						r.GetString(r.GetOrdinal("anyja_neve"))						?? "";
+			md.vegzettseg =						r.GetString(r.GetOrdinal("vegzettseg"))						?? "";
+			md.foglalkozas =					r.GetString(r.GetOrdinal("foglalkozas"))					?? "";
+			md.szakkepzettseg =					r.GetString(r.GetOrdinal("szakkepzettseg"))					?? "";
+			md.munkaltato =						r.GetString(r.GetOrdinal("munkaltato"))						?? "";
+			md.azonosito =						r.GetString(r.GetOrdinal("azonosito"))						?? "";
+			md.utolso_tamogatas_idopontja =		r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja"))		?? "";
+			md.jovedelem_igazolas =				((r.GetString(r.GetOrdinal("jovedelem_igazolas"))			?? "F") == "T" ? true : false);
+			md.elhunyt =						((r.GetString(r.GetOrdinal("elhunyt"))						?? "F") == "T" ? true : false);
+			string allapot =					r.GetString(r.GetOrdinal("allapot"));
+			int all = 0;
+			if (int.TryParse(allapot, out all)) { md.allapot = all; }
+			md.vallas =							r.GetString(r.GetOrdinal("vallas"))							?? "";
+			md.környezettanulmanyt_végezte =	r.GetString(r.GetOrdinal("környezettanulmanyt_végezte"))	?? "";
+			md.környezettanulmany_idopontja =	r.GetString(r.GetOrdinal("környezettanulmany_idopontja"))	?? "";
+			md.hozzaadas_datuma =				r.GetString(r.GetOrdinal("hozzaadas_datuma"))				?? "";
+			md.felvevo_profil =					r.GetString(r.GetOrdinal("felvevo_profil"))					?? "";
+			md.legutobb_modositotta =			r.GetString(r.GetOrdinal("legutobb_modositotta"))			?? "";
+			md.legutobbi_modositas_datuma =		r.GetString(r.GetOrdinal("legutobbi_modositas_datuma"))		?? "";
+
+
+			cad.cust_0_mainData = md;
+
+			r.Close();
+
+			//========== Vagyon
+
+			command = string.Format("SELECT * FROM vagyon WHERE ugyfel_id={0}", custid);
+			sqlk = new SQLiteCommand(command, sqlc);
+			r = sqlk.ExecuteReader();
+			while (r.Read())
+			{
+				vagyon vv = new vagyon();
+
+				vv.szoveg =		r.GetString(r.GetOrdinal("szoveg"))		?? "--";
+				vv.osszeg =		r.GetInt32(r.GetOrdinal("osszeg"));
+				vv.tipus =		r.GetString(r.GetOrdinal("tipus"))		?? "";
+
+				_v.Add(vv);
+			}
+
+			cad.cust_1_vagyon = _v;
+
+			r.Close();
+
+			//========== SZOC_HELYZET
+
+			command = string.Format("SELECT * FROM szoc_helyzet WHERE ugyfel_id={0}", custid);
+			sqlk = new SQLiteCommand(command, sqlc);
+			r = sqlk.ExecuteReader();
+
+			if (r.Read())
+			{
+
+				cad.cust_2_lakas = (enums.lakás)r.GetInt32(r.GetOrdinal("lakas"));
+				cad.cust_3_alt_szoc_helyzet = (enums.általános_szociális_helyzet)r.GetInt32(r.GetOrdinal("altalanos_szoc_helyzet"));
+				cad.cust_4_rendsz_seg_szorul = (enums.rendszeres_segítségre_szorul)r.GetInt32(r.GetOrdinal("rendszeres_segitsegre_szorul"));
+
+			}
+			r.Close();
+
+			//========== HAZTARTASBAN_ELOK
+
+			command = string.Format("SELECT * FROM haztartasban_elok WHERE ugyfel_id={0}", custid);
+			sqlk = new SQLiteCommand(command, sqlc);
+			r = sqlk.ExecuteReader();
+
+			while (r.Read())
+			{
+				rokon rr = new rokon();
+
+				rr.nev = r.GetString(r.GetOrdinal("nev")) ?? "";
+				rr.kapcsolat = (enums.rokoni_kapcsolat)r.GetInt32(r.GetOrdinal("rokoni_kapcsolat"));
+				rr.havi_jovedelem = r.GetInt32(r.GetOrdinal("havi_jovedelem"));
+
+				_r.Add(rr);
+			}
+
+			cad.cust_5_rokonok = _r;
+
+			r.Close();
+
+			//========== TAMOGATASOK
+
+			command = string.Format("SELECT * FROM tamogatasok WHERE ugyfel_id={0}", custid);
+			sqlk = new SQLiteCommand(command, sqlc);
+			r = sqlk.ExecuteReader();
+
+			while (r.Read())
+			{
+				tamogatas tt = new tamogatas();
+
+				tt.datum =					Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("datum"))		?? ""));
+				tt.tamogatas_tipusa =		r.GetString(r.GetOrdinal("tamogatas"))								?? "";
+				tt.tamogatas_mennyisege =	r.GetString(r.GetOrdinal("tamogatas_mennyisege"))					?? "0";
+				tt.tamogatas_egysége =		r.GetString(r.GetOrdinal("tamogatas_egysége"))						?? "";
+				tt.megjegyzes =				r.GetString(r.GetOrdinal("megjegyzes"))								?? "";
+
+				t.Add(tt);
+			}
+
+			cad.cust_6_tamogatasok = t;
+
+
+			return cad;
 		}
 
 		#endregion
 
-		/*
-				Vallás:
-				0 : Római katolikus 
-				1 : Evangélikus 
-				2 : Református 
-				3 : Metodista 
-				4 : Baptista 
-				5 : Unitárius 
-				6 : Nem hívő
-				7 : Egyéb
+		
 
-				Lakás:
-				0 : Saját Lakás
-				1 : Albérlő
-				2 : Társbérlő
-				3 : Hajléktalan
-				4 : Szívességi Lakáshasználó
-
-				Ált. Szoc. Helyzet:
-				0 : Jó
-				1 : Közepes
-				2 : Megfelelő
-				3 : Rossz
-
-				Rendszeres segítségre szorul:
-				0 : Igen
-				1 : Nem
-				2 : Esetenként
-
-				Családi állapot:
-				0 : nős
-				1 : nőtlen
-				2 : férjezett
-				3 : hajadon
-				4 : özvegy
-				5 : elvált
-				
-		*/
-
-		//Metódusok amik írnak adatokat az adatbázis(ok)ba (új sor vagy update)
+		//===== Metódusok amik írnak adatokat az adatbázis(ok)ba (új sor vagy update) =====//
 		#region Új Sor és Módosítás
 
+		//-------------------------- PASSWORD
 		/// <summary>
 		/// Edits password line //There is only one line in password table
 		/// </summary>
@@ -212,6 +306,7 @@ namespace CaritasManager
 			}
 		}
 
+		//-------------------------- PROFILE
 		/// <summary>
 		/// Adds new profile line or edits an existing one
 		/// </summary>
@@ -476,7 +571,7 @@ namespace CaritasManager
 			executeNonQuery(sqlk);
 		}
 
-		//Csúnyább de sokkal egyszerűbb megoldás iterálás nélkül
+
 		/// <summary>
 		/// Update or delete row in table 'vagyon'
 		/// </summary>
@@ -698,6 +793,7 @@ namespace CaritasManager
 			executeNonQuery(sqlk);
 		}
 
+		//-------------------------- AZONOSÍTÓ
 		/// <summary>
 		/// Sets new value for user_identification number
 		/// </summary>
@@ -711,12 +807,11 @@ namespace CaritasManager
 			executeNonQuery(sqlk);
 		}
 
-
 		#endregion
 
 
 
-		//Metódusok amik segédfeladatokat hajtanak végre
+		//===== Metódusok amik segédfeladatokat hajtanak végre =====//
 		#region Management functions
 
 		/// <summary>
@@ -737,7 +832,7 @@ namespace CaritasManager
 
 				if (!date.Contains("."))
 				{
-					//TODO: FINISH
+					//TODO: FINISH DATE STUFF!
 
 					int year = 0;
 					int month = 0;
@@ -798,8 +893,6 @@ namespace CaritasManager
 					}
 					catch { }
 				}
-
-				//TODO: helyes dátum létrehozása
 				return DateTime.Now.ToShortDateString();
 			}
 		}
@@ -939,8 +1032,7 @@ namespace CaritasManager
 			//Ellenőrzi, hogy létezik-e a tábla, ha nem, létrehozza
 			if (!tableExists(sqlc, "ugyfel"))               //------- UGYFEL tábla
 			{
-				//TODO: HOZZÁADTA oszlop
-				sqlk.CommandText = "CREATE TABLE ugyfel " +     //TODO: STUDY BY, STUDY ON, ELHUNYT
+				sqlk.CommandText = "CREATE TABLE ugyfel " +
 									"(" +
 										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 										"nev TEXT, " +
@@ -973,6 +1065,7 @@ namespace CaritasManager
 				executeNonQuery(sqlk);
 			}
 
+
 			if (!tableExists(sqlc, "ugyfel_azonosito"))               //------- VAGYON tábla
 			{
 				sqlk.CommandText = "CREATE TABLE ugyfel_azonosito " +
@@ -983,6 +1076,7 @@ namespace CaritasManager
 
 				executeNonQuery(sqlk);
 			}
+
 
 			if (!tableExists(sqlc, "vagyon"))               //------- VAGYON tábla
 			{
@@ -997,6 +1091,7 @@ namespace CaritasManager
 
 				executeNonQuery(sqlk);
 			}
+
 
 			if (!tableExists(sqlc, "szoc_helyzet"))         //------- SZOCIALIS HELYZET 1 tábla
 			{
@@ -1086,14 +1181,8 @@ namespace CaritasManager
 		public static SQLiteConnection[] connectToDB()
 		{
 			string p = genp();
-
-			//IMPORTANT:!!CHANGE THIS!!
-
 			SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;Password=" + p.Split('|')[0] + ";");
 			SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;Password=" + p.Split('|')[1] + ";");
-
-			//SQLiteConnection sqlc = new SQLiteConnection("Data Source=database.sqlite;Version=3;");
-			//SQLiteConnection sqlc2 = new SQLiteConnection("Data Source=changes.sqlite;Version=3;");
 			return new SQLiteConnection[] { sqlc, sqlc2 };
 		}
 
@@ -1209,111 +1298,46 @@ namespace CaritasManager
 	}
 
 
-	/// <summary>
-	/// Enums for later
-	/// </summary>
-	public class enums
-	{
-		public enum vallás
-		{
-			Római_katolikus,
-			Evangélikus,
-			Református,
-			Metodista,
-			Baptista,
-			Unitárius,
-			Nem_hívő,
-			Egyéb
-		}
-
-		public enum lakás
-		{
-			Saját_Lakás,
-			Albérlő,
-			Társbérlő,
-			Hajléktalan,
-			Szívességi_Lakáshasználó
-		}
-
-		public enum általános_szociális_helyzet
-		{
-			Jó,
-			Közepes,
-			Megfelelő,
-			Rossz
-		}
-
-		public enum rendszeres_segítségre_szorul
-		{
-			Igen,
-			Nem,
-			Esetenként
-		}
-
-		public enum családi_állapot
-		{
-			Nős,
-			Nőtlen,
-			Férjezett,
-			Hajadon,
-			Özvegy,
-			Elvált
-		}
-	}
-
-
-	/// <summary>
-	/// Contains all the data required for the main customer data lines
-	/// </summary>
-	public class mainData
-	{
-		public int		id								{ get; set; }
-		public string	nev								{ get; set; }
-		public string	születesi_nev					{ get; set; }
-		public string	szig_szam						{ get; set; }
-		public string	lakcim_varos					{ get; set; }
-		public string	lakcim_uh						{ get; set; }
-		public string	szul_datum						{ get; set; }
-		public string	szul_hely						{ get; set; }
-		public int		csaladi_allapot					{ get; set; }
-		public string	anyja_neve						{ get; set; }
-		public string	vegzettseg						{ get; set; }
-		public string	foglalkozas						{ get; set; }
-		public string	szakkepzettseg					{ get; set; }
-		public string	munkaltato						{ get; set; }
-		public string	azonosito						{ get; set; }
-		public string	utolso_tamogatas_idopontja		{ get; set; }
-		public bool		jovedelem_igazolas				{ get; set; }
-		public bool		elhunyt							{ get; set; }
-		public int		allapot							{ get; set; }
-		public string	vallas							{ get; set; }
-		public string	környezettanulmanyt_végezte		{ get; set; }
-		public string	környezettanulmany_idopontja	{ get; set; }
-		public string	hozzaadas_datuma				{ get; set; }
-		public string	felvevo_profil					{ get; set; }
-		public string	legutobb_modositotta			{ get; set; }
-		public string	legutobbi_modositas_datuma		{ get; set; }
-	}
-
-	/// <summary>
-	/// Profile Class - 
-	/// Contains all data added to the profile table
-	/// </summary>
-	public class profile
-	{
-		public string name { get; set; }
-		public string fontFamily { get; set; }
-		public string fontSize { get; set; }
-		public string fontStyle { get; set; }
-		public string fontColor { get; set; }
-		public string color_1 { get; set; }
-		public string color_2 { get; set; }
-		public string color_3 { get; set; }
-		public string last_login { get; set; }
-	}
-
-	public class customerAllData
-	{
-		public mainData cust_mainData { get; set; }
-	}
+	
 }
+
+
+	/*
+	 
+		Vallás:
+		0 : Római katolikus 
+		1 : Evangélikus 
+		2 : Református 
+		3 : Metodista 
+		4 : Baptista 
+		5 : Unitárius 
+		6 : Nem hívő
+		7 : Egyéb
+
+		Lakás:
+		0 : Saját Lakás
+		1 : Albérlő
+		2 : Társbérlő
+		3 : Hajléktalan
+		4 : Szívességi Lakáshasználó
+
+		Ált. Szoc. Helyzet:
+		0 : Jó
+		1 : Közepes
+		2 : Megfelelő
+		3 : Rossz
+
+		Rendszeres segítségre szorul:
+		0 : Igen
+		1 : Nem
+		2 : Esetenként
+
+		Családi állapot:
+		0 : nős
+		1 : nőtlen
+		2 : férjezett
+		3 : hajadon
+		4 : özvegy
+		5 : elvált
+				
+	*/

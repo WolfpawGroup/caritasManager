@@ -286,5 +286,26 @@ namespace CaritasManager
 		{
 			
 		}
+
+		private void toolStripButton1_Click(object sender, EventArgs e)
+		{
+			if(dg_DataTable.SelectedRows != null && dg_DataTable.SelectedRows.Count > 0 && dg_DataTable.SelectedRows[0].Cells[0].Tag != null)
+			{
+				object[] oo = dg_DataTable.SelectedRows[0].Cells[0].Tag as object[];
+				if (oo.Length == 2)
+				{
+					f_AddCustomer fa = new f_AddCustomer()
+					{
+						edit = true,
+						sqlc = sqlc,
+						customer_id = Convert.ToInt32(oo[1]),
+						login_profile = login_profile
+					};
+
+					fa.ShowDialog();
+				}
+
+			}
+		}
 	}
 }
