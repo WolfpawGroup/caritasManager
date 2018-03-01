@@ -38,12 +38,12 @@
 			this.p_Furniture = new System.Windows.Forms.Panel();
 			this.lbl_AidType = new System.Windows.Forms.Label();
 			this.p_Extreme = new System.Windows.Forms.Panel();
+			this.cb_ExtremeUnit = new System.Windows.Forms.ComboBox();
+			this.tb_ExtremeAmount = new System.Windows.Forms.TextBox();
+			this.cb_ExtremeType = new System.Windows.Forms.ComboBox();
+			this.lbl_Extreme = new System.Windows.Forms.Label();
 			this.tb_AidAmount = new System.Windows.Forms.TextBox();
 			this.lbl_AidUnit = new System.Windows.Forms.Label();
-			this.lbl_Extreme = new System.Windows.Forms.Label();
-			this.cb_ExtremeType = new System.Windows.Forms.ComboBox();
-			this.tb_ExtremeAmount = new System.Windows.Forms.TextBox();
-			this.cb_ExtremeUnit = new System.Windows.Forms.ComboBox();
 			this.btn_Cancel = new System.Windows.Forms.Button();
 			this.btn_AddAid = new System.Windows.Forms.Button();
 			this.p_Extreme.SuspendLayout();
@@ -59,7 +59,7 @@
 			this.p_Food.Name = "p_Food";
 			this.p_Food.Size = new System.Drawing.Size(132, 132);
 			this.p_Food.TabIndex = 0;
-			this.p_Food.Tag = "Élelmiszer|";
+			this.p_Food.Tag = "Élelmiszer|kg";
 			this.p_Food.Click += new System.EventHandler(this.selectAid);
 			// 
 			// p_Clothes
@@ -175,33 +175,27 @@
 			this.p_Extreme.TabIndex = 9;
 			this.p_Extreme.Visible = false;
 			// 
-			// tb_AidAmount
+			// cb_ExtremeUnit
 			// 
-			this.tb_AidAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.tb_AidAmount.Location = new System.Drawing.Point(168, 278);
-			this.tb_AidAmount.Name = "tb_AidAmount";
-			this.tb_AidAmount.Size = new System.Drawing.Size(337, 26);
-			this.tb_AidAmount.TabIndex = 10;
+			this.cb_ExtremeUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.cb_ExtremeUnit.FormattingEnabled = true;
+			this.cb_ExtremeUnit.Items.AddRange(new object[] {
+            "Ft",
+            "db",
+            "cs",
+            "kg"});
+			this.cb_ExtremeUnit.Location = new System.Drawing.Point(478, 1);
+			this.cb_ExtremeUnit.Name = "cb_ExtremeUnit";
+			this.cb_ExtremeUnit.Size = new System.Drawing.Size(49, 28);
+			this.cb_ExtremeUnit.TabIndex = 12;
 			// 
-			// lbl_AidUnit
+			// tb_ExtremeAmount
 			// 
-			this.lbl_AidUnit.AutoSize = true;
-			this.lbl_AidUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.lbl_AidUnit.Location = new System.Drawing.Point(511, 279);
-			this.lbl_AidUnit.Name = "lbl_AidUnit";
-			this.lbl_AidUnit.Size = new System.Drawing.Size(31, 25);
-			this.lbl_AidUnit.TabIndex = 11;
-			this.lbl_AidUnit.Text = "Ft";
-			// 
-			// lbl_Extreme
-			// 
-			this.lbl_Extreme.AutoSize = true;
-			this.lbl_Extreme.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.lbl_Extreme.Location = new System.Drawing.Point(0, 3);
-			this.lbl_Extreme.Name = "lbl_Extreme";
-			this.lbl_Extreme.Size = new System.Drawing.Size(181, 25);
-			this.lbl_Extreme.TabIndex = 9;
-			this.lbl_Extreme.Text = "Rendkívüli segély";
+			this.tb_ExtremeAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.tb_ExtremeAmount.Location = new System.Drawing.Point(325, 3);
+			this.tb_ExtremeAmount.Name = "tb_ExtremeAmount";
+			this.tb_ExtremeAmount.Size = new System.Drawing.Size(147, 26);
+			this.tb_ExtremeAmount.TabIndex = 11;
 			// 
 			// cb_ExtremeType
 			// 
@@ -220,27 +214,33 @@
 			this.cb_ExtremeType.Size = new System.Drawing.Size(132, 28);
 			this.cb_ExtremeType.TabIndex = 10;
 			// 
-			// tb_ExtremeAmount
+			// lbl_Extreme
 			// 
-			this.tb_ExtremeAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.tb_ExtremeAmount.Location = new System.Drawing.Point(325, 3);
-			this.tb_ExtremeAmount.Name = "tb_ExtremeAmount";
-			this.tb_ExtremeAmount.Size = new System.Drawing.Size(147, 26);
-			this.tb_ExtremeAmount.TabIndex = 11;
+			this.lbl_Extreme.AutoSize = true;
+			this.lbl_Extreme.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.lbl_Extreme.Location = new System.Drawing.Point(0, 3);
+			this.lbl_Extreme.Name = "lbl_Extreme";
+			this.lbl_Extreme.Size = new System.Drawing.Size(181, 25);
+			this.lbl_Extreme.TabIndex = 9;
+			this.lbl_Extreme.Text = "Rendkívüli segély";
 			// 
-			// cb_ExtremeUnit
+			// tb_AidAmount
 			// 
-			this.cb_ExtremeUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.cb_ExtremeUnit.FormattingEnabled = true;
-			this.cb_ExtremeUnit.Items.AddRange(new object[] {
-            "Ft",
-            "db",
-            "cs",
-            "kg"});
-			this.cb_ExtremeUnit.Location = new System.Drawing.Point(478, 1);
-			this.cb_ExtremeUnit.Name = "cb_ExtremeUnit";
-			this.cb_ExtremeUnit.Size = new System.Drawing.Size(49, 28);
-			this.cb_ExtremeUnit.TabIndex = 12;
+			this.tb_AidAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.tb_AidAmount.Location = new System.Drawing.Point(168, 278);
+			this.tb_AidAmount.Name = "tb_AidAmount";
+			this.tb_AidAmount.Size = new System.Drawing.Size(337, 26);
+			this.tb_AidAmount.TabIndex = 10;
+			// 
+			// lbl_AidUnit
+			// 
+			this.lbl_AidUnit.AutoSize = true;
+			this.lbl_AidUnit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.lbl_AidUnit.Location = new System.Drawing.Point(511, 279);
+			this.lbl_AidUnit.Name = "lbl_AidUnit";
+			this.lbl_AidUnit.Size = new System.Drawing.Size(31, 25);
+			this.lbl_AidUnit.TabIndex = 11;
+			this.lbl_AidUnit.Text = "Ft";
 			// 
 			// btn_Cancel
 			// 
@@ -251,6 +251,7 @@
 			this.btn_Cancel.TabIndex = 12;
 			this.btn_Cancel.Text = "Mégse";
 			this.btn_Cancel.UseVisualStyleBackColor = true;
+			this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
 			// 
 			// btn_AddAid
 			// 

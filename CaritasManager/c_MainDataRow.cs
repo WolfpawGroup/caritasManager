@@ -148,7 +148,7 @@ namespace CaritasManager
 		public string utolso_tamogatas_idopontja { get; set; }
 		public bool jovedelem_igazolas { get; set; }
 		public bool elhunyt { get; set; }
-		public int allapot { get; set; }
+		public string allapot { get; set; }
 		public string vallas { get; set; }
 		public string környezettanulmanyt_végezte { get; set; }
 		public string környezettanulmany_idopontja { get; set; }
@@ -180,9 +180,10 @@ namespace CaritasManager
 	/// </summary>
 	public class vagyon
 	{
+		public int id { get; set; }
 		public string szoveg { get; set; }
 		public int osszeg { get; set; }
-		public string tipus { get; set; }
+		public string tipus { get; set; } //B = Bevétel | K = Kiadás | M = Megjegyzés
 	}
 
 	/// <summary>
@@ -190,6 +191,7 @@ namespace CaritasManager
 	/// </summary>
 	public class rokon
 	{
+		public int id { get; set; }
 		public string nev { get; set; }
 		public enums.rokoni_kapcsolat kapcsolat { get; set; }
 		public int havi_jovedelem { get; set; }
@@ -200,6 +202,7 @@ namespace CaritasManager
 	/// </summary>
 	public class tamogatas
 	{
+		public int id { get; set; }
 		public DateTime datum { get; set; }
 		public string tamogatas_tipusa { get; set; }
 		public string tamogatas_mennyisege { get; set; }

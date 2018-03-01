@@ -213,6 +213,7 @@ namespace CaritasManager
 		{
 			f_AddCustomer fad = new f_AddCustomer();
 			fad.login_profile = login_profile;
+			fad.sqlc = sqlc;
 			fad.ShowDialog();
 		}
 
@@ -305,6 +306,31 @@ namespace CaritasManager
 					fa.ShowDialog();
 				}
 
+			}
+		}
+
+
+		public bool backupForCurrentDate = false;
+
+		private void btn_DatabaseBackup_Click(object sender, EventArgs e)
+		{
+			string loc = Properties.Settings.Default.s_BackupLocation;
+			try
+			{
+				if (loc == "" || !Directory.Exists(loc))
+				{
+					loc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\CaritasManager Adatbázis biztonsági mentés" + (backupForCurrentDate ? " " + DateTime.Now.ToShortDateString() : "");
+					Directory.CreateDirectory(loc);
+				}
+
+				File.Copy("database.sqlite", loc + "\\database.sqlite");
+				File.Copy("changes.sqlite", loc + "\\changes.sqlite");
+
+				System.Diagnostics.Process.Start(loc);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.ToString(), "Hiba a mentés közben!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 	}

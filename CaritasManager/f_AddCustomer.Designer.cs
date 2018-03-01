@@ -33,7 +33,8 @@
 			this.btn_Save = new System.Windows.Forms.Button();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tp_PersonalData = new System.Windows.Forms.TabPage();
-			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
+			this.tb_Customer_OriginalName = new System.Windows.Forms.TextBox();
+			this.cb_Customer_OriginalName = new System.Windows.Forms.CheckBox();
 			this.gb_Religion = new System.Windows.Forms.GroupBox();
 			this.tb_OtherReligion = new System.Windows.Forms.ComboBox();
 			this.lbl_OtherReligion = new System.Windows.Forms.Label();
@@ -67,7 +68,7 @@
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage2 = new System.Windows.Forms.TabPage();
 			this.panel2 = new System.Windows.Forms.Panel();
-			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.tb_Vagyon_Megjegyzés = new System.Windows.Forms.TextBox();
 			this.label18 = new System.Windows.Forms.Label();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.label25 = new System.Windows.Forms.Label();
@@ -90,10 +91,10 @@
 			this.ch_CustomerExpenditureType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_CustomerExpenditureValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.btn_Expenditure_Remove = new System.Windows.Forms.Button();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.tb_Expenditure_Sum = new System.Windows.Forms.TextBox();
 			this.btn_Expenditure_Add = new System.Windows.Forms.Button();
 			this.label16 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.tb_Net_Income = new System.Windows.Forms.TextBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.btn_State_Add = new System.Windows.Forms.Button();
@@ -113,7 +114,7 @@
 			this.btn_SocialState_Add = new System.Windows.Forms.Button();
 			this.btn_SocialState_Remove = new System.Windows.Forms.Button();
 			this.btn_SocialState_Edit = new System.Windows.Forms.Button();
-			this.lv_CustomerSocialState = new System.Windows.Forms.ListView();
+			this.lv_Relatives = new System.Windows.Forms.ListView();
 			this.ch_PPLID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_PPL_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_PPL_Connection = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -144,8 +145,8 @@
 			this.ch_AidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.cb_Customer_OriginalName = new System.Windows.Forms.CheckBox();
-			this.tb_Customer_OriginalName = new System.Windows.Forms.TextBox();
+			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
+			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.panel1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tp_PersonalData.SuspendLayout();
@@ -193,6 +194,7 @@
 			this.btn_Save.TabIndex = 0;
 			this.btn_Save.Text = "Mentés";
 			this.btn_Save.UseVisualStyleBackColor = true;
+			this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
 			// 
 			// tabControl1
 			// 
@@ -227,19 +229,138 @@
 			this.tp_PersonalData.Text = "Személyes Adatok";
 			this.tp_PersonalData.UseVisualStyleBackColor = true;
 			// 
-			// cbb_PassedAway
+			// tb_Customer_OriginalName
 			// 
-			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cbb_PassedAway.Checked = false;
-			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.cbb_PassedAway.Location = new System.Drawing.Point(593, 14);
-			this.cbb_PassedAway.Name = "cbb_PassedAway";
-			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 31);
-			this.cbb_PassedAway.TabIndex = 9;
-			this.cbb_PassedAway.Text = "Elhunyt";
-			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.cbb_PassedAway.UseVisualStyleBackColor = true;
+			this.tb_Customer_OriginalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_Customer_OriginalName.AutoCompleteCustomSource.AddRange(new string[] {
+            "Szekszárd",
+            "Paks",
+            "Dombóvár",
+            "Bonyhád",
+            "Tolna",
+            "Dunaföldvár",
+            "Tamási",
+            "Bátaszék",
+            "Simontornya",
+            "Nagymányok",
+            "Gyönk",
+            "Alsónána",
+            "Alsónyék",
+            "Aparhant",
+            "Attala",
+            "Báta",
+            "Bátaapáti",
+            "Belecska",
+            "Bikács",
+            "Bogyiszló",
+            "Bonyhádvarasd",
+            "Bölcske",
+            "Cikó",
+            "Csibrák",
+            "Csikóstőttős",
+            "Dalmand",
+            "Decs",
+            "Diósberény",
+            "Döbrököz",
+            "Dunaszentgyörgy",
+            "Dúzs",
+            "Értény",
+            "Fadd",
+            "Fácánkert",
+            "Felsőnána",
+            "Felsőnyék",
+            "Fürged",
+            "Gerjen",
+            "Grábóc",
+            "Györe",
+            "Györköny",
+            "Gyulaj",
+            "Harc",
+            "Hőgyész",
+            "Iregszemcse",
+            "Izmény",
+            "Jágónak",
+            "Kajdacs",
+            "Kakasd",
+            "Kalaznó",
+            "Kapospula",
+            "Kaposszekcső",
+            "Keszőhidegkút",
+            "Kéty",
+            "Kisdorog",
+            "Kismányok",
+            "Kisszékely",
+            "Kistormás",
+            "Kisvejke",
+            "Kocsola",
+            "Koppányszántó",
+            "Kölesd",
+            "Kurd",
+            "Lápafő",
+            "Lengyel",
+            "Madocsa",
+            "Magyarkeszi",
+            "Medina",
+            "Miszla",
+            "Mórágy",
+            "Mőcsény",
+            "Mucsfa",
+            "Mucsi",
+            "Murga",
+            "Nagydorog",
+            "Nagykónyi",
+            "Nagyszékely",
+            "Nagyszokoly",
+            "Nagyvejke",
+            "Nak",
+            "Németkér",
+            "Ozora",
+            "Őcsény",
+            "Pálfa",
+            "Pári",
+            "Pincehely",
+            "Pörböly",
+            "Pusztahencse",
+            "Regöly",
+            "Sárpilis",
+            "Sárszentlőrinc",
+            "Sióagárd",
+            "Szakadát",
+            "Szakály",
+            "Szakcs",
+            "Szálka",
+            "Szárazd",
+            "Szedres",
+            "Tengelic",
+            "Tevel",
+            "Tolnanémedi",
+            "Udvari",
+            "Újireg",
+            "Varsád",
+            "Váralja",
+            "Várdomb",
+            "Várong",
+            "Závod",
+            "Zomba"});
+			this.tb_Customer_OriginalName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.tb_Customer_OriginalName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			this.tb_Customer_OriginalName.Location = new System.Drawing.Point(268, 46);
+			this.tb_Customer_OriginalName.Name = "tb_Customer_OriginalName";
+			this.tb_Customer_OriginalName.Size = new System.Drawing.Size(319, 20);
+			this.tb_Customer_OriginalName.TabIndex = 6;
+			this.tb_Customer_OriginalName.Visible = false;
+			// 
+			// cb_Customer_OriginalName
+			// 
+			this.cb_Customer_OriginalName.AutoSize = true;
+			this.cb_Customer_OriginalName.Location = new System.Drawing.Point(121, 48);
+			this.cb_Customer_OriginalName.Name = "cb_Customer_OriginalName";
+			this.cb_Customer_OriginalName.Size = new System.Drawing.Size(153, 17);
+			this.cb_Customer_OriginalName.TabIndex = 10;
+			this.cb_Customer_OriginalName.Text = "Születése név különbözik: ";
+			this.cb_Customer_OriginalName.UseVisualStyleBackColor = true;
+			this.cb_Customer_OriginalName.CheckedChanged += new System.EventHandler(this.cb_Customer_OriginalName_CheckedChanged);
 			// 
 			// gb_Religion
 			// 
@@ -785,7 +906,7 @@
 			// 
 			// panel2
 			// 
-			this.panel2.Controls.Add(this.textBox3);
+			this.panel2.Controls.Add(this.tb_Vagyon_Megjegyzés);
 			this.panel2.Controls.Add(this.label18);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.panel2.Location = new System.Drawing.Point(3, 340);
@@ -793,16 +914,16 @@
 			this.panel2.Size = new System.Drawing.Size(681, 80);
 			this.panel2.TabIndex = 23;
 			// 
-			// textBox3
+			// tb_Vagyon_Megjegyzés
 			// 
-			this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.tb_Vagyon_Megjegyzés.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox3.Location = new System.Drawing.Point(3, 22);
-			this.textBox3.Multiline = true;
-			this.textBox3.Name = "textBox3";
-			this.textBox3.Size = new System.Drawing.Size(642, 52);
-			this.textBox3.TabIndex = 18;
+			this.tb_Vagyon_Megjegyzés.Location = new System.Drawing.Point(3, 22);
+			this.tb_Vagyon_Megjegyzés.Multiline = true;
+			this.tb_Vagyon_Megjegyzés.Name = "tb_Vagyon_Megjegyzés";
+			this.tb_Vagyon_Megjegyzés.Size = new System.Drawing.Size(642, 52);
+			this.tb_Vagyon_Megjegyzés.TabIndex = 18;
 			// 
 			// label18
 			// 
@@ -840,10 +961,10 @@
 			this.splitContainer1.Panel2.Controls.Add(this.btn_Expenditure_Edit);
 			this.splitContainer1.Panel2.Controls.Add(this.lv_CustomerExpenditure);
 			this.splitContainer1.Panel2.Controls.Add(this.btn_Expenditure_Remove);
-			this.splitContainer1.Panel2.Controls.Add(this.textBox1);
+			this.splitContainer1.Panel2.Controls.Add(this.tb_Expenditure_Sum);
 			this.splitContainer1.Panel2.Controls.Add(this.btn_Expenditure_Add);
 			this.splitContainer1.Panel2.Controls.Add(this.label16);
-			this.splitContainer1.Panel2.Controls.Add(this.textBox2);
+			this.splitContainer1.Panel2.Controls.Add(this.tb_Net_Income);
 			this.splitContainer1.Panel2.Controls.Add(this.label17);
 			this.splitContainer1.Size = new System.Drawing.Size(681, 417);
 			this.splitContainer1.SplitterDistance = 167;
@@ -889,17 +1010,17 @@
 			// ch_Income_Id
 			// 
 			this.ch_Income_Id.Text = "#";
-			this.ch_Income_Id.Width = 38;
+			this.ch_Income_Id.Width = 40;
 			// 
 			// ch_CustomerIncomeSource
 			// 
 			this.ch_CustomerIncomeSource.Text = "Bevétel megnevezése";
-			this.ch_CustomerIncomeSource.Width = 183;
+			this.ch_CustomerIncomeSource.Width = 180;
 			// 
 			// ch_CustomerIncomeAmount
 			// 
 			this.ch_CustomerIncomeAmount.Text = "Összeg";
-			this.ch_CustomerIncomeAmount.Width = 387;
+			this.ch_CustomerIncomeAmount.Width = 390;
 			// 
 			// btn_Income_Add
 			// 
@@ -937,8 +1058,10 @@
 			// tb_Income_Sum
 			// 
 			this.tb_Income_Sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_Income_Sum.BackColor = System.Drawing.Color.White;
 			this.tb_Income_Sum.Location = new System.Drawing.Point(528, 144);
 			this.tb_Income_Sum.Name = "tb_Income_Sum";
+			this.tb_Income_Sum.ReadOnly = true;
 			this.tb_Income_Sum.Size = new System.Drawing.Size(100, 20);
 			this.tb_Income_Sum.TabIndex = 7;
 			// 
@@ -1013,16 +1136,17 @@
 			// ch_ExpenditureId
 			// 
 			this.ch_ExpenditureId.Text = "#";
-			this.ch_ExpenditureId.Width = 46;
+			this.ch_ExpenditureId.Width = 40;
 			// 
 			// ch_CustomerExpenditureType
 			// 
 			this.ch_CustomerExpenditureType.Text = "Kiadás megnevezése";
-			this.ch_CustomerExpenditureType.Width = 160;
+			this.ch_CustomerExpenditureType.Width = 180;
 			// 
 			// ch_CustomerExpenditureValue
 			// 
-			this.ch_CustomerExpenditureValue.Width = 408;
+			this.ch_CustomerExpenditureValue.Text = "Összeg";
+			this.ch_CustomerExpenditureValue.Width = 390;
 			// 
 			// btn_Expenditure_Remove
 			// 
@@ -1035,13 +1159,15 @@
 			this.btn_Expenditure_Remove.TabIndex = 20;
 			this.btn_Expenditure_Remove.UseVisualStyleBackColor = true;
 			// 
-			// textBox1
+			// tb_Expenditure_Sum
 			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.Location = new System.Drawing.Point(528, 114);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(100, 20);
-			this.textBox1.TabIndex = 9;
+			this.tb_Expenditure_Sum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_Expenditure_Sum.BackColor = System.Drawing.Color.White;
+			this.tb_Expenditure_Sum.Location = new System.Drawing.Point(528, 114);
+			this.tb_Expenditure_Sum.Name = "tb_Expenditure_Sum";
+			this.tb_Expenditure_Sum.ReadOnly = true;
+			this.tb_Expenditure_Sum.Size = new System.Drawing.Size(100, 20);
+			this.tb_Expenditure_Sum.TabIndex = 9;
 			// 
 			// btn_Expenditure_Add
 			// 
@@ -1064,13 +1190,15 @@
 			this.label16.TabIndex = 10;
 			this.label16.Text = "Havi kiadás összesítve: ";
 			// 
-			// textBox2
+			// tb_Net_Income
 			// 
-			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox2.Location = new System.Drawing.Point(528, 141);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.Size = new System.Drawing.Size(100, 20);
-			this.textBox2.TabIndex = 16;
+			this.tb_Net_Income.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_Net_Income.BackColor = System.Drawing.Color.White;
+			this.tb_Net_Income.Location = new System.Drawing.Point(528, 141);
+			this.tb_Net_Income.Name = "tb_Net_Income";
+			this.tb_Net_Income.ReadOnly = true;
+			this.tb_Net_Income.Size = new System.Drawing.Size(100, 20);
+			this.tb_Net_Income.TabIndex = 16;
 			// 
 			// label17
 			// 
@@ -1084,6 +1212,7 @@
 			// 
 			// tabPage3
 			// 
+			this.tabPage3.Controls.Add(this.cbb_SZJI);
 			this.tabPage3.Controls.Add(this.btn_State_Add);
 			this.tabPage3.Controls.Add(this.btn_State_Remove);
 			this.tabPage3.Controls.Add(this.btn_State_Edit);
@@ -1099,7 +1228,7 @@
 			this.tabPage3.Controls.Add(this.btn_SocialState_Add);
 			this.tabPage3.Controls.Add(this.btn_SocialState_Remove);
 			this.tabPage3.Controls.Add(this.btn_SocialState_Edit);
-			this.tabPage3.Controls.Add(this.lv_CustomerSocialState);
+			this.tabPage3.Controls.Add(this.lv_Relatives);
 			this.tabPage3.Controls.Add(this.label20);
 			this.tabPage3.Controls.Add(this.cb_Dwelling);
 			this.tabPage3.Controls.Add(this.label19);
@@ -1196,8 +1325,10 @@
 			// tb_FamilyIncomeSum
 			// 
 			this.tb_FamilyIncomeSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.tb_FamilyIncomeSum.BackColor = System.Drawing.Color.White;
 			this.tb_FamilyIncomeSum.Location = new System.Drawing.Point(528, 265);
 			this.tb_FamilyIncomeSum.Name = "tb_FamilyIncomeSum";
+			this.tb_FamilyIncomeSum.ReadOnly = true;
 			this.tb_FamilyIncomeSum.Size = new System.Drawing.Size(100, 20);
 			this.tb_FamilyIncomeSum.TabIndex = 12;
 			// 
@@ -1265,7 +1396,7 @@
 			this.btn_SocialState_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btn_SocialState_Add.BackgroundImage = global::CaritasManager.Properties.Resources.plus_icon;
 			this.btn_SocialState_Add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Add.Location = new System.Drawing.Point(656, 94);
+			this.btn_SocialState_Add.Location = new System.Drawing.Point(656, 110);
 			this.btn_SocialState_Add.Name = "btn_SocialState_Add";
 			this.btn_SocialState_Add.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Add.TabIndex = 4;
@@ -1276,7 +1407,7 @@
 			this.btn_SocialState_Remove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btn_SocialState_Remove.BackgroundImage = global::CaritasManager.Properties.Resources.minus_icon;
 			this.btn_SocialState_Remove.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Remove.Location = new System.Drawing.Point(656, 123);
+			this.btn_SocialState_Remove.Location = new System.Drawing.Point(656, 139);
 			this.btn_SocialState_Remove.Name = "btn_SocialState_Remove";
 			this.btn_SocialState_Remove.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Remove.TabIndex = 5;
@@ -1287,30 +1418,30 @@
 			this.btn_SocialState_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.btn_SocialState_Edit.BackgroundImage = global::CaritasManager.Properties.Resources.edit_icon;
 			this.btn_SocialState_Edit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btn_SocialState_Edit.Location = new System.Drawing.Point(656, 152);
+			this.btn_SocialState_Edit.Location = new System.Drawing.Point(656, 168);
 			this.btn_SocialState_Edit.Name = "btn_SocialState_Edit";
 			this.btn_SocialState_Edit.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Edit.TabIndex = 6;
 			this.btn_SocialState_Edit.UseVisualStyleBackColor = true;
 			// 
-			// lv_CustomerSocialState
+			// lv_Relatives
 			// 
-			this.lv_CustomerSocialState.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.lv_Relatives.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.lv_CustomerSocialState.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.lv_Relatives.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ch_PPLID,
             this.ch_PPL_Name,
             this.ch_PPL_Connection,
             this.ch_PPL_Income});
-			this.lv_CustomerSocialState.FullRowSelect = true;
-			this.lv_CustomerSocialState.GridLines = true;
-			this.lv_CustomerSocialState.Location = new System.Drawing.Point(20, 94);
-			this.lv_CustomerSocialState.Name = "lv_CustomerSocialState";
-			this.lv_CustomerSocialState.Size = new System.Drawing.Size(630, 164);
-			this.lv_CustomerSocialState.TabIndex = 3;
-			this.lv_CustomerSocialState.UseCompatibleStateImageBehavior = false;
-			this.lv_CustomerSocialState.View = System.Windows.Forms.View.Details;
+			this.lv_Relatives.FullRowSelect = true;
+			this.lv_Relatives.GridLines = true;
+			this.lv_Relatives.Location = new System.Drawing.Point(20, 110);
+			this.lv_Relatives.Name = "lv_Relatives";
+			this.lv_Relatives.Size = new System.Drawing.Size(630, 151);
+			this.lv_Relatives.TabIndex = 3;
+			this.lv_Relatives.UseCompatibleStateImageBehavior = false;
+			this.lv_Relatives.View = System.Windows.Forms.View.Details;
 			// 
 			// ch_PPLID
 			// 
@@ -1335,7 +1466,7 @@
 			// label20
 			// 
 			this.label20.AutoSize = true;
-			this.label20.Location = new System.Drawing.Point(17, 69);
+			this.label20.Location = new System.Drawing.Point(17, 88);
 			this.label20.Name = "label20";
 			this.label20.Size = new System.Drawing.Size(170, 13);
 			this.label20.TabIndex = 2;
@@ -1351,7 +1482,7 @@
             "Társbérlő",
             "Hajléktalan",
             "Szívességi lakáshasználó"});
-			this.cb_Dwelling.Location = new System.Drawing.Point(65, 22);
+			this.cb_Dwelling.Location = new System.Drawing.Point(65, 51);
 			this.cb_Dwelling.Name = "cb_Dwelling";
 			this.cb_Dwelling.Size = new System.Drawing.Size(170, 21);
 			this.cb_Dwelling.TabIndex = 1;
@@ -1359,7 +1490,7 @@
 			// label19
 			// 
 			this.label19.AutoSize = true;
-			this.label19.Location = new System.Drawing.Point(17, 25);
+			this.label19.Location = new System.Drawing.Point(17, 54);
 			this.label19.Name = "label19";
 			this.label19.Size = new System.Drawing.Size(42, 13);
 			this.label19.TabIndex = 0;
@@ -1595,138 +1726,31 @@
 			this.ch_AidComment.Text = "Megjegyzés";
 			this.ch_AidComment.Width = 253;
 			// 
-			// cb_Customer_OriginalName
+			// cbb_PassedAway
 			// 
-			this.cb_Customer_OriginalName.AutoSize = true;
-			this.cb_Customer_OriginalName.Location = new System.Drawing.Point(121, 48);
-			this.cb_Customer_OriginalName.Name = "cb_Customer_OriginalName";
-			this.cb_Customer_OriginalName.Size = new System.Drawing.Size(153, 17);
-			this.cb_Customer_OriginalName.TabIndex = 10;
-			this.cb_Customer_OriginalName.Text = "Születése név különbözik: ";
-			this.cb_Customer_OriginalName.UseVisualStyleBackColor = true;
-			this.cb_Customer_OriginalName.CheckedChanged += new System.EventHandler(this.cb_Customer_OriginalName_CheckedChanged);
+			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbb_PassedAway.Checked = false;
+			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.cbb_PassedAway.Location = new System.Drawing.Point(593, 14);
+			this.cbb_PassedAway.Name = "cbb_PassedAway";
+			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 31);
+			this.cbb_PassedAway.TabIndex = 9;
+			this.cbb_PassedAway.Text = "Elhunyt";
+			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_PassedAway.UseVisualStyleBackColor = true;
 			// 
-			// tb_Customer_OriginalName
+			// cbb_SZJI
 			// 
-			this.tb_Customer_OriginalName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.tb_Customer_OriginalName.AutoCompleteCustomSource.AddRange(new string[] {
-            "Szekszárd",
-            "Paks",
-            "Dombóvár",
-            "Bonyhád",
-            "Tolna",
-            "Dunaföldvár",
-            "Tamási",
-            "Bátaszék",
-            "Simontornya",
-            "Nagymányok",
-            "Gyönk",
-            "Alsónána",
-            "Alsónyék",
-            "Aparhant",
-            "Attala",
-            "Báta",
-            "Bátaapáti",
-            "Belecska",
-            "Bikács",
-            "Bogyiszló",
-            "Bonyhádvarasd",
-            "Bölcske",
-            "Cikó",
-            "Csibrák",
-            "Csikóstőttős",
-            "Dalmand",
-            "Decs",
-            "Diósberény",
-            "Döbrököz",
-            "Dunaszentgyörgy",
-            "Dúzs",
-            "Értény",
-            "Fadd",
-            "Fácánkert",
-            "Felsőnána",
-            "Felsőnyék",
-            "Fürged",
-            "Gerjen",
-            "Grábóc",
-            "Györe",
-            "Györköny",
-            "Gyulaj",
-            "Harc",
-            "Hőgyész",
-            "Iregszemcse",
-            "Izmény",
-            "Jágónak",
-            "Kajdacs",
-            "Kakasd",
-            "Kalaznó",
-            "Kapospula",
-            "Kaposszekcső",
-            "Keszőhidegkút",
-            "Kéty",
-            "Kisdorog",
-            "Kismányok",
-            "Kisszékely",
-            "Kistormás",
-            "Kisvejke",
-            "Kocsola",
-            "Koppányszántó",
-            "Kölesd",
-            "Kurd",
-            "Lápafő",
-            "Lengyel",
-            "Madocsa",
-            "Magyarkeszi",
-            "Medina",
-            "Miszla",
-            "Mórágy",
-            "Mőcsény",
-            "Mucsfa",
-            "Mucsi",
-            "Murga",
-            "Nagydorog",
-            "Nagykónyi",
-            "Nagyszékely",
-            "Nagyszokoly",
-            "Nagyvejke",
-            "Nak",
-            "Németkér",
-            "Ozora",
-            "Őcsény",
-            "Pálfa",
-            "Pári",
-            "Pincehely",
-            "Pörböly",
-            "Pusztahencse",
-            "Regöly",
-            "Sárpilis",
-            "Sárszentlőrinc",
-            "Sióagárd",
-            "Szakadát",
-            "Szakály",
-            "Szakcs",
-            "Szálka",
-            "Szárazd",
-            "Szedres",
-            "Tengelic",
-            "Tevel",
-            "Tolnanémedi",
-            "Udvari",
-            "Újireg",
-            "Varsád",
-            "Váralja",
-            "Várdomb",
-            "Várong",
-            "Závod",
-            "Zomba"});
-			this.tb_Customer_OriginalName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-			this.tb_Customer_OriginalName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-			this.tb_Customer_OriginalName.Location = new System.Drawing.Point(268, 46);
-			this.tb_Customer_OriginalName.Name = "tb_Customer_OriginalName";
-			this.tb_Customer_OriginalName.Size = new System.Drawing.Size(319, 20);
-			this.tb_Customer_OriginalName.TabIndex = 6;
-			this.tb_Customer_OriginalName.Visible = false;
+			this.cbb_SZJI.Checked = false;
+			this.cbb_SZJI.Location = new System.Drawing.Point(65, 22);
+			this.cbb_SZJI.Name = "cbb_SZJI";
+			this.cbb_SZJI.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_SZJI.Size = new System.Drawing.Size(169, 23);
+			this.cbb_SZJI.TabIndex = 19;
+			this.cbb_SZJI.Text = "Jövedelem igazolást leadta";
+			this.cbb_SZJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_SZJI.UseVisualStyleBackColor = true;
 			// 
 			// f_AddCustomer
 			// 
@@ -1736,6 +1760,7 @@
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.panel1);
 			this.Name = "f_AddCustomer";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Új ügyfél felvétele";
 			this.panel1.ResumeLayout(false);
 			this.tabControl1.ResumeLayout(false);
@@ -1818,12 +1843,12 @@
 		private System.Windows.Forms.Button btn_Income_Remove;
 		private System.Windows.Forms.Button btn_Income_Add;
 		private System.Windows.Forms.ListView lv_CustomerIncome;
-		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.TextBox tb_Vagyon_Megjegyzés;
 		private System.Windows.Forms.Label label17;
-		private System.Windows.Forms.TextBox textBox2;
+		private System.Windows.Forms.TextBox tb_Net_Income;
 		private System.Windows.Forms.Label label18;
 		private System.Windows.Forms.Label label16;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox tb_Expenditure_Sum;
 		private System.Windows.Forms.Button btn_Expenditure_Edit;
 		private System.Windows.Forms.Button btn_Expenditure_Remove;
 		private System.Windows.Forms.Button btn_Expenditure_Add;
@@ -1840,7 +1865,7 @@
 		private System.Windows.Forms.Button btn_SocialState_Add;
 		private System.Windows.Forms.Button btn_SocialState_Remove;
 		private System.Windows.Forms.Button btn_SocialState_Edit;
-		private System.Windows.Forms.ListView lv_CustomerSocialState;
+		private System.Windows.Forms.ListView lv_Relatives;
 		private System.Windows.Forms.ColumnHeader ch_PPLID;
 		private System.Windows.Forms.ColumnHeader ch_PPL_Name;
 		private System.Windows.Forms.ColumnHeader ch_PPL_Connection;
@@ -1888,5 +1913,6 @@
 		private uc_cb_Button cbb_PassedAway;
 		private System.Windows.Forms.TextBox tb_Customer_OriginalName;
 		private System.Windows.Forms.CheckBox cb_Customer_OriginalName;
+		private uc_cb_Button cbb_SZJI;
 	}
 }

@@ -11,6 +11,7 @@ namespace CaritasManager
 	public static class c_DBHandler
 	{
 		public static SHA512CryptoServiceProvider sha5 = new SHA512CryptoServiceProvider();
+		private static SQLiteDataReader reader = null;
 		private static string ptwvnq9 = "fDo6Y2FyaXRh";
 		private static string pfoaywe = "c19jaGFuZ2Vz";
 		private static string powv89w = "OjpjYXJpdGFz";
@@ -103,15 +104,22 @@ namespace CaritasManager
 			{
 				c_MainDataRow mdr =		new c_MainDataRow();
 				mdr.id =				r.GetInt32(r.GetOrdinal("id"));
-				mdr.name =				r.GetString(r.GetOrdinal("nev"))												?? "";
-				mdr.j =					((r.GetString(r.GetOrdinal("jovedelem_igazolas"))								?? "F") == "T" ? true : false);
-				mdr.identification =	r.GetString(r.GetOrdinal("azonosito"))											?? "";
-				mdr.city =				r.GetString(r.GetOrdinal("lakcim_varos"))										?? "";
-				mdr.houseno =			r.GetString(r.GetOrdinal("lakcim_uh"))											?? "";
-				mdr.state =				r.GetString(r.GetOrdinal("allapot"))											?? "";
-				mdr.dateAdded =			Convert.ToDateTime(checkDate((r.GetString(r.GetOrdinal("hozzaadas_datuma")))	?? ""));
-				string d =				r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")).ToString()				?? "";
-				mdr.lastSupport =		(d != "" ? Convert.ToDateTime(checkDate(d)) : (DateTime?)null);
+				mdr.name =				checkvalueString(r.GetValue(r.GetOrdinal("nev")));  //--
+				mdr.j =					(checkvalueString(r.GetValue(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
+				mdr.identification =	checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
+				mdr.city =				checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
+				mdr.houseno =			checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
+				mdr.state =				checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
+				mdr.dateAdded =			Convert.ToDateTime(checkDate(checkvalueString(r.GetValue(r.GetOrdinal("hozzaadas_datuma"))))); //TODO: Checkdate-ben lekezelni az üres értéket
+				string d =				checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
+				try
+				{
+					mdr.lastSupport =	(d != "" ? Convert.ToDateTime(checkDate(d)) : (DateTime?)null);
+				}
+				catch
+				{
+					mdr.lastSupport =	null;
+				}
 				mdr.kin =				new List<string>();
 
 
@@ -121,7 +129,7 @@ namespace CaritasManager
 
 				while (rr.Read())
 				{
-					mdr.kin.Add(rr.GetString(rr.GetOrdinal("rokoni_kapcsolat")) + ":" + rr.GetString(rr.GetOrdinal("nev")));
+					mdr.kin.Add(checkvalueString(rr.GetValue(rr.GetOrdinal("rokoni_kapcsolat"))) + ":" + checkvalueString(rr.GetValue(rr.GetOrdinal("nev"))));
 				}
 
 
@@ -138,16 +146,40 @@ namespace CaritasManager
 			return lst;
 		}
 
+		public static int checkvalueInt(object v)
+		{
+			int ret = 0;
+
+			if (v is DBNull)
+			{ ret = 0; }
+			else { int.TryParse(v.ToString(), out ret); }
+
+			return ret;
+		}
+
+		public static String checkvalueString(object v)
+		{
+			String ret = "";
+			
+			if (v is DBNull)
+			{ ret = ""; }
+			else { ret = v.ToString(); }
+
+			return ret;
+		}
+
 		//MEMO: ===== Return all customer data!!
 		//MEMO: Le kell kezelni, hogy ne lehessen <NULL> értéket menteni
 		//MEMO: Biztosra kell menni, hogy nincs szám értékként string oszlop lekérve
 		public static customerAllData getCustomerAllData(SQLiteConnection sqlc, int custid)
 		{
+			if (!connectioinOpen(sqlc)) { return null; }
+
 			customerAllData cad = new customerAllData();
 			mainData md = new mainData();
 			List<vagyon> _v = new List<vagyon>();
 			List<rokon> _r = new List<rokon>();
-			List<tamogatas> t = new List<tamogatas>();
+			List<tamogatas> _t = new List<tamogatas>();
 
 			//========== MainData
 
@@ -156,37 +188,36 @@ namespace CaritasManager
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
 			SQLiteDataReader r = sqlk.ExecuteReader();
 			r.Read();
+			reader = r;
 
 			//Változó neve					--	Táblából lekérdezett érték								--	Üres érték kezelése
 
 			md.id =								custid;
-			md.nev =							r.GetString(r.GetOrdinal("nev"))							?? "";
-			md.születesi_nev =					r.GetString(r.GetOrdinal("születesi_nev"))					?? "";
-			md.szig_szam =						r.GetString(r.GetOrdinal("szig_szam"))						?? "";
-			md.lakcim_varos =					r.GetString(r.GetOrdinal("lakcim_varos"))					?? "";
-			md.lakcim_uh =						r.GetString(r.GetOrdinal("lakcim_uh"))						?? "";
-			md.szul_datum =						r.GetString(r.GetOrdinal("szul_datum"))						?? "";
-			md.szul_hely =						r.GetString(r.GetOrdinal("szul_hely"))						?? "";
-			md.csaladi_allapot =				r.GetInt32(r.GetOrdinal("csaladi_allapot"));
-			md.anyja_neve =						r.GetString(r.GetOrdinal("anyja_neve"))						?? "";
-			md.vegzettseg =						r.GetString(r.GetOrdinal("vegzettseg"))						?? "";
-			md.foglalkozas =					r.GetString(r.GetOrdinal("foglalkozas"))					?? "";
-			md.szakkepzettseg =					r.GetString(r.GetOrdinal("szakkepzettseg"))					?? "";
-			md.munkaltato =						r.GetString(r.GetOrdinal("munkaltato"))						?? "";
-			md.azonosito =						r.GetString(r.GetOrdinal("azonosito"))						?? "";
-			md.utolso_tamogatas_idopontja =		r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja"))		?? "";
-			md.jovedelem_igazolas =				((r.GetString(r.GetOrdinal("jovedelem_igazolas"))			?? "F") == "T" ? true : false);
-			md.elhunyt =						((r.GetString(r.GetOrdinal("elhunyt"))						?? "F") == "T" ? true : false);
-			string allapot =					r.GetString(r.GetOrdinal("allapot"));
-			int all = 0;
-			if (int.TryParse(allapot, out all)) { md.allapot = all; }
-			md.vallas =							r.GetString(r.GetOrdinal("vallas"))							?? "";
-			md.környezettanulmanyt_végezte =	r.GetString(r.GetOrdinal("környezettanulmanyt_végezte"))	?? "";
-			md.környezettanulmany_idopontja =	r.GetString(r.GetOrdinal("környezettanulmany_idopontja"))	?? "";
-			md.hozzaadas_datuma =				r.GetString(r.GetOrdinal("hozzaadas_datuma"))				?? "";
-			md.felvevo_profil =					r.GetString(r.GetOrdinal("felvevo_profil"))					?? "";
-			md.legutobb_modositotta =			r.GetString(r.GetOrdinal("legutobb_modositotta"))			?? "";
-			md.legutobbi_modositas_datuma =		r.GetString(r.GetOrdinal("legutobbi_modositas_datuma"))		?? "";
+			md.nev =							checkvalueString(	r.GetValue(r.GetOrdinal("nev"							)));
+			md.születesi_nev =					checkvalueString(	r.GetValue(r.GetOrdinal("születesi_nev"					)));
+			md.szig_szam =						checkvalueString(	r.GetValue(r.GetOrdinal("szig_szam"						)));
+			md.lakcim_varos =					checkvalueString(	r.GetValue(r.GetOrdinal("lakcim_varos"					)));
+			md.lakcim_uh =						checkvalueString(	r.GetValue(r.GetOrdinal("lakcim_uh"						)));
+			md.szul_datum =						checkvalueString(	r.GetValue(r.GetOrdinal("szul_datum"					)));
+			md.szul_hely =						checkvalueString(	r.GetValue(r.GetOrdinal("szul_hely"						)));
+			md.csaladi_allapot =				checkvalueInt(		r.GetValue(r.GetOrdinal("csaladi_allapot"				)));
+			md.anyja_neve =						checkvalueString(	r.GetValue(r.GetOrdinal("anyja_neve"					)));
+			md.vegzettseg =						checkvalueString(	r.GetValue(r.GetOrdinal("vegzettseg"					)));
+			md.foglalkozas =					checkvalueString(	r.GetValue(r.GetOrdinal("foglalkozas"					)));
+			md.szakkepzettseg =					checkvalueString(	r.GetValue(r.GetOrdinal("szakkepzettseg"				)));
+			md.munkaltato =						checkvalueString(	r.GetValue(r.GetOrdinal("munkaltato"					)));
+			md.azonosito =						checkvalueString(	r.GetValue(r.GetOrdinal("azonosito"						)));
+			md.utolso_tamogatas_idopontja =		checkvalueString(	r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja"	)));
+			md.jovedelem_igazolas =				(checkvalueString((	r.GetValue(r.GetOrdinal("jovedelem_igazolas"			)))) == "T" ? true : false);
+			md.elhunyt =						(checkvalueString((	r.GetValue(r.GetOrdinal("elhunyt"						)))) == "T" ? true : false);
+			md.allapot =						checkvalueString(	r.GetValue(r.GetOrdinal("allapot"						)));
+			md.vallas =							checkvalueString(	r.GetValue(r.GetOrdinal("vallas"						)));
+			md.környezettanulmanyt_végezte =	checkvalueString(	r.GetValue(r.GetOrdinal("környezettanulmanyt_végezte"	)));
+			md.környezettanulmany_idopontja =	checkvalueString(	r.GetValue(r.GetOrdinal("környezettanulmany_idopontja"	)));
+			md.hozzaadas_datuma =				checkvalueString(	r.GetValue(r.GetOrdinal("hozzaadas_datuma"				)));
+			md.felvevo_profil =					checkvalueString(	r.GetValue(r.GetOrdinal("felvevo_profil"				)));
+			md.legutobb_modositotta =			checkvalueString(	r.GetValue(r.GetOrdinal("legutobb_modositotta"			)));
+			md.legutobbi_modositas_datuma =		checkvalueString(	r.GetValue(r.GetOrdinal("legutobbi_modositas_datuma"	)));
 
 
 			cad.cust_0_mainData = md;
@@ -202,9 +233,10 @@ namespace CaritasManager
 			{
 				vagyon vv = new vagyon();
 
-				vv.szoveg =		r.GetString(r.GetOrdinal("szoveg"))		?? "--";
-				vv.osszeg =		r.GetInt32(r.GetOrdinal("osszeg"));
-				vv.tipus =		r.GetString(r.GetOrdinal("tipus"))		?? "";
+				vv.id =							checkvalueInt(		r.GetValue(r.GetOrdinal("id"		)));
+				vv.szoveg =						checkvalueString(	r.GetValue(r.GetOrdinal("szoveg"	)));
+				vv.osszeg =						checkvalueInt(		r.GetValue(r.GetOrdinal("osszeg"	)));
+				vv.tipus =						checkvalueString(	r.GetValue(r.GetOrdinal("tipus"		)));
 
 				_v.Add(vv);
 			}
@@ -221,10 +253,10 @@ namespace CaritasManager
 
 			if (r.Read())
 			{
-
-				cad.cust_2_lakas = (enums.lakás)r.GetInt32(r.GetOrdinal("lakas"));
-				cad.cust_3_alt_szoc_helyzet = (enums.általános_szociális_helyzet)r.GetInt32(r.GetOrdinal("altalanos_szoc_helyzet"));
-				cad.cust_4_rendsz_seg_szorul = (enums.rendszeres_segítségre_szorul)r.GetInt32(r.GetOrdinal("rendszeres_segitsegre_szorul"));
+				
+				cad.cust_2_lakas =				(enums.lakás)							checkvalueInt(r.GetValue(r.GetOrdinal("lakas"						)));
+				cad.cust_3_alt_szoc_helyzet =	(enums.általános_szociális_helyzet)		checkvalueInt(r.GetValue(r.GetOrdinal("altalanos_szoc_helyzet"		)));
+				cad.cust_4_rendsz_seg_szorul =	(enums.rendszeres_segítségre_szorul)	checkvalueInt(r.GetValue(r.GetOrdinal("rendszeres_segitsegre_szorul")));
 
 			}
 			r.Close();
@@ -239,9 +271,10 @@ namespace CaritasManager
 			{
 				rokon rr = new rokon();
 
-				rr.nev = r.GetString(r.GetOrdinal("nev")) ?? "";
-				rr.kapcsolat = (enums.rokoni_kapcsolat)r.GetInt32(r.GetOrdinal("rokoni_kapcsolat"));
-				rr.havi_jovedelem = r.GetInt32(r.GetOrdinal("havi_jovedelem"));
+				rr.id =												checkvalueInt(r.GetValue(r.GetOrdinal("id"					)));
+				rr.nev =											checkvalueString(r.GetValue(r.GetOrdinal("nev"				)));
+				rr.kapcsolat =		(enums.rokoni_kapcsolat)		checkvalueInt(r.GetValue(r.GetOrdinal("rokoni_kapcsolat"	)));
+				rr.havi_jovedelem =									checkvalueInt(r.GetValue(r.GetOrdinal("havi_jovedelem"		)));
 
 				_r.Add(rr);
 			}
@@ -260,20 +293,131 @@ namespace CaritasManager
 			{
 				tamogatas tt = new tamogatas();
 
-				tt.datum =					Convert.ToDateTime(checkDate(r.GetString(r.GetOrdinal("datum"))		?? ""));
-				tt.tamogatas_tipusa =		r.GetString(r.GetOrdinal("tamogatas"))								?? "";
-				tt.tamogatas_mennyisege =	r.GetString(r.GetOrdinal("tamogatas_mennyisege"))					?? "0";
-				tt.tamogatas_egysége =		r.GetString(r.GetOrdinal("tamogatas_egysége"))						?? "";
-				tt.megjegyzes =				r.GetString(r.GetOrdinal("megjegyzes"))								?? "";
+				tt.id =						checkvalueInt(r.GetValue(r.GetOrdinal("id"										)));
+				tt.datum =					Convert.ToDateTime(checkDate(checkvalueString(r.GetValue(r.GetOrdinal("datum"	)))));
+				tt.tamogatas_tipusa =		checkvalueString(r.GetValue(r.GetOrdinal("tamogatas"							)));
+				tt.tamogatas_mennyisege =	checkvalueString(r.GetValue(r.GetOrdinal("tamogatas_mennyisege"					)));
+				tt.tamogatas_egysége =		checkvalueString(r.GetValue(r.GetOrdinal("tamogatas_egysége"					)));
+				tt.megjegyzes =				checkvalueString(r.GetValue(r.GetOrdinal("megjegyzes"							)));
 
-				t.Add(tt);
+				_t.Add(tt);
 			}
 
-			cad.cust_6_tamogatasok = t;
+			cad.cust_6_tamogatasok = _t;
 
 
 			return cad;
 		}
+
+		public static void addNewCustomerAllData(SQLiteConnection sqlc, customerAllData cad)
+		{
+			if (!connectioinOpen(sqlc)) { return; }
+
+			mainData md = cad.cust_0_mainData;
+
+			string command = string.Format(
+				"INSERT INTO ugyfel " +
+				" ( " +
+					"nev, születesi_nev, szig_szam, lakcim_varos, " +
+					"lakcim_uh, szul_datum, szul_hely, csaladi_allapot, " +
+					"anyja_neve,  vegzettseg, foglalkozas, szakkepzettseg, " +
+					"munkaltato, azonosito, utolso_tamogatas_idopontja, jovedelem_igazolas, " +
+					"elhunyt, allapot, vallas, környezettanulmanyt_végezte, " +
+					"környezettanulmany_idopontja, hozzaadas_datuma, felvevo_profil, " +
+					"legutobb_modositotta, legutobbi_modositas_datuma" +
+				" ) " +
+				"VALUES " +
+				" (" +
+					"'{0}',  " +
+					"'{1}',  " +
+					"'{2}',  " +
+					"'{3}',  " +
+					"'{4}',  " +
+					"'{5}',  " +
+					"'{6}',  " +
+					"{7},    " +
+					"'{8}',  " +
+					"'{9}',  " +
+					"'{10}', " +
+					"'{11}', " +
+					"'{12}', " +
+					"'{13}', " +
+					"'{14}', " +
+					"'{15}', " +
+					"'{16}', " +
+					"'{17}', " +
+					"'{18}', " +
+					"'{19}', " +
+					"'{20}', " +
+					"'{21}', " +
+					"'{22}', " +
+					"'{23}', " +
+					"'{24}'  " +
+				");",
+					md.nev,
+					md.születesi_nev,
+					md.szig_szam,
+					md.lakcim_varos,
+					md.lakcim_uh,
+					md.szul_datum,
+					md.szul_hely,
+					md.csaladi_allapot,
+					md.anyja_neve,
+					md.vegzettseg,
+					md.foglalkozas,
+					md.szakkepzettseg,
+					md.munkaltato,
+					md.azonosito,
+					md.utolso_tamogatas_idopontja,
+					md.jovedelem_igazolas,
+					md.elhunyt,
+					md.allapot,
+					md.vallas,
+					md.környezettanulmanyt_végezte,
+					md.környezettanulmany_idopontja,
+					md.hozzaadas_datuma,
+					md.felvevo_profil,
+					md.legutobb_modositotta,
+					md.legutobbi_modositas_datuma
+				);
+
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
+			executeNonQuery(sqlk);
+
+			int custid = 0;
+
+			command = "select last_insert_rowid();";
+
+			sqlk = new SQLiteCommand(command, sqlc);
+
+			if (int.TryParse(sqlk.ExecuteScalar().ToString(), out custid))
+			{
+				foreach (vagyon v in cad.cust_1_vagyon)
+				{
+					command = string.Format("INSERT INTO vagyon (ugyfel_id,osszeg,szoveg,tipus) VALUES ({0},{1},'{2}','{3}')", custid, v.osszeg, v.szoveg, v.tipus);
+					sqlk.CommandText = command;
+					executeNonQuery(sqlk);
+				}
+
+				command = string.Format("INSERT INTO szoc_helyzet (ugyfel_id,lakas,altalanos_szoc_helyzet,rendszeres_segitsegre_szorul) VALUES ({0}, {1}, {2}, {3})", custid, (int)cad.cust_2_lakas, (int)cad.cust_3_alt_szoc_helyzet, (int)cad.cust_4_rendsz_seg_szorul);
+				sqlk.CommandText = command;
+				executeNonQuery(sqlk);
+
+				foreach (rokon r in cad.cust_5_rokonok)
+				{
+					command = string.Format("INSERT INTO haztartasban_elok (ugyfel_id,nev,rokoni_kapcsolat,havi_jovedelem) VALUES ({0},'{1}',{2},{3})", custid, r.nev, (int)r.kapcsolat, r.havi_jovedelem);
+					sqlk.CommandText = command;
+					executeNonQuery(sqlk);
+				}
+			}
+			else
+			{
+				throw new Exception("Nem megy...");
+			}
+
+
+		}
+
 
 		#endregion
 
@@ -878,7 +1022,7 @@ namespace CaritasManager
 					}
 					else
 					{
-
+						year = 1; month = 1; day = 1;
 					}
 
 					DateTime correct = new DateTime(year, month, day);

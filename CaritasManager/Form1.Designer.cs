@@ -116,6 +116,7 @@
 			this.btn_DatabaseBackup.Name = "btn_DatabaseBackup";
 			this.btn_DatabaseBackup.Size = new System.Drawing.Size(210, 47);
 			this.btn_DatabaseBackup.Text = "Biztonsági Mentés";
+			this.btn_DatabaseBackup.Click += new System.EventHandler(this.btn_DatabaseBackup_Click);
 			// 
 			// toolStripButton1
 			// 
