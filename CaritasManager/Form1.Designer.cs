@@ -41,7 +41,6 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.lbl_NumOfCustomers = new System.Windows.Forms.ToolStripStatusLabel();
 			this.lbl_LoggedInAs = new System.Windows.Forms.ToolStripStatusLabel();
-			this.panel1 = new System.Windows.Forms.Panel();
 			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
 			this.dg_DataTable = new CaritasManager.myDataGridView();
 			this.ch_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,9 +51,21 @@
 			this.ch_DateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.label1 = new System.Windows.Forms.Label();
+			this.tb_Filter_Name = new System.Windows.Forms.TextBox();
+			this.btn_Filter = new System.Windows.Forms.Button();
+			this.cb_FullMatch = new System.Windows.Forms.CheckBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.tb_Filter_City = new System.Windows.Forms.TextBox();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.btn_ClearFilter = new System.Windows.Forms.Button();
+			this.label3 = new System.Windows.Forms.Label();
+			this.cb_Filter_State = new System.Windows.Forms.ComboBox();
 			this.ts_Tools.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// ts_Tools
@@ -72,7 +83,7 @@
 			this.ts_Tools.Location = new System.Drawing.Point(0, 0);
 			this.ts_Tools.Name = "ts_Tools";
 			this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.ts_Tools.Size = new System.Drawing.Size(1049, 50);
+			this.ts_Tools.Size = new System.Drawing.Size(902, 50);
 			this.ts_Tools.TabIndex = 0;
 			this.ts_Tools.Text = "toolStrip1";
 			// 
@@ -139,14 +150,14 @@
             this.lbl_LoggedInAs});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 477);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(1049, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(902, 22);
 			this.statusStrip1.TabIndex = 4;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
 			// lbl_NumOfCustomers
 			// 
 			this.lbl_NumOfCustomers.Name = "lbl_NumOfCustomers";
-			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(955, 17);
+			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(808, 17);
 			this.lbl_NumOfCustomers.Spring = true;
 			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
 			this.lbl_NumOfCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -156,14 +167,6 @@
 			this.lbl_LoggedInAs.Name = "lbl_LoggedInAs";
 			this.lbl_LoggedInAs.Size = new System.Drawing.Size(79, 17);
 			this.lbl_LoggedInAs.Text = "Belépve mint:";
-			// 
-			// panel1
-			// 
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel1.Location = new System.Drawing.Point(0, 380);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(1049, 97);
-			this.panel1.TabIndex = 5;
 			// 
 			// tt_Tooltip
 			// 
@@ -211,7 +214,7 @@
 			this.dg_DataTable.RowHeadersVisible = false;
 			this.dg_DataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dg_DataTable.ShowEditingIcon = false;
-			this.dg_DataTable.Size = new System.Drawing.Size(1049, 330);
+			this.dg_DataTable.Size = new System.Drawing.Size(902, 389);
 			this.dg_DataTable.TabIndex = 6;
 			this.dg_DataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellContentClick);
 			this.dg_DataTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
@@ -271,11 +274,137 @@
 			this.ch_AddSupport.Name = "ch_AddSupport";
 			this.ch_AddSupport.ReadOnly = true;
 			// 
+			// toolTip1
+			// 
+			this.toolTip1.AutoPopDelay = 20000;
+			this.toolTip1.InitialDelay = 500;
+			this.toolTip1.ReshowDelay = 100;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.label1.Location = new System.Drawing.Point(12, 12);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(38, 13);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Név: ";
+			// 
+			// tb_Filter_Name
+			// 
+			this.tb_Filter_Name.Location = new System.Drawing.Point(51, 9);
+			this.tb_Filter_Name.Name = "tb_Filter_Name";
+			this.tb_Filter_Name.Size = new System.Drawing.Size(134, 20);
+			this.tb_Filter_Name.TabIndex = 1;
+			// 
+			// btn_Filter
+			// 
+			this.btn_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Filter.Location = new System.Drawing.Point(822, 7);
+			this.btn_Filter.Name = "btn_Filter";
+			this.btn_Filter.Size = new System.Drawing.Size(75, 23);
+			this.btn_Filter.TabIndex = 2;
+			this.btn_Filter.Text = "Szűrés";
+			this.btn_Filter.UseVisualStyleBackColor = true;
+			this.btn_Filter.Click += new System.EventHandler(this.btn_Filter_Click);
+			// 
+			// cb_FullMatch
+			// 
+			this.cb_FullMatch.AutoSize = true;
+			this.cb_FullMatch.Location = new System.Drawing.Point(191, 11);
+			this.cb_FullMatch.Name = "cb_FullMatch";
+			this.cb_FullMatch.Size = new System.Drawing.Size(118, 17);
+			this.cb_FullMatch.TabIndex = 3;
+			this.cb_FullMatch.Text = "csak teljes egyezés";
+			this.toolTip1.SetToolTip(this.cb_FullMatch, "Csak azokat a találatokat jelenítse meg ahol a találat teljesen egyezik a beírt s" +
+        "zöveggel.");
+			this.cb_FullMatch.UseVisualStyleBackColor = true;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.label2.Location = new System.Drawing.Point(315, 12);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(59, 13);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "Lakhely: ";
+			// 
+			// tb_Filter_City
+			// 
+			this.tb_Filter_City.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.tb_Filter_City.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+			this.tb_Filter_City.Location = new System.Drawing.Point(371, 9);
+			this.tb_Filter_City.Name = "tb_Filter_City";
+			this.tb_Filter_City.Size = new System.Drawing.Size(154, 20);
+			this.tb_Filter_City.TabIndex = 5;
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.cb_Filter_State);
+			this.panel1.Controls.Add(this.label3);
+			this.panel1.Controls.Add(this.btn_ClearFilter);
+			this.panel1.Controls.Add(this.tb_Filter_City);
+			this.panel1.Controls.Add(this.label2);
+			this.panel1.Controls.Add(this.cb_FullMatch);
+			this.panel1.Controls.Add(this.btn_Filter);
+			this.panel1.Controls.Add(this.tb_Filter_Name);
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel1.Location = new System.Drawing.Point(0, 439);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(902, 38);
+			this.panel1.TabIndex = 5;
+			// 
+			// btn_ClearFilter
+			// 
+			this.btn_ClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_ClearFilter.Location = new System.Drawing.Point(725, 7);
+			this.btn_ClearFilter.Name = "btn_ClearFilter";
+			this.btn_ClearFilter.Size = new System.Drawing.Size(91, 23);
+			this.btn_ClearFilter.TabIndex = 6;
+			this.btn_ClearFilter.Text = "Szűrő törlése";
+			this.btn_ClearFilter.UseVisualStyleBackColor = true;
+			this.btn_ClearFilter.Click += new System.EventHandler(this.btn_ClearFilter_Click);
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.label3.Location = new System.Drawing.Point(531, 12);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(54, 13);
+			this.label3.TabIndex = 7;
+			this.label3.Text = "Állapot: ";
+			// 
+			// cb_Filter_State
+			// 
+			this.cb_Filter_State.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+			this.cb_Filter_State.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+			this.cb_Filter_State.FormattingEnabled = true;
+			this.cb_Filter_State.Items.AddRange(new object[] {
+            "Elköltözött",
+            "Gyermekgondozási segély",
+            "Hajléktalan",
+            "Hátrányos helyzetű",
+            "Háztartásbeli",
+            "Munkanélküli",
+            "Nagycsaládos",
+            "Nyugdíjas",
+            "Rokkant Nyugdíjas",
+            "RÉV által felvéve",
+            "Családsegítő által felvéve",
+            "Ritkán jár"});
+			this.cb_Filter_State.Location = new System.Drawing.Point(582, 9);
+			this.cb_Filter_State.Name = "cb_Filter_State";
+			this.cb_Filter_State.Size = new System.Drawing.Size(121, 21);
+			this.cb_Filter_State.TabIndex = 8;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1049, 499);
+			this.ClientSize = new System.Drawing.Size(902, 499);
 			this.Controls.Add(this.tt_Tooltip);
 			this.Controls.Add(this.dg_DataTable);
 			this.Controls.Add(this.panel1);
@@ -288,6 +417,8 @@
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -304,7 +435,6 @@
 		private System.Windows.Forms.ToolStripButton btn_Exit;
 		private System.Windows.Forms.ToolStripButton btn_DatabaseBackup;
 		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_CustomerName;
 		private System.Windows.Forms.DataGridViewImageColumn ch_jovedelemig;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_ID;
@@ -316,6 +446,17 @@
 		private System.Windows.Forms.ToolStripStatusLabel lbl_NumOfCustomers;
 		private System.Windows.Forms.ToolStripStatusLabel lbl_LoggedInAs;
 		private myDataGridView dg_DataTable;
+		private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.TextBox tb_Filter_Name;
+		private System.Windows.Forms.Button btn_Filter;
+		private System.Windows.Forms.CheckBox cb_FullMatch;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.TextBox tb_Filter_City;
+		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Button btn_ClearFilter;
+		private System.Windows.Forms.ComboBox cb_Filter_State;
+		private System.Windows.Forms.Label label3;
 	}
 }
 

@@ -89,11 +89,11 @@ namespace CaritasManager
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
 		/// <returns>List containing every row in c_MainDataRow objects</returns>
-		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc)
+		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc, string where)
 		{
 			if (!connectioinOpen(sqlc)) { return null; }
 			
-			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel";
+			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel " + where;
 
 			List<c_MainDataRow> lst = new List<c_MainDataRow>();
 			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);

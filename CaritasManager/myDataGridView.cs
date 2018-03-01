@@ -59,13 +59,25 @@ namespace CaritasManager
 
 				DateTime ls = Convert.ToDateTime(date);
 				DateTime n = DateTime.Now;
-				int lasts = (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - ls).TotalDays);
-				c = lasts <= 28 ? Color.LightGreen : (lasts <= 365 ? Color.Orange : Color.LightPink);
+				int lasts = 0;
+
+				if ((ls as DateTime?) == null)
+				{
+					lasts = 1;
+				}
+				else
+				{
+					if (ls.Year == DateTime.Now.Year && ls.Month == DateTime.Now.Month) { lasts = 0; }
+					else if ((n - ls).TotalDays >= 365) { lasts = 2; }
+					else { lasts = 1; }
+				}
+
+				c = lasts == 0 ? colors[0] : (lasts == 1 ? colors[1] : colors[2]);
 
 				Rectangle rec = GetRowDisplayRectangle(selectedRow, false);
 
-				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left , rec.Top -1, rec.Width - 2, rec.Height - 2));
-				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left + 1, rec.Top , rec.Width - 2, rec.Height - 2));
+				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5 , rec.Top -1, rec.Width + 20, rec.Height - 2));
+				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5, rec.Top , rec.Width + 20, rec.Height - 2));
 
 				foreach(DataGridViewCell cel in Rows[selectedRow].Cells)
 				{

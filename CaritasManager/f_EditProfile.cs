@@ -39,7 +39,7 @@ namespace CaritasManager
 				fontSize = prof.fontSize;
 				fontStyle = prof.fontStyle;
 				fontColor = prof.fontColor;
-				color_2 = prof.color_1;
+				color_1 = prof.color_1;
 				color_2 = prof.color_2;
 				color_3 = prof.color_3;
 				
@@ -72,7 +72,7 @@ namespace CaritasManager
 			{
 				fontFamily = fd.Font.FontFamily.Name;
 				fontSize = fd.Font.Size.ToString();
-				fontStyle = fd.Font.Style.ToString();
+				fontStyle = ((int)fd.Font.Style).ToString();
 			}
 		}
 
