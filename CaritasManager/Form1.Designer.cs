@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ts_Tools = new System.Windows.Forms.ToolStrip();
 			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
@@ -52,16 +51,16 @@
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.cb_FullMatch = new System.Windows.Forms.CheckBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tb_Filter_Name = new System.Windows.Forms.TextBox();
 			this.btn_Filter = new System.Windows.Forms.Button();
-			this.cb_FullMatch = new System.Windows.Forms.CheckBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.tb_Filter_City = new System.Windows.Forms.TextBox();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.btn_ClearFilter = new System.Windows.Forms.Button();
-			this.label3 = new System.Windows.Forms.Label();
 			this.cb_Filter_State = new System.Windows.Forms.ComboBox();
+			this.label3 = new System.Windows.Forms.Label();
+			this.btn_ClearFilter = new System.Windows.Forms.Button();
 			this.ts_Tools.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dg_DataTable)).BeginInit();
@@ -90,7 +89,7 @@
 			// btn_NewCustomer
 			// 
 			this.btn_NewCustomer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btn_NewCustomer.Image = ((System.Drawing.Image)(resources.GetObject("btn_NewCustomer.Image")));
+			this.btn_NewCustomer.Image = global::CaritasManager.Properties.Resources.addusr;
 			this.btn_NewCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btn_NewCustomer.Name = "btn_NewCustomer";
 			this.btn_NewCustomer.Size = new System.Drawing.Size(133, 47);
@@ -101,7 +100,7 @@
 			// 
 			this.btn_Exit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.btn_Exit.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_Exit.Image = ((System.Drawing.Image)(resources.GetObject("btn_Exit.Image")));
+			this.btn_Exit.Image = global::CaritasManager.Properties.Resources.power;
 			this.btn_Exit.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btn_Exit.Name = "btn_Exit";
 			this.btn_Exit.Size = new System.Drawing.Size(116, 47);
@@ -112,7 +111,7 @@
 			// 
 			this.btn_Settings.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.btn_Settings.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_Settings.Image = ((System.Drawing.Image)(resources.GetObject("btn_Settings.Image")));
+			this.btn_Settings.Image = global::CaritasManager.Properties.Resources.settings;
 			this.btn_Settings.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btn_Settings.Name = "btn_Settings";
 			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
@@ -122,7 +121,7 @@
 			// 
 			this.btn_DatabaseBackup.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.btn_DatabaseBackup.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.btn_DatabaseBackup.Image = ((System.Drawing.Image)(resources.GetObject("btn_DatabaseBackup.Image")));
+			this.btn_DatabaseBackup.Image = global::CaritasManager.Properties.Resources.save;
 			this.btn_DatabaseBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btn_DatabaseBackup.Name = "btn_DatabaseBackup";
 			this.btn_DatabaseBackup.Size = new System.Drawing.Size(210, 47);
@@ -132,7 +131,7 @@
 			// toolStripButton1
 			// 
 			this.toolStripButton1.Font = new System.Drawing.Font("Segoe UI", 14.25F);
-			this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+			this.toolStripButton1.Image = global::CaritasManager.Properties.Resources.edit;
 			this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButton1.Name = "toolStripButton1";
 			this.toolStripButton1.Size = new System.Drawing.Size(232, 47);
@@ -280,6 +279,18 @@
 			this.toolTip1.InitialDelay = 500;
 			this.toolTip1.ReshowDelay = 100;
 			// 
+			// cb_FullMatch
+			// 
+			this.cb_FullMatch.AutoSize = true;
+			this.cb_FullMatch.Location = new System.Drawing.Point(191, 11);
+			this.cb_FullMatch.Name = "cb_FullMatch";
+			this.cb_FullMatch.Size = new System.Drawing.Size(118, 17);
+			this.cb_FullMatch.TabIndex = 3;
+			this.cb_FullMatch.Text = "csak teljes egyezés";
+			this.toolTip1.SetToolTip(this.cb_FullMatch, "Csak azokat a találatokat jelenítse meg ahol a találat teljesen egyezik a beírt s" +
+        "zöveggel.");
+			this.cb_FullMatch.UseVisualStyleBackColor = true;
+			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
@@ -307,18 +318,6 @@
 			this.btn_Filter.Text = "Szűrés";
 			this.btn_Filter.UseVisualStyleBackColor = true;
 			this.btn_Filter.Click += new System.EventHandler(this.btn_Filter_Click);
-			// 
-			// cb_FullMatch
-			// 
-			this.cb_FullMatch.AutoSize = true;
-			this.cb_FullMatch.Location = new System.Drawing.Point(191, 11);
-			this.cb_FullMatch.Name = "cb_FullMatch";
-			this.cb_FullMatch.Size = new System.Drawing.Size(118, 17);
-			this.cb_FullMatch.TabIndex = 3;
-			this.cb_FullMatch.Text = "csak teljes egyezés";
-			this.toolTip1.SetToolTip(this.cb_FullMatch, "Csak azokat a találatokat jelenítse meg ahol a találat teljesen egyezik a beírt s" +
-        "zöveggel.");
-			this.cb_FullMatch.UseVisualStyleBackColor = true;
 			// 
 			// label2
 			// 
@@ -356,27 +355,6 @@
 			this.panel1.Size = new System.Drawing.Size(902, 38);
 			this.panel1.TabIndex = 5;
 			// 
-			// btn_ClearFilter
-			// 
-			this.btn_ClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_ClearFilter.Location = new System.Drawing.Point(725, 7);
-			this.btn_ClearFilter.Name = "btn_ClearFilter";
-			this.btn_ClearFilter.Size = new System.Drawing.Size(91, 23);
-			this.btn_ClearFilter.TabIndex = 6;
-			this.btn_ClearFilter.Text = "Szűrő törlése";
-			this.btn_ClearFilter.UseVisualStyleBackColor = true;
-			this.btn_ClearFilter.Click += new System.EventHandler(this.btn_ClearFilter_Click);
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label3.Location = new System.Drawing.Point(531, 12);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(54, 13);
-			this.label3.TabIndex = 7;
-			this.label3.Text = "Állapot: ";
-			// 
 			// cb_Filter_State
 			// 
 			this.cb_Filter_State.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
@@ -399,6 +377,27 @@
 			this.cb_Filter_State.Name = "cb_Filter_State";
 			this.cb_Filter_State.Size = new System.Drawing.Size(121, 21);
 			this.cb_Filter_State.TabIndex = 8;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.label3.Location = new System.Drawing.Point(531, 12);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(54, 13);
+			this.label3.TabIndex = 7;
+			this.label3.Text = "Állapot: ";
+			// 
+			// btn_ClearFilter
+			// 
+			this.btn_ClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_ClearFilter.Location = new System.Drawing.Point(725, 7);
+			this.btn_ClearFilter.Name = "btn_ClearFilter";
+			this.btn_ClearFilter.Size = new System.Drawing.Size(91, 23);
+			this.btn_ClearFilter.TabIndex = 6;
+			this.btn_ClearFilter.Text = "Szűrő törlése";
+			this.btn_ClearFilter.UseVisualStyleBackColor = true;
+			this.btn_ClearFilter.Click += new System.EventHandler(this.btn_ClearFilter_Click);
 			// 
 			// Form1
 			// 
