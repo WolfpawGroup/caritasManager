@@ -237,6 +237,15 @@ namespace CaritasManager
 			fad.login_profile = login_profile;
 			fad.sqlc = sqlc;
 			fad.ShowDialog();
+			if (fad.OK)
+			{
+				fad = new f_AddCustomer();
+				fad.login_profile = login_profile;
+				fad.sqlc = sqlc;
+				fad.edit = true;
+				fad.customer_id = c_DBHandler.getLastInsertRowId(sqlc);
+				fad.ShowDialog();
+			}
 		}
 
 		int selectedrow = 0;

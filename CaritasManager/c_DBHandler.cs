@@ -309,6 +309,19 @@ namespace CaritasManager
 			return cad;
 		}
 
+		public static int getLastInsertRowId(SQLiteConnection sqlc)
+		{
+			string command = "select last_insert_rowid();";
+
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
+
+			int i = -1;
+
+			if(int.TryParse(sqlk.ExecuteScalar().ToString(), out i)) { } else { i = -1; }
+
+			return i;
+		}
+
 		public static void addNewCustomerAllData(SQLiteConnection sqlc, customerAllData cad)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
@@ -386,11 +399,9 @@ namespace CaritasManager
 
 			int custid = 0;
 
-			command = "select last_insert_rowid();";
+			custid = getLastInsertRowId(sqlc);
 
-			sqlk = new SQLiteCommand(command, sqlc);
-
-			if (int.TryParse(sqlk.ExecuteScalar().ToString(), out custid))
+			if (custid > 0)
 			{
 				foreach (vagyon v in cad.cust_1_vagyon)
 				{

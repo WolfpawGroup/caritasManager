@@ -21,6 +21,7 @@ namespace CaritasManager
 		public bool edit { get; set; }
 		public bool otherReligion = false;
 		public string current_id = "";
+		public bool OK = false;
 
 		public List<string> States { get; set; }
 
@@ -47,6 +48,8 @@ namespace CaritasManager
 			customerAllData cad = c_DBHandler.getCustomerAllData(sqlc, customer_id);
 
 			mainData m = cad.cust_0_mainData;
+
+			Text = "Adatlap Szerkesztése - " + m.nev;
 
 			//------------- Személyes Adatok
 
@@ -240,11 +243,15 @@ namespace CaritasManager
 
 			if (edit)
 			{
-				Text = "Adatlap Szerkesztése";
+				lbl_HelpText.Hide();
 				loadData();
+				
 			}
 			else
 			{
+				tc_Tabs.TabPages.Remove(tp_AIDS);
+				tc_Tabs.TabPages.Remove(tp_MoneyData);
+				tc_Tabs.TabPages.Remove(tp_SocialData);
 				States = new List<string>();
 				lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
 			}
@@ -398,6 +405,7 @@ namespace CaritasManager
 			if (edit)
 			{
 				//TODO: módosítást létrehozni
+				this.Close();
 			}
 			else
 			{
@@ -438,7 +446,8 @@ namespace CaritasManager
 				m.legutobbi_modositas_datuma = "";
 				m.környezettanulmanyt_végezte = tb_StudyBy.Text;
 				m.környezettanulmany_idopontja = tb_StudyOn.Text;
-				
+
+				/*
 				foreach (ListViewItem lvi in lv_CustomerIncome.Items)
 				{
 					vagyon v = new vagyon();
@@ -478,12 +487,18 @@ namespace CaritasManager
 					r.havi_jovedelem = jovedelem;
 					lst_r.Add(r);
 				}
+				*/
 
 				cad.cust_0_mainData = m;
 				cad.cust_1_vagyon = lst_v;
 				cad.cust_5_rokonok = lst_r;
 
 				c_DBHandler.addNewCustomerAllData(sqlc, cad);
+
+				customer_id = m.id;
+				OK = true;
+
+				this.Close();
 			}
 		}
 	}
