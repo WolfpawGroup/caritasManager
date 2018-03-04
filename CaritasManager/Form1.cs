@@ -425,5 +425,21 @@ namespace CaritasManager
 		{
 
 		}
+
+		private void btn_Settings_Click(object sender, EventArgs e)
+		{
+			f_Settings fs = new f_Settings();
+			fs.sqlc = sqlc;
+			fs.prof = login_profile;
+			fs.ShowDialog();
+			foreach(profile p in c_DBHandler.getProfiles(sqlc))
+			{
+				if(p.name == login_profile.name) { login_profile = p; }
+			}
+
+			dg_DataTable.colors = new Color[] { Color.FromArgb(Convert.ToInt32(login_profile.color_1)), Color.FromArgb(Convert.ToInt32(login_profile.color_2)), Color.FromArgb(Convert.ToInt32(login_profile.color_3)) };
+
+			fillMainList();
+		}
 	}
 }

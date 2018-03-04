@@ -1439,7 +1439,7 @@ namespace CaritasManager
 			ret = sqlk.ExecuteScalar() == null ? false : true;
 
 			//Updateljük a last login-t a profilon
-			if (ret)
+			if (ret && prof != null)
 			{
 				sqlk = new SQLiteCommand("UPDATE profilok SET last_login='" + DateTime.Now.ToShortDateString() + "' WHERE lower(profil_name) = '" + prof.name.ToLower() + "';", sqlc);
 				executeNonQuery(sqlk);

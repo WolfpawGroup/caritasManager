@@ -33,6 +33,11 @@ namespace CaritasManager
 				btn_Cancel.Enabled = false;
 				label1.Enabled = false;
 			}
+			else
+			{
+				tb_OldPassWord.Select();
+
+			}
 		}
 
 		private void btn_Cancel_Click(object sender, EventArgs e)
@@ -51,6 +56,13 @@ namespace CaritasManager
 			if (empty)
 			{
 				if (tb_NewPassWord.Text.Length > 0)
+				{
+					c_DBHandler.editPassword(sqlc, tb_NewPassWord.Text);
+				}
+			}
+			else
+			{
+				if(c_DBHandler.login(sqlc, tb_OldPassWord.Text, null) && tb_NewPassWord.Text.Length > 0)
 				{
 					c_DBHandler.editPassword(sqlc, tb_NewPassWord.Text);
 				}

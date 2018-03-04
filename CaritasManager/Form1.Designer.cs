@@ -116,6 +116,7 @@
 			this.btn_Settings.Name = "btn_Settings";
 			this.btn_Settings.Size = new System.Drawing.Size(146, 47);
 			this.btn_Settings.Text = "Beállítások";
+			this.btn_Settings.Click += new System.EventHandler(this.btn_Settings_Click);
 			// 
 			// btn_DatabaseBackup
 			// 

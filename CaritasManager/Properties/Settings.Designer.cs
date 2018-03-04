@@ -34,5 +34,65 @@ namespace CaritasManager.Properties {
                 this["s_BackupLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string s_BackupWithDate {
+            get {
+                return ((string)(this["s_BackupWithDate"]));
+            }
+            set {
+                this["s_BackupWithDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string s_AutoBackup {
+            get {
+                return ((string)(this["s_AutoBackup"]));
+            }
+            set {
+                this["s_AutoBackup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string s_AutoBackupTime {
+            get {
+                return ((string)(this["s_AutoBackupTime"]));
+            }
+            set {
+                this["s_AutoBackupTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string s_CanSeeDeceased {
+            get {
+                return ((string)(this["s_CanSeeDeceased"]));
+            }
+            set {
+                this["s_CanSeeDeceased"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string s_ColorImages {
+            get {
+                return ((string)(this["s_ColorImages"]));
+            }
+            set {
+                this["s_ColorImages"] = value;
+            }
+        }
     }
 }

@@ -62,6 +62,7 @@
 			this.btn_Cancel.Name = "btn_Cancel";
 			this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
 			this.btn_Cancel.TabIndex = 2;
+			this.btn_Cancel.TabStop = false;
 			this.btn_Cancel.Text = "Mégse";
 			this.btn_Cancel.UseVisualStyleBackColor = true;
 			this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
@@ -73,6 +74,7 @@
 			this.btn_SetPassword.Name = "btn_SetPassword";
 			this.btn_SetPassword.Size = new System.Drawing.Size(75, 23);
 			this.btn_SetPassword.TabIndex = 3;
+			this.btn_SetPassword.TabStop = false;
 			this.btn_SetPassword.Text = "Beállítás";
 			this.btn_SetPassword.UseVisualStyleBackColor = true;
 			this.btn_SetPassword.Click += new System.EventHandler(this.btn_SetPassword_Click);
@@ -86,6 +88,7 @@
 			this.btn_AllSeeingEye_Old.Name = "btn_AllSeeingEye_Old";
 			this.btn_AllSeeingEye_Old.Size = new System.Drawing.Size(32, 26);
 			this.btn_AllSeeingEye_Old.TabIndex = 8;
+			this.btn_AllSeeingEye_Old.TabStop = false;
 			this.btn_AllSeeingEye_Old.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye_Old.Click += new System.EventHandler(this.btn_AllSeeingEye_Old_Click);
 			this.btn_AllSeeingEye_Old.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
@@ -97,7 +100,7 @@
 			this.tb_OldPassWord.Name = "tb_OldPassWord";
 			this.tb_OldPassWord.PasswordChar = '•';
 			this.tb_OldPassWord.Size = new System.Drawing.Size(259, 24);
-			this.tb_OldPassWord.TabIndex = 9;
+			this.tb_OldPassWord.TabIndex = 0;
 			this.tb_OldPassWord.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// tb_NewPassWord
@@ -107,7 +110,7 @@
 			this.tb_NewPassWord.Name = "tb_NewPassWord";
 			this.tb_NewPassWord.PasswordChar = '•';
 			this.tb_NewPassWord.Size = new System.Drawing.Size(259, 24);
-			this.tb_NewPassWord.TabIndex = 11;
+			this.tb_NewPassWord.TabIndex = 1;
 			this.tb_NewPassWord.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);
 			// 
 			// btn_AllSeeingEye_New
@@ -118,6 +121,7 @@
 			this.btn_AllSeeingEye_New.Name = "btn_AllSeeingEye_New";
 			this.btn_AllSeeingEye_New.Size = new System.Drawing.Size(32, 26);
 			this.btn_AllSeeingEye_New.TabIndex = 10;
+			this.btn_AllSeeingEye_New.TabStop = false;
 			this.btn_AllSeeingEye_New.UseVisualStyleBackColor = true;
 			this.btn_AllSeeingEye_New.Click += new System.EventHandler(this.btn_AllSeeingEye_New_Click);
 			this.btn_AllSeeingEye_New.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.tb_OldPassWord_PreviewKeyDown);

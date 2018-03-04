@@ -43,6 +43,7 @@
 			this.p_FontColor = new System.Windows.Forms.Panel();
 			this.btn_Cancel = new System.Windows.Forms.Button();
 			this.btn_Save = new System.Windows.Forms.Button();
+			this.btn_FactorySettings = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -187,7 +188,7 @@
 			// 
 			// btn_Cancel
 			// 
-			this.btn_Cancel.Location = new System.Drawing.Point(16, 308);
+			this.btn_Cancel.Location = new System.Drawing.Point(16, 333);
 			this.btn_Cancel.Name = "btn_Cancel";
 			this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
 			this.btn_Cancel.TabIndex = 12;
@@ -197,7 +198,7 @@
 			// 
 			// btn_Save
 			// 
-			this.btn_Save.Location = new System.Drawing.Point(303, 308);
+			this.btn_Save.Location = new System.Drawing.Point(303, 333);
 			this.btn_Save.Name = "btn_Save";
 			this.btn_Save.Size = new System.Drawing.Size(75, 23);
 			this.btn_Save.TabIndex = 13;
@@ -205,11 +206,23 @@
 			this.btn_Save.UseVisualStyleBackColor = true;
 			this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
 			// 
+			// btn_FactorySettings
+			// 
+			this.btn_FactorySettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btn_FactorySettings.Location = new System.Drawing.Point(16, 288);
+			this.btn_FactorySettings.Name = "btn_FactorySettings";
+			this.btn_FactorySettings.Size = new System.Drawing.Size(362, 26);
+			this.btn_FactorySettings.TabIndex = 14;
+			this.btn_FactorySettings.Text = "Alapértelmezett beállítások visszaállítása";
+			this.btn_FactorySettings.UseVisualStyleBackColor = true;
+			this.btn_FactorySettings.Click += new System.EventHandler(this.btn_FactorySettings_Click);
+			// 
 			// f_EditProfile
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(390, 348);
+			this.ClientSize = new System.Drawing.Size(390, 368);
+			this.Controls.Add(this.btn_FactorySettings);
 			this.Controls.Add(this.btn_Save);
 			this.Controls.Add(this.btn_Cancel);
 			this.Controls.Add(this.p_FontColor);
@@ -248,5 +261,6 @@
 		private System.Windows.Forms.Panel p_FontColor;
 		private System.Windows.Forms.Button btn_Cancel;
 		private System.Windows.Forms.Button btn_Save;
+		private System.Windows.Forms.Button btn_FactorySettings;
 	}
 }

@@ -68,6 +68,9 @@ namespace CaritasManager
 		private void btn_SelectFont_Click(object sender, EventArgs e)
 		{
 			FontDialog fd = new FontDialog();
+
+			fd.Font = new Font(fontFamily, (float)Convert.ToDouble(fontSize), (FontStyle)Convert.ToInt32(fontStyle));
+
 			if(fd.ShowDialog() == DialogResult.OK)
 			{
 				fontFamily = fd.Font.FontFamily.Name;
@@ -116,6 +119,11 @@ namespace CaritasManager
 		private void btn_Cancel_Click(object sender, EventArgs e)
 		{
 			this.Close();
+		}
+
+		private void btn_FactorySettings_Click(object sender, EventArgs e)
+		{
+			//TODO: reset settings
 		}
 	}
 }
