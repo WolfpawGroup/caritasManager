@@ -216,6 +216,13 @@ namespace CaritasManager
 			//------------- Támogatások
 
 			List<tamogatas> támogatáslista = cad.cust_6_tamogatasok;
+
+			int num = 0, allnum = 0;
+			List<aidsclass> aids = new List<aidsclass>();
+			List<aidsclass> all_aids = new List<aidsclass>();
+
+			List<string> types = new List<string>();
+
 			foreach (tamogatas _támogatás in támogatáslista)
 			{
 				ListViewItem támogatás_lvi = new ListViewItem();
@@ -226,8 +233,68 @@ namespace CaritasManager
 				támogatás_lvi.SubItems.Add(_támogatás.megjegyzes);
 				lv_Aids.Items.Add(támogatás_lvi);
 
+				allnum++;
+				all_aids.Add(new aidsclass() { type = _támogatás.tamogatas_tipusa, value = _támogatás.tamogatas_mennyisege, denoimination = _támogatás.tamogatas_egysége });
+				if (_támogatás.datum.Year == DateTime.Now.Year)
+				{
+					num++;
+					aids.Add(new aidsclass() { type = _támogatás.tamogatas_tipusa, value = _támogatás.tamogatas_mennyisege, denoimination = _támogatás.tamogatas_egysége });
+				}
+
+				if (!types.Contains(_támogatás.tamogatas_tipusa))
+				{
+					types.Add(_támogatás.tamogatas_tipusa);
+				}
 			}
 
+			lbl_All_Num.Text = allnum + "";
+			lbl_ThisYear_Num.Text = num + "";
+
+			string tmp = "", tmp1 = "";
+
+			foreach (string t in types)
+			{
+				{
+					tmp += t + ": ";
+					int i = 0;
+					string tt = "";
+					foreach (aidsclass a in all_aids)
+					{
+						if (a.type.ToLower() == t.ToLower())
+						{
+							int tmp_i = 0;
+							int.TryParse(a.value, out tmp_i);
+							i += tmp_i;
+							tt = a.denoimination;
+						}
+					}
+
+					tmp += i + tt + "\r\n";
+				}
+
+				{
+					tmp1 += t + ": ";
+					int i = 0;
+					string tt = "";
+					foreach (aidsclass a in all_aids)
+					{
+						if (a.type.ToLower() == t.ToLower())
+						{
+							int tmp_i = 0;
+							int.TryParse(a.value, out tmp_i);
+							i += tmp_i;
+							tt = a.denoimination;
+						}
+					}
+
+					tmp1 += i + tt + "\r\n";
+				}
+
+
+			}
+
+			lbl_All_ValueSum.Text = tmp;
+			lbl_ThisYear_ValueSum.Text = tmp1;
 		}
 
 		private void F_AddCustomer_Load(object sender, EventArgs e)
@@ -501,5 +568,12 @@ namespace CaritasManager
 				this.Close();
 			}
 		}
+	}
+
+	public class aidsclass
+	{
+		public string type { get; set; }
+		public string value { get; set; }
+		public string denoimination { get; set; }
 	}
 }

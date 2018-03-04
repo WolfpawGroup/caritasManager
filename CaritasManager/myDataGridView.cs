@@ -19,6 +19,13 @@ namespace CaritasManager
 		public myDataGridView()
 		{
 			InitializeComponent();
+
+			KeyDown += MyDataGridView_KeyDown;
+		}
+
+		private void MyDataGridView_KeyDown(object sender, KeyEventArgs e)
+		{
+			Invalidate();
 		}
 
 		protected override void OnStyleChanged(EventArgs e)
@@ -55,7 +62,7 @@ namespace CaritasManager
 
 				string date = this[6, selectedRow].Value.ToString();
 
-				if(date == "") { date = (DateTime.Now - new TimeSpan(30, 0, 0, 0, 0)).ToShortDateString(); }
+				if (date == "") { date = (DateTime.Now - new TimeSpan(30, 0, 0, 0, 0)).ToShortDateString(); }
 
 				DateTime ls = Convert.ToDateTime(date);
 				DateTime n = DateTime.Now;
@@ -74,23 +81,28 @@ namespace CaritasManager
 
 				c = lasts == 0 ? colors[0] : (lasts == 1 ? colors[1] : colors[2]);
 
-				Rectangle rec = GetRowDisplayRectangle(selectedRow, false);
+				//Rectangle rec = GetRowDisplayRectangle(selectedRow, false);
+				Rectangle rec = GetRowDisplayRectangle(SelectedRows[0].Index, false);
 
-				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5 , rec.Top -1, rec.Width + 20, rec.Height - 2));
-				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5, rec.Top , rec.Width + 20, rec.Height - 2));
+				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5, rec.Top - 1, rec.Width + 20, rec.Height - 2));
+				e.Graphics.DrawRectangle(Pens.Black, new Rectangle(rec.Left - 5, rec.Top, rec.Width + 20, rec.Height - 2));
 
-				foreach(DataGridViewCell cel in Rows[selectedRow].Cells)
+				foreach (DataGridViewCell cel in Rows[selectedRow].Cells)
 				{
 					cel.Style.SelectionBackColor = c;
 				}
 
 				cc = Color.FromArgb(255, c.R > 100 ? c.R - 100 : c.R, c.G > 100 ? c.G - 100 : c.G, c.B > 100 ? c.B - 100 : c.B);
-				
+
+
 
 				//e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(22, Color.Blue)), rec);
-				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(70, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 4),rec.Width,Rows[selectedRow].Height / 5));
-				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 3),rec.Width,Rows[selectedRow].Height / 5));
-				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(30, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 2),rec.Width,Rows[selectedRow].Height / 5));
+
+
+				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(70, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 4), rec.Width, Rows[selectedRow].Height / 5));
+				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(50, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 3), rec.Width, Rows[selectedRow].Height / 5));
+				e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(30, cc)), new Rectangle(rec.Left, rec.Top + (Rows[selectedRow].Height / 5 * 2), rec.Width, Rows[selectedRow].Height / 5));
+
 			}
 			catch
 			{

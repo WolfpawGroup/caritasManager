@@ -218,6 +218,7 @@
 			this.dg_DataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellContentClick);
 			this.dg_DataTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
 			this.dg_DataTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellMouseLeave);
+			this.dg_DataTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_DataTable_ColumnHeaderMouseClick);
 			this.dg_DataTable.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dg_DataTable_RowPostPaint);
 			this.dg_DataTable.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dg_DataTable_KeyDown);
 			// 

@@ -298,6 +298,10 @@ namespace CaritasManager
 			{
 				try
 				{
+					int index = dg_DataTable.SelectedRows[0].Index;
+					int col = dg_DataTable.SortedColumn != null ? dg_DataTable.SortedColumn.Index : 0;
+					//DataGridViewColumnSortMode mod = dg_DataTable.SortedColumn.SortMode;
+
 					f_Aids fa = new f_Aids()
 					{
 						sqlc = sqlc,
@@ -306,6 +310,10 @@ namespace CaritasManager
 					fa.ShowDialog();
 
 					fillMainList();
+
+					//dg_DataTable.Columns[col].SortMode = mod;
+					dg_DataTable.Sort(dg_DataTable.Columns[col], ListSortDirection.Ascending);
+					dg_DataTable.Rows[index].Selected = true;
 				}
 				catch(Exception ex)
 				{
@@ -411,6 +419,11 @@ namespace CaritasManager
 			lbl_NumOfCustomers.Text = "Ügyfelek száma: " + dg_DataTable.Rows.Count;
 
 			
+		}
+
+		private void dg_DataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+		{
+
 		}
 	}
 }
