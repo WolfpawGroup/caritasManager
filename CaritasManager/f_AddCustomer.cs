@@ -133,41 +133,8 @@ namespace CaritasManager
 			}
 
 			//------------- Vagyoni helyzet
-			int bevétel = 0;
-			int kiadás = 0;
 
-			List<vagyon> vagyonlista = cad.cust_1_vagyon;
-			foreach (vagyon v_1 in vagyonlista)
-			{
-				if (v_1.tipus == "M")
-				{
-					tb_Vagyon_Megjegyzés.Text = v_1.szoveg;
-				}
-				else
-				{
-					ListViewItem lvi_1 = new ListViewItem();
-					lvi_1.Tag = v_1.id;
-					lvi_1.SubItems.Add(v_1.szoveg);
-					lvi_1.SubItems.Add(v_1.osszeg + "");
-									
-					if (v_1.tipus == "B")
-					{
-						bevétel += v_1.osszeg;
-						lvi_1.Text = (lv_CustomerIncome.Items.Count + 1) + "";
-						lv_CustomerIncome.Items.Add(lvi_1);
-					}
-					else
-					{
-						kiadás += v_1.osszeg;
-						lvi_1.Text = (lv_CustomerExpenditure.Items.Count + 1) + "";
-						lv_CustomerExpenditure.Items.Add(lvi_1);
-					}
-				}
-			}
-
-			tb_Income_Sum.Text = bevétel + "";
-			tb_Expenditure_Sum.Text = kiadás + "";
-			tb_Net_Income.Text = (kiadás + bevétel) + "";
+			fillCustomerVagyon(cad.cust_1_vagyon);
 
 			//------------- Szociális helyzet
 
@@ -547,7 +514,101 @@ namespace CaritasManager
 			tb_StudyBy.Text = "TEST_" + new Random().Next();
 			tb_StudyOn.Text = DateTime.Now.ToShortDateString();
 		}
+
+		private void btn_Income_Add_Click(object sender, EventArgs e)
+		{
+			f_AddVagyon f_vagy = new f_AddVagyon()
+			{
+				sqlc = sqlc,
+				edit = false,
+				customer_id = customer_id
+			};
+
+			f_vagy.ShowDialog();
+
+			if (f_vagy.OK)
+			{
+				fillCustomerVagyon(c_DBHandler.getCustomerAllData(sqlc, customer_id).cust_1_vagyon);
+			}
+		}
+
+
+		public void fillCustomerVagyon(List<vagyon> vagyonlista)
+		{
+			int bevétel = 0;
+			int kiadás = 0;
+
+			lv_CustomerIncome.Items.Clear();
+			lv_CustomerExpenditure.Items.Clear();
+
+			foreach (vagyon v_1 in vagyonlista)
+			{
+				if (v_1.tipus == "M")
+				{
+					tb_Vagyon_Megjegyzés.Text = v_1.szoveg;
+				}
+				else
+				{
+					ListViewItem lvi_1 = new ListViewItem();
+					lvi_1.Tag = v_1.id;
+					lvi_1.SubItems.Add(v_1.szoveg);
+					lvi_1.SubItems.Add(v_1.osszeg + "");
+
+					if (v_1.tipus == "B")
+					{
+						bevétel += v_1.osszeg;
+						lvi_1.Text = (lv_CustomerIncome.Items.Count + 1) + "";
+						lv_CustomerIncome.Items.Add(lvi_1);
+					}
+					else
+					{
+						kiadás += v_1.osszeg;
+						lvi_1.Text = (lv_CustomerExpenditure.Items.Count + 1) + "";
+						lv_CustomerExpenditure.Items.Add(lvi_1);
+					}
+				}
+			}
+
+			tb_Income_Sum.Text = bevétel + "";
+			tb_Expenditure_Sum.Text = kiadás + "";
+			tb_Net_Income.Text = (kiadás + bevétel) + "";
+		}
+
+		private void btn_Income_Edit_Click(object sender, EventArgs e)
+		{
+			if (lv_CustomerIncome.FocusedItem != null)
+			{
+				f_AddVagyon f_vagy = new f_AddVagyon()
+				{
+					sqlc = sqlc,
+					edit = true,
+					id = Convert.ToInt32(lv_CustomerIncome.FocusedItem.Tag),
+					customer_id = customer_id
+				};
+
+				f_vagy.ShowDialog();
+
+				if (f_vagy.OK)
+				{
+					fillCustomerVagyon(c_DBHandler.getCustomerAllData(sqlc, customer_id).cust_1_vagyon);
+				}
+			}
+		}
+
+		private void btn_Income_Remove_Click(object sender, EventArgs e)
+		{
+			if (lv_CustomerIncome.FocusedItem != null)
+			{
+				if (MessageBox.Show("Törölni készül egy sort az ügyfél vagyon táblából.\r\nA törlés ha végbement, már nem vonható vissza.\r\n\r\nBiztosan folytatja?","Figyelem!",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes)
+				{
+					c_DBHandler.modifyVagyonRow(sqlc, Convert.ToInt32(lv_CustomerIncome.FocusedItem.Tag), "", 0, "", true);
+					fillCustomerVagyon(c_DBHandler.getCustomerAllData(sqlc, customer_id).cust_1_vagyon);
+				}
+			}
+		}
 	}
+
+
 
 	public class aidsclass
 	{

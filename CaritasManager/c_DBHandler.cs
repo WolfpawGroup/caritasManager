@@ -763,12 +763,12 @@ namespace CaritasManager
 		/// Update or delete row in table 'vagyon'
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <param name="ugyfel_id">ID of customer</param>
+		/// <param name="id">ID of row in Vagyon table</param>
 		/// <param name="szoveg">Message of updated row</param>
 		/// <param name="osszeg">Value of updated row</param>
 		/// <param name="tipus">Type of updated row</param>
 		/// <param name="delete">Bool, if true than delete else update</param>
-		public static void modifyVagyonRow(SQLiteConnection sqlc, int ugyfel_id, string szoveg, int osszeg, string tipus, bool delete)
+		public static void modifyVagyonRow(SQLiteConnection sqlc, int id, string szoveg, int osszeg, string tipus, bool delete)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
 
@@ -776,11 +776,11 @@ namespace CaritasManager
 
 			if (delete)
 			{
-				command = string.Format("DELETE FROM vagyon WHERE ugyfel_id={0}", ugyfel_id);
+				command = string.Format("DELETE FROM vagyon WHERE id={0}", id);
 			}
 			else
 			{
-				command = string.Format("UPDATE vagyon SET szoveg='{0}', osszeg={1}, tipus='{2}' WHERE ugyfel_id={3}", szoveg, osszeg, tipus, ugyfel_id);
+				command = string.Format("UPDATE vagyon SET szoveg='{0}', osszeg={1}, tipus='{2}' WHERE id={3}", szoveg, osszeg, tipus, id);
 			}
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
@@ -888,12 +888,12 @@ namespace CaritasManager
 		/// Update or delete row from table 'haztartasban_elok'
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <param name="ugyfel_id">ID of customer</param>
+		/// <param name="id">ID of customer</param>
 		/// <param name="nev">Name of family member</param>
 		/// <param name="rokoni_kapcsolat">Type of connection</param>
 		/// <param name="havi_jovedelem">Monthly income</param>
 		/// <param name="delete">Bool, if true than delete else update</param>
-		public static void modifyHaztartasbanElok(SQLiteConnection sqlc, int ugyfel_id, string nev, string rokoni_kapcsolat, int havi_jovedelem, bool delete)
+		public static void modifyHaztartasbanElok(SQLiteConnection sqlc, int id, string nev, string rokoni_kapcsolat, int havi_jovedelem, bool delete)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
 
@@ -901,12 +901,12 @@ namespace CaritasManager
 
 			if (delete)
 			{
-				command = string.Format("DELETE FROM haztartasban_elok WHERE ugyfel_id={0}", ugyfel_id);
+				command = string.Format("DELETE FROM haztartasban_elok WHERE id={0}", id);
 			}
 			else
 			{
-				command = string.Format("UPDATE haztartasban_elok SET nev='{0}', rokoni_kapcsolat='{1}', havi_jovedelem={2} WHERE ugyfel_id={3}",
-				nev, rokoni_kapcsolat, havi_jovedelem, ugyfel_id);
+				command = string.Format("UPDATE haztartasban_elok SET nev='{0}', rokoni_kapcsolat='{1}', havi_jovedelem={2} WHERE id={3}",
+				nev, rokoni_kapcsolat, havi_jovedelem, id);
 			}
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
@@ -957,11 +957,11 @@ namespace CaritasManager
 		/// Update or delete row from table 'tamogatasok'
 		/// </summary>
 		/// <param name="sqlc">Current open SQLiteConnection</param>
-		/// <param name="ugyfel_id">ID of customer</param>
+		/// <param name="id">ID of customer</param>
 		/// <param name="datum">Date of last support</param>
 		/// <param name="tamogatas">Type of support</param>
 		/// <param name="delete">Bool, if true than delete else update</param>
-		public static void modifyTamogatasok(SQLiteConnection sqlc, int ugyfel_id, string datum, string tamogatas, string mennyiseg, string mertekegyseg, string megjegyzes, bool delete)
+		public static void modifyTamogatasok(SQLiteConnection sqlc, int id, string datum, string tamogatas, string mennyiseg, string mertekegyseg, string megjegyzes, bool delete)
 		{
 			if (!connectioinOpen(sqlc)) { return; }
 
@@ -969,11 +969,11 @@ namespace CaritasManager
 
 			if (delete)
 			{
-				command = "DELETE FROM tamogatasok WHERE ugyfel_id=" + ugyfel_id;
+				command = "DELETE FROM tamogatasok WHERE id=" + id;
 			}
 			else
 			{
-				command = "UPDATE tamogatasok SET datum='" + datum + "', tamogatas='" + tamogatas + "', tamogatas_mennyisege='" + mennyiseg + "', tamogatas_egysége='" + mertekegyseg + "', megjegyzes='" + megjegyzes + "' WHERE ugyfel_id=" + ugyfel_id;
+				command = "UPDATE tamogatasok SET datum='" + datum + "', tamogatas='" + tamogatas + "', tamogatas_mennyisege='" + mennyiseg + "', tamogatas_egysége='" + mertekegyseg + "', megjegyzes='" + megjegyzes + "' WHERE id=" + id;
 			}
 
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
@@ -1215,6 +1215,7 @@ namespace CaritasManager
 			if (!connectioinOpen(sqlc)) { return; }
 
 			SQLiteCommand sqlk = new SQLiteCommand(sqlc);
+			SQLiteCommand sqlk2 = new SQLiteCommand(sqlc2);
 
 			//Ellenőrzi, hogy létezik-e a tábla, ha nem, létrehozza
 			if (!tableExists(sqlc, "ugyfel"))               //------- UGYFEL tábla
@@ -1357,6 +1358,160 @@ namespace CaritasManager
 
 				executeNonQuery(sqlk);
 			}
+
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//ügyfél
+
+				sqlk2.CommandText = "CREATE TABLE change_ugyfel " +
+										"(" +
+											"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+											"nev TEXT, " +
+											"születesi_nev TEXT, " +
+											"szig_szam TEXT, " +
+											"lakcim_varos TEXT, " +
+											"lakcim_uh TEXT, " +
+											"szul_datum TEXT, " +
+											"szul_hely TEXT, " +
+											"csaladi_allapot INTEGER, " +
+											"anyja_neve TEXT, " +
+											"vegzettseg TEXT, " +
+											"foglalkozas TEXT, " +
+											"szakkepzettseg TEXT, " +
+											"munkaltato TEXT, " +
+											"azonosito TEXT, " +
+											"utolso_tamogatas_idopontja TEXT, " +
+											"jovedelem_igazolas TEXT, " +
+											"elhunyt TEXT, " +
+											"allapot TEXT," +   //nagycsaládos, hajléktalan, hátrányos helyzetű...
+											"vallas TEXT, " +   //INT if general religion, name of religion if MISC
+											"környezettanulmanyt_végezte TEXT, " +
+											"környezettanulmany_idopontja TEXT, " +
+											"hozzaadas_datuma TEXT, " +
+											"felvevo_profil TEXT," +
+											"legutobb_modositotta TEXT," +
+											"legutobbi_modositas_datuma TEXT, " +
+											"changed_by TEXT, " +
+											"changed_on TEXT " +
+										")";
+
+				executeNonQuery(sqlk2);
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//vagyon
+
+				sqlk2.CommandText = "CREATE TABLE change_vagyon " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +     //Ügyfél
+										"szoveg TEXT, " +           //kiadás vagy bevétel megnevezése ill megjegyzés szövege
+										"osszeg INTEGER, " +        //Összeg (0 if megjegyzés)
+										"tipus TEXT, " +            //Tipus: K=Kiadás, B=Bevétel, M=Megjegyzés
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//támogatások
+
+				sqlk2.CommandText = "CREATE TABLE change_tamogatasok " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"datum TEXT, " +
+										"tamogatas TEXT, " +
+										"tamogatas_mennyisege TEXT, " +
+										"tamogatas_egysége TEXT, " +
+										"megjegyzes TEXT, " +
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//szoc_helyzet
+
+				sqlk2.CommandText = "CREATE TABLE change_szoc_helyzet " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"lakas INTEGER, " +
+										"altalanos_szoc_helyzet INTEGER, " +
+										"rendszeres_segitsegre_szorul INTEGER, " +
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//hozzátartozók
+
+				sqlk2.CommandText = "CREATE TABLE change_haztartasban_elok " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id INTEGER, " +
+										"nev TEXT, " +
+										"rokoni_kapcsolat TEXT, " +
+										"havi_jovedelem INTEGER, " +
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//jelszó
+
+				sqlk2.CommandText = "CREATE TABLE change_data " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"old_pass TEXT, " +
+										"new_pass TEXT, " +
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+			}
+
+			if (!tableExists(sqlc2, ""))
+			{
+				//change_data
+
+				sqlk2.CommandText = "CREATE TABLE change_data " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"table TEXT, " +
+										"original_data TEXT, " +
+										"new_data TEXT, " +
+										"changed_by TEXT, " +
+										"changed_on TEXT " +
+									")";
+
+				executeNonQuery(sqlk2);
+			}
+
+
+
+
+
+
 
 			//TODO: add table creation for backups db
 		}

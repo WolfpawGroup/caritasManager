@@ -99,6 +99,12 @@
     <Compile Include="f_AddState.Designer.cs">
       <DependentUpon>f_AddState.cs</DependentUpon>
     </Compile>
+    <Compile Include="f_AddVagyon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f_AddVagyon.Designer.cs">
+      <DependentUpon>f_AddVagyon.cs</DependentUpon>
+    </Compile>
     <Compile Include="f_Aids.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="f_AddState.resx">
       <DependentUpon>f_AddState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="f_AddVagyon.resx">
+      <DependentUpon>f_AddVagyon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="f_Aids.resx">
       <DependentUpon>f_Aids.cs</DependentUpon>

@@ -34,6 +34,7 @@
 			this.btn_Save = new System.Windows.Forms.Button();
 			this.tc_Tabs = new System.Windows.Forms.TabControl();
 			this.tp_PersonalData = new System.Windows.Forms.TabPage();
+			this.btn_TEstFill = new System.Windows.Forms.Button();
 			this.btn_EditCustomerIdentification = new System.Windows.Forms.Button();
 			this.panel3 = new System.Windows.Forms.Panel();
 			this.tb_Customer_Name = new System.Windows.Forms.TextBox();
@@ -162,7 +163,6 @@
 			this.ch_AidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.btn_TEstFill = new System.Windows.Forms.Button();
 			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
 			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.panel1.SuspendLayout();
@@ -264,6 +264,16 @@
 			this.tp_PersonalData.TabIndex = 0;
 			this.tp_PersonalData.Text = "Személyes Adatok";
 			this.tp_PersonalData.UseVisualStyleBackColor = true;
+			// 
+			// btn_TEstFill
+			// 
+			this.btn_TEstFill.Location = new System.Drawing.Point(12, 70);
+			this.btn_TEstFill.Name = "btn_TEstFill";
+			this.btn_TEstFill.Size = new System.Drawing.Size(75, 23);
+			this.btn_TEstFill.TabIndex = 14;
+			this.btn_TEstFill.Text = "TESTFILL";
+			this.btn_TEstFill.UseVisualStyleBackColor = true;
+			this.btn_TEstFill.Click += new System.EventHandler(this.btn_TEstFill_Click);
 			// 
 			// btn_EditCustomerIdentification
 			// 
@@ -1134,6 +1144,7 @@
 			this.btn_Income_Add.Size = new System.Drawing.Size(23, 23);
 			this.btn_Income_Add.TabIndex = 1;
 			this.btn_Income_Add.UseVisualStyleBackColor = true;
+			this.btn_Income_Add.Click += new System.EventHandler(this.btn_Income_Add_Click);
 			// 
 			// btn_Income_Remove
 			// 
@@ -1145,6 +1156,7 @@
 			this.btn_Income_Remove.Size = new System.Drawing.Size(23, 23);
 			this.btn_Income_Remove.TabIndex = 2;
 			this.btn_Income_Remove.UseVisualStyleBackColor = true;
+			this.btn_Income_Remove.Click += new System.EventHandler(this.btn_Income_Remove_Click);
 			// 
 			// btn_Income_Edit
 			// 
@@ -1156,6 +1168,7 @@
 			this.btn_Income_Edit.Size = new System.Drawing.Size(23, 23);
 			this.btn_Income_Edit.TabIndex = 3;
 			this.btn_Income_Edit.UseVisualStyleBackColor = true;
+			this.btn_Income_Edit.Click += new System.EventHandler(this.btn_Income_Edit_Click);
 			// 
 			// tb_Income_Sum
 			// 
@@ -1228,7 +1241,7 @@
             this.ch_CustomerExpenditureValue});
 			this.lv_CustomerExpenditure.FullRowSelect = true;
 			this.lv_CustomerExpenditure.GridLines = true;
-			this.lv_CustomerExpenditure.Location = new System.Drawing.Point(3, 16);
+			this.lv_CustomerExpenditure.Location = new System.Drawing.Point(0, 16);
 			this.lv_CustomerExpenditure.Name = "lv_CustomerExpenditure";
 			this.lv_CustomerExpenditure.Size = new System.Drawing.Size(778, 117);
 			this.lv_CustomerExpenditure.TabIndex = 5;
@@ -1933,16 +1946,6 @@
 			// 
 			this.ch_AidComment.Text = "Megjegyzés";
 			this.ch_AidComment.Width = 253;
-			// 
-			// btn_TEstFill
-			// 
-			this.btn_TEstFill.Location = new System.Drawing.Point(12, 70);
-			this.btn_TEstFill.Name = "btn_TEstFill";
-			this.btn_TEstFill.Size = new System.Drawing.Size(75, 23);
-			this.btn_TEstFill.TabIndex = 14;
-			this.btn_TEstFill.Text = "TESTFILL";
-			this.btn_TEstFill.UseVisualStyleBackColor = true;
-			this.btn_TEstFill.Click += new System.EventHandler(this.btn_TEstFill_Click);
 			// 
 			// cbb_PassedAway
 			// 
