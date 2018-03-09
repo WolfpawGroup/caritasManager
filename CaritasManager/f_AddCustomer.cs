@@ -102,6 +102,7 @@ namespace CaritasManager
 			tb_Customer_Name.Text =				m.nev;
 			tb_Customer_OriginalName.Text =		m.születesi_nev;
 			cb_Customer_OriginalName.Checked =	(tb_Customer_OriginalName.Text != tb_Customer_Name.Text);
+			tb_CustomerIdentification.Text =	m.azonosito;
 
 			tb_Customer_City.Text =				m.lakcim_varos;
 			tb_Customer_UH.Text =				m.lakcim_uh;
@@ -273,10 +274,10 @@ namespace CaritasManager
 				}
 
 				{
-					tmp1 += t + ": ";
+					tmp1 += "";
 					int i = 0;
 					string tt = "";
-					foreach (aidsclass a in all_aids)
+					foreach (aidsclass a in aids)
 					{
 						if (a.type.ToLower() == t.ToLower())
 						{
@@ -287,7 +288,8 @@ namespace CaritasManager
 						}
 					}
 
-					tmp1 += i + tt + "\r\n";
+					if(i > 0)
+					tmp1 += t + ": " + i + tt + "\r\n";
 				}
 
 
@@ -295,6 +297,23 @@ namespace CaritasManager
 
 			lbl_All_ValueSum.Text = tmp;
 			lbl_ThisYear_ValueSum.Text = tmp1;
+		}
+
+		public string getNextTmpId()
+		{
+			string tmp = c_DBHandler.get_azonosito(sqlc);
+			
+			if(tmp != "" && tmp.Length == 6)
+			{
+				int i = 0;
+				if (int.TryParse(tmp, out i))
+				{
+					i++;
+					tmp = i.ToString().PadLeft(6, '0');
+				}
+			}
+
+			return tmp;
 		}
 
 		private void F_AddCustomer_Load(object sender, EventArgs e)
@@ -312,7 +331,6 @@ namespace CaritasManager
 			{
 				lbl_HelpText.Hide();
 				loadData();
-				
 			}
 			else
 			{
@@ -321,19 +339,12 @@ namespace CaritasManager
 				tc_Tabs.TabPages.Remove(tp_SocialData);
 				States = new List<string>();
 				lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
+				tb_CustomerIdentification.Text = getNextTmpId();
+				btn_EditCustomerIdentification.Visible = false;
 			}
 		}
 
-		public void incrementID()
-		{
-			//IMPORTANT: ne felejtsük el inkrementálni az ID fájl értékét
-			string lastID = File.ReadAllText("last_id.ini");
-			//TODO:DB handlerbe esetleg felvenni új methodot ami ellenőrzi a legnagyobb ID-t az azonosítók között
-			int lid = 0;
-			Int32.TryParse(lastID, out lid);
-			current_id = (lid + 1).ToString().PadLeft(6, '0');
-			File.WriteAllText("last_id.ini", current_id);
-		}
+
 
 		private void cb_Religion_SelectedIndexChanged(object sender, EventArgs e)
 		{
@@ -476,11 +487,7 @@ namespace CaritasManager
 			}
 			else
 			{
-				customerAllData cad = new customerAllData();
-
 				mainData m = new mainData();
-				List<vagyon> lst_v = new List<vagyon>();
-				List<rokon> lst_r = new List<rokon>();
 
 				m.nev = tb_Customer_Name.Text;
 				m.születesi_nev = tb_Customer_OriginalName.Text;
@@ -495,6 +502,8 @@ namespace CaritasManager
 				m.foglalkozas = tb_Customer_Work.Text;
 				m.munkaltato = tb_Customer_Employer.Text;
 				m.vallas = cb_Religion.SelectedIndex < 7 ? cb_Religion.SelectedIndex + "" : tb_OtherReligion.Text;
+
+				m.azonosito = c_DBHandler.getNextAzonosito(sqlc);
 
 				string allapot = "";
 
@@ -514,59 +523,29 @@ namespace CaritasManager
 				m.környezettanulmanyt_végezte = tb_StudyBy.Text;
 				m.környezettanulmany_idopontja = tb_StudyOn.Text;
 
-				/*
-				foreach (ListViewItem lvi in lv_CustomerIncome.Items)
-				{
-					vagyon v = new vagyon();
-					int osszeg = 0;
-					v.szoveg = lvi.SubItems[1].Text;
-					int.TryParse(lvi.SubItems[2].Text, out osszeg);
-					v.osszeg = osszeg;
-					v.tipus = "B";
-					lst_v.Add(v);
-				}
-
-				foreach (ListViewItem lvi in lv_CustomerExpenditure.Items)
-				{
-					int osszeg = 0;
-					int.TryParse(lvi.SubItems[2].Text, out osszeg);
-
-					vagyon v = new vagyon()
-					{
-						szoveg = lvi.SubItems[1].Text,
-						osszeg = osszeg,
-						tipus = "K"
-					};
-
-					lst_v.Add(v);
-				}
-
-				lst_v.Add(new vagyon() { tipus = "M", szoveg = tb_Vagyon_Megjegyzés.Text, osszeg = 0 });
-
-				foreach(ListViewItem lvi in lv_Relatives.Items)
-				{
-					int jovedelem = 0;
-					int.TryParse(lvi.SubItems[3].Text, out jovedelem);
-
-					rokon r = new rokon();
-					r.nev = lvi.SubItems[1].Text;
-					r.kapcsolat = (enums.rokoni_kapcsolat)Enum.Parse(typeof(enums.rokoni_kapcsolat), lvi.SubItems[2].Text.Replace(" ", "_"));
-					r.havi_jovedelem = jovedelem;
-					lst_r.Add(r);
-				}
-				*/
-
-				cad.cust_0_mainData = m;
-				cad.cust_1_vagyon = lst_v;
-				cad.cust_5_rokonok = lst_r;
-
-				c_DBHandler.addNewCustomerAllData(sqlc, cad);
-
-				customer_id = m.id;
+				customer_id = c_DBHandler.addNewCustomerAllData(sqlc, m);
 				OK = true;
 
 				this.Close();
 			}
+		}
+
+		private void btn_TEstFill_Click(object sender, EventArgs e)
+		{
+			tb_Customer_BirthDate.Text = DateTime.Now.ToShortDateString();
+			tb_Customer_BirthPlace.Text = "TEST_" + new Random().Next();
+			tb_Customer_City.Text = "TEST_" + new Random().Next();
+			tb_Customer_Employer.Text = "TEST_" + new Random().Next();
+			tb_Customer_MothersName.Text = "TEST_" + new Random().Next();
+			tb_Customer_Name.Text = "TEST_" + new Random().Next();
+			tb_Customer_OriginalName.Text = "TEST_" + new Random().Next();
+			tb_Customer_PIDNum.Text = "TEST_" + new Random().Next();
+			tb_Customer_Schooling.Text = "TEST_" + new Random().Next();
+			tb_Customer_Skill.Text = "TEST_" + new Random().Next();
+			tb_Customer_UH.Text = "TEST_" + new Random().Next();
+			tb_Customer_Work.Text = "TEST_" + new Random().Next();
+			tb_StudyBy.Text = "TEST_" + new Random().Next();
+			tb_StudyOn.Text = DateTime.Now.ToShortDateString();
 		}
 	}
 

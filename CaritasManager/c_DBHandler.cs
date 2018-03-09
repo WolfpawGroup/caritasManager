@@ -61,6 +61,31 @@ namespace CaritasManager
 			return proflist;
 		}
 
+
+
+		public static string getNextAzonosito(SQLiteConnection sqlc)
+		{
+			incrementAzonosito(sqlc);
+			return get_azonosito(sqlc);
+		}
+
+
+		public static void incrementAzonosito(SQLiteConnection sqlc)
+		{
+			string azonosito = get_azonosito(sqlc);
+			if(azonosito != "")
+			{
+				int tmp = 0;
+				if(int.TryParse(azonosito, out tmp))
+				{
+					tmp++;
+
+					set_azonosito(sqlc, tmp.ToString().PadLeft(6, '0'));
+				}
+			}
+		}
+
+
 		/// <summary>
 		/// Returns current user identification number
 		/// </summary>
@@ -322,11 +347,9 @@ namespace CaritasManager
 			return i;
 		}
 
-		public static void addNewCustomerAllData(SQLiteConnection sqlc, customerAllData cad)
+		public static int addNewCustomerAllData(SQLiteConnection sqlc, mainData md)
 		{
-			if (!connectioinOpen(sqlc)) { return; }
-
-			mainData md = cad.cust_0_mainData;
+			if (!connectioinOpen(sqlc)) { return -1; }
 
 			string command = string.Format(
 				"INSERT INTO ugyfel " +
@@ -398,35 +421,44 @@ namespace CaritasManager
 			executeNonQuery(sqlk);
 
 			int custid = 0;
-
+			
 			custid = getLastInsertRowId(sqlc);
-
 			if (custid > 0)
 			{
-				foreach (vagyon v in cad.cust_1_vagyon)
-				{
-					command = string.Format("INSERT INTO vagyon (ugyfel_id,osszeg,szoveg,tipus) VALUES ({0},{1},'{2}','{3}')", custid, v.osszeg, v.szoveg, v.tipus);
-					sqlk.CommandText = command;
-					executeNonQuery(sqlk);
-				}
-
-				command = string.Format("INSERT INTO szoc_helyzet (ugyfel_id,lakas,altalanos_szoc_helyzet,rendszeres_segitsegre_szorul) VALUES ({0}, {1}, {2}, {3})", custid, (int)cad.cust_2_lakas, (int)cad.cust_3_alt_szoc_helyzet, (int)cad.cust_4_rendsz_seg_szorul);
+				command = string.Format("INSERT INTO vagyon (ugyfel_id,osszeg,szoveg,tipus) VALUES ({0},{1},'{2}','{3}')", custid, 0, "", "M");
 				sqlk.CommandText = command;
 				executeNonQuery(sqlk);
+			}
 
-				foreach (rokon r in cad.cust_5_rokonok)
+
+			/*
+				if (custid > 0)
 				{
-					command = string.Format("INSERT INTO haztartasban_elok (ugyfel_id,nev,rokoni_kapcsolat,havi_jovedelem) VALUES ({0},'{1}',{2},{3})", custid, r.nev, (int)r.kapcsolat, r.havi_jovedelem);
+					foreach (vagyon v in cad.cust_1_vagyon)
+					{
+						command = string.Format("INSERT INTO vagyon (ugyfel_id,osszeg,szoveg,tipus) VALUES ({0},{1},'{2}','{3}')", custid, v.osszeg, v.szoveg, v.tipus);
+						sqlk.CommandText = command;
+						executeNonQuery(sqlk);
+					}
+
+					command = string.Format("INSERT INTO szoc_helyzet (ugyfel_id,lakas,altalanos_szoc_helyzet,rendszeres_segitsegre_szorul) VALUES ({0}, {1}, {2}, {3})", custid, (int)cad.cust_2_lakas, (int)cad.cust_3_alt_szoc_helyzet, (int)cad.cust_4_rendsz_seg_szorul);
 					sqlk.CommandText = command;
 					executeNonQuery(sqlk);
+
+					foreach (rokon r in cad.cust_5_rokonok)
+					{
+						command = string.Format("INSERT INTO haztartasban_elok (ugyfel_id,nev,rokoni_kapcsolat,havi_jovedelem) VALUES ({0},'{1}',{2},{3})", custid, r.nev, (int)r.kapcsolat, r.havi_jovedelem);
+						sqlk.CommandText = command;
+						executeNonQuery(sqlk);
+					}
 				}
-			}
-			else
-			{
-				throw new Exception("Nem megy...");
-			}
+				else
+				{
+					throw new Exception("Nem megy...");
+				}
+			*/
 
-
+			return custid;
 		}
 
 
