@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Data.SQLite;
+using System.Xml;
+using System.Threading;
 
 namespace CaritasManager
 {
@@ -22,8 +24,14 @@ namespace CaritasManager
 		public bool otherReligion = false;
 		public string current_id = "";
 		public bool OK = false;
-
 		public List<string> States { get; set; }
+		public List<city> cities = new List<city>();
+
+		private Thread t = null;
+		private string _city = "";
+		private string _zip = "";
+		private TextBox ziptb = null;
+
 
 		public f_AddCustomer()
 		{
@@ -116,6 +124,30 @@ namespace CaritasManager
 			tb_Customer_Skill.Text =			m.szakkepzettseg;
 			tb_Customer_Work.Text =				m.foglalkozas;
 			tb_Customer_Employer.Text =			m.munkaltato;
+
+
+
+			if(m.lakcim_zip == "")
+			{
+				_city = m.lakcim_varos.ToLower();
+
+				foreach (city c in cities)
+				{
+					if (c.name.ToLower() == _city)
+					{
+						_zip = c.zipcode;
+						break;
+					}
+				}
+
+				if (_zip != "") { lbl_ZipCode.Invoke(new myDelegate(setZip)); }
+
+				GC.Collect();
+			}
+			else
+			{
+				lbl_ZipCode.Text = m.lakcim_zip;
+			}
 
 			cbb_SZJI.Checked =					m.jovedelem_igazolas;
 
@@ -285,6 +317,8 @@ namespace CaritasManager
 
 		private void F_AddCustomer_Load(object sender, EventArgs e)
 		{
+			
+
 			tb_Customer_Name.Focus();
 
 			tb_Customer_BirthPlace.AutoCompleteCustomSource = new AutoCompleteStringCollection();
@@ -309,6 +343,8 @@ namespace CaritasManager
 				tb_CustomerIdentification.Text = getNextTmpId();
 				btn_EditCustomerIdentification.Visible = false;
 			}
+
+			
 		}
 
 
@@ -460,6 +496,7 @@ namespace CaritasManager
 				m.születesi_nev = tb_Customer_OriginalName.Text;
 				m.lakcim_varos = tb_Customer_City.Text;
 				m.lakcim_uh = tb_Customer_UH.Text;
+				m.lakcim_zip = lbl_ZipCode.Text;
 				m.szul_datum = tb_Customer_BirthDate.Text;
 				m.szul_hely = tb_Customer_BirthPlace.Text;
 				m.szig_szam = tb_Customer_PIDNum.Text;
@@ -649,9 +686,97 @@ namespace CaritasManager
 		{
 			editIncomeExpenditure(true);
 		}
+
+		private void tb_Customer_City_Leave(object sender, EventArgs e)
+		{
+			_city = tb_Customer_City.Text.ToLower();
+
+			if (t == null)
+			{
+				t = new Thread(new ThreadStart(checkZipCode));
+				t.Start();
+			}
+		}
+
+		public void checkZipCode()
+		{
+			foreach(city c in cities)
+			{
+				if(c.name.ToLower() == _city)
+				{
+					_zip = c.zipcode;
+					break;
+				}
+			}
+
+			if(_zip != "") { lbl_ZipCode.Invoke(new myDelegate(setZip)); }
+
+			t = null;
+			GC.Collect();
+		}
+
+		public delegate void myDelegate();
+		public void setZip()
+		{
+			lbl_ZipCode.Text = _zip;
+		}
+
+		private void btn_EditZipCode_Click(object sender, EventArgs e)
+		{
+			TextBox tb = new TextBox();
+			tb.Name = "tb_ZipCode";
+			tb.Parent = gb_PlaceOfResidence;
+			tb.Top = lbl_ZipCode.Top - 2;
+			tb.Left = lbl_ZipCode.Left + 2;
+			tb.Text = lbl_ZipCode.Text;
+			tb.BringToFront();
+			ziptb = tb;
+			
+
+			Button btn = new Button();
+			btn.Parent = gb_PlaceOfResidence;
+			btn.Text = "Mentés";
+			btn.AutoSize = false;
+			btn.Height-=1;
+			btn.Left = tb.Right + 2;
+			btn.Top = tb.Top - 1;
+			btn.Click += Btn_Click;
+
+			btn_EditZipCode.Hide();
+			ziptb.Tag = btn;
+			ziptb.KeyDown += Ziptb_KeyDown;
+
+		}
+
+		private void Ziptb_KeyDown(object sender, KeyEventArgs e)
+		{
+			if(e.KeyCode == Keys.Enter)
+			{
+				if(((TextBox)sender).Tag != null)
+				{
+					((Button)((TextBox)sender).Tag).PerformClick();
+				}
+			}
+		}
+
+		private void Btn_Click(object sender, EventArgs e)
+		{
+			if(ziptb.Text != "")
+			{
+				lbl_ZipCode.Text = ziptb.Text;
+				((Button)sender).Dispose();
+				ziptb.Dispose();
+				btn_EditZipCode.Show();
+			}
+		}
 	}
 
-
+	public class city
+	{
+		public string name { get; set; }
+		public string zipcode { get; set; }
+		
+	}
 
 	public class aidsclass
 	{

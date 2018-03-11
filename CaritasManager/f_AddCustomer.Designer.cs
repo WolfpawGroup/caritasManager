@@ -843,6 +843,7 @@
 			this.btn_EditZipCode.TabIndex = 8;
 			this.btn_EditZipCode.Text = "Irányítószám Szerkesztése";
 			this.btn_EditZipCode.UseVisualStyleBackColor = true;
+			this.btn_EditZipCode.Click += new System.EventHandler(this.btn_EditZipCode_Click);
 			// 
 			// lbl_ZipCode
 			// 
@@ -1007,6 +1008,7 @@
 			this.tb_Customer_City.Name = "tb_Customer_City";
 			this.tb_Customer_City.Size = new System.Drawing.Size(185, 20);
 			this.tb_Customer_City.TabIndex = 4;
+			this.tb_Customer_City.Leave += new System.EventHandler(this.tb_Customer_City_Leave);
 			// 
 			// label1
 			// 

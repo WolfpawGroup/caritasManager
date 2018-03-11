@@ -217,6 +217,7 @@
 			this.dg_DataTable.Size = new System.Drawing.Size(902, 389);
 			this.dg_DataTable.TabIndex = 6;
 			this.dg_DataTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellContentClick);
+			this.dg_DataTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellDoubleClick);
 			this.dg_DataTable.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellMouseEnter);
 			this.dg_DataTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg_DataTable_CellMouseLeave);
 			this.dg_DataTable.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dg_DataTable_ColumnHeaderMouseClick);

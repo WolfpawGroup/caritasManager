@@ -118,7 +118,7 @@ namespace CaritasManager
 		{
 			if (!connectioinOpen(sqlc)) { return null; }
 			
-			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel " + where;
+			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,lakcim_zip,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel " + where;
 
 			List<c_MainDataRow> lst = new List<c_MainDataRow>();
 			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);
@@ -134,6 +134,7 @@ namespace CaritasManager
 				mdr.identification =	checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
 				mdr.city =				checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
 				mdr.houseno =			checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
+				mdr.zip =				checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
 				mdr.state =				checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
 				mdr.dateAdded =			Convert.ToDateTime(checkDate(checkvalueString(r.GetValue(r.GetOrdinal("hozzaadas_datuma"))))); //TODO: Checkdate-ben lekezelni az üres értéket
 				string d =				checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
@@ -223,6 +224,7 @@ namespace CaritasManager
 			md.szig_szam =						checkvalueString(	r.GetValue(r.GetOrdinal("szig_szam"						)));
 			md.lakcim_varos =					checkvalueString(	r.GetValue(r.GetOrdinal("lakcim_varos"					)));
 			md.lakcim_uh =						checkvalueString(	r.GetValue(r.GetOrdinal("lakcim_uh"						)));
+			md.lakcim_zip =						checkvalueString(	r.GetValue(r.GetOrdinal("lakcim_zip"					)));
 			md.szul_datum =						checkvalueString(	r.GetValue(r.GetOrdinal("szul_datum"					)));
 			md.szul_hely =						checkvalueString(	r.GetValue(r.GetOrdinal("szul_hely"						)));
 			md.csaladi_allapot =				checkvalueInt(		r.GetValue(r.GetOrdinal("csaladi_allapot"				)));
@@ -355,7 +357,7 @@ namespace CaritasManager
 				"INSERT INTO ugyfel " +
 				" ( " +
 					"nev, születesi_nev, szig_szam, lakcim_varos, " +
-					"lakcim_uh, szul_datum, szul_hely, csaladi_allapot, " +
+					"lakcim_uh, lakcim_zip, szul_datum, szul_hely, csaladi_allapot, " +
 					"anyja_neve,  vegzettseg, foglalkozas, szakkepzettseg, " +
 					"munkaltato, azonosito, utolso_tamogatas_idopontja, jovedelem_igazolas, " +
 					"elhunyt, allapot, vallas, környezettanulmanyt_végezte, " +
@@ -371,8 +373,8 @@ namespace CaritasManager
 					"'{4}',  " +
 					"'{5}',  " +
 					"'{6}',  " +
-					"{7},    " +
-					"'{8}',  " +
+					"'{7}',    " +
+					"{8},  " +
 					"'{9}',  " +
 					"'{10}', " +
 					"'{11}', " +
@@ -395,6 +397,7 @@ namespace CaritasManager
 					md.szig_szam,
 					md.lakcim_varos,
 					md.lakcim_uh,
+					md.lakcim_zip,
 					md.szul_datum,
 					md.szul_hely,
 					md.csaladi_allapot,
@@ -603,6 +606,7 @@ namespace CaritasManager
 													"szig_szam, " +
 													"lakcim_varos, " +
 													"lakcim_uh, " +
+													"lakcim_zip, " + 
 													"szul_datum, " +
 													"szul_hely, " +
 													"csaladi_allapot, " +
@@ -630,8 +634,8 @@ namespace CaritasManager
 													"'{4}', " +
 													"'{5}', " +
 													"'{6}', " +
-													"{7}, " +
-													"'{8}', " +
+													"'{7}', " +
+													"{8}, " +
 													"'{9}', " +
 													"'{10}', " +
 													"'{11}', " +
@@ -653,6 +657,7 @@ namespace CaritasManager
 													cust.szig_szam,                     //Can be empty?
 													cust.lakcim_varos,
 													cust.lakcim_uh,
+													cust.lakcim_zip,
 													cust.szul_datum,					//Can be empty
 													cust.szul_hely,                     //Can be empty
 													cust.csaladi_allapot,				//From enums->családi_állapot
@@ -1228,6 +1233,7 @@ namespace CaritasManager
 										"szig_szam TEXT, " +
 										"lakcim_varos TEXT, " +
 										"lakcim_uh TEXT, " +
+										"lakcim_zip TEXT" + 
 										"szul_datum TEXT, " +
 										"szul_hely TEXT, " +
 										"csaladi_allapot INTEGER, " +

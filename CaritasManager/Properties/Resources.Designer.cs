@@ -121,6 +121,45 @@ namespace CaritasManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 	&lt;cities&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Aba&lt;/name&gt;
+        ///			&lt;zip&gt;8127&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abádszalók&lt;/name&gt;
+        ///			&lt;zip&gt;5241&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abaliget&lt;/name&gt;
+        ///			&lt;zip&gt;7678&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abasár&lt;/name&gt;
+        ///			&lt;zip&gt;3261&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abaújalpár&lt;/name&gt;
+        ///			&lt;zip&gt;3882&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abaújkér&lt;/name&gt;
+        ///			&lt;zip&gt;3882&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abaújlak&lt;/name&gt;
+        ///			&lt;zip&gt;3815&lt;/zip&gt;
+        ///		&lt;/city&gt;
+        ///		&lt;city&gt;
+        ///			&lt;name&gt;Abaújszántó&lt;/nam [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string cityList {
+            get {
+                return ResourceManager.GetString("cityList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap clothes_0 {

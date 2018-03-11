@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.Common;
 using System.Data.SQLite;
 using System.IO;
+using System.Xml;
 
 namespace CaritasManager
 {
@@ -21,6 +22,7 @@ namespace CaritasManager
 		DataGridViewCellEventArgs showKinArgs = null;
 		public bool backupForCurrentDate = false;
 		int showKinCheck = 0;
+		private List<city> cities = new List<city>();
 
 		public Form1()
 		{
@@ -36,6 +38,23 @@ namespace CaritasManager
 			//sqlc = c_DBHandler.connectToDB()[0];
 			//sqlc.Open();
 			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
+
+			try
+			{
+				XmlDocument xmld = new XmlDocument();
+				xmld.LoadXml(Properties.Resources.cityList);
+				XmlNode xe = xmld.FirstChild;
+
+				foreach (XmlNode x in xmld.GetElementsByTagName("city"))
+				{
+					city _c = new city() { name = x.FirstChild.InnerText, zipcode = x.LastChild.InnerText };
+					cities.Add(_c);
+				}
+			}
+			catch
+			{
+
+			}
 
 			createIdFile();
 
@@ -236,6 +255,7 @@ namespace CaritasManager
 			f_AddCustomer fad = new f_AddCustomer();
 			fad.login_profile = login_profile;
 			fad.sqlc = sqlc;
+			fad.cities = cities;
 			fad.ShowDialog();
 			int cid = -1;
 			if (fad.OK)
@@ -245,6 +265,7 @@ namespace CaritasManager
 				fad = new f_AddCustomer();
 				fad.login_profile = login_profile;
 				fad.sqlc = sqlc;
+				fad.cities = cities;
 				fad.edit = true;
 				fad.customer_id = cid;
 				fad.ShowDialog();
@@ -341,6 +362,7 @@ namespace CaritasManager
 					{
 						edit = true,
 						sqlc = sqlc,
+						cities = cities,
 						customer_id = Convert.ToInt32(oo[1]),
 						login_profile = login_profile
 					};
@@ -445,6 +467,11 @@ namespace CaritasManager
 			dg_DataTable.colors = new Color[] { Color.FromArgb(Convert.ToInt32(login_profile.color_1)), Color.FromArgb(Convert.ToInt32(login_profile.color_2)), Color.FromArgb(Convert.ToInt32(login_profile.color_3)) };
 
 			fillMainList();
+		}
+
+		private void dg_DataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			toolStripButton1_Click(null,null);
 		}
 	}
 }

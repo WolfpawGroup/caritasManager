@@ -42,6 +42,11 @@ namespace CaritasManager
 		public string houseno { get; set; }
 
 		/// <summary>
+		/// Ügyfél lakhelye (zipcode)
+		/// </summary>
+		public string zip { get; set; }
+
+		/// <summary>
 		/// Ügyfél állapota
 		/// </summary>
 		public string state { get; set; }
@@ -136,6 +141,7 @@ namespace CaritasManager
 		public string szig_szam { get; set; }
 		public string lakcim_varos { get; set; }
 		public string lakcim_uh { get; set; }
+		public string lakcim_zip { get; set; }
 		public string szul_datum { get; set; }
 		public string szul_hely { get; set; }
 		public int csaladi_allapot { get; set; }
