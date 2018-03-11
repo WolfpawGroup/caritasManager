@@ -1359,157 +1359,39 @@ namespace CaritasManager
 				executeNonQuery(sqlk);
 			}
 
+			//---- Changes
+			//IMPORTANT: Befejezni a change és delete backupot!!!
+			//Le kell kérdezni a változás előtti adatot és az azt követően beszúrt új adatot is és mindkettőt kiírni a changes táblába!
 
-			if (!tableExists(sqlc2, ""))
+			if (!tableExists(sqlc2, "changelog"))             //------- changelog
 			{
-				//ügyfél
-
-				sqlk2.CommandText = "CREATE TABLE change_ugyfel " +
-										"(" +
-											"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-											"nev TEXT, " +
-											"születesi_nev TEXT, " +
-											"szig_szam TEXT, " +
-											"lakcim_varos TEXT, " +
-											"lakcim_uh TEXT, " +
-											"szul_datum TEXT, " +
-											"szul_hely TEXT, " +
-											"csaladi_allapot INTEGER, " +
-											"anyja_neve TEXT, " +
-											"vegzettseg TEXT, " +
-											"foglalkozas TEXT, " +
-											"szakkepzettseg TEXT, " +
-											"munkaltato TEXT, " +
-											"azonosito TEXT, " +
-											"utolso_tamogatas_idopontja TEXT, " +
-											"jovedelem_igazolas TEXT, " +
-											"elhunyt TEXT, " +
-											"allapot TEXT," +   //nagycsaládos, hajléktalan, hátrányos helyzetű...
-											"vallas TEXT, " +   //INT if general religion, name of religion if MISC
-											"környezettanulmanyt_végezte TEXT, " +
-											"környezettanulmany_idopontja TEXT, " +
-											"hozzaadas_datuma TEXT, " +
-											"felvevo_profil TEXT," +
-											"legutobb_modositotta TEXT," +
-											"legutobbi_modositas_datuma TEXT, " +
-											"changed_by TEXT, " +
-											"changed_on TEXT " +
-										")";
-
-				executeNonQuery(sqlk2);
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//vagyon
-
-				sqlk2.CommandText = "CREATE TABLE change_vagyon " +
+				sqlk2.CommandText = "CREATE TABLE changelog " +
 									"( " +
 										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +     //Ügyfél
-										"szoveg TEXT, " +           //kiadás vagy bevétel megnevezése ill megjegyzés szövege
-										"osszeg INTEGER, " +        //Összeg (0 if megjegyzés)
-										"tipus TEXT, " +            //Tipus: K=Kiadás, B=Bevétel, M=Megjegyzés
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
-									")";
-
-				executeNonQuery(sqlk2);
-
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//támogatások
-
-				sqlk2.CommandText = "CREATE TABLE change_tamogatasok " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"datum TEXT, " +
-										"tamogatas TEXT, " +
-										"tamogatas_mennyisege TEXT, " +
-										"tamogatas_egysége TEXT, " +
-										"megjegyzes TEXT, " +
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
-									")";
-
-				executeNonQuery(sqlk2);
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//szoc_helyzet
-
-				sqlk2.CommandText = "CREATE TABLE change_szoc_helyzet " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"lakas INTEGER, " +
-										"altalanos_szoc_helyzet INTEGER, " +
-										"rendszeres_segitsegre_szorul INTEGER, " +
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
-									")";
-
-				executeNonQuery(sqlk2);
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//hozzátartozók
-
-				sqlk2.CommandText = "CREATE TABLE change_haztartasban_elok " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id INTEGER, " +
-										"nev TEXT, " +
-										"rokoni_kapcsolat TEXT, " +
-										"havi_jovedelem INTEGER, " +
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
-									")";
-
-				executeNonQuery(sqlk2);
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//jelszó
-
-				sqlk2.CommandText = "CREATE TABLE change_data " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"old_pass TEXT, " +
-										"new_pass TEXT, " +
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
-									")";
-
-				executeNonQuery(sqlk2);
-			}
-
-			if (!tableExists(sqlc2, ""))
-			{
-				//change_data
-
-				sqlk2.CommandText = "CREATE TABLE change_data " +
-									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id TEXT, " +
 										"table TEXT, " +
-										"original_data TEXT, " +
-										"new_data TEXT, " +
-										"changed_by TEXT, " +
-										"changed_on TEXT " +
+										"before_change TEXT, " +
+										"after_change TEXT, " +
+										"who_changed TEXT, " +
+										"when_changed TEXT " +
 									")";
 
 				executeNonQuery(sqlk2);
 			}
 
+			if (!tableExists(sqlc2, "deleted_customers"))             //------- deleted_customers
+			{
+				sqlk2.CommandText = "CREATE TABLE deleted_customers " +
+									"( " +
+										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id TEXT, " +
+										"customer_data TEXT, " +
+										"who_deleted TEXT, " +
+										"when_deleted TEXT " +
+									")";
 
-
-
+				executeNonQuery(sqlk2);
+			}
 
 
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data.Common;
 using System.Data.SQLite;
 using System.IO;
 
@@ -19,7 +19,7 @@ namespace CaritasManager
 		public bool showKin = false;
 		public profile login_profile { get; set; }
 		DataGridViewCellEventArgs showKinArgs = null;
-
+		public bool backupForCurrentDate = false;
 		int showKinCheck = 0;
 
 		public Form1()
@@ -352,7 +352,9 @@ namespace CaritasManager
 		}
 
 
-		public bool backupForCurrentDate = false;
+
+
+		
 
 		private void btn_DatabaseBackup_Click(object sender, EventArgs e)
 		{

@@ -17,6 +17,7 @@ namespace CaritasManager
 		public int customer_id { get; set; }
 		public int id { get; set; }
 		public bool edit { get; set; }
+		public bool expenditure { get; set; } // 1 if Income | -1 if Expenditure
 		public bool OK = false;
 
 		public f_AddVagyon()
@@ -47,6 +48,11 @@ namespace CaritasManager
 
 		private void F_AddVagyon_Load(object sender, EventArgs e)
 		{
+			if (expenditure)
+			{
+				rb_Expenditure.Checked = true;
+			}
+
 			if (edit)
 			{
 				Text = "Bevétel / Kiadás módosítása";
