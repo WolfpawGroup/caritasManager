@@ -50,6 +50,7 @@
 			this.tb_BackupFolder = new System.Windows.Forms.TextBox();
 			this.btn_BrowseFolder = new System.Windows.Forms.Button();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.btn_ShowDeletedCustomers = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btn_EditProfile
@@ -286,11 +287,23 @@
 			this.btn_BrowseFolder.TabIndex = 19;
 			this.btn_BrowseFolder.UseVisualStyleBackColor = true;
 			// 
+			// btn_ShowDeletedCustomers
+			// 
+			this.btn_ShowDeletedCustomers.Location = new System.Drawing.Point(356, 70);
+			this.btn_ShowDeletedCustomers.Name = "btn_ShowDeletedCustomers";
+			this.btn_ShowDeletedCustomers.Size = new System.Drawing.Size(105, 23);
+			this.btn_ShowDeletedCustomers.TabIndex = 20;
+			this.btn_ShowDeletedCustomers.Text = "Törölt Ügyfelek";
+			this.toolTip1.SetToolTip(this.btn_ShowDeletedCustomers, "Itt megtekintheti és visszaállíthatja a törölt ügyfél sorokat");
+			this.btn_ShowDeletedCustomers.UseVisualStyleBackColor = true;
+			this.btn_ShowDeletedCustomers.Click += new System.EventHandler(this.btn_ShowDeletedCustomers_Click);
+			// 
 			// f_Settings
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(473, 242);
+			this.Controls.Add(this.btn_ShowDeletedCustomers);
 			this.Controls.Add(this.btn_BrowseFolder);
 			this.Controls.Add(this.tb_BackupFolder);
 			this.Controls.Add(this.label7);
@@ -311,6 +324,7 @@
 			this.Controls.Add(this.lbl_Profile);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.btn_EditProfile);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Name = "f_Settings";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Beállítások";
@@ -342,5 +356,6 @@
 		private System.Windows.Forms.TextBox tb_BackupFolder;
 		private System.Windows.Forms.Button btn_BrowseFolder;
 		private System.Windows.Forms.ToolTip toolTip1;
+		private System.Windows.Forms.Button btn_ShowDeletedCustomers;
 	}
 }

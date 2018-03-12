@@ -41,7 +41,6 @@
 			this.tb_CustomerIdentification = new System.Windows.Forms.TextBox();
 			this.tb_Customer_OriginalName = new System.Windows.Forms.TextBox();
 			this.cb_Customer_OriginalName = new System.Windows.Forms.CheckBox();
-			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
 			this.gb_Religion = new System.Windows.Forms.GroupBox();
 			this.tb_OtherReligion = new System.Windows.Forms.ComboBox();
 			this.lbl_OtherReligion = new System.Windows.Forms.Label();
@@ -106,7 +105,6 @@
 			this.tb_Net_Income = new System.Windows.Forms.TextBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tp_SocialData = new System.Windows.Forms.TabPage();
-			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.btn_State_Add = new System.Windows.Forms.Button();
 			this.btn_State_Remove = new System.Windows.Forms.Button();
 			this.btn_State_Edit = new System.Windows.Forms.Button();
@@ -165,6 +163,13 @@
 			this.ch_AidDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ch_AidComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.tp_Misc = new System.Windows.Forms.TabPage();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.panel5 = new System.Windows.Forms.Panel();
+			this.btn_DeleteCustomer = new System.Windows.Forms.Button();
+			this.gb_History = new System.Windows.Forms.GroupBox();
+			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
+			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.panel1.SuspendLayout();
 			this.tc_Tabs.SuspendLayout();
 			this.tp_PersonalData.SuspendLayout();
@@ -184,6 +189,9 @@
 			this.tp_AIDS.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			this.tp_Misc.SuspendLayout();
+			this.panel4.SuspendLayout();
+			this.panel5.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// panel1
@@ -237,6 +245,7 @@
 			this.tc_Tabs.Controls.Add(this.tp_SocialData);
 			this.tc_Tabs.Controls.Add(this.tp_ProfileData);
 			this.tc_Tabs.Controls.Add(this.tp_AIDS);
+			this.tc_Tabs.Controls.Add(this.tp_Misc);
 			this.tc_Tabs.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tc_Tabs.Location = new System.Drawing.Point(0, 0);
 			this.tc_Tabs.Name = "tc_Tabs";
@@ -453,20 +462,6 @@
 			this.cb_Customer_OriginalName.Text = "Születése név különbözik: ";
 			this.cb_Customer_OriginalName.UseVisualStyleBackColor = true;
 			this.cb_Customer_OriginalName.CheckedChanged += new System.EventHandler(this.cb_Customer_OriginalName_CheckedChanged);
-			// 
-			// cbb_PassedAway
-			// 
-			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cbb_PassedAway.Checked = false;
-			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.cbb_PassedAway.Location = new System.Drawing.Point(729, 16);
-			this.cbb_PassedAway.Name = "cbb_PassedAway";
-			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 26);
-			this.cbb_PassedAway.TabIndex = 9;
-			this.cbb_PassedAway.Text = "Elhunyt";
-			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.cbb_PassedAway.UseVisualStyleBackColor = true;
 			// 
 			// gb_Religion
 			// 
@@ -1374,18 +1369,6 @@
 			this.tp_SocialData.Text = "Szociális Helyzet";
 			this.tp_SocialData.UseVisualStyleBackColor = true;
 			// 
-			// cbb_SZJI
-			// 
-			this.cbb_SZJI.Checked = false;
-			this.cbb_SZJI.Location = new System.Drawing.Point(65, 22);
-			this.cbb_SZJI.Name = "cbb_SZJI";
-			this.cbb_SZJI.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.cbb_SZJI.Size = new System.Drawing.Size(169, 23);
-			this.cbb_SZJI.TabIndex = 19;
-			this.cbb_SZJI.Text = "Jövedelem igazolást leadta";
-			this.cbb_SZJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.cbb_SZJI.UseVisualStyleBackColor = true;
-			// 
 			// btn_State_Add
 			// 
 			this.btn_State_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1978,6 +1961,82 @@
 			this.ch_AidComment.Text = "Megjegyzés";
 			this.ch_AidComment.Width = 253;
 			// 
+			// tp_Misc
+			// 
+			this.tp_Misc.Controls.Add(this.panel4);
+			this.tp_Misc.Controls.Add(this.gb_History);
+			this.tp_Misc.Location = new System.Drawing.Point(4, 22);
+			this.tp_Misc.Name = "tp_Misc";
+			this.tp_Misc.Padding = new System.Windows.Forms.Padding(3);
+			this.tp_Misc.Size = new System.Drawing.Size(823, 464);
+			this.tp_Misc.TabIndex = 5;
+			this.tp_Misc.Text = "Egyebek";
+			this.tp_Misc.UseVisualStyleBackColor = true;
+			// 
+			// panel4
+			// 
+			this.panel4.BackColor = System.Drawing.Color.Red;
+			this.panel4.Controls.Add(this.panel5);
+			this.panel4.Location = new System.Drawing.Point(8, 6);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(160, 45);
+			this.panel4.TabIndex = 1;
+			// 
+			// panel5
+			// 
+			this.panel5.BackColor = System.Drawing.Color.White;
+			this.panel5.Controls.Add(this.btn_DeleteCustomer);
+			this.panel5.Location = new System.Drawing.Point(1, 1);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(158, 43);
+			this.panel5.TabIndex = 2;
+			// 
+			// btn_DeleteCustomer
+			// 
+			this.btn_DeleteCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.btn_DeleteCustomer.Location = new System.Drawing.Point(4, 4);
+			this.btn_DeleteCustomer.Name = "btn_DeleteCustomer";
+			this.btn_DeleteCustomer.Size = new System.Drawing.Size(150, 35);
+			this.btn_DeleteCustomer.TabIndex = 2;
+			this.btn_DeleteCustomer.Text = "Ügyfél Törlése";
+			this.btn_DeleteCustomer.UseVisualStyleBackColor = true;
+			this.btn_DeleteCustomer.Click += new System.EventHandler(this.btn_DeleteCustomer_Click);
+			// 
+			// gb_History
+			// 
+			this.gb_History.Location = new System.Drawing.Point(6, 57);
+			this.gb_History.Name = "gb_History";
+			this.gb_History.Size = new System.Drawing.Size(809, 401);
+			this.gb_History.TabIndex = 0;
+			this.gb_History.TabStop = false;
+			this.gb_History.Text = "Módosítás Napló";
+			// 
+			// cbb_PassedAway
+			// 
+			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbb_PassedAway.Checked = false;
+			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.cbb_PassedAway.Location = new System.Drawing.Point(729, 16);
+			this.cbb_PassedAway.Name = "cbb_PassedAway";
+			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 26);
+			this.cbb_PassedAway.TabIndex = 9;
+			this.cbb_PassedAway.Text = "Elhunyt";
+			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_PassedAway.UseVisualStyleBackColor = true;
+			// 
+			// cbb_SZJI
+			// 
+			this.cbb_SZJI.Checked = false;
+			this.cbb_SZJI.Location = new System.Drawing.Point(65, 22);
+			this.cbb_SZJI.Name = "cbb_SZJI";
+			this.cbb_SZJI.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_SZJI.Size = new System.Drawing.Size(169, 23);
+			this.cbb_SZJI.TabIndex = 19;
+			this.cbb_SZJI.Text = "Jövedelem igazolást leadta";
+			this.cbb_SZJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_SZJI.UseVisualStyleBackColor = true;
+			// 
 			// f_AddCustomer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2023,6 +2082,9 @@
 			this.groupBox2.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
+			this.tp_Misc.ResumeLayout(false);
+			this.panel4.ResumeLayout(false);
+			this.panel5.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -2166,5 +2228,10 @@
 		private System.Windows.Forms.Label lbl_ThisYear_ValueSum;
 		private System.Windows.Forms.Label lbl_ThisYear_Num;
 		private System.Windows.Forms.Button btn_TEstFill;
+		private System.Windows.Forms.TabPage tp_Misc;
+		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.Panel panel5;
+		private System.Windows.Forms.Button btn_DeleteCustomer;
+		private System.Windows.Forms.GroupBox gb_History;
 	}
 }

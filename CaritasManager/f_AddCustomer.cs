@@ -19,18 +19,20 @@ namespace CaritasManager
 	{
 		public SQLiteConnection sqlc { get; set; }
 		public profile login_profile { get; set; }
-		public int customer_id { get; set; }
-		public bool edit { get; set; }
-		public bool otherReligion = false;
-		public string current_id = "";
-		public bool OK = false;
 		public List<string> States { get; set; }
 		public List<city> cities = new List<city>();
+		public string customerName = "";
+		public string current_id = "";
+		public bool otherReligion = false;
+		public bool reload = false;
+		public bool edit { get; set; }
+		public bool OK = false;
+		public int customer_id { get; set; }
 
+		private TextBox ziptb = null;
 		private Thread t = null;
 		private string _city = "";
 		private string _zip = "";
-		private TextBox ziptb = null;
 
 
 		public f_AddCustomer()
@@ -39,7 +41,7 @@ namespace CaritasManager
 
 			Load += F_AddCustomer_Load;
 		}
-
+		
 		protected override CreateParams CreateParams
 		{
 			get
@@ -108,6 +110,7 @@ namespace CaritasManager
 			}
 
 			tb_Customer_Name.Text =				m.nev;
+			customerName = m.nev;
 			tb_Customer_OriginalName.Text =		m.születesi_nev;
 			cb_Customer_OriginalName.Checked =	(tb_Customer_OriginalName.Text != tb_Customer_Name.Text);
 			tb_CustomerIdentification.Text =	m.azonosito;
@@ -338,6 +341,7 @@ namespace CaritasManager
 				tc_Tabs.TabPages.Remove(tp_AIDS);
 				tc_Tabs.TabPages.Remove(tp_MoneyData);
 				tc_Tabs.TabPages.Remove(tp_SocialData);
+				tc_Tabs.TabPages.Remove(tp_Misc);
 				States = new List<string>();
 				lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
 				tb_CustomerIdentification.Text = getNextTmpId();
@@ -529,6 +533,7 @@ namespace CaritasManager
 
 				customer_id = c_DBHandler.addNewCustomerAllData(sqlc, m);
 				OK = true;
+				reload = true;
 
 				this.Close();
 			}
@@ -768,6 +773,16 @@ namespace CaritasManager
 				ziptb.Dispose();
 				btn_EditZipCode.Show();
 			}
+		}
+
+		private void btn_DeleteCustomer_Click(object sender, EventArgs e)
+		{
+			f_DeleteCustomer fd = new f_DeleteCustomer();
+			fd.sqlc = sqlc;
+			fd.customerName = customerName;
+			fd.custid = customer_id;
+			fd.ShowDialog();
+			if (fd.OK) { reload = true; this.Close(); }
 		}
 	}
 

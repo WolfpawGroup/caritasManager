@@ -257,6 +257,7 @@ namespace CaritasManager
 			fad.sqlc = sqlc;
 			fad.cities = cities;
 			fad.ShowDialog();
+			if (fad.reload) { fillMainList(); }
 			int cid = -1;
 			if (fad.OK)
 			{
@@ -368,6 +369,7 @@ namespace CaritasManager
 					};
 
 					fa.ShowDialog();
+					if (fa.reload) { fillMainList(); }
 				}
 
 			}

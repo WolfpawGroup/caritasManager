@@ -49,5 +49,11 @@ namespace CaritasManager
 			fedp.empty = false;
 			fedp.ShowDialog();
 		}
+
+		private void btn_ShowDeletedCustomers_Click(object sender, EventArgs e)
+		{
+			f_DeletedCustomers fdc = new f_DeletedCustomers();
+			fdc.ShowDialog();
+		}
 	}
 }
