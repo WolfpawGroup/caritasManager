@@ -229,4 +229,15 @@ namespace CaritasManager
 		public List<rokon> cust_5_rokonok { get; set; }
 		public List<tamogatas> cust_6_tamogatasok { get; set; }
 	}
+
+	public class changes
+	{
+		public int id { get; set; }
+		public int cust_id { get; set; }
+		public string table { get; set; }			//Ugyfel when deleted user
+		public string before { get; set; }			//Customer data when deleted user
+		public string after { get; set; }			//empty when deleted user
+		public string whochanged { get; set; }		//whodeleted
+		public string whenchanged { get; set; }		//whendeleted
+	}
 }
