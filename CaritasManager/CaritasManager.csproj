@@ -94,6 +94,12 @@
     <Compile Include="f_AddCustomer.Designer.cs">
       <DependentUpon>f_AddCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="f_AddRokon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="f_AddRokon.Designer.cs">
+      <DependentUpon>f_AddRokon.cs</DependentUpon>
+    </Compile>
     <Compile Include="f_AddState.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="f_AddCustomer.resx">
       <DependentUpon>f_AddCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="f_AddRokon.resx">
+      <DependentUpon>f_AddRokon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="f_AddState.resx">
       <DependentUpon>f_AddState.cs</DependentUpon>

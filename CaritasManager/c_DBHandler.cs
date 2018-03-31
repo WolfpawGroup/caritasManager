@@ -41,16 +41,28 @@ namespace CaritasManager
 			return lst;
 		}
 
-		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc)
+		//Changes and deleted customers
+
+		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc2)
 		{
-			return c_Query_DBHandler.getDeletedCustomers(sqlc, -1);
+			return c_Query_DBHandler.getDeletedCustomers(sqlc2, -1);
 		}
 
-		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc, int cust_id)
+		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc2, int cust_id)
 		{
-			return c_Query_DBHandler.getDeletedCustomers(sqlc, cust_id);
+			return c_Query_DBHandler.getDeletedCustomers(sqlc2, cust_id);
 		}
 
+		public static List<changes> getChanges(SQLiteConnection sqlc2)
+		{
+			return c_Query_DBHandler.getChanges(sqlc2, -1);
+		}
+
+		public static List<changes> getChanges(SQLiteConnection sqlc2, int cust_id)
+		{
+			return c_Query_DBHandler.getChanges(sqlc2, cust_id);
+		}
+		
 
 		#endregion
 
@@ -1174,7 +1186,7 @@ namespace CaritasManager
 									"( " +
 										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 										"ugyfel_id TEXT, " +
-										"table TEXT, " +
+										"\"table\" TEXT, " +
 										"before_change TEXT, " +
 										"after_change TEXT, " +
 										"who_changed TEXT, " +
@@ -1197,10 +1209,7 @@ namespace CaritasManager
 
 				executeNonQuery(sqlk2);
 			}
-
-
-
-			//TODO: add table creation for backups db
+			
 		}
 
 		/// <summary>

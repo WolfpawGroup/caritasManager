@@ -176,24 +176,9 @@ namespace CaritasManager
 			cb_Dwelling.SelectedIndex = (int)cad.cust_2_lakas;
 			cb_GeneralSocialState.SelectedIndex = (int)cad.cust_3_alt_szoc_helyzet;
 			cb_RequiresConstantCare.SelectedIndex = (int)cad.cust_4_rendsz_seg_szorul;
-
-			int összjöv = 0;
-
-			List<rokon> rokonlista = cad.cust_5_rokonok;
-			foreach (rokon r_1 in rokonlista)
-			{
-				ListViewItem rokon_lvi = new ListViewItem();
-				rokon_lvi.Tag = r_1.id;
-				rokon_lvi.Text = (lv_Relatives.Items.Count + 1) + "";
-				rokon_lvi.SubItems.Add(r_1.nev);
-				rokon_lvi.SubItems.Add(r_1.kapcsolat.ToString().Replace("_", " "));
-				rokon_lvi.SubItems.Add(r_1.havi_jovedelem + "");
-				lv_Relatives.Items.Add(rokon_lvi);
-
-				összjöv += r_1.havi_jovedelem;
-			}
-
-			tb_FamilyIncomeSum.Text = összjöv + "";
+			
+			fillCustomerRokonok(cad);
+			
 
 			String[] állapot = m.allapot.Split('|');
 			foreach (string _állapot in állapot)
@@ -299,6 +284,29 @@ namespace CaritasManager
 
 			lbl_All_ValueSum.Text = tmp;
 			lbl_ThisYear_ValueSum.Text = tmp1;
+		}
+
+		public void fillCustomerRokonok(customerAllData cad)
+		{
+			int összjöv = 0;
+
+			lv_Relatives.Items.Clear();
+
+			List<rokon> rokonlista = cad.cust_5_rokonok;
+			foreach (rokon r_1 in rokonlista)
+			{
+				ListViewItem rokon_lvi = new ListViewItem();
+				rokon_lvi.Tag = r_1.id;
+				rokon_lvi.Text = (lv_Relatives.Items.Count + 1) + "";
+				rokon_lvi.SubItems.Add(r_1.nev);
+				rokon_lvi.SubItems.Add(r_1.kapcsolat.ToString().Replace("_", " "));
+				rokon_lvi.SubItems.Add(r_1.havi_jovedelem + "");
+				lv_Relatives.Items.Add(rokon_lvi);
+
+				összjöv += r_1.havi_jovedelem;
+			}
+
+			tb_FamilyIncomeSum.Text = összjöv + "";
 		}
 
 		public string getNextTmpId()
@@ -783,6 +791,61 @@ namespace CaritasManager
 			fd.custid = customer_id;
 			fd.ShowDialog();
 			if (fd.OK) { reload = true; this.Close(); }
+		}
+
+		private void btn_SocialState_Add_Click(object sender, EventArgs e)
+		{
+			f_AddRokon ar = new f_AddRokon() {
+				sqlc = sqlc,
+				customer_id = customer_id,
+				edit = false
+			};
+			ar.ShowDialog();
+			fillCustomerRokonok(c_DBHandler.getCustomerAllData(sqlc, customer_id));
+		}
+
+		private void btn_SocialState_Remove_Click(object sender, EventArgs e)
+		{
+			if (lv_Relatives.FocusedItem != null)
+			{
+				if (MessageBox.Show("Törölni készül egy sort az ügyfél Egy Háztartásban Élők táblából.\r\nA törlés ha végbement, már nem vonható vissza.\r\n\r\nBiztosan folytatja?", "Figyelem!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+				{
+					c_DBHandler.modifyHaztartasbanElok(sqlc, Convert.ToInt32(lv_Relatives.FocusedItem.Tag), "", "", 0, true);
+				}
+
+				fillCustomerRokonok(c_DBHandler.getCustomerAllData(sqlc, customer_id));
+			}
+		}
+
+		private void btn_SocialState_Edit_Click(object sender, EventArgs e)
+		{
+			editRokon();
+		}
+
+		public void editRokon()
+		{
+			if (lv_Relatives.FocusedItem != null)
+			{
+				f_AddRokon f_rokon = new f_AddRokon()
+				{
+					sqlc = sqlc,
+					edit = true,
+					id = Convert.ToInt32(lv_Relatives.FocusedItem.Tag),
+					customer_id = customer_id
+				};
+
+				f_rokon.ShowDialog();
+
+				if (f_rokon.OK)
+				{
+					fillCustomerRokonok(c_DBHandler.getCustomerAllData(sqlc, customer_id));
+				}
+			}
+		}
+
+		private void lv_Relatives_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if(lv_Relatives.FocusedItem != null) { editRokon(); }
 		}
 	}
 

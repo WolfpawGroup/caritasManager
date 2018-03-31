@@ -254,15 +254,18 @@ namespace CaritasManager
 
 
 		//Queries from backups database
-		
-		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc, int custid)
+
+		/// <summary>
+		/// Returns the deleted customer list or a single deleted customer (list if custid = -1)
+		/// </summary>
+		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc2, int custid)
 		{
 			List<changes> lst = new List<changes>();
 
 			string where = custid == -1 ? "" : " WHERE ugyfel_id=" + custid;
 
 			string command = "SELECT * FROM deleted_customers" + where;
-			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc2);
 			reader = sqlk.ExecuteReader();
 
 			while (reader.Read())
@@ -279,11 +282,40 @@ namespace CaritasManager
 
 				lst.Add(c);
 			}
-			
+
 			return lst;
 		}
 
+		/// <summary>
+		/// Returns list of changes for single customer or all of the changes (all changes if custid = -1)
+		/// </summary>
+		public static List<changes> getChanges(SQLiteConnection sqlc2, int cust_id)
+		{
+			List<changes> lst = new List<changes>();
 
+			string where = cust_id == -1 ? "" : " WHERE ugyfel_id=" + cust_id;
 
+			string command = "SELECT * FROM changelog";
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc2);
+			reader = sqlk.ExecuteReader();
+
+			while (reader.Read())
+			{
+				changes c = new changes();
+
+				c.id = c_DBHandler.checkvalueInt(reader.GetInt32(reader.GetOrdinal("id")));
+				c.cust_id = c_DBHandler.checkvalueInt(reader.GetInt32(reader.GetOrdinal("ugyfel_id")));
+				c.table = c.before = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("table")));
+				c.before = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("before_change")));
+				c.after = c.before = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("after_change")));
+				c.whochanged = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("who_changed")));
+				c.whenchanged = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("when_changed")));
+
+				lst.Add(c);
+			}
+
+			return lst;
+		}
+		
 	}
 }

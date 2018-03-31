@@ -41,6 +41,7 @@
 			this.tb_CustomerIdentification = new System.Windows.Forms.TextBox();
 			this.tb_Customer_OriginalName = new System.Windows.Forms.TextBox();
 			this.cb_Customer_OriginalName = new System.Windows.Forms.CheckBox();
+			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
 			this.gb_Religion = new System.Windows.Forms.GroupBox();
 			this.tb_OtherReligion = new System.Windows.Forms.ComboBox();
 			this.lbl_OtherReligion = new System.Windows.Forms.Label();
@@ -105,6 +106,7 @@
 			this.tb_Net_Income = new System.Windows.Forms.TextBox();
 			this.label17 = new System.Windows.Forms.Label();
 			this.tp_SocialData = new System.Windows.Forms.TabPage();
+			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.btn_State_Add = new System.Windows.Forms.Button();
 			this.btn_State_Remove = new System.Windows.Forms.Button();
 			this.btn_State_Edit = new System.Windows.Forms.Button();
@@ -168,8 +170,6 @@
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.btn_DeleteCustomer = new System.Windows.Forms.Button();
 			this.gb_History = new System.Windows.Forms.GroupBox();
-			this.cbb_PassedAway = new CaritasManager.uc_cb_Button();
-			this.cbb_SZJI = new CaritasManager.uc_cb_Button();
 			this.panel1.SuspendLayout();
 			this.tc_Tabs.SuspendLayout();
 			this.tp_PersonalData.SuspendLayout();
@@ -462,6 +462,20 @@
 			this.cb_Customer_OriginalName.Text = "Születése név különbözik: ";
 			this.cb_Customer_OriginalName.UseVisualStyleBackColor = true;
 			this.cb_Customer_OriginalName.CheckedChanged += new System.EventHandler(this.cb_Customer_OriginalName_CheckedChanged);
+			// 
+			// cbb_PassedAway
+			// 
+			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.cbb_PassedAway.Checked = false;
+			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.cbb_PassedAway.Location = new System.Drawing.Point(729, 16);
+			this.cbb_PassedAway.Name = "cbb_PassedAway";
+			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 26);
+			this.cbb_PassedAway.TabIndex = 9;
+			this.cbb_PassedAway.Text = "Elhunyt";
+			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_PassedAway.UseVisualStyleBackColor = true;
 			// 
 			// gb_Religion
 			// 
@@ -1369,6 +1383,18 @@
 			this.tp_SocialData.Text = "Szociális Helyzet";
 			this.tp_SocialData.UseVisualStyleBackColor = true;
 			// 
+			// cbb_SZJI
+			// 
+			this.cbb_SZJI.Checked = false;
+			this.cbb_SZJI.Location = new System.Drawing.Point(65, 22);
+			this.cbb_SZJI.Name = "cbb_SZJI";
+			this.cbb_SZJI.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.cbb_SZJI.Size = new System.Drawing.Size(169, 23);
+			this.cbb_SZJI.TabIndex = 19;
+			this.cbb_SZJI.Text = "Jövedelem igazolást leadta";
+			this.cbb_SZJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.cbb_SZJI.UseVisualStyleBackColor = true;
+			// 
 			// btn_State_Add
 			// 
 			this.btn_State_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1530,6 +1556,7 @@
 			this.btn_SocialState_Add.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Add.TabIndex = 4;
 			this.btn_SocialState_Add.UseVisualStyleBackColor = true;
+			this.btn_SocialState_Add.Click += new System.EventHandler(this.btn_SocialState_Add_Click);
 			// 
 			// btn_SocialState_Remove
 			// 
@@ -1541,6 +1568,7 @@
 			this.btn_SocialState_Remove.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Remove.TabIndex = 5;
 			this.btn_SocialState_Remove.UseVisualStyleBackColor = true;
+			this.btn_SocialState_Remove.Click += new System.EventHandler(this.btn_SocialState_Remove_Click);
 			// 
 			// btn_SocialState_Edit
 			// 
@@ -1552,6 +1580,7 @@
 			this.btn_SocialState_Edit.Size = new System.Drawing.Size(23, 23);
 			this.btn_SocialState_Edit.TabIndex = 6;
 			this.btn_SocialState_Edit.UseVisualStyleBackColor = true;
+			this.btn_SocialState_Edit.Click += new System.EventHandler(this.btn_SocialState_Edit_Click);
 			// 
 			// lv_Relatives
 			// 
@@ -1571,6 +1600,7 @@
 			this.lv_Relatives.TabIndex = 3;
 			this.lv_Relatives.UseCompatibleStateImageBehavior = false;
 			this.lv_Relatives.View = System.Windows.Forms.View.Details;
+			this.lv_Relatives.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lv_Relatives_MouseDoubleClick);
 			// 
 			// ch_PPLID
 			// 
@@ -2010,32 +2040,6 @@
 			this.gb_History.TabIndex = 0;
 			this.gb_History.TabStop = false;
 			this.gb_History.Text = "Módosítás Napló";
-			// 
-			// cbb_PassedAway
-			// 
-			this.cbb_PassedAway.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cbb_PassedAway.Checked = false;
-			this.cbb_PassedAway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.cbb_PassedAway.Location = new System.Drawing.Point(729, 16);
-			this.cbb_PassedAway.Name = "cbb_PassedAway";
-			this.cbb_PassedAway.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.cbb_PassedAway.Size = new System.Drawing.Size(86, 26);
-			this.cbb_PassedAway.TabIndex = 9;
-			this.cbb_PassedAway.Text = "Elhunyt";
-			this.cbb_PassedAway.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.cbb_PassedAway.UseVisualStyleBackColor = true;
-			// 
-			// cbb_SZJI
-			// 
-			this.cbb_SZJI.Checked = false;
-			this.cbb_SZJI.Location = new System.Drawing.Point(65, 22);
-			this.cbb_SZJI.Name = "cbb_SZJI";
-			this.cbb_SZJI.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-			this.cbb_SZJI.Size = new System.Drawing.Size(169, 23);
-			this.cbb_SZJI.TabIndex = 19;
-			this.cbb_SZJI.Text = "Jövedelem igazolást leadta";
-			this.cbb_SZJI.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.cbb_SZJI.UseVisualStyleBackColor = true;
 			// 
 			// f_AddCustomer
 			// 
