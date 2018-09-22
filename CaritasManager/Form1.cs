@@ -23,6 +23,7 @@ namespace CaritasManager
 		public bool backupForCurrentDate = false;
 		int showKinCheck = 0;
 		private List<city> cities = new List<city>();
+		public bool scrollMovePosition = false;
 
 		public Form1()
 		{
@@ -66,6 +67,8 @@ namespace CaritasManager
 				Color.FromArgb(Convert.ToInt32(login_profile.color_3))
 			};
 
+			scrollMovePosition = Properties.Settings.Default.s_ScrollMovePosition;
+
 			tb_Filter_City.AutoCompleteCustomSource.AddRange(Properties.Resources.telepulesek.Replace("\r", "").Split('\n'));
 
 			dg_DataTable.colors = c;
@@ -73,6 +76,25 @@ namespace CaritasManager
 			fillMainList();
 
 			dg_DataTable.Invalidate();
+
+			dg_DataTable.MouseWheel += Dg_DataTable_MouseWheel;
+		}
+
+		private void Dg_DataTable_MouseWheel(object sender, MouseEventArgs e)
+		{
+			if (scrollMovePosition)
+			{
+				((HandledMouseEventArgs)e).Handled = true;
+
+				if (e.Delta > 0)
+				{
+					SendKeys.SendWait("{UP}");
+				}
+				else
+				{
+					SendKeys.SendWait("{DOWN}");
+				}
+			}
 		}
 
 		public void createIdFile()
@@ -305,7 +327,7 @@ namespace CaritasManager
 			}
 			catch
 			{
-
+				
 			}
 			
 		}
