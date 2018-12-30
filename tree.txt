@@ -1,0 +1,627 @@
+Folder PATH listing
+Volume serial number is 70B2-1EE4
+C:.
+³   .gitattributes
+³   .gitignore
+³   CaritasManager.sln
+³   tree.txt
+³   
+ÃÄÄÄCaritasManager
+³   ³   App.config
+³   ³   CaritasManager.csproj
+³   ³   CaritasManager.csproj.user
+³   ³   c_DBHandler.cs
+³   ³   c_MainDataRow.cs
+³   ³   c_Query_DBHandler.cs
+³   ³   c_test.cs
+³   ³   Form1.cs
+³   ³   Form1.Designer.cs
+³   ³   Form1.resx
+³   ³   f_AddCustomer.cs
+³   ³   f_AddCustomer.Designer.cs
+³   ³   f_AddCustomer.resx
+³   ³   f_AddRokon.cs
+³   ³   f_AddRokon.Designer.cs
+³   ³   f_AddRokon.resx
+³   ³   f_AddState.cs
+³   ³   f_AddState.Designer.cs
+³   ³   f_AddState.resx
+³   ³   f_AddVagyon.cs
+³   ³   f_AddVagyon.Designer.cs
+³   ³   f_AddVagyon.resx
+³   ³   f_Aids.cs
+³   ³   f_Aids.Designer.cs
+³   ³   f_Aids.resx
+³   ³   f_belepteto.cs
+³   ³   f_belepteto.Designer.cs
+³   ³   f_belepteto.resx
+³   ³   f_DateSelector.cs
+³   ³   f_DateSelector.Designer.cs
+³   ³   f_DateSelector.resx
+³   ³   f_DeleteCustomer.cs
+³   ³   f_DeleteCustomer.Designer.cs
+³   ³   f_DeleteCustomer.resx
+³   ³   f_DeletedCustomers.cs
+³   ³   f_DeletedCustomers.Designer.cs
+³   ³   f_DeletedCustomers.resx
+³   ³   f_EditPassword.cs
+³   ³   f_EditPassword.Designer.cs
+³   ³   f_EditPassword.resx
+³   ³   f_EditProfile.cs
+³   ³   f_EditProfile.Designer.cs
+³   ³   f_EditProfile.resx
+³   ³   f_Settings.cs
+³   ³   f_Settings.Designer.cs
+³   ³   f_Settings.resx
+³   ³   myDataGridView.cs
+³   ³   myDataGridView.Designer.cs
+³   ³   packages.config
+³   ³   Program.cs
+³   ³   uc_cb_Button.cs
+³   ³   uc_cb_Button.Designer.cs
+³   ³   uc_Tooltip.cs
+³   ³   uc_Tooltip.Designer.cs
+³   ³   uc_Tooltip.resx
+³   ³   
+³   ÃÄÄÄbin
+³   ³   ÃÄÄÄDebug
+³   ³   ³   ³   CaritasManager.exe
+³   ³   ³   ³   CaritasManager.exe.config
+³   ³   ³   ³   CaritasManager.pdb
+³   ³   ³   ³   changes.sqlite
+³   ³   ³   ³   database.sqlite
+³   ³   ³   ³   Debug.rar
+³   ³   ³   ³   EntityFramework.dll
+³   ³   ³   ³   EntityFramework.SqlServer.dll
+³   ³   ³   ³   EntityFramework.SqlServer.xml
+³   ³   ³   ³   EntityFramework.xml
+³   ³   ³   ³   last_id.ini
+³   ³   ³   ³   System.Data.SQLite.dll
+³   ³   ³   ³   System.Data.SQLite.dll.config
+³   ³   ³   ³   System.Data.SQLite.EF6.dll
+³   ³   ³   ³   System.Data.SQLite.Linq.dll
+³   ³   ³   ³   System.Data.SQLite.xml
+³   ³   ³   ³   
+³   ³   ³   ÃÄÄÄx64
+³   ³   ³   ³       SQLite.Interop.dll
+³   ³   ³   ³       
+³   ³   ³   ÀÄÄÄx86
+³   ³   ³           SQLite.Interop.dll
+³   ³   ³           
+³   ³   ÀÄÄÄRelease
+³   ³       ³   CaritasManager.exe
+³   ³       ³   CaritasManager.exe.config
+³   ³       ³   CaritasManager.pdb
+³   ³       ³   changes.sqlite
+³   ³       ³   database.sqlite
+³   ³       ³   EntityFramework.dll
+³   ³       ³   EntityFramework.SqlServer.dll
+³   ³       ³   EntityFramework.SqlServer.xml
+³   ³       ³   EntityFramework.xml
+³   ³       ³   System.Data.SQLite.dll
+³   ³       ³   System.Data.SQLite.dll.config
+³   ³       ³   System.Data.SQLite.EF6.dll
+³   ³       ³   System.Data.SQLite.Linq.dll
+³   ³       ³   System.Data.SQLite.xml
+³   ³       ³   
+³   ³       ÃÄÄÄx64
+³   ³       ³       SQLite.Interop.dll
+³   ³       ³       
+³   ³       ÀÄÄÄx86
+³   ³               SQLite.Interop.dll
+³   ³               
+³   ÃÄÄÄobj
+³   ³   ÃÄÄÄDebug
+³   ³   ³   ³   CaritasManager.csproj.CopyComplete
+³   ³   ³   ³   CaritasManager.csproj.CoreCompileInputs.cache
+³   ³   ³   ³   CaritasManager.csproj.FileListAbsolute.txt
+³   ³   ³   ³   CaritasManager.csproj.GenerateResource.cache
+³   ³   ³   ³   CaritasManager.exe
+³   ³   ³   ³   CaritasManager.Form1.resources
+³   ³   ³   ³   CaritasManager.f_AddCustomer.resources
+³   ³   ³   ³   CaritasManager.f_AddRokon.resources
+³   ³   ³   ³   CaritasManager.f_AddState.resources
+³   ³   ³   ³   CaritasManager.f_AddVagyon.resources
+³   ³   ³   ³   CaritasManager.f_Aids.resources
+³   ³   ³   ³   CaritasManager.f_belepteto.resources
+³   ³   ³   ³   CaritasManager.f_DateSelector.resources
+³   ³   ³   ³   CaritasManager.f_DeleteCustomer.resources
+³   ³   ³   ³   CaritasManager.f_DeletedCustomers.resources
+³   ³   ³   ³   CaritasManager.f_EditPassword.resources
+³   ³   ³   ³   CaritasManager.f_EditProfile.resources
+³   ³   ³   ³   CaritasManager.f_Settings.resources
+³   ³   ³   ³   CaritasManager.pdb
+³   ³   ³   ³   CaritasManager.Properties.Resources.resources
+³   ³   ³   ³   CaritasManager.uc_Tooltip.resources
+³   ³   ³   ³   DesignTimeResolveAssemblyReferences.cache
+³   ³   ³   ³   DesignTimeResolveAssemblyReferencesInput.cache
+³   ³   ³   ³   TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+³   ³   ³   ³   TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+³   ³   ³   ³   TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+³   ³   ³   ³   
+³   ³   ³   ÀÄÄÄTempPE
+³   ³   ³           Properties.Resources.Designer.cs.dll
+³   ³   ³           
+³   ³   ÀÄÄÄRelease
+³   ³           CaritasManager.csproj.CopyComplete
+³   ³           CaritasManager.csproj.CoreCompileInputs.cache
+³   ³           CaritasManager.csproj.FileListAbsolute.txt
+³   ³           CaritasManager.csproj.GenerateResource.cache
+³   ³           CaritasManager.exe
+³   ³           CaritasManager.Form1.resources
+³   ³           CaritasManager.f_AddCustomer.resources
+³   ³           CaritasManager.f_AddRokon.resources
+³   ³           CaritasManager.f_AddState.resources
+³   ³           CaritasManager.f_AddVagyon.resources
+³   ³           CaritasManager.f_Aids.resources
+³   ³           CaritasManager.f_belepteto.resources
+³   ³           CaritasManager.f_DateSelector.resources
+³   ³           CaritasManager.f_DeleteCustomer.resources
+³   ³           CaritasManager.f_DeletedCustomers.resources
+³   ³           CaritasManager.f_EditPassword.resources
+³   ³           CaritasManager.f_EditProfile.resources
+³   ³           CaritasManager.f_Settings.resources
+³   ³           CaritasManager.pdb
+³   ³           CaritasManager.Properties.Resources.resources
+³   ³           CaritasManager.uc_Tooltip.resources
+³   ³           TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+³   ³           TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+³   ³           TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+³   ³           
+³   ÃÄÄÄProperties
+³   ³       AssemblyInfo.cs
+³   ³       Resources.Designer.cs
+³   ³       Resources.resx
+³   ³       Settings.Designer.cs
+³   ³       Settings.settings
+³   ³       
+³   ÀÄÄÄResources
+³       ³   addusr.png
+³       ³   addusr_color.png
+³       ³   browse_folder.png
+³       ³   calendar.png
+³       ³   checkmark_icon.png
+³       ³   checkmark_icon_2.png
+³       ³   cityList.txt
+³       ³   clothes_0.png
+³       ³   clothes_1.png
+³       ³   edit.png
+³       ³   edit_color.png
+³       ³   edit_icon.png
+³       ³   extreme_aid_0.png
+³       ³   extreme_aid_1.png
+³       ³   eye.png
+³       ³   food_0.png
+³       ³   food_1.png
+³       ³   furniture_0.png
+³       ³   furniture_1.png
+³       ³   homeless_0.png
+³       ³   home_0.png
+³       ³   home_1.png
+³       ³   meal_0.png
+³       ³   meal_1.png
+³       ³   medicine_0.png
+³       ³   medicine_1.png
+³       ³   minus_icon.png
+³       ³   plus_icon.png
+³       ³   power.png
+³       ³   power_color.png
+³       ³   save.png
+³       ³   save_color.png
+³       ³   settings.png
+³       ³   settings_color.png
+³       ³   statistics.png
+³       ³   statistics_color.png
+³       ³   utility_0.png
+³       ³   utility_1.png
+³       ³   
+³       ÀÄÄÄdb_files_for_testing
+³               changes.sqlite
+³               database.sqlite
+³               
+ÀÄÄÄpackages
+    ÃÄÄÄEntityFramework.6.0.0
+    ³   ³   EntityFramework.6.0.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄContent
+    ³   ³       App.config.transform
+    ³   ³       Web.config.transform
+    ³   ³       
+    ³   ÃÄÄÄlib
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       EntityFramework.dll
+    ³   ³   ³       EntityFramework.SqlServer.dll
+    ³   ³   ³       EntityFramework.SqlServer.xml
+    ³   ³   ³       EntityFramework.xml
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet45
+    ³   ³           EntityFramework.dll
+    ³   ³           EntityFramework.SqlServer.dll
+    ³   ³           EntityFramework.SqlServer.xml
+    ³   ³           EntityFramework.xml
+    ³   ³           
+    ³   ÀÄÄÄtools
+    ³           about_EntityFramework.help.txt
+    ³           EntityFramework.PowerShell.dll
+    ³           EntityFramework.PowerShell.Utility.dll
+    ³           EntityFramework.psd1
+    ³           EntityFramework.psm1
+    ³           init.ps1
+    ³           install.ps1
+    ³           migrate.exe
+    ³           
+    ÃÄÄÄEntityFramework.6.2.0
+    ³   ³   EntityFramework.6.2.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄcontent
+    ³   ³   ÀÄÄÄnet40
+    ³   ³           App.config.transform
+    ³   ³           Web.config.transform
+    ³   ³           
+    ³   ÃÄÄÄlib
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       EntityFramework.dll
+    ³   ³   ³       EntityFramework.SqlServer.dll
+    ³   ³   ³       EntityFramework.SqlServer.xml
+    ³   ³   ³       EntityFramework.xml
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet45
+    ³   ³           EntityFramework.dll
+    ³   ³           EntityFramework.SqlServer.dll
+    ³   ³           EntityFramework.SqlServer.xml
+    ³   ³           EntityFramework.xml
+    ³   ³           
+    ³   ÀÄÄÄtools
+    ³           about_EntityFramework.help.txt
+    ³           EntityFramework.PowerShell.dll
+    ³           EntityFramework.PowerShell.Utility.dll
+    ³           EntityFramework.psd1
+    ³           EntityFramework.psm1
+    ³           init.ps1
+    ³           install.ps1
+    ³           migrate.exe
+    ³           
+    ÃÄÄÄSystem.Data.SQLite.1.0.106.0
+    ³       System.Data.SQLite.1.0.106.0.nupkg
+    ³       
+    ÃÄÄÄSystem.Data.SQLite.1.0.107.0
+    ³       System.Data.SQLite.1.0.107.0.nupkg
+    ³       
+    ÃÄÄÄSystem.Data.SQLite.Core.1.0.106.0
+    ³   ³   System.Data.SQLite.Core.1.0.106.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄbuild
+    ³   ³   ÃÄÄÄnet20
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÀÄÄÄnet46
+    ³   ³       ³   System.Data.SQLite.Core.targets
+    ³   ³       ³   
+    ³   ³       ÃÄÄÄx64
+    ³   ³       ³       SQLite.Interop.dll
+    ³   ³       ³       
+    ³   ³       ÀÄÄÄx86
+    ³   ³               SQLite.Interop.dll
+    ³   ³               
+    ³   ÀÄÄÄlib
+    ³       ÃÄÄÄnet20
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet40
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet45
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet451
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÀÄÄÄnet46
+    ³               System.Data.SQLite.dll
+    ³               System.Data.SQLite.dll.config
+    ³               System.Data.SQLite.xml
+    ³               
+    ÃÄÄÄSystem.Data.SQLite.Core.1.0.107.0
+    ³   ³   System.Data.SQLite.Core.1.0.107.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄbuild
+    ³   ³   ÃÄÄÄnet20
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³   ³   System.Data.SQLite.Core.targets
+    ³   ³   ³   ³   
+    ³   ³   ³   ÃÄÄÄx64
+    ³   ³   ³   ³       SQLite.Interop.dll
+    ³   ³   ³   ³       
+    ³   ³   ³   ÀÄÄÄx86
+    ³   ³   ³           SQLite.Interop.dll
+    ³   ³   ³           
+    ³   ³   ÀÄÄÄnet46
+    ³   ³       ³   System.Data.SQLite.Core.targets
+    ³   ³       ³   
+    ³   ³       ÃÄÄÄx64
+    ³   ³       ³       SQLite.Interop.dll
+    ³   ³       ³       
+    ³   ³       ÀÄÄÄx86
+    ³   ³               SQLite.Interop.dll
+    ³   ³               
+    ³   ÀÄÄÄlib
+    ³       ÃÄÄÄnet20
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet40
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet45
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÃÄÄÄnet451
+    ³       ³       System.Data.SQLite.dll
+    ³       ³       System.Data.SQLite.dll.config
+    ³       ³       System.Data.SQLite.xml
+    ³       ³       
+    ³       ÀÄÄÄnet46
+    ³               System.Data.SQLite.dll
+    ³               System.Data.SQLite.dll.config
+    ³               System.Data.SQLite.xml
+    ³               
+    ÃÄÄÄSystem.Data.SQLite.EF6.1.0.106.0
+    ³   ³   System.Data.SQLite.EF6.1.0.106.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄcontent
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet46
+    ³   ³           app.config.install.xdt
+    ³   ³           app.config.transform
+    ³   ³           web.config.install.xdt
+    ³   ³           web.config.transform
+    ³   ³           
+    ³   ÃÄÄÄlib
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet46
+    ³   ³           System.Data.SQLite.EF6.dll
+    ³   ³           
+    ³   ÀÄÄÄtools
+    ³       ÃÄÄÄnet40
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÃÄÄÄnet45
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÃÄÄÄnet451
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÀÄÄÄnet46
+    ³               install.ps1
+    ³               
+    ÃÄÄÄSystem.Data.SQLite.EF6.1.0.107.0
+    ³   ³   System.Data.SQLite.EF6.1.0.107.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄcontent
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³       app.config.install.xdt
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.install.xdt
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet46
+    ³   ³           app.config.install.xdt
+    ³   ³           app.config.transform
+    ³   ³           web.config.install.xdt
+    ³   ³           web.config.transform
+    ³   ³           
+    ³   ÃÄÄÄlib
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³       System.Data.SQLite.EF6.dll
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet46
+    ³   ³           System.Data.SQLite.EF6.dll
+    ³   ³           
+    ³   ÀÄÄÄtools
+    ³       ÃÄÄÄnet40
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÃÄÄÄnet45
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÃÄÄÄnet451
+    ³       ³       install.ps1
+    ³       ³       
+    ³       ÀÄÄÄnet46
+    ³               install.ps1
+    ³               
+    ÃÄÄÄSystem.Data.SQLite.Linq.1.0.106.0
+    ³   ³   System.Data.SQLite.Linq.1.0.106.0.nupkg
+    ³   ³   
+    ³   ÃÄÄÄcontent
+    ³   ³   ÃÄÄÄnet20
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet40
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet45
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÃÄÄÄnet451
+    ³   ³   ³       app.config.transform
+    ³   ³   ³       web.config.transform
+    ³   ³   ³       
+    ³   ³   ÀÄÄÄnet46
+    ³   ³           app.config.transform
+    ³   ³           web.config.transform
+    ³   ³           
+    ³   ÀÄÄÄlib
+    ³       ÃÄÄÄnet20
+    ³       ³       System.Data.SQLite.Linq.dll
+    ³       ³       
+    ³       ÃÄÄÄnet40
+    ³       ³       System.Data.SQLite.Linq.dll
+    ³       ³       
+    ³       ÃÄÄÄnet45
+    ³       ³       System.Data.SQLite.Linq.dll
+    ³       ³       
+    ³       ÃÄÄÄnet451
+    ³       ³       System.Data.SQLite.Linq.dll
+    ³       ³       
+    ³       ÀÄÄÄnet46
+    ³               System.Data.SQLite.Linq.dll
+    ³               
+    ÀÄÄÄSystem.Data.SQLite.Linq.1.0.107.0
+        ³   System.Data.SQLite.Linq.1.0.107.0.nupkg
+        ³   
+        ÃÄÄÄcontent
+        ³   ÃÄÄÄnet20
+        ³   ³       app.config.transform
+        ³   ³       web.config.transform
+        ³   ³       
+        ³   ÃÄÄÄnet40
+        ³   ³       app.config.transform
+        ³   ³       web.config.transform
+        ³   ³       
+        ³   ÃÄÄÄnet45
+        ³   ³       app.config.transform
+        ³   ³       web.config.transform
+        ³   ³       
+        ³   ÃÄÄÄnet451
+        ³   ³       app.config.transform
+        ³   ³       web.config.transform
+        ³   ³       
+        ³   ÀÄÄÄnet46
+        ³           app.config.transform
+        ³           web.config.transform
+        ³           
+        ÀÄÄÄlib
+            ÃÄÄÄnet20
+            ³       System.Data.SQLite.Linq.dll
+            ³       
+            ÃÄÄÄnet40
+            ³       System.Data.SQLite.Linq.dll
+            ³       
+            ÃÄÄÄnet45
+            ³       System.Data.SQLite.Linq.dll
+            ³       
+            ÃÄÄÄnet451
+            ³       System.Data.SQLite.Linq.dll
+            ³       
+            ÀÄÄÄnet46
+                    System.Data.SQLite.Linq.dll
+                    

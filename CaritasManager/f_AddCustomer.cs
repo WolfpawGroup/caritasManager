@@ -34,6 +34,8 @@ namespace CaritasManager
 		private string _city = "";
 		private string _zip = "";
 
+		c_xml xml = new c_xml(Properties.Resources.cities);
+
 
 		public f_AddCustomer()
 		{
@@ -70,63 +72,63 @@ namespace CaritasManager
 			if (cbb_PassedAway.Checked)
 			{
 				//TODO: kiszürkíteni mindent
-				tb_Customer_Name.Enabled = false;
-				cb_Customer_OriginalName.Enabled = false;
-				tb_Customer_OriginalName.Enabled = false;
-				tb_Customer_City.Enabled = false;
-				tb_Customer_UH.Enabled = false;
-				tb_Customer_BirthDate.Enabled = false;
-				btn_SelectBirthDate.Enabled = false;
-				tb_Customer_BirthPlace.Enabled = false;
-				tb_Customer_PIDNum.Enabled = false;
-				tb_Customer_MothersName.Enabled = false;
-				tb_Customer_Schooling.Enabled = false;
-				tb_Customer_Skill.Enabled = false;
-				tb_Customer_Work.Enabled = false;
-				tb_Customer_Employer.Enabled = false;
-				cb_Religion.Enabled = false;
-				tb_OtherReligion.Enabled = false;
-				btn_Income_Add.Enabled = false;
-				btn_Income_Remove.Enabled = false;
-				btn_Income_Edit.Enabled = false;
-				btn_Expenditure_Add.Enabled = false;
-				btn_Expenditure_Remove.Enabled = false;
-				btn_Expenditure_Edit.Enabled = false;
-				tb_Vagyon_Megjegyzés.Enabled = false;
-				cb_Dwelling.Enabled = false;
-				btn_SocialState_Add.Enabled = false;
-				btn_SocialState_Remove.Enabled = false;
-				btn_SocialState_Edit.Enabled = false;
-				cb_GeneralSocialState.Enabled = false;
-				cb_RequiresConstantCare.Enabled = false;
-				btn_State_Add.Enabled = false;
-				btn_State_Remove.Enabled = false;
-				btn_State_Edit.Enabled = false;
-				tb_StudyBy.Enabled = false;
-				tb_StudyOn.Enabled = false;
-				btn_SameAsCreator.Enabled = false;
-				btn_EditAid.Enabled = false;
+				tb_Customer_Name.Enabled			= false;
+				cb_Customer_OriginalName.Enabled	= false;
+				tb_Customer_OriginalName.Enabled	= false;
+				tb_Customer_City.Enabled			= false;
+				tb_Customer_UH.Enabled				= false;
+				tb_Customer_BirthDate.Enabled		= false;
+				btn_SelectBirthDate.Enabled			= false;
+				tb_Customer_BirthPlace.Enabled		= false;
+				tb_Customer_PIDNum.Enabled			= false;
+				tb_Customer_MothersName.Enabled		= false;
+				tb_Customer_Schooling.Enabled		= false;
+				tb_Customer_Skill.Enabled			= false;
+				tb_Customer_Work.Enabled			= false;
+				tb_Customer_Employer.Enabled		= false;
+				cb_Religion.Enabled					= false;
+				tb_OtherReligion.Enabled			= false;
+				btn_Income_Add.Enabled				= false;
+				btn_Income_Remove.Enabled			= false;
+				btn_Income_Edit.Enabled				= false;
+				btn_Expenditure_Add.Enabled			= false;
+				btn_Expenditure_Remove.Enabled		= false;
+				btn_Expenditure_Edit.Enabled		= false;
+				tb_Vagyon_Megjegyzés.Enabled		= false;
+				cb_Dwelling.Enabled					= false;
+				btn_SocialState_Add.Enabled			= false;
+				btn_SocialState_Remove.Enabled		= false;
+				btn_SocialState_Edit.Enabled		= false;
+				cb_GeneralSocialState.Enabled		= false;
+				cb_RequiresConstantCare.Enabled		= false;
+				btn_State_Add.Enabled				= false;
+				btn_State_Remove.Enabled			= false;
+				btn_State_Edit.Enabled				= false;
+				tb_StudyBy.Enabled					= false;
+				tb_StudyOn.Enabled					= false;
+				btn_SameAsCreator.Enabled			= false;
+				btn_EditAid.Enabled					= false;
 				
 			}
 
-			tb_Customer_Name.Text =				m.nev;
-			customerName = m.nev;
-			tb_Customer_OriginalName.Text =		m.születesi_nev;
-			cb_Customer_OriginalName.Checked =	(tb_Customer_OriginalName.Text != tb_Customer_Name.Text);
-			tb_CustomerIdentification.Text =	m.azonosito;
+			tb_Customer_Name.Text					=	m.nev;
+			customerName							=	m.nev;
+			tb_Customer_OriginalName.Text			=	m.születesi_nev;
+			cb_Customer_OriginalName.Checked		=	(tb_Customer_OriginalName.Text != tb_Customer_Name.Text);
+			tb_CustomerIdentification.Text			=	m.azonosito;
 
-			tb_Customer_City.Text =				m.lakcim_varos;
-			tb_Customer_UH.Text =				m.lakcim_uh;
+			tb_Customer_City.Text					=	m.lakcim_varos;
+			tb_Customer_UH.Text						=	m.lakcim_uh;
 
-			tb_Customer_BirthDate.Text =		m.szul_datum;
-			tb_Customer_BirthPlace.Text =		m.szul_hely;
-			tb_Customer_PIDNum.Text =			m.szig_szam;
-			tb_Customer_MothersName.Text =		m.anyja_neve;
+			tb_Customer_BirthDate.Text				=	m.szul_datum;
+			tb_Customer_BirthPlace.Text				=	m.szul_hely;
+			tb_Customer_PIDNum.Text					=	m.szig_szam;
+			tb_Customer_MothersName.Text			=	m.anyja_neve;
 
-			tb_Customer_Schooling.Text =		m.vegzettseg;
-			tb_Customer_Skill.Text =			m.szakkepzettseg;
-			tb_Customer_Work.Text =				m.foglalkozas;
-			tb_Customer_Employer.Text =			m.munkaltato;
+			tb_Customer_Schooling.Text				=	m.vegzettseg;
+			tb_Customer_Skill.Text					=	m.szakkepzettseg;
+			tb_Customer_Work.Text					=	m.foglalkozas;
+			tb_Customer_Employer.Text				=	m.munkaltato;
 
 
 
@@ -504,44 +506,43 @@ namespace CaritasManager
 			{
 				mainData m = new mainData();
 
-				m.nev = tb_Customer_Name.Text;
-				m.születesi_nev = tb_Customer_OriginalName.Text;
-				m.lakcim_varos = tb_Customer_City.Text;
-				m.lakcim_uh = tb_Customer_UH.Text;
-				m.lakcim_zip = lbl_ZipCode.Text;
-				m.szul_datum = tb_Customer_BirthDate.Text;
-				m.szul_hely = tb_Customer_BirthPlace.Text;
-				m.szig_szam = tb_Customer_PIDNum.Text;
-				m.anyja_neve = tb_Customer_MothersName.Text;
-				m.vegzettseg = tb_Customer_Schooling.Text;
-				m.szakkepzettseg = tb_Customer_Skill.Text;
-				m.foglalkozas = tb_Customer_Work.Text;
-				m.munkaltato = tb_Customer_Employer.Text;
-				m.vallas = cb_Religion.SelectedIndex < 7 ? cb_Religion.SelectedIndex + "" : tb_OtherReligion.Text;
+				m.nev				= tb_Customer_Name.Text;
+				m.születesi_nev		= tb_Customer_OriginalName.Text;
+				m.lakcim_varos		= tb_Customer_City.Text;
+				m.lakcim_uh			= tb_Customer_UH.Text;
+				m.lakcim_zip		= lbl_ZipCode.Text;
+				m.szul_datum		= tb_Customer_BirthDate.Text;
+				m.szul_hely			= tb_Customer_BirthPlace.Text;
+				m.szig_szam			= tb_Customer_PIDNum.Text;
+				m.anyja_neve		= tb_Customer_MothersName.Text;
+				m.vegzettseg		= tb_Customer_Schooling.Text;
+				m.szakkepzettseg	= tb_Customer_Skill.Text;
+				m.foglalkozas		= tb_Customer_Work.Text;
+				m.munkaltato		= tb_Customer_Employer.Text;
+				m.vallas			= cb_Religion.SelectedIndex < 7 ? cb_Religion.SelectedIndex + "" : tb_OtherReligion.Text;
 
-				m.azonosito = c_DBHandler.getNextAzonosito(sqlc);
+				m.azonosito			= c_DBHandler.getNextAzonosito(sqlc);
 
-				string allapot = "";
+				string allapot		= "";
 
 				foreach(ListViewItem lvi in lv_States.Items)
 				{
-					allapot += lvi.SubItems[1].Text + "|";
+					allapot						+= lvi.SubItems[1].Text + "|";
 				}
 
-				allapot = allapot.Trim('|');
+				allapot							= allapot.Trim('|');
+				m.allapot						= allapot;
 
-				m.allapot = allapot;
+				m.felvevo_profil				= lbl_ProfileName.Text;
+				m.hozzaadas_datuma				= lbl_CreationDate.Text;
+				m.legutobb_modositotta			= "";
+				m.legutobbi_modositas_datuma	= "";
+				m.környezettanulmanyt_végezte	= tb_StudyBy.Text;
+				m.környezettanulmany_idopontja	= tb_StudyOn.Text;
 
-				m.felvevo_profil = lbl_ProfileName.Text;
-				m.hozzaadas_datuma = lbl_CreationDate.Text;
-				m.legutobb_modositotta = "";
-				m.legutobbi_modositas_datuma = "";
-				m.környezettanulmanyt_végezte = tb_StudyBy.Text;
-				m.környezettanulmany_idopontja = tb_StudyOn.Text;
-
-				customer_id = c_DBHandler.addNewCustomerAllData(sqlc, m);
-				OK = true;
-				reload = true;
+				customer_id						= c_DBHandler.addNewCustomerAllData(sqlc, m);
+				OK								= true;
+				reload							= true;
 
 				this.Close();
 			}
@@ -777,6 +778,7 @@ namespace CaritasManager
 			if(ziptb.Text != "")
 			{
 				lbl_ZipCode.Text = ziptb.Text;
+				tb_Customer_City.Text = xml.getCityName(ziptb.Text);
 				((Button)sender).Dispose();
 				ziptb.Dispose();
 				btn_EditZipCode.Show();
@@ -846,6 +848,12 @@ namespace CaritasManager
 		private void lv_Relatives_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if(lv_Relatives.FocusedItem != null) { editRokon(); }
+		}
+
+		private void btn_EditCustomerIdentification_Click(object sender, EventArgs e)
+		{
+			tb_CustomerIdentification.ReadOnly = false;
+			tb_CustomerIdentification.SelectAll();
 		}
 	}
 

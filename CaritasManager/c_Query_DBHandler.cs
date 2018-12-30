@@ -21,30 +21,45 @@ namespace CaritasManager
 		public static List<profile> getProfiles(SQLiteConnection sqlc)
 		{
 			List<profile> proflist = new List<profile>();
-
-			SQLiteCommand sqlk = new SQLiteCommand("SELECT * FROM profilok", sqlc);
+			SQLiteCommand sqlk = new SQLiteCommand(
+				@"
+					SELECT
+						id,
+						COALESCE(profil_name ,'')	AS profil_name,
+						COALESCE(last_login ,'')	AS last_login,
+						COALESCE(font_family ,'')	AS font_family,
+						COALESCE(font_size ,'')		AS font_size,
+						COALESCE(font_style ,'')	AS font_style ,
+						COALESCE(font_color ,'')	AS font_color ,
+						COALESCE(color_1 ,'')		AS color_1,
+						COALESCE(color_2 ,'')		AS color_2,
+						COALESCE(color_3 ,'')		AS color_3
+					FROM
+						profilok", sqlc);
 			SQLiteDataReader r = sqlk.ExecuteReader();
 			while (r.Read())
 			{
+
 				try
 				{
-					profile p = new profile();
-					p.name = r.GetString(r.GetOrdinal("profil_name"));
-					p.fontStyle = r.GetString(r.GetOrdinal("font_style"));
-					p.fontSize = r.GetString(r.GetOrdinal("font_size"));
-					p.fontFamily = r.GetString(r.GetOrdinal("font_family"));
-					p.fontColor = r.GetString(r.GetOrdinal("font_color"));
-					p.color_1 = r.GetString(r.GetOrdinal("color_1"));
-					p.color_2 = r.GetString(r.GetOrdinal("color_2"));
-					p.color_3 = r.GetString(r.GetOrdinal("color_3"));
-					p.last_login = r.GetString(r.GetOrdinal("last_login"));
+					if(r.GetString(r.GetOrdinal("profil_name")) == "") { continue; }
+					profile p		=	new profile();
+					p.name			=	r.GetString( r.GetOrdinal( "profil_name" ) );
+					p.fontStyle		=	r.GetString( r.GetOrdinal( "font_style"	 ) );
+					p.fontSize		=	r.GetString( r.GetOrdinal( "font_size"	 ) );
+					p.fontFamily	=	r.GetString( r.GetOrdinal( "font_family" ) );
+					p.fontColor		=	r.GetString( r.GetOrdinal( "font_color"	 ) );
+					p.color_1		=	r.GetString( r.GetOrdinal( "color_1"	 ) );
+					p.color_2		=	r.GetString( r.GetOrdinal( "color_2"	 ) );
+					p.color_3		=	r.GetString( r.GetOrdinal( "color_3"	 ) );
+					p.last_login	=	r.GetString( r.GetOrdinal( "last_login"	 ) );
 
 					proflist.Add(p);
 				}
 				catch (Exception ex)
 				{
 					Console.WriteLine(ex.ToString());
-					System.Media.SystemSounds.Asterisk.Play();
+					//System.Media.SystemSounds.Asterisk.Play();
 				}
 			}
 
@@ -76,7 +91,17 @@ namespace CaritasManager
 				mdr.houseno = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
 				mdr.zip = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
 				mdr.state = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
-				mdr.dateAdded = Convert.ToDateTime(c_DBHandler.checkDate(c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("hozzaadas_datuma"))))); //TODO: Checkdate-ben lekezelni az üres értéket
+				DateTime o_dtadded;
+				if (DateTime.TryParse(r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString(), out o_dtadded))
+				{
+					mdr.dateAdded = o_dtadded;
+				}
+				else
+				{
+					mdr.dateAdded = default(DateTime); //TODO: Checkdate-ben lekezelni az üres értéket
+					mdr.dtadded = r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString();
+				}
+				
 				string d = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
 				try
 				{

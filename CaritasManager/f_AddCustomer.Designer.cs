@@ -293,6 +293,7 @@
 			this.btn_EditCustomerIdentification.TabIndex = 13;
 			this.btn_EditCustomerIdentification.Text = "Ügyfél azonosító manuális felülírása";
 			this.btn_EditCustomerIdentification.UseVisualStyleBackColor = true;
+			this.btn_EditCustomerIdentification.Click += new System.EventHandler(this.btn_EditCustomerIdentification_Click);
 			// 
 			// panel3
 			// 

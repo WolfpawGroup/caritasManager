@@ -44,6 +44,7 @@
 			this.btn_Cancel = new System.Windows.Forms.Button();
 			this.btn_Save = new System.Windows.Forms.Button();
 			this.btn_FactorySettings = new System.Windows.Forms.Button();
+			this.p_TextTest = new System.Windows.Forms.Panel();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -109,6 +110,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.groupBox1.Controls.Add(this.p_Color3);
 			this.groupBox1.Controls.Add(this.p_Color2);
 			this.groupBox1.Controls.Add(this.p_Color1);
@@ -116,19 +119,20 @@
 			this.groupBox1.Controls.Add(this.label6);
 			this.groupBox1.Controls.Add(this.label5);
 			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.groupBox1.Location = new System.Drawing.Point(16, 142);
+			this.groupBox1.Location = new System.Drawing.Point(16, 204);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(362, 140);
+			this.groupBox1.Size = new System.Drawing.Size(613, 140);
 			this.groupBox1.TabIndex = 7;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Színek";
 			// 
 			// p_Color3
 			// 
+			this.p_Color3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.p_Color3.BackColor = System.Drawing.Color.LightPink;
 			this.p_Color3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.p_Color3.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color3.Location = new System.Drawing.Point(281, 105);
+			this.p_Color3.Location = new System.Drawing.Point(535, 105);
 			this.p_Color3.Name = "p_Color3";
 			this.p_Color3.Size = new System.Drawing.Size(72, 24);
 			this.p_Color3.TabIndex = 14;
@@ -136,10 +140,11 @@
 			// 
 			// p_Color2
 			// 
+			this.p_Color2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.p_Color2.BackColor = System.Drawing.Color.Moccasin;
 			this.p_Color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.p_Color2.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color2.Location = new System.Drawing.Point(281, 68);
+			this.p_Color2.Location = new System.Drawing.Point(535, 68);
 			this.p_Color2.Name = "p_Color2";
 			this.p_Color2.Size = new System.Drawing.Size(72, 24);
 			this.p_Color2.TabIndex = 13;
@@ -147,10 +152,11 @@
 			// 
 			// p_Color1
 			// 
+			this.p_Color1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.p_Color1.BackColor = System.Drawing.Color.LightGreen;
 			this.p_Color1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.p_Color1.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_Color1.Location = new System.Drawing.Point(281, 31);
+			this.p_Color1.Location = new System.Drawing.Point(535, 31);
 			this.p_Color1.Name = "p_Color1";
 			this.p_Color1.Size = new System.Drawing.Size(72, 24);
 			this.p_Color1.TabIndex = 12;
@@ -158,16 +164,19 @@
 			// 
 			// tb_ProfileName
 			// 
+			this.tb_ProfileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.tb_ProfileName.BackColor = System.Drawing.Color.White;
 			this.tb_ProfileName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
 			this.tb_ProfileName.Location = new System.Drawing.Point(124, 3);
 			this.tb_ProfileName.Name = "tb_ProfileName";
-			this.tb_ProfileName.Size = new System.Drawing.Size(245, 29);
+			this.tb_ProfileName.Size = new System.Drawing.Size(505, 29);
 			this.tb_ProfileName.TabIndex = 8;
 			// 
 			// btn_SelectFont
 			// 
-			this.btn_SelectFont.Location = new System.Drawing.Point(297, 61);
+			this.btn_SelectFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_SelectFont.Location = new System.Drawing.Point(551, 61);
 			this.btn_SelectFont.Name = "btn_SelectFont";
 			this.btn_SelectFont.Size = new System.Drawing.Size(72, 23);
 			this.btn_SelectFont.TabIndex = 10;
@@ -177,10 +186,11 @@
 			// 
 			// p_FontColor
 			// 
+			this.p_FontColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.p_FontColor.BackColor = System.Drawing.Color.Black;
 			this.p_FontColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.p_FontColor.Cursor = System.Windows.Forms.Cursors.Hand;
-			this.p_FontColor.Location = new System.Drawing.Point(297, 97);
+			this.p_FontColor.Location = new System.Drawing.Point(551, 97);
 			this.p_FontColor.Name = "p_FontColor";
 			this.p_FontColor.Size = new System.Drawing.Size(72, 24);
 			this.p_FontColor.TabIndex = 11;
@@ -188,7 +198,8 @@
 			// 
 			// btn_Cancel
 			// 
-			this.btn_Cancel.Location = new System.Drawing.Point(16, 333);
+			this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btn_Cancel.Location = new System.Drawing.Point(16, 395);
 			this.btn_Cancel.Name = "btn_Cancel";
 			this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
 			this.btn_Cancel.TabIndex = 12;
@@ -198,7 +209,8 @@
 			// 
 			// btn_Save
 			// 
-			this.btn_Save.Location = new System.Drawing.Point(303, 333);
+			this.btn_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btn_Save.Location = new System.Drawing.Point(554, 395);
 			this.btn_Save.Name = "btn_Save";
 			this.btn_Save.Size = new System.Drawing.Size(75, 23);
 			this.btn_Save.TabIndex = 13;
@@ -208,20 +220,34 @@
 			// 
 			// btn_FactorySettings
 			// 
+			this.btn_FactorySettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.btn_FactorySettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.btn_FactorySettings.Location = new System.Drawing.Point(16, 288);
+			this.btn_FactorySettings.Location = new System.Drawing.Point(16, 350);
 			this.btn_FactorySettings.Name = "btn_FactorySettings";
-			this.btn_FactorySettings.Size = new System.Drawing.Size(362, 26);
+			this.btn_FactorySettings.Size = new System.Drawing.Size(613, 26);
 			this.btn_FactorySettings.TabIndex = 14;
 			this.btn_FactorySettings.Text = "Alapértelmezett beállítások visszaállítása";
 			this.btn_FactorySettings.UseVisualStyleBackColor = true;
 			this.btn_FactorySettings.Click += new System.EventHandler(this.btn_FactorySettings_Click);
 			// 
+			// p_TextTest
+			// 
+			this.p_TextTest.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.p_TextTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.p_TextTest.Location = new System.Drawing.Point(97, 54);
+			this.p_TextTest.Name = "p_TextTest";
+			this.p_TextTest.Size = new System.Drawing.Size(448, 144);
+			this.p_TextTest.TabIndex = 15;
+			// 
 			// f_EditProfile
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(390, 368);
+			this.ClientSize = new System.Drawing.Size(641, 430);
+			this.Controls.Add(this.p_TextTest);
 			this.Controls.Add(this.btn_FactorySettings);
 			this.Controls.Add(this.btn_Save);
 			this.Controls.Add(this.btn_Cancel);
@@ -232,7 +258,7 @@
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
 			this.Name = "f_EditProfile";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Profil Módosítása";
@@ -262,5 +288,6 @@
 		private System.Windows.Forms.Button btn_Cancel;
 		private System.Windows.Forms.Button btn_Save;
 		private System.Windows.Forms.Button btn_FactorySettings;
+		private System.Windows.Forms.Panel p_TextTest;
 	}
 }

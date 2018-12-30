@@ -55,6 +55,11 @@ namespace CaritasManager
 		/// Mikor lett felvéve az ügyfél az adatbázisba (SDT)
 		/// </summary>
 		public DateTime dateAdded { get; set; }
+		
+		/// <summary>
+		/// Mikor lett felvéve az ügyfél az adatbázisba (SDT)
+		/// </summary>
+		public string dtadded { get; set; }
 
 		/// <summary>
 		/// Mikor kapott utoljára segélyt az ügyfél

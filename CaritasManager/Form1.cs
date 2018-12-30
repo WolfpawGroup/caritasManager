@@ -16,14 +16,14 @@ namespace CaritasManager
 {
 	public partial class Form1 : Form
 	{
-		public SQLiteConnection sqlc = null;
-		public bool showKin = false;
-		public profile login_profile { get; set; }
-		DataGridViewCellEventArgs showKinArgs = null;
-		public bool backupForCurrentDate = false;
-		int showKinCheck = 0;
-		private List<city> cities = new List<city>();
-		public bool scrollMovePosition = false;
+		public	profile						login_profile			{ get; set; }
+		public	SQLiteConnection			sqlc					= null;
+		public	bool						showKin					= false;
+		public	bool						backupForCurrentDate	= false;
+		public	bool						scrollMovePosition		= false;
+		private	int							showKinCheck			= 0;
+		private List<city>					cities					= new List<city>();
+		private	DataGridViewCellEventArgs	showKinArgs				= null;
 
 		public Form1()
 		{
@@ -39,7 +39,7 @@ namespace CaritasManager
 			//sqlc = c_DBHandler.connectToDB()[0];
 			//sqlc.Open();
 			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
-
+			
 			try
 			{
 				XmlDocument xmld = new XmlDocument();
@@ -300,6 +300,7 @@ namespace CaritasManager
 		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			selectedrow = e.RowIndex;
+			lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
 			//dg_DataTable.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
 
 			//TODO: add some form of selection marker to this thing...
@@ -314,21 +315,11 @@ namespace CaritasManager
 					Font = new Font(dg_DataTable.Font.FontFamily, dg_DataTable.Font.Size, FontStyle.Underline)
 				};
 			*/
+			/*Ehh... good enough...*/
 		}
 
 		private void dg_DataTable_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
 		{
-			try
-			{
-				if(e.RowIndex == selectedrow)
-				{
-					//e.Graphics.DrawRectangle(Pens.Black, e.RowBounds);
-				}
-			}
-			catch
-			{
-				
-			}
 			
 		}
 
@@ -432,27 +423,27 @@ namespace CaritasManager
 			{
 				if (cb_FullMatch.Checked)
 				{
-					where += " lower(nev) = '" + tb_Filter_Name.Text.ToLower() + "'";
+					where += $" lower(nev) = '{tb_Filter_Name.Text.ToLower()}'";
 				}
 				else
 				{
-					where += " nev LIKE '%" + tb_Filter_Name.Text + "%'";
+					where += $" lower(nev) LIKE '%{tb_Filter_Name.Text.ToLower()}%'";
 				}
 			}
 
 			if (tb_Filter_City.Text != "")
 			{
 				if (where.Trim() != "where") { where += " AND "; }
-				where += " lower(lakcim_varos) = '" + tb_Filter_City.Text.ToLower() + "'";
+				where += $" trim(lower(lakcim_varos)) LIKE '%{tb_Filter_City.Text.ToLower().Trim()}%'";
 			}
 
 			if (cb_Filter_State.Text != "")
 			{
 				if (where.Trim() != "where") { where += " AND "; }
-				where += " instr(lower(allapot), '" + cb_Filter_State.Text.ToLower() + "')";
+				where += $" trim(instr(lower(allapot)), '{cb_Filter_State.Text.ToLower().Trim()}')";
 			}
 
-			if (where.Trim() == "where") { where = ""; }
+			if (where.ToLower().Trim() == "where") { where = ""; }
 
 			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(sqlc, where);
 
@@ -496,6 +487,31 @@ namespace CaritasManager
 		private void dg_DataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
 			toolStripButton1_Click(null,null);
+		}
+
+		private void dg_DataTable_CellClick_1(object sender, DataGridViewCellEventArgs e)
+		{
+			selectedrow = e.RowIndex;
+			fillOtherData();
+		}
+
+		private void dg_DataTable_SelectionChanged(object sender, EventArgs e)
+		{
+			selectedrow = dg_DataTable.CurrentRow.Index;
+			fillOtherData();
+		}
+
+		public void fillOtherData()
+		{
+			//TODO: Add select for some extended data for customer selection
+			//var cust = getSomeData();
+			lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
+			lbl_SelectedCustomer_ID.Text = "#" + dg_DataTable.Rows[selectedrow].Cells[2].Value.ToString();
+		}
+
+		private void panel1_Paint(object sender, PaintEventArgs e)
+		{
+
 		}
 	}
 }

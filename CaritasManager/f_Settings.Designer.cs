@@ -245,6 +245,7 @@
 			this.btn_Save.TabIndex = 15;
 			this.btn_Save.Text = "Mentés";
 			this.btn_Save.UseVisualStyleBackColor = true;
+			this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
 			// 
 			// btn_Cancel
 			// 
@@ -254,6 +255,7 @@
 			this.btn_Cancel.TabIndex = 16;
 			this.btn_Cancel.Text = "Mégse";
 			this.btn_Cancel.UseVisualStyleBackColor = true;
+			this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
 			// 
 			// label7
 			// 

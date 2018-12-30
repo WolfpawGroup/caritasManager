@@ -229,6 +229,7 @@ namespace CaritasManager
 		{
 			if (!connectioinOpen(sqlc)) { return "ERROR:-1"; }
 
+			if(p.name.Length < 1) { return "ERROR:NONAME"; }
 			//TODO: NE ENGEDJÜK MEG, HOGY ÜRES LEGYEN A NEVE!!!!!
 
 			string command = string.Format("SELECT id FROM profilok WHERE lower(profil_name)='{0}'", p.name.ToLower());

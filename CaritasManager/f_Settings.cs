@@ -55,5 +55,15 @@ namespace CaritasManager
 			f_DeletedCustomers fdc = new f_DeletedCustomers();
 			fdc.ShowDialog();
 		}
+
+		private void btn_Cancel_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+
+		private void btn_Save_Click(object sender, EventArgs e)
+		{
+			//TODO: Don't forget to add settings
+		}
 	}
 }
