@@ -60,8 +60,7 @@
 			// 
 			// p_LoadingBar
 			// 
-			this.p_LoadingBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.p_LoadingBar.Location = new System.Drawing.Point(0, 290);
+			this.p_LoadingBar.Location = new System.Drawing.Point(0, 289);
 			this.p_LoadingBar.Name = "p_LoadingBar";
 			this.p_LoadingBar.Size = new System.Drawing.Size(300, 10);
 			this.p_LoadingBar.TabIndex = 2;

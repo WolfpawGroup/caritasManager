@@ -73,24 +73,36 @@ namespace CaritasManager
 		/// <returns>List containing every row in c_MainDataRow objects</returns>
 		public static List<c_MainDataRow> getMainRowData(SQLiteConnection sqlc, string where)
 		{
-			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,lakcim_zip,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel " + where;
+			string main_command = @"
+SELECT 
+id,COALESCE(nev, '')					AS nev,
+COALESCE(jovedelem_igazolas, 'F')		AS jovedelem_igazolas,
+COALESCE(azonosito,'')					AS azonosito,
+COALESCE(lakcim_varos,'')				AS lakcim_varos,
+COALESCE(lakcim_uh,'')					AS lakcim_uh,
+COALESCE(lakcim_zip,'')					AS lakcim_zip,
+COALESCE(allapot,'')					AS allapot,
+COALESCE(hozzaadas_datuma,'')			AS hozzaadas_datuma,
+COALESCE(utolso_tamogatas_idopontja,'') AS utolso_tamogatas_idopontja
+FROM ugyfel " + where;
 
 			List<c_MainDataRow> lst = new List<c_MainDataRow>();
 			SQLiteCommand sqlk = new SQLiteCommand(main_command, sqlc);
 			SQLiteDataReader r = sqlk.ExecuteReader();
 			string current_azonosito = c_DBHandler.get_azonosito(sqlc);
 
+			c_MainDataRow mdr	= new c_MainDataRow();
 			while (r.Read())
 			{
-				c_MainDataRow mdr	= new c_MainDataRow();
+				mdr					= new c_MainDataRow();
 				mdr.id				= r.GetInt32(r.GetOrdinal("id"));
-				mdr.name			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("nev")));  //--
-				mdr.j				= (c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
-				mdr.identification	= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
-				mdr.city			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
-				mdr.houseno			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
-				mdr.zip				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
-				mdr.state			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
+				mdr.name			= (r.GetString(r.GetOrdinal("nev")));  //--
+				mdr.j				= ((r.GetString(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
+				mdr.identification	= (r.GetString(r.GetOrdinal("azonosito")));
+				mdr.city			= (r.GetString(r.GetOrdinal("lakcim_varos")));
+				mdr.houseno			= (r.GetString(r.GetOrdinal("lakcim_uh")));
+				mdr.zip				= (r.GetString(r.GetOrdinal("lakcim_zip")));
+				mdr.state			= (r.GetString(r.GetOrdinal("allapot")));
 
 				DateTime o_dtadded;
 				if (DateTime.TryParse(r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString(), out o_dtadded))
@@ -103,7 +115,7 @@ namespace CaritasManager
 					mdr.dtadded = r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString();
 				}
 
-				string d = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
+				string d = (r.GetString(r.GetOrdinal("utolso_tamogatas_idopontja")));
 				try
 				{
 					mdr.lastSupport = (d != "" ? Convert.ToDateTime(c_DBHandler.checkDate(d)) : (DateTime?)null);
@@ -114,26 +126,25 @@ namespace CaritasManager
 				}
 				mdr.kin = new List<string>();
 
-
 				string kin_command = "SELECT * FROM haztartasban_elok WHERE ugyfel_id=" + mdr.id;
 				SQLiteCommand sqlk2 = new SQLiteCommand(kin_command, sqlc);
 				SQLiteDataReader rr = sqlk2.ExecuteReader();
 
 				while (rr.Read())
 				{
-					mdr.kin.Add(c_DBHandler.checkvalueString(rr.GetValue(rr.GetOrdinal("rokoni_kapcsolat"))) + ":" + c_DBHandler.checkvalueString(rr.GetValue(rr.GetOrdinal("nev"))));
+					mdr.kin.Add((rr.GetValue(rr.GetOrdinal("rokoni_kapcsolat"))) + ":" + (rr.GetValue(rr.GetOrdinal("nev"))));
 				}
-
-
-				if (c_DBHandler.greater(current_azonosito, mdr.identification))
-				{
-					current_azonosito = mdr.identification;
-				}
-
-				c_DBHandler.set_azonosito(sqlc, current_azonosito);
 
 				lst.Add(mdr);
 			}
+	
+			
+			if (c_DBHandler.greater(current_azonosito, mdr.identification))
+			{
+				current_azonosito = mdr.identification;
+			}
+
+			c_DBHandler.set_azonosito(sqlc, current_azonosito);
 
 			return lst;
 		}

@@ -17,24 +17,23 @@ namespace CaritasManager
 {
 	public partial class f_AddCustomer : Form
 	{
-		public SQLiteConnection sqlc { get; set; }
-		public profile login_profile { get; set; }
-		public List<string> States { get; set; }
-		public List<city> cities = new List<city>();
-		public string customerName = "";
-		public string current_id = "";
-		public bool otherReligion = false;
-		public bool reload = false;
-		public bool edit { get; set; }
-		public bool OK = false;
-		public int customer_id { get; set; }
+		public	SQLiteConnection	sqlc			{ get; set; }
+		public	profile				login_profile	{ get; set; }
+		public	List<string>		States			{ get; set; }
+		public	string				customerName	= "";
+		public	string				current_id		= "";
+		public	bool				otherReligion	= false;
+		public	bool				reload			= false;
+		public	bool				edit			{ get; set; }
+		public	bool				OK				= false;
+		public	int					customer_id		{ get; set; }
 
-		private TextBox ziptb = null;
-		private Thread t = null;
-		private string _city = "";
-		private string _zip = "";
+		private	TextBox				ziptb			= null;
+		private	Thread				_t				= null;
+		private	string				_city			= "";
+		private	string				_zip			= "";
 
-		c_xml xml = new c_xml(Properties.Resources.cities);
+		private	c_xml				_xml			= new c_xml(Properties.Resources.cities);
 
 
 		public f_AddCustomer()
@@ -129,21 +128,11 @@ namespace CaritasManager
 			tb_Customer_Skill.Text					=	m.szakkepzettseg;
 			tb_Customer_Work.Text					=	m.foglalkozas;
 			tb_Customer_Employer.Text				=	m.munkaltato;
-
-
-
+			
 			if(m.lakcim_zip == "")
 			{
-				_city = m.lakcim_varos.ToLower();
-
-				foreach (city c in cities)
-				{
-					if (c.name.ToLower() == _city)
-					{
-						_zip = c.zipcode;
-						break;
-					}
-				}
+				_city								= m.lakcim_varos.ToLower();
+				_zip								= _xml.getZipcode(_city).ToString();
 
 				if (_zip != "") { lbl_ZipCode.Invoke(new myDelegate(setZip)); }
 
@@ -151,22 +140,20 @@ namespace CaritasManager
 			}
 			else
 			{
-				lbl_ZipCode.Text = m.lakcim_zip;
+				lbl_ZipCode.Text					= m.lakcim_zip;
 			}
 
-			cbb_SZJI.Checked =					m.jovedelem_igazolas;
+			cbb_SZJI.Checked						=	m.jovedelem_igazolas;
+			string vallas							=	m.vallas;
 
-			string vallas = m.vallas;
-			int _v = 1;
-
-			if(int.TryParse(vallas, out _v))
+			if (int.TryParse(vallas, out int _v))
 			{
-				cb_Religion.SelectedIndex = _v;
+				cb_Religion.SelectedIndex	= _v;
 			}
 			else
 			{
-				cb_Religion.SelectedIndex = 7;
-				tb_OtherReligion.Text = vallas;
+				cb_Religion.SelectedIndex	= 7;
+				tb_OtherReligion.Text		= vallas;
 			}
 
 			//------------- Vagyoni helyzet
@@ -175,20 +162,20 @@ namespace CaritasManager
 
 			//------------- Szociális helyzet
 
-			cb_Dwelling.SelectedIndex = (int)cad.cust_2_lakas;
-			cb_GeneralSocialState.SelectedIndex = (int)cad.cust_3_alt_szoc_helyzet;
-			cb_RequiresConstantCare.SelectedIndex = (int)cad.cust_4_rendsz_seg_szorul;
+			cb_Dwelling.SelectedIndex				= (int)cad.cust_2_lakas;
+			cb_GeneralSocialState.SelectedIndex		= (int)cad.cust_3_alt_szoc_helyzet;
+			cb_RequiresConstantCare.SelectedIndex	= (int)cad.cust_4_rendsz_seg_szorul;
 			
 			fillCustomerRokonok(cad);
-			
 
-			String[] állapot = m.allapot.Split('|');
+			string[] állapot						= m.allapot.Split('|');
 			foreach (string _állapot in állapot)
 			{
 				if (_állapot != "")
 				{
 					ListViewItem állapot_lvi = new ListViewItem();
-					állapot_lvi.Text = (lv_States.Items.Count + 1) + "";
+					állapot_lvi.Text		 = (lv_States.Items.Count + 1) + "";
+
 					állapot_lvi.SubItems.Add(_állapot);
 					lv_States.Items.Add(állapot_lvi);
 				}
@@ -196,39 +183,47 @@ namespace CaritasManager
 
 			//------------- Felhasználói Információ
 
-			lbl_ProfileName.Text = m.felvevo_profil;
-			lbl_CreationDate.Text = m.hozzaadas_datuma;
-			lbl_LastUpdatedBy.Text = m.legutobb_modositotta;
-			lbl_LastUpdateDate.Text = m.legutobbi_modositas_datuma;
-			tb_StudyBy.Text = m.környezettanulmanyt_végezte;
-			tb_StudyOn.Text = m.környezettanulmany_idopontja;
+			lbl_ProfileName.Text					= m.felvevo_profil;
+			lbl_CreationDate.Text					= m.hozzaadas_datuma;
+			lbl_LastUpdatedBy.Text					= m.legutobb_modositotta;
+			lbl_LastUpdateDate.Text					= m.legutobbi_modositas_datuma;
+			tb_StudyBy.Text							= m.környezettanulmanyt_végezte;
+			tb_StudyOn.Text							= m.környezettanulmany_idopontja;
 
 			//------------- Támogatások
 
-			List<tamogatas> támogatáslista = cad.cust_6_tamogatasok;
+			List<tamogatas> támogatáslista			= cad.cust_6_tamogatasok;
 
-			int num = 0, allnum = 0;
-			List<aidsclass> aids = new List<aidsclass>();
-			List<aidsclass> all_aids = new List<aidsclass>();
-
-			List<string> types = new List<string>();
+			int num									= 0, 
+				allnum								= 0;
+			List<aidsclass> aids					= new List<aidsclass>();
+			List<aidsclass> all_aids				= new List<aidsclass>();
+			List<string> types						= new List<string>();
 
 			foreach (tamogatas _támogatás in támogatáslista)
 			{
-				ListViewItem támogatás_lvi = new ListViewItem();
-				támogatás_lvi.Tag = new object[] { _támogatás.id, _támogatás.tamogatas_tipusa, _támogatás.tamogatas_mennyisege, _támogatás.tamogatas_egysége };
-				támogatás_lvi.Text = (lv_Aids.Items.Count + 1) + "";
+				ListViewItem támogatás_lvi	= new ListViewItem();
+				támogatás_lvi.Tag			= new object[] { _támogatás.id, _támogatás.tamogatas_tipusa, _támogatás.tamogatas_mennyisege, _támogatás.tamogatas_egysége };
+				támogatás_lvi.Text			= (lv_Aids.Items.Count + 1) + "";
+
 				támogatás_lvi.SubItems.Add(_támogatás.datum.ToShortDateString());
 				támogatás_lvi.SubItems.Add(_támogatás.tamogatas_mennyisege + " " + _támogatás.tamogatas_egysége + " " + _támogatás.tamogatas_tipusa);
 				támogatás_lvi.SubItems.Add(_támogatás.megjegyzes);
 				lv_Aids.Items.Add(támogatás_lvi);
 
+				var aid = new aidsclass()
+				{
+					type = _támogatás.tamogatas_tipusa,
+					value = _támogatás.tamogatas_mennyisege,
+					denoimination = _támogatás.tamogatas_egysége
+				};
+
 				allnum++;
-				all_aids.Add(new aidsclass() { type = _támogatás.tamogatas_tipusa, value = _támogatás.tamogatas_mennyisege, denoimination = _támogatás.tamogatas_egysége });
+				all_aids.Add(aid);
 				if (_támogatás.datum.Year == DateTime.Now.Year)
 				{
 					num++;
-					aids.Add(new aidsclass() { type = _támogatás.tamogatas_tipusa, value = _támogatás.tamogatas_mennyisege, denoimination = _támogatás.tamogatas_egysége });
+					aids.Add(aid);
 				}
 
 				if (!types.Contains(_támogatás.tamogatas_tipusa))
@@ -237,10 +232,11 @@ namespace CaritasManager
 				}
 			}
 
-			lbl_All_Num.Text = allnum + "";
-			lbl_ThisYear_Num.Text = num + "";
+			lbl_All_Num.Text						= allnum + "";
+			lbl_ThisYear_Num.Text					= num + "";
 
-			string tmp = "", tmp1 = "";
+			string tmp								= "", 
+				tmp1								= "";
 
 			foreach (string t in types)
 			{
@@ -705,27 +701,21 @@ namespace CaritasManager
 		{
 			_city = tb_Customer_City.Text.ToLower();
 
-			if (t == null)
+			if (_t == null)
 			{
-				t = new Thread(new ThreadStart(checkZipCode));
-				t.Start();
+				_t = new Thread(new ThreadStart(checkZipCode));
+				_t.Start();
 			}
 		}
 
 		public void checkZipCode()
 		{
-			foreach(city c in cities)
+			if (_xml.tryGetCity(_city, out city c))
 			{
-				if(c.name.ToLower() == _city)
-				{
-					_zip = c.zipcode;
-					break;
-				}
+				_zip = c.zipcode;
+				lbl_ZipCode.Invoke(new myDelegate(setZip));
 			}
-
-			if(_zip != "") { lbl_ZipCode.Invoke(new myDelegate(setZip)); }
-
-			t = null;
+			_t = null;
 			GC.Collect();
 		}
 
@@ -778,7 +768,7 @@ namespace CaritasManager
 			if(ziptb.Text != "")
 			{
 				lbl_ZipCode.Text = ziptb.Text;
-				tb_Customer_City.Text = xml.getCityName(ziptb.Text);
+				tb_Customer_City.Text = _xml.getCityName(ziptb.Text);
 				((Button)sender).Dispose();
 				ziptb.Dispose();
 				btn_EditZipCode.Show();

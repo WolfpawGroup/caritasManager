@@ -8,7 +8,7 @@ namespace CaritasManager
 {
 	class c_xml
 	{
-		Dictionary<string, string> items = new Dictionary<string, string>();
+		List<city> items = new List<city>();
 
 		public c_xml(string xml_string)
 		{
@@ -19,7 +19,7 @@ namespace CaritasManager
 			foreach (XmlNode v in document.FirstChild.ChildNodes)
 			{
 				try {
-					items.Add(v.FirstChild.InnerText, v.LastChild.InnerText);
+					items.Add(new city() { name = v.FirstChild.InnerText, zipcode = v.LastChild.InnerText });
 				} catch(Exception ex) {
 					Console.WriteLine($"Error while adding city to dictionary\r\nName: {v.FirstChild.InnerText}\r\nZipcode: {v.LastChild.InnerText}");
 					Console.Error.WriteLine(ex.Message);
@@ -29,12 +29,78 @@ namespace CaritasManager
 
 		public string getCityName(string zipcode)
 		{
-			return items.Where(x => x.Value == zipcode).Select(x=>x.Key).First();
+
+			try
+			{
+				return items.Where(x => x.zipcode == zipcode).Select(x => x.name).First();
+			}
+			catch
+			{
+				return "";
+			}
 		}
 
 		public int getZipcode(string cityName)
 		{
-			return Convert.ToInt32(items[cityName]);
+			try
+			{
+				return Convert.ToInt32(items.Where(x => x.name == cityName).Select(x => x.zipcode).First());
+			}
+			catch
+			{
+				return -1;
+			}
+		}
+
+		public List<city> getItems()
+		{
+			return items;
+		}
+
+		public city getCity(string cityName)
+		{
+			try
+			{
+				return items.Where(x => x.name == cityName).ToArray()[0];
+			}
+			catch
+			{
+				return null;
+			}
+		}
+		public bool tryGetCity(string cityName, out city result)
+		{
+			try
+			{
+				city c = items.Where(x => x.name == cityName).ToArray()[0];
+				if (c != null)
+				{
+					result = c;
+					return true;
+				}
+				else
+				{
+					result = null;
+					return false;
+				}
+			}
+			catch
+			{
+				result = null;
+				return false;
+			}
+		}
+
+		public city getCityByZip(string zipcode)
+		{
+			try
+			{
+				return items.Where(x => x.zipcode == zipcode).ToArray()[0] ?? null;
+			}
+			catch
+			{
+				return null;
+			}
 		}
 	}
 }

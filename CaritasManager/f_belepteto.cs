@@ -40,12 +40,12 @@ namespace CaritasManager
 
                 c_DBHandler.createTables(sqlc, sqlc2);
             }
-            catch
-            {
-                //TODO: valami szöveget írjunk ki
-            }
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Hiba lépett fel.\r\n\r\nHibakód: {ex.Message}", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 
-            try
+			try
             {
                 if (!c_DBHandler.checkPassword(sqlc))
                 {
@@ -56,9 +56,9 @@ namespace CaritasManager
                     fe.ShowDialog();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                //TODO: valami szöveget írjunk ki
+				MessageBox.Show($"Hiba lépett fel.\r\n\r\nHibakód: {ex.Message}", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 			fillProfiles();
@@ -123,12 +123,9 @@ namespace CaritasManager
 			if (c_DBHandler.login(sqlc, tb_Password.Text, p))
 			{
 				Form1 f = new Form1();
-				f_Splash fs = new f_Splash();
-				f.splashscreen = fs;
 				f.login_profile = p;
 				f.Sqlc = sqlc;
 				this.Hide();
-				fs.Show();
 				f.ShowDialog();
 				this.Show();
 				fillProfiles();

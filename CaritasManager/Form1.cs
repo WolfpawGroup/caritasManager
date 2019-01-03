@@ -11,19 +11,19 @@ using System.Data.Common;
 using System.Data.SQLite;
 using System.IO;
 using System.Xml;
+using System.Threading;
 
 namespace CaritasManager
 {
 	public partial class Form1 : Form
 	{
-		public	f_Splash					splashscreen			{ get; set; }
+		public	f_Splash					splashscreen			= new f_Splash(5);
 		public	profile						login_profile			{ get; set; }
 		public	SQLiteConnection			Sqlc					= null;
 		public	bool						ShowKin					= false;
 		public	bool						BackupForCurrentDate	= false;
 		public	bool						ScrollMovePosition		= false;
 		private	int							_showKinCheck			= 0;
-		private List<city>					_cities					= new List<city>();
 		private	DataGridViewCellEventArgs	_showKinArgs			= null;
 		private bool						_infoPanelOpen			= false;
 		private Bitmap						img						= new Bitmap(22, 22);
@@ -33,6 +33,8 @@ namespace CaritasManager
 		public Form1()
 		{
 			InitializeComponent();
+			splashscreen.Show();
+			splashscreen.incrementLoad();
 
 			Load += Form1_Load;
 			
@@ -45,6 +47,7 @@ namespace CaritasManager
 			dg_DataTable.ColumnWidthChanged += dg_DataTable_ColumnWidthChanged;
 			MouseWheel						+= Form1_MouseWheel;
 			SizeChanged						+= Form1_SizeChanged;
+			splashscreen.incrementLoad();
 		}
 
 		private void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -74,26 +77,11 @@ namespace CaritasManager
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			//TODO: Remove This!
-			//sqlc = c_DBHandler.connectToDB()[0];
-			//sqlc.Open();
-			//login_profile = c_DBHandler.getProfiles(sqlc)[0];
-			
-			try
-			{
-				XmlDocument xmld = new XmlDocument();
-				xmld.LoadXml(Properties.Resources.cityList);
-				XmlNode xe = xmld.FirstChild;
 
-				foreach (XmlNode x in xmld.GetElementsByTagName("city"))
-				{
-					city _c = new city() { name = x.FirstChild.InnerText, zipcode = x.LastChild.InnerText };
-					_cities.Add(_c);
-				}
-			}
-			catch
+			using (Graphics g = Graphics.FromImage(img))
 			{
-
+				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
+				g.DrawImage(Properties.Resources.checkmark_icon_2, new Point(0, 0));
 			}
 
 			createIdFile();
@@ -111,12 +99,15 @@ namespace CaritasManager
 			tb_Filter_City.AutoCompleteCustomSource.AddRange(Properties.Resources.telepulesek.Replace("\r", "").Split('\n'));
 
 			dg_DataTable.colors = c;
+			splashscreen.incrementLoad();
 
 			fillMainList();
+			splashscreen.incrementLoad();
 
 			dg_DataTable.Invalidate();
 
 			dg_DataTable.MouseWheel += Dg_DataTable_MouseWheel;
+			splashscreen.incrementLoad();
 
 			if (splashscreen != null)
 			{
@@ -244,17 +235,12 @@ namespace CaritasManager
 			dg_DataTable.Rows.Clear();
 
 			int I = 0;
-			
-			using (Graphics g = Graphics.FromImage(img))
-			{
-				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
-				g.DrawImage(Properties.Resources.checkmark_icon_2, new Point(0, 0));
-			}
+			DateTime n = DateTime.Now;
+			int lasts = 0;
 
 			foreach (c_MainDataRow mdr in lst)
 			{
-				DateTime n = DateTime.Now;
-				int lasts = 0;
+				lasts = 0;
 
 				if((mdr.lastSupport as DateTime?) == null)
 				{
@@ -281,15 +267,18 @@ namespace CaritasManager
 						"Támogatás"
 					}
 				);
-				dg_DataTable.Rows[I].Cells[0].Tag = new object[] { mdr.kin, mdr.id };
-				dg_DataTable.Rows[I].Cells[1].Tag = mdr;
+
+				DataGridViewRow row = dg_DataTable.Rows[I];
+
+				row.Cells[0].Tag = new object[] { mdr.kin, mdr.id };
+				row.Cells[1].Tag = mdr;
 
 				Color c = lasts == 0 ? Color.FromArgb(Convert.ToInt32(login_profile.color_1)) : (lasts == 1 ? Color.FromArgb(Convert.ToInt32(login_profile.color_2)) : Color.FromArgb(Convert.ToInt32(login_profile.color_3)));
 
-				dg_DataTable.Rows[I].DefaultCellStyle.BackColor = c;
-				dg_DataTable.Rows[I].DefaultCellStyle.SelectionBackColor = c;
+				row.DefaultCellStyle.BackColor = c;
+				row.DefaultCellStyle.SelectionBackColor = c;
 
-				dg_DataTable.Rows[I].DefaultCellStyle.Font = new Font(login_profile.fontFamily, (float)Convert.ToDouble(login_profile.fontSize), (FontStyle)Convert.ToInt32(login_profile.fontStyle));
+				row.DefaultCellStyle.Font = new Font(login_profile.fontFamily, (float)Convert.ToDouble(login_profile.fontSize), (FontStyle)Convert.ToInt32(login_profile.fontStyle));
 
 				I++;
 			}
@@ -320,7 +309,6 @@ namespace CaritasManager
 			f_AddCustomer fad = new f_AddCustomer();
 			fad.login_profile = login_profile;
 			fad.sqlc = Sqlc;
-			fad.cities = _cities;
 			fad.ShowDialog();
 			if (fad.reload) { fillMainList(); }
 			int cid = -1;
@@ -331,7 +319,6 @@ namespace CaritasManager
 				fad = new f_AddCustomer();
 				fad.login_profile = login_profile;
 				fad.sqlc = Sqlc;
-				fad.cities = _cities;
 				fad.edit = true;
 				fad.customer_id = cid;
 				fad.ShowDialog();
@@ -407,7 +394,6 @@ namespace CaritasManager
 					{
 						edit = true,
 						sqlc = Sqlc,
-						cities = _cities,
 						customer_id = Convert.ToInt32(oo[1]),
 						login_profile = login_profile
 					};
