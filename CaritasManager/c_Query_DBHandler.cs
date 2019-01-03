@@ -42,17 +42,17 @@ namespace CaritasManager
 
 				try
 				{
-					if(r.GetString(r.GetOrdinal("profil_name")) == "") { continue; }
-					profile p		=	new profile();
-					p.name			=	r.GetString( r.GetOrdinal( "profil_name" ) );
-					p.fontStyle		=	r.GetString( r.GetOrdinal( "font_style"	 ) );
-					p.fontSize		=	r.GetString( r.GetOrdinal( "font_size"	 ) );
-					p.fontFamily	=	r.GetString( r.GetOrdinal( "font_family" ) );
-					p.fontColor		=	r.GetString( r.GetOrdinal( "font_color"	 ) );
-					p.color_1		=	r.GetString( r.GetOrdinal( "color_1"	 ) );
-					p.color_2		=	r.GetString( r.GetOrdinal( "color_2"	 ) );
-					p.color_3		=	r.GetString( r.GetOrdinal( "color_3"	 ) );
-					p.last_login	=	r.GetString( r.GetOrdinal( "last_login"	 ) );
+					if (r.GetString(r.GetOrdinal("profil_name")) == "") { continue; }
+					profile p = new profile();
+					p.name = r.GetString(r.GetOrdinal("profil_name"));
+					p.fontStyle = r.GetString(r.GetOrdinal("font_style"));
+					p.fontSize = r.GetString(r.GetOrdinal("font_size"));
+					p.fontFamily = r.GetString(r.GetOrdinal("font_family"));
+					p.fontColor = r.GetString(r.GetOrdinal("font_color"));
+					p.color_1 = r.GetString(r.GetOrdinal("color_1"));
+					p.color_2 = r.GetString(r.GetOrdinal("color_2"));
+					p.color_3 = r.GetString(r.GetOrdinal("color_3"));
+					p.last_login = r.GetString(r.GetOrdinal("last_login"));
 
 					proflist.Add(p);
 				}
@@ -82,26 +82,27 @@ namespace CaritasManager
 
 			while (r.Read())
 			{
-				c_MainDataRow mdr = new c_MainDataRow();
-				mdr.id = r.GetInt32(r.GetOrdinal("id"));
-				mdr.name = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("nev")));  //--
-				mdr.j = (c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
-				mdr.identification = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
-				mdr.city = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
-				mdr.houseno = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
-				mdr.zip = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
-				mdr.state = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
+				c_MainDataRow mdr	= new c_MainDataRow();
+				mdr.id				= r.GetInt32(r.GetOrdinal("id"));
+				mdr.name			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("nev")));  //--
+				mdr.j				= (c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
+				mdr.identification	= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
+				mdr.city			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
+				mdr.houseno			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
+				mdr.zip				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
+				mdr.state			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
+
 				DateTime o_dtadded;
 				if (DateTime.TryParse(r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString(), out o_dtadded))
 				{
-					mdr.dateAdded = o_dtadded;
+					mdr.dateAdded	= o_dtadded;
 				}
 				else
 				{
 					mdr.dateAdded = default(DateTime); //TODO: Checkdate-ben lekezelni az üres értéket
 					mdr.dtadded = r.GetValue(r.GetOrdinal("hozzaadas_datuma")).ToString();
 				}
-				
+
 				string d = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
 				try
 				{
@@ -159,33 +160,33 @@ namespace CaritasManager
 
 			//Változó neve					--	Táblából lekérdezett érték								--	Üres érték kezelése
 
-			md.id = custid;
-			md.nev = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("nev")));
-			md.születesi_nev = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("születesi_nev")));
-			md.szig_szam = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szig_szam")));
-			md.lakcim_varos = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
-			md.lakcim_uh = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
-			md.lakcim_zip = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
-			md.szul_datum = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szul_datum")));
-			md.szul_hely = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szul_hely")));
-			md.csaladi_allapot = c_DBHandler.checkvalueInt(r.GetValue(r.GetOrdinal("csaladi_allapot")));
-			md.anyja_neve = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("anyja_neve")));
-			md.vegzettseg = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("vegzettseg")));
-			md.foglalkozas = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("foglalkozas")));
-			md.szakkepzettseg = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szakkepzettseg")));
-			md.munkaltato = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("munkaltato")));
-			md.azonosito = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
-			md.utolso_tamogatas_idopontja = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
-			md.jovedelem_igazolas = (c_DBHandler.checkvalueString((r.GetValue(r.GetOrdinal("jovedelem_igazolas")))) == "T" ? true : false);
-			md.elhunyt = (c_DBHandler.checkvalueString((r.GetValue(r.GetOrdinal("elhunyt")))) == "T" ? true : false);
-			md.allapot = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
-			md.vallas = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("vallas")));
-			md.környezettanulmanyt_végezte = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("környezettanulmanyt_végezte")));
+			md.id							= custid;
+			md.nev							= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("nev")));
+			md.születesi_nev				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("születesi_nev")));
+			md.szig_szam					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szig_szam")));
+			md.lakcim_varos					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_varos")));
+			md.lakcim_uh					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_uh")));
+			md.lakcim_zip					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("lakcim_zip")));
+			md.szul_datum					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szul_datum")));
+			md.szul_hely					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szul_hely")));
+			md.csaladi_allapot				= c_DBHandler.checkvalueInt(r.GetValue(r.GetOrdinal("csaladi_allapot")));
+			md.anyja_neve					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("anyja_neve")));
+			md.vegzettseg					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("vegzettseg")));
+			md.foglalkozas					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("foglalkozas")));
+			md.szakkepzettseg				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("szakkepzettseg")));
+			md.munkaltato					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("munkaltato")));
+			md.azonosito					= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("azonosito")));
+			md.utolso_tamogatas_idopontja	= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("utolso_tamogatas_idopontja")));
+			md.jovedelem_igazolas			= (c_DBHandler.checkvalueString((r.GetValue(r.GetOrdinal("jovedelem_igazolas")))) == "T" ? true : false);
+			md.elhunyt						= (c_DBHandler.checkvalueString((r.GetValue(r.GetOrdinal("elhunyt")))) == "T" ? true : false);
+			md.allapot						= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("allapot")));
+			md.vallas						= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("vallas")));
+			md.környezettanulmanyt_végezte	= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("környezettanulmanyt_végezte")));
 			md.környezettanulmany_idopontja = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("környezettanulmany_idopontja")));
-			md.hozzaadas_datuma = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("hozzaadas_datuma")));
-			md.felvevo_profil = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("felvevo_profil")));
-			md.legutobb_modositotta = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("legutobb_modositotta")));
-			md.legutobbi_modositas_datuma = c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("legutobbi_modositas_datuma")));
+			md.hozzaadas_datuma				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("hozzaadas_datuma")));
+			md.felvevo_profil				= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("felvevo_profil")));
+			md.legutobb_modositotta			= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("legutobb_modositotta")));
+			md.legutobbi_modositas_datuma	= c_DBHandler.checkvalueString(r.GetValue(r.GetOrdinal("legutobbi_modositas_datuma")));
 
 
 			cad.cust_0_mainData = md;
@@ -277,6 +278,11 @@ namespace CaritasManager
 			return cad;
 		}
 
+		/*public static List<c_SomeData> getSomeData(SQLiteConnection sqlc, int custid)
+		{
+			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,lakcim_zip,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel where ";
+			return null;
+		}*/
 
 		//Queries from backups database
 

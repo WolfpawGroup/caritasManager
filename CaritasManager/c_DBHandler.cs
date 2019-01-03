@@ -10,12 +10,12 @@ namespace CaritasManager
 {
 	public static class c_DBHandler
 	{
-		public static SHA512CryptoServiceProvider sha5 = new SHA512CryptoServiceProvider();
-		private static string ptwvnq9 = "fDo6Y2FyaXRh";
-		private static string pfoaywe = "c19jaGFuZ2Vz";
-		private static string powv89w = "OjpjYXJpdGFz";
-		private static string pfinwhk = "LnNxbGl0ZTo6";
-		private static string pthwnqc = "X2RhdGFiYXNl";
+		public static SHA512CryptoServiceProvider sha5	= new SHA512CryptoServiceProvider();
+		private static string ptwvnq9					= "fDo6Y2FyaXRh";
+		private static string pfoaywe					= "c19jaGFuZ2Vz";
+		private static string powv89w					= "OjpjYXJpdGFz";
+		private static string pfinwhk					= "LnNxbGl0ZTo6";
+		private static string pthwnqc					= "X2RhdGFiYXNl";
 		
 		//Metódusok amik lekérdeznek adatokat az adatbázis(ok)ból
 		#region Lekérdezés
@@ -41,6 +41,13 @@ namespace CaritasManager
 			return lst;
 		}
 
+		/*public static List<c_SomeData> getSomeData(SQLiteConnection sqlc, int custid)
+		{
+			if (!connectioinOpen(sqlc)) { return null; }
+			List<c_SomeData> data = c_Query_DBHandler.getSomeData(sqlc, custid);
+			return data;
+		}*/
+
 		//Changes and deleted customers
 
 		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc2)
@@ -65,10 +72,7 @@ namespace CaritasManager
 		
 
 		#endregion
-
-
-
-
+		
 		public static int addNewCustomerAllData(SQLiteConnection sqlc, mainData md)
 		{
 			if (!connectioinOpen(sqlc)) { return -1; }
@@ -185,11 +189,7 @@ namespace CaritasManager
 			return custid;
 		}
 
-
 		
-
-		
-
 		//===== Metódusok amik írnak adatokat az adatbázis(ok)ba (új sor vagy update) =====//
 		#region Új Sor és Módosítás
 
@@ -1039,33 +1039,33 @@ namespace CaritasManager
 			{
 				sqlk.CommandText = "CREATE TABLE ugyfel " +
 									"(" +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"nev TEXT, " +
-										"születesi_nev TEXT, " +
-										"szig_szam TEXT, " +
-										"lakcim_varos TEXT, " +
-										"lakcim_uh TEXT, " +
-										"lakcim_zip TEXT" + 
-										"szul_datum TEXT, " +
-										"szul_hely TEXT, " +
-										"csaladi_allapot INTEGER, " +
-										"anyja_neve TEXT, " +
-										"vegzettseg TEXT, " +
-										"foglalkozas TEXT, " +
-										"szakkepzettseg TEXT, " +
-										"munkaltato TEXT, " +
-										"azonosito TEXT, " +
-										"utolso_tamogatas_idopontja TEXT, " +
-										"jovedelem_igazolas TEXT, " +
-										"elhunyt TEXT, " +
-										"allapot TEXT," +   //nagycsaládos, hajléktalan, hátrányos helyzetű...
-										"vallas TEXT, " +	//INT if general religion, name of religion if MISC
-										"környezettanulmanyt_végezte TEXT, " +
-										"környezettanulmany_idopontja TEXT, " +
-										"hozzaadas_datuma TEXT, " +
-										"felvevo_profil TEXT," +
-										"legutobb_modositotta TEXT," +
-										"legutobbi_modositas_datuma TEXT" +
+										"id								INTEGER PRIMARY KEY AUTOINCREMENT,	"	+
+										"nev							TEXT,								"	+
+										"születesi_nev					TEXT,								"	+
+										"szig_szam						TEXT,								"	+
+										"lakcim_varos					TEXT,								"	+
+										"lakcim_uh						TEXT,								"	+
+										"lakcim_zip						TEXT,								"	+ 
+										"szul_datum						TEXT,								"	+
+										"szul_hely						TEXT,								"	+
+										"csaladi_allapot				INTEGER,							"	+
+										"anyja_neve						TEXT,								"	+
+										"vegzettseg						TEXT,								"	+
+										"foglalkozas					TEXT,								"	+
+										"szakkepzettseg					TEXT,								"	+
+										"munkaltato						TEXT,								"	+
+										"azonosito						TEXT,								"	+
+										"utolso_tamogatas_idopontja		TEXT,								"	+
+										"jovedelem_igazolas				TEXT,								"	+
+										"elhunyt						TEXT,								"	+
+										"allapot						TEXT,								"	+	//nagycsaládos, hajléktalan, hátrányos helyzetű...
+										"vallas							TEXT,								"	+	//INT if general religion, name of religion if MISC
+										"környezettanulmanyt_végezte	TEXT,								"	+
+										"környezettanulmany_idopontja	TEXT,								"	+
+										"hozzaadas_datuma				TEXT,								"	+
+										"felvevo_profil					TEXT,								"	+
+										"legutobb_modositotta			TEXT,								"	+
+										"legutobbi_modositas_datuma		TEXT								"	+
 									")";
 
 				executeNonQuery(sqlk);

@@ -17,13 +17,16 @@ namespace CaritasManager
 	public partial class Form1 : Form
 	{
 		public	profile						login_profile			{ get; set; }
-		public	SQLiteConnection			sqlc					= null;
-		public	bool						showKin					= false;
-		public	bool						backupForCurrentDate	= false;
-		public	bool						scrollMovePosition		= false;
-		private	int							showKinCheck			= 0;
-		private List<city>					cities					= new List<city>();
-		private	DataGridViewCellEventArgs	showKinArgs				= null;
+		public	SQLiteConnection			Sqlc					= null;
+		public	bool						ShowKin					= false;
+		public	bool						BackupForCurrentDate	= false;
+		public	bool						ScrollMovePosition		= false;
+		private	int							_showKinCheck			= 0;
+		private List<city>					_cities					= new List<city>();
+		private	DataGridViewCellEventArgs	_showKinArgs			= null;
+		private bool						_infoPanelOpen			= false;
+		private Bitmap						img						= new Bitmap(22, 22);
+		private Bitmap						img2					= new Bitmap(22, 22);
 
 		public Form1()
 		{
@@ -31,6 +34,41 @@ namespace CaritasManager
 
 			Load += Form1_Load;
 
+			dg_DataTable.CellMouseLeave		+= dg_DataTable_CellMouseLeave;
+			dg_DataTable.CellMouseEnter		+= dg_DataTable_CellMouseEnter;
+			dg_DataTable.CellClick			+= dg_DataTable_CellClick;
+			dg_DataTable.CellContentClick	+= dg_DataTable_CellContentClick;
+			dg_DataTable.CellDoubleClick	+= dg_DataTable_CellDoubleClick;
+			dg_DataTable.SelectionChanged	+= dg_DataTable_SelectionChanged;
+			dg_DataTable.ColumnWidthChanged += dg_DataTable_ColumnWidthChanged;
+			MouseWheel						+= Form1_MouseWheel;
+			
+
+		}
+
+		private void Form1_MouseWheel(object sender, MouseEventArgs e)
+		{
+			if (dg_DataTable.Bounds.Contains(PointToClient(Cursor.Position)))
+			{
+				try
+				{
+					if (e.Delta > 0)
+					{
+						if (dg_DataTable.FirstDisplayedScrollingRowIndex > 0)
+						{
+							dg_DataTable.FirstDisplayedScrollingRowIndex--;
+						}
+					}
+					else
+					{
+						dg_DataTable.FirstDisplayedScrollingRowIndex++;
+					}
+				}
+				catch(Exception ex)
+				{
+					Console.WriteLine(ex.ToString());
+				}
+			}
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -49,7 +87,7 @@ namespace CaritasManager
 				foreach (XmlNode x in xmld.GetElementsByTagName("city"))
 				{
 					city _c = new city() { name = x.FirstChild.InnerText, zipcode = x.LastChild.InnerText };
-					cities.Add(_c);
+					_cities.Add(_c);
 				}
 			}
 			catch
@@ -67,7 +105,7 @@ namespace CaritasManager
 				Color.FromArgb(Convert.ToInt32(login_profile.color_3))
 			};
 
-			scrollMovePosition = Properties.Settings.Default.s_ScrollMovePosition;
+			ScrollMovePosition = Properties.Settings.Default.s_ScrollMovePosition;
 
 			tb_Filter_City.AutoCompleteCustomSource.AddRange(Properties.Resources.telepulesek.Replace("\r", "").Split('\n'));
 
@@ -82,7 +120,7 @@ namespace CaritasManager
 
 		private void Dg_DataTable_MouseWheel(object sender, MouseEventArgs e)
 		{
-			if (scrollMovePosition)
+			if (ScrollMovePosition)
 			{
 				((HandledMouseEventArgs)e).Handled = true;
 
@@ -110,20 +148,20 @@ namespace CaritasManager
 		
 		private void dg_DataTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
-			showKin = false;
+			ShowKin = false;
 			t_Timer.Stop();
 			tt_Tooltip.hide();
 		}
 
-		private void dataGridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+		private void dg_DataTable_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.ColumnIndex == 0)
 			{
 				try
 				{
-					showKin = true;
-					showKinArgs = e;
-					showKinCheck = 0;
+					ShowKin = true;
+					_showKinArgs = e;
+					_showKinCheck = 0;
 					t_Timer.Start();
 				}
 				catch
@@ -133,14 +171,14 @@ namespace CaritasManager
 			}
 			else
 			{
-				showKin = false;
+				ShowKin = false;
 				t_Timer.Stop();
 				tt_Tooltip.hide();
 			}
 			//
 		}
 
-		private void ShowKin(DataGridViewCellEventArgs e)
+		private void ShowCustomerKin(DataGridViewCellEventArgs e)
 		{
 			try
 			{
@@ -188,7 +226,7 @@ namespace CaritasManager
 
 		private void fillMainList()
 		{
-			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(sqlc, " where 1=1");
+			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(Sqlc, " where 1=1");
 
 			fillRows(lst);
 
@@ -200,9 +238,7 @@ namespace CaritasManager
 			dg_DataTable.Rows.Clear();
 
 			int I = 0;
-
-			Bitmap img = new Bitmap(22, 22);
-			Bitmap img2 = new Bitmap(22, 22);
+			
 			using (Graphics g = Graphics.FromImage(img))
 			{
 				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
@@ -212,7 +248,7 @@ namespace CaritasManager
 			foreach (c_MainDataRow mdr in lst)
 			{
 				DateTime n = DateTime.Now;
-				int lasts = 0;// (mdr.lastSupport as DateTime?) != null ? (int)Math.Floor((new DateTime(n.Year, n.Month, n.Day) - (DateTime)mdr.lastSupport).TotalDays) : 30;
+				int lasts = 0;
 
 				if((mdr.lastSupport as DateTime?) == null)
 				{
@@ -240,6 +276,7 @@ namespace CaritasManager
 					}
 				);
 				dg_DataTable.Rows[I].Cells[0].Tag = new object[] { mdr.kin, mdr.id };
+				dg_DataTable.Rows[I].Cells[1].Tag = mdr;
 
 				Color c = lasts == 0 ? Color.FromArgb(Convert.ToInt32(login_profile.color_1)) : (lasts == 1 ? Color.FromArgb(Convert.ToInt32(login_profile.color_2)) : Color.FromArgb(Convert.ToInt32(login_profile.color_3)));
 
@@ -254,17 +291,17 @@ namespace CaritasManager
 
 		private void t_Timer_Tick(object sender, EventArgs e)
 		{
-			if (showKinCheck >= 8)
+			if (_showKinCheck >= 8)
 			{
-				if (showKin == true)
+				if (ShowKin == true)
 				{
 					t_Timer.Stop();
-					ShowKin(showKinArgs);
+					ShowCustomerKin(_showKinArgs);
 				}
-				showKinCheck = 0;
+				_showKinCheck = 0;
 			}
 
-			showKinCheck++;
+			_showKinCheck++;
 		}
 
 		private void btn_Exit_Click(object sender, EventArgs e)
@@ -276,8 +313,8 @@ namespace CaritasManager
 		{
 			f_AddCustomer fad = new f_AddCustomer();
 			fad.login_profile = login_profile;
-			fad.sqlc = sqlc;
-			fad.cities = cities;
+			fad.sqlc = Sqlc;
+			fad.cities = _cities;
 			fad.ShowDialog();
 			if (fad.reload) { fillMainList(); }
 			int cid = -1;
@@ -287,8 +324,8 @@ namespace CaritasManager
 				fillMainList();
 				fad = new f_AddCustomer();
 				fad.login_profile = login_profile;
-				fad.sqlc = sqlc;
-				fad.cities = cities;
+				fad.sqlc = Sqlc;
+				fad.cities = _cities;
 				fad.edit = true;
 				fad.customer_id = cid;
 				fad.ShowDialog();
@@ -297,10 +334,9 @@ namespace CaritasManager
 
 		int selectedrow = 0;
 
-		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
+		private void commentedout(object sender, DataGridViewCellEventArgs e)
 		{
-			selectedrow = e.RowIndex;
-			lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
+			
 			//dg_DataTable.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
 
 			//TODO: add some form of selection marker to this thing...
@@ -317,12 +353,6 @@ namespace CaritasManager
 			*/
 			/*Ehh... good enough...*/
 		}
-
-		private void dg_DataTable_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-		{
-			
-		}
-
 
 		private void button2_Click(object sender, EventArgs e)
 		{
@@ -342,7 +372,7 @@ namespace CaritasManager
 
 					f_Aids fa = new f_Aids()
 					{
-						sqlc = sqlc,
+						sqlc = Sqlc,
 						customer_id = Convert.ToInt32((dg_DataTable.Rows[e.RowIndex].Cells[0].Tag as object[])[1].ToString())
 					};
 					fa.ShowDialog();
@@ -360,11 +390,6 @@ namespace CaritasManager
 			}
 		}
 
-		private void dg_DataTable_KeyDown(object sender, KeyEventArgs e)
-		{
-			
-		}
-
 		private void toolStripButton1_Click(object sender, EventArgs e)
 		{
 			if(dg_DataTable.SelectedRows != null && dg_DataTable.SelectedRows.Count > 0 && dg_DataTable.SelectedRows[0].Cells[0].Tag != null)
@@ -375,8 +400,8 @@ namespace CaritasManager
 					f_AddCustomer fa = new f_AddCustomer()
 					{
 						edit = true,
-						sqlc = sqlc,
-						cities = cities,
+						sqlc = Sqlc,
+						cities = _cities,
 						customer_id = Convert.ToInt32(oo[1]),
 						login_profile = login_profile
 					};
@@ -400,7 +425,7 @@ namespace CaritasManager
 			{
 				if (loc == "" || !Directory.Exists(loc))
 				{
-					loc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\CaritasManager Adatbázis biztonsági mentés" + (backupForCurrentDate ? " " + DateTime.Now.ToShortDateString() : "");
+					loc = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\CaritasManager Adatbázis biztonsági mentés" + (BackupForCurrentDate ? " " + DateTime.Now.ToShortDateString() : "");
 					Directory.CreateDirectory(loc);
 				}
 
@@ -440,12 +465,12 @@ namespace CaritasManager
 			if (cb_Filter_State.Text != "")
 			{
 				if (where.Trim() != "where") { where += " AND "; }
-				where += $" trim(instr(lower(allapot)), '{cb_Filter_State.Text.ToLower().Trim()}')";
+				where += $" instr(trim(lower(allapot)), '{cb_Filter_State.Text.ToLower().Trim()}')";
 			}
 
 			if (where.ToLower().Trim() == "where") { where = ""; }
 
-			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(sqlc, where);
+			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(Sqlc, where);
 
 			fillRows(lst);
 
@@ -454,7 +479,7 @@ namespace CaritasManager
 
 		private void btn_ClearFilter_Click(object sender, EventArgs e)
 		{
-			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(sqlc, "");
+			List<c_MainDataRow> lst = c_DBHandler.getMainRowData(Sqlc, "");
 
 			fillRows(lst);
 
@@ -463,18 +488,13 @@ namespace CaritasManager
 			
 		}
 
-		private void dg_DataTable_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-		{
-
-		}
-
 		private void btn_Settings_Click(object sender, EventArgs e)
 		{
 			f_Settings fs = new f_Settings();
-			fs.sqlc = sqlc;
+			fs.sqlc = Sqlc;
 			fs.prof = login_profile;
 			fs.ShowDialog();
-			foreach(profile p in c_DBHandler.getProfiles(sqlc))
+			foreach(profile p in c_DBHandler.getProfiles(Sqlc))
 			{
 				if(p.name == login_profile.name) { login_profile = p; }
 			}
@@ -489,10 +509,12 @@ namespace CaritasManager
 			toolStripButton1_Click(null,null);
 		}
 
-		private void dg_DataTable_CellClick_1(object sender, DataGridViewCellEventArgs e)
+		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			selectedrow = e.RowIndex;
 			fillOtherData();
+			selectedrow = e.RowIndex;
+			lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
 		}
 
 		private void dg_DataTable_SelectionChanged(object sender, EventArgs e)
@@ -503,15 +525,80 @@ namespace CaritasManager
 
 		public void fillOtherData()
 		{
+			lb_SelectedCustomer_Kin.Items.Clear();
+			lb_SelectedCustomer_State.Items.Clear();
 			//TODO: Add select for some extended data for customer selection
 			//var cust = getSomeData();
-			lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
-			lbl_SelectedCustomer_ID.Text = "#" + dg_DataTable.Rows[selectedrow].Cells[2].Value.ToString();
+			try
+			{
+				DataGridViewRow x = dg_DataTable.Rows[selectedrow];
+				lbl_SelectedCustomer_Name.Text = dg_DataTable.Rows[selectedrow].Cells[0].Value.ToString();
+				lbl_SelectedCustomer_ID.Text = "#" + x.Cells[2].Value.ToString();
+
+				c_MainDataRow data = x.Cells[1].Tag as c_MainDataRow;
+				if (data != null)
+				{
+					lbl_SelectedCustomer_Added.Text = data.dateAdded.ToShortDateString();
+					if (data.lastSupport == null)
+					{
+						lbl_SelectedCustomer_LastSupported.Text = "";
+					}
+					else
+					{
+						lbl_SelectedCustomer_LastSupported.Text = ((DateTime)data.lastSupport).ToShortDateString();
+					}
+					lbl_SelectedCustomer_JILead.Text			= data.j == true ? "PIPA" : "IX";
+					lbl_SelectedCustomer_Dwelling_City.Text		= data.city;
+					lbl_SelectedCustomer_Dwelling_ZipCode.Text	= data.zip;
+					lbl_SelectedCustomer_Dwelling_Street.Text	= data.houseno;
+					foreach(string s in data.kin)
+					{
+						lb_SelectedCustomer_Kin.Items.Add(s);
+					}
+
+					foreach(string s in data.state.Split('|'))
+					{
+						lb_SelectedCustomer_State.Items.Add(s);
+					}
+				}
+			}
+			catch(Exception ex)
+			{
+				Console.Error.Write(ex.ToString());
+			}
 		}
 
-		private void panel1_Paint(object sender, PaintEventArgs e)
+		public void clearPanels()
 		{
+			p_FilterContainer.Refresh();
+			p_FilterContainerInner.Refresh();
+			p_FilterPartition.Refresh();
+		}
 
+		private void dg_DataTable_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+		{
+			clearPanels();
+		}
+
+		private void lbl_AdditionalInfo_Click(object sender, EventArgs e)
+		{
+			if (_infoPanelOpen)
+			{
+				p_FilterContainer.Height -= 82;
+				lbl_AdditionalInfo.Text = lbl_AdditionalInfo.Text.Replace("▼", "▲");
+			}
+			else
+			{
+				p_FilterContainer.Height += 82;
+				lbl_AdditionalInfo.Text = lbl_AdditionalInfo.Text.Replace("▲", "▼");
+			}
+
+			_infoPanelOpen = !_infoPanelOpen;
+		}
+
+		private void dg_DataTable_MouseEnter(object sender, EventArgs e)
+		{
+			
 		}
 	}
 }

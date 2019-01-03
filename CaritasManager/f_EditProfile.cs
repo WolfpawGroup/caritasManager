@@ -19,13 +19,13 @@ namespace CaritasManager
 
 		Font fnt			= null;
 
-		string fontFamily	= "";
-		string fontSize		= "";
-		string fontStyle	= "";
-		string fontColor	= "";
-		string color_1		= "";
-		string color_2		= "";
-		string color_3		= "";
+		string fontFamily	= "Consolas";
+		string fontSize		= "14";
+		string fontStyle	= "0";
+		string fontColor	= Color.Black.ToArgb().ToString();
+		string color_1		= Color.LightGreen.ToArgb().ToString();
+		string color_2		= Color.Moccasin.ToArgb().ToString();
+		string color_3		= Color.LightGreen.ToArgb().ToString();
 
 		string[] tests		= new string[] { "Teszt", "Félkövér", "Dőlt", "Félkövér és Dőlt", "0123456789 ! ? . ,", "Árvíztűrő tükörfúrógép", "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyz", "AÁBCDEÉFGHIÍJKLMNOÓÖŐPQRSTUÚÜŰVWXYZ" };
 
