@@ -145,9 +145,6 @@
   <data name="furniture_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\furniture_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="homeless_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\homeless_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="home_0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home_0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -16354,5 +16351,86 @@ Zsurk</value>
 &lt;zip&gt;3723&lt;/zip&gt;
 &lt;/city&gt;
 &lt;/cities&gt;</value>
+  </data>
+  <data name="caritas" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\caritas.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="caritas2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\caritas2.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ccby40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ccby40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ccbynd30" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ccbynd30.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="game_icons" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game-icons.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addDB_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addDB_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="addDB_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\addDB_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backupDB_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\backupDB_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chart_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chart_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chart_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chart_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="csv_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\csv_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="csv_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\csv_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dir_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dir_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="expand_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\expand_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="expand_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\expand_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="female_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\female_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="info_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="male_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\male_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="paper_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\paper_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pawprint_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pawprint_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="question_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\question_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skype_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skype_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skype_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\skype_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

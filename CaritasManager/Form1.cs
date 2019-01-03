@@ -16,6 +16,7 @@ namespace CaritasManager
 {
 	public partial class Form1 : Form
 	{
+		public	f_Splash					splashscreen			{ get; set; }
 		public	profile						login_profile			{ get; set; }
 		public	SQLiteConnection			Sqlc					= null;
 		public	bool						ShowKin					= false;
@@ -27,13 +28,14 @@ namespace CaritasManager
 		private bool						_infoPanelOpen			= false;
 		private Bitmap						img						= new Bitmap(22, 22);
 		private Bitmap						img2					= new Bitmap(22, 22);
+		private bool						fullScreen				= false;
 
 		public Form1()
 		{
 			InitializeComponent();
 
 			Load += Form1_Load;
-
+			
 			dg_DataTable.CellMouseLeave		+= dg_DataTable_CellMouseLeave;
 			dg_DataTable.CellMouseEnter		+= dg_DataTable_CellMouseEnter;
 			dg_DataTable.CellClick			+= dg_DataTable_CellClick;
@@ -42,8 +44,7 @@ namespace CaritasManager
 			dg_DataTable.SelectionChanged	+= dg_DataTable_SelectionChanged;
 			dg_DataTable.ColumnWidthChanged += dg_DataTable_ColumnWidthChanged;
 			MouseWheel						+= Form1_MouseWheel;
-			
-
+			SizeChanged						+= Form1_SizeChanged;
 		}
 
 		private void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -116,6 +117,11 @@ namespace CaritasManager
 			dg_DataTable.Invalidate();
 
 			dg_DataTable.MouseWheel += Dg_DataTable_MouseWheel;
+
+			if (splashscreen != null)
+			{
+				splashscreen.Hide();
+			}
 		}
 
 		private void Dg_DataTable_MouseWheel(object sender, MouseEventArgs e)
@@ -390,7 +396,7 @@ namespace CaritasManager
 			}
 		}
 
-		private void toolStripButton1_Click(object sender, EventArgs e)
+		private void btn_Edit_Click(object sender, EventArgs e)
 		{
 			if(dg_DataTable.SelectedRows != null && dg_DataTable.SelectedRows.Count > 0 && dg_DataTable.SelectedRows[0].Cells[0].Tag != null)
 			{
@@ -506,7 +512,7 @@ namespace CaritasManager
 
 		private void dg_DataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			toolStripButton1_Click(null,null);
+			btn_Edit_Click(null,null);
 		}
 
 		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -599,6 +605,50 @@ namespace CaritasManager
 		private void dg_DataTable_MouseEnter(object sender, EventArgs e)
 		{
 			
+		}
+
+		private bool cansizechange = true;
+
+		public void fullscreen()
+		{
+			cansizechange = false;
+			if (this.FormBorderStyle == FormBorderStyle.None)
+			{
+				this.FormBorderStyle = FormBorderStyle.Sizable;
+				this.WindowState = FormWindowState.Normal;
+			}
+			else
+			{
+				this.FormBorderStyle = FormBorderStyle.None;
+				this.WindowState = FormWindowState.Maximized;
+			}
+			cansizechange = true;
+		}
+
+		private void Form1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.F11)
+			{
+				fullscreen();
+			}
+		}
+
+		private void Form1_SizeChanged(object sender, EventArgs e)
+		{
+			if (cansizechange)
+			{
+				if (fullScreen != (WindowState == FormWindowState.Maximized))
+				{
+					fullscreen();
+				}
+				fullScreen = (WindowState == FormWindowState.Maximized);
+			}
+		}
+
+		private void btn_Help_Click(object sender, EventArgs e)
+		{
+			f_help h = new f_help();
+			h.ShowDialog();
 		}
 	}
 }
