@@ -17,24 +17,25 @@ namespace CaritasManager
 {
 	public partial class Form1 : Form
 	{
-		public	f_Splash					splashscreen			= new f_Splash(5);
-		public	profile						login_profile			{ get; set; }
+		public	f_Splash					Splashscreen			= new f_Splash(5);
+		public	profile						Login_profile			{ get; set; }
 		public	SQLiteConnection			Sqlc					= null;
+		public	SQLiteConnection			Sqlc2					= null;
 		public	bool						ShowKin					= false;
 		public	bool						BackupForCurrentDate	= false;
 		public	bool						ScrollMovePosition		= false;
 		private	int							_showKinCheck			= 0;
 		private	DataGridViewCellEventArgs	_showKinArgs			= null;
 		private bool						_infoPanelOpen			= false;
-		private Bitmap						img						= new Bitmap(22, 22);
-		private Bitmap						img2					= new Bitmap(22, 22);
-		private bool						fullScreen				= false;
+		private Bitmap						_img					= new Bitmap(22, 22);
+		private Bitmap						_img2					= new Bitmap(22, 22);
+		private bool						_fullScreen				= false;
 
 		public Form1()
 		{
 			InitializeComponent();
-			splashscreen.Show();
-			splashscreen.incrementLoad();
+			Splashscreen.Show();
+			Splashscreen.incrementLoad();
 
 			Load += Form1_Load;
 			
@@ -47,7 +48,7 @@ namespace CaritasManager
 			dg_DataTable.ColumnWidthChanged += dg_DataTable_ColumnWidthChanged;
 			MouseWheel						+= Form1_MouseWheel;
 			SizeChanged						+= Form1_SizeChanged;
-			splashscreen.incrementLoad();
+			Splashscreen.incrementLoad();
 		}
 
 		private void Form1_MouseWheel(object sender, MouseEventArgs e)
@@ -78,7 +79,7 @@ namespace CaritasManager
 		private void Form1_Load(object sender, EventArgs e)
 		{
 
-			using (Graphics g = Graphics.FromImage(img))
+			using (Graphics g = Graphics.FromImage(_img))
 			{
 				g.FillEllipse(Brushes.White, new Rectangle(1, 1, 18, 18));
 				g.DrawImage(Properties.Resources.checkmark_icon_2, new Point(0, 0));
@@ -86,12 +87,12 @@ namespace CaritasManager
 
 			createIdFile();
 
-			lbl_LoggedInAs.Text = "Belépve mint: " + login_profile.name;
+			lbl_LoggedInAs.Text = "Belépve mint: " + Login_profile.name;
 
 			Color[] c = new Color[] {
-				Color.FromArgb(Convert.ToInt32(login_profile.color_1)),
-				Color.FromArgb(Convert.ToInt32(login_profile.color_2)),
-				Color.FromArgb(Convert.ToInt32(login_profile.color_3))
+				Color.FromArgb(Convert.ToInt32(Login_profile.color_1)),
+				Color.FromArgb(Convert.ToInt32(Login_profile.color_2)),
+				Color.FromArgb(Convert.ToInt32(Login_profile.color_3))
 			};
 
 			ScrollMovePosition = Properties.Settings.Default.s_ScrollMovePosition;
@@ -99,19 +100,24 @@ namespace CaritasManager
 			tb_Filter_City.AutoCompleteCustomSource.AddRange(Properties.Resources.telepulesek.Replace("\r", "").Split('\n'));
 
 			dg_DataTable.colors = c;
-			splashscreen.incrementLoad();
+			Splashscreen.incrementLoad();
 
 			fillMainList();
-			splashscreen.incrementLoad();
+			Splashscreen.incrementLoad();
+
+			//Set Column Header autosize modes
+			ch_CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+			ch_State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			ch_AddSupport.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 
 			dg_DataTable.Invalidate();
 
 			dg_DataTable.MouseWheel += Dg_DataTable_MouseWheel;
-			splashscreen.incrementLoad();
+			Splashscreen.incrementLoad();
 
-			if (splashscreen != null)
+			if (Splashscreen != null)
 			{
-				splashscreen.Hide();
+				Splashscreen.Hide();
 			}
 		}
 
@@ -258,7 +264,7 @@ namespace CaritasManager
 					I,
 					new object[] {
 						mdr.name + (mdr.kin.Count > 0 ? "  (" + (mdr.kin.Count + 1) + ")" : ""),
-						mdr.j == true ? img : img2,
+						mdr.j == true ? _img : _img2,
 						mdr.identification,
 						mdr.city,
 						mdr.state,
@@ -273,12 +279,12 @@ namespace CaritasManager
 				row.Cells[0].Tag = new object[] { mdr.kin, mdr.id };
 				row.Cells[1].Tag = mdr;
 
-				Color c = lasts == 0 ? Color.FromArgb(Convert.ToInt32(login_profile.color_1)) : (lasts == 1 ? Color.FromArgb(Convert.ToInt32(login_profile.color_2)) : Color.FromArgb(Convert.ToInt32(login_profile.color_3)));
+				Color c = lasts == 0 ? Color.FromArgb(Convert.ToInt32(Login_profile.color_1)) : (lasts == 1 ? Color.FromArgb(Convert.ToInt32(Login_profile.color_2)) : Color.FromArgb(Convert.ToInt32(Login_profile.color_3)));
 
 				row.DefaultCellStyle.BackColor = c;
 				row.DefaultCellStyle.SelectionBackColor = c;
 
-				row.DefaultCellStyle.Font = new Font(login_profile.fontFamily, (float)Convert.ToDouble(login_profile.fontSize), (FontStyle)Convert.ToInt32(login_profile.fontStyle));
+				row.DefaultCellStyle.Font = new Font(Login_profile.fontFamily, (float)Convert.ToDouble(Login_profile.fontSize), (FontStyle)Convert.ToInt32(Login_profile.fontStyle));
 
 				I++;
 			}
@@ -307,8 +313,9 @@ namespace CaritasManager
 		private void btn_NewCustomer_Click(object sender, EventArgs e)
 		{
 			f_AddCustomer fad = new f_AddCustomer();
-			fad.login_profile = login_profile;
+			fad.login_profile = Login_profile;
 			fad.sqlc = Sqlc;
+			fad.sqlc2 = Sqlc2;
 			fad.ShowDialog();
 			if (fad.reload) { fillMainList(); }
 			int cid = -1;
@@ -317,8 +324,9 @@ namespace CaritasManager
 				cid = fad.customer_id;
 				fillMainList();
 				fad = new f_AddCustomer();
-				fad.login_profile = login_profile;
+				fad.login_profile = Login_profile;
 				fad.sqlc = Sqlc;
+				fad.sqlc2 = Sqlc2;
 				fad.edit = true;
 				fad.customer_id = cid;
 				fad.ShowDialog();
@@ -394,8 +402,9 @@ namespace CaritasManager
 					{
 						edit = true,
 						sqlc = Sqlc,
+						sqlc2 = Sqlc2,
 						customer_id = Convert.ToInt32(oo[1]),
-						login_profile = login_profile
+						login_profile = Login_profile
 					};
 
 					fa.ShowDialog();
@@ -482,16 +491,19 @@ namespace CaritasManager
 
 		private void btn_Settings_Click(object sender, EventArgs e)
 		{
-			f_Settings fs = new f_Settings();
-			fs.sqlc = Sqlc;
-			fs.prof = login_profile;
+			f_Settings fs = new f_Settings
+			{
+				sqlc = Sqlc,
+				sqlc2 = Sqlc2,
+				prof = Login_profile
+			};
 			fs.ShowDialog();
 			foreach(profile p in c_DBHandler.getProfiles(Sqlc))
 			{
-				if(p.name == login_profile.name) { login_profile = p; }
+				if(p.name == Login_profile.name) { Login_profile = p; }
 			}
 
-			dg_DataTable.colors = new Color[] { Color.FromArgb(Convert.ToInt32(login_profile.color_1)), Color.FromArgb(Convert.ToInt32(login_profile.color_2)), Color.FromArgb(Convert.ToInt32(login_profile.color_3)) };
+			dg_DataTable.colors = new Color[] { Color.FromArgb(Convert.ToInt32(Login_profile.color_1)), Color.FromArgb(Convert.ToInt32(Login_profile.color_2)), Color.FromArgb(Convert.ToInt32(Login_profile.color_3)) };
 
 			fillMainList();
 		}
@@ -626,11 +638,11 @@ namespace CaritasManager
 		{
 			if (cansizechange)
 			{
-				if (fullScreen != (WindowState == FormWindowState.Maximized))
+				if (_fullScreen != (WindowState == FormWindowState.Maximized))
 				{
 					fullscreen();
 				}
-				fullScreen = (WindowState == FormWindowState.Maximized);
+				_fullScreen = (WindowState == FormWindowState.Maximized);
 			}
 		}
 

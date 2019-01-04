@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Newtonsoft.Json;
+
 namespace CaritasManager
 {
 	public partial class f_DeletedCustomers : Form
@@ -39,8 +41,9 @@ namespace CaritasManager
 			{
 				ListViewItem lvi = new ListViewItem();
 
+				var conv = JsonConvert.DeserializeObject<mainData>(c.before);
 
-				//TODO: parse XML
+				//TODO: parse	
 				//TODO: Fill LVI with data
 				//TODO: Set lvi style
 

@@ -96,7 +96,7 @@ FROM ugyfel " + where;
 			{
 				mdr					= new c_MainDataRow();
 				mdr.id				= r.GetInt32(r.GetOrdinal("id"));
-				mdr.name			= (r.GetString(r.GetOrdinal("nev")));  //--
+				mdr.name			= (r.GetString(r.GetOrdinal("nev")));
 				mdr.j				= ((r.GetString(r.GetOrdinal("jovedelem_igazolas"))) == "T" ? true : false);
 				mdr.identification	= (r.GetString(r.GetOrdinal("azonosito")));
 				mdr.city			= (r.GetString(r.GetOrdinal("lakcim_varos")));
@@ -288,15 +288,7 @@ FROM ugyfel " + where;
 
 			return cad;
 		}
-
-		/*public static List<c_SomeData> getSomeData(SQLiteConnection sqlc, int custid)
-		{
-			string main_command = "SELECT id,nev,jovedelem_igazolas,azonosito,lakcim_varos,lakcim_uh,lakcim_zip,allapot,hozzaadas_datuma,utolso_tamogatas_idopontja FROM ugyfel where ";
-			return null;
-		}*/
-
-		//Queries from backups database
-
+		
 		/// <summary>
 		/// Returns the deleted customer list or a single deleted customer (list if custid = -1)
 		/// </summary>
@@ -315,12 +307,12 @@ FROM ugyfel " + where;
 				changes c = new changes();
 
 				c.id = c_DBHandler.checkvalueInt(reader.GetInt32(reader.GetOrdinal("id")));
-				c.cust_id = c_DBHandler.checkvalueInt(reader.GetInt32(reader.GetOrdinal("ugyfel_id")));
+				c.cust_id = c_DBHandler.checkvalueInt(reader.GetValue(reader.GetOrdinal("ugyfel_id")));
 				c.table = "ugyfel";
-				c.before = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("customer_data")));
+				c.before = c_DBHandler.checkvalueString(reader.GetValue(reader.GetOrdinal("customer_data")));
 				c.after = "";
-				c.whochanged = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("who_deleted")));
-				c.whenchanged = c_DBHandler.checkvalueString(reader.GetInt32(reader.GetOrdinal("when_deleted")));
+				c.whochanged = c_DBHandler.checkvalueString(reader.GetValue(reader.GetOrdinal("who_deleted")));
+				c.whenchanged = c_DBHandler.checkvalueString(reader.GetValue(reader.GetOrdinal("when_deleted")));
 
 				lst.Add(c);
 			}

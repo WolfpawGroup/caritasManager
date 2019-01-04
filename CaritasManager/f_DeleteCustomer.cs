@@ -13,10 +13,14 @@ namespace CaritasManager
 {
 	public partial class f_DeleteCustomer : Form
 	{
-		public SQLiteConnection sqlc { get; set; }
-		public string customerName { get; set; }
-		public int custid { get; set; }
-		public bool OK = false;
+		public SQLiteConnection		sqlc			{ get; set; }
+		public string				customerName	{ get; set; }
+		public int					custid			{ get; set; }
+		public bool					OK				= false;
+
+		public SQLiteConnection		sqlc2			{ get; set; }
+		public mainData				maindata		{ get; set; }
+		public string				who_deleted		{ get; set; }
 
 		public f_DeleteCustomer()
 		{
@@ -52,6 +56,9 @@ namespace CaritasManager
 				if (MessageBox.Show("Sikeresen törölte a [ " + customerName + " ] nevű ügyfelet.", "Ügyfél törölve!", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
 				{
 					OK = true;
+
+					c_DBHandler.addRowToDeletedUserBackupTable(sqlc2, maindata, custid.ToString(), who_deleted, DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString());
+
 					this.Close();
 				}
 			}

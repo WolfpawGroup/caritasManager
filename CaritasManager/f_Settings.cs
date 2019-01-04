@@ -15,6 +15,7 @@ namespace CaritasManager
 	{
 
 		public SQLiteConnection sqlc { get; set; }
+		public SQLiteConnection sqlc2 { get; set; }
 		public profile prof { get; set; }
 
 		public f_Settings()
@@ -52,7 +53,9 @@ namespace CaritasManager
 
 		private void btn_ShowDeletedCustomers_Click(object sender, EventArgs e)
 		{
-			f_DeletedCustomers fdc = new f_DeletedCustomers();
+			f_DeletedCustomers fdc = new f_DeletedCustomers() {
+				sqlc = sqlc2
+			};
 			fdc.ShowDialog();
 		}
 

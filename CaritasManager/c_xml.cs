@@ -9,7 +9,7 @@ namespace CaritasManager
 {
 	class c_xml
 	{
-		List<city> items = new List<city>();
+		List<city> _items = new List<city>();
 
 		public c_xml(string xml_string)
 		{
@@ -20,7 +20,7 @@ namespace CaritasManager
 			foreach (XmlNode v in document.FirstChild.ChildNodes)
 			{
 				try {
-					items.Add(new city() { name = v.FirstChild.InnerText, zipcode = v.LastChild.InnerText });
+					_items.Add(new city() { name = v.FirstChild.InnerText, zipcode = v.LastChild.InnerText });
 				} catch(Exception ex) {
 					Console.WriteLine($"Error while adding city to dictionary\r\nName: {v.FirstChild.InnerText}\r\nZipcode: {v.LastChild.InnerText}");
 					Console.Error.WriteLine(ex.Message);
@@ -33,7 +33,7 @@ namespace CaritasManager
 
 			try
 			{
-				return items.Where(x => x.zipcode == zipcode).Select(x => x.name).First();
+				return _items.Where(x => x.zipcode == zipcode).Select(x => x.name).First();
 			}
 			catch
 			{
@@ -45,7 +45,7 @@ namespace CaritasManager
 		{
 			try
 			{
-				return Convert.ToInt32(items.Where(x => x.name == cityName).Select(x => x.zipcode).First());
+				return Convert.ToInt32(_items.Where(x => x.name == cityName).Select(x => x.zipcode).First());
 			}
 			catch
 			{
@@ -55,14 +55,14 @@ namespace CaritasManager
 
 		public List<city> getItems()
 		{
-			return items;
+			return _items;
 		}
 
 		public city getCity(string cityName)
 		{
 			try
 			{
-				return items.Where(x => x.name == cityName).ToArray()[0];
+				return _items.Where(x => x.name == cityName).ToArray()[0];
 			}
 			catch
 			{
@@ -73,7 +73,7 @@ namespace CaritasManager
 		{
 			try
 			{
-				city c = items.Where(x => x.name == cityName).ToArray()[0];
+				city c = _items.Where(x => x.name == cityName).ToArray()[0];
 				if (c != null)
 				{
 					result = c;
@@ -96,7 +96,7 @@ namespace CaritasManager
 		{
 			try
 			{
-				return items.Where(x => x.zipcode == zipcode).ToArray()[0] ?? null;
+				return _items.Where(x => x.zipcode == zipcode).ToArray()[0] ?? null;
 			}
 			catch
 			{

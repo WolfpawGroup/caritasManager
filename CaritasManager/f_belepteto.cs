@@ -14,9 +14,9 @@ namespace CaritasManager
 {
 	public partial class f_belepteto : Form
 	{
-		SQLiteConnection sqlc;
-		SQLiteConnection sqlc2;
-		List<profile> profs = new List<profile>();
+		SQLiteConnection _sqlc;
+		SQLiteConnection _sqlc2;
+		List<profile> _profs = new List<profile>();
 
 		public f_belepteto()
 		{
@@ -32,13 +32,13 @@ namespace CaritasManager
                 c_DBHandler.createDBFile();
 				SQLiteConnection[] conns = c_DBHandler.connectToDB();
 
-				sqlc = conns[0];
-                sqlc.Open();
+				_sqlc = conns[0];
+                _sqlc.Open();
 
-				sqlc2 = conns[1];
-				sqlc2.Open();
+				_sqlc2 = conns[1];
+				_sqlc2.Open();
 
-                c_DBHandler.createTables(sqlc, sqlc2);
+                c_DBHandler.createTables(_sqlc, _sqlc2);
             }
 			catch (Exception ex)
 			{
@@ -47,12 +47,12 @@ namespace CaritasManager
 
 			try
             {
-                if (!c_DBHandler.checkPassword(sqlc))
+                if (!c_DBHandler.checkPassword(_sqlc))
                 {
                     MessageBox.Show("Jelenleg nincs a programban jelszó beállítva.\r\nAz OK gombra kattintás után, megjelenő ablakban állíthat be új érvényes jelszót.", "Nincs jelszó Beállítva", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     f_EditPassword fe = new f_EditPassword();
                     fe.empty = true;
-                    fe.sqlc = sqlc;
+                    fe.sqlc = _sqlc;
                     fe.ShowDialog();
                 }
             }
@@ -75,8 +75,8 @@ namespace CaritasManager
 			cb_UserProfile.Items.Clear();
 			lbl_LastLoginInfo.Text = "";
 
-			profs = c_DBHandler.getProfiles(sqlc);
-			foreach(profile p in profs)
+			_profs = c_DBHandler.getProfiles(_sqlc);
+			foreach(profile p in _profs)
 			{
 				cb_UserProfile.Items.Add(p.name);
 			}
@@ -109,7 +109,7 @@ namespace CaritasManager
 
 			profile p = new profile();
 
-			foreach (profile pp in profs)
+			foreach (profile pp in _profs)
 			{
 				if (cb_UserProfile.Text == pp.name)
 				{
@@ -120,11 +120,12 @@ namespace CaritasManager
 
 			//TODO: handle profile
 
-			if (c_DBHandler.login(sqlc, tb_Password.Text, p))
+			if (c_DBHandler.login(_sqlc, tb_Password.Text, p))
 			{
 				Form1 f = new Form1();
-				f.login_profile = p;
-				f.Sqlc = sqlc;
+				f.Login_profile = p;
+				f.Sqlc = _sqlc;
+				f.Sqlc2 = _sqlc2;
 				this.Hide();
 				f.ShowDialog();
 				this.Show();
@@ -147,7 +148,7 @@ namespace CaritasManager
 		private void btn_NewProfile_Click(object sender, EventArgs e)
 		{
 			f_EditProfile ep = new f_EditProfile();
-			ep.sqlc = sqlc;
+			ep.sqlc = _sqlc;
 			ep.edit = false;
 			ep.ShowDialog();
 			fillProfiles();
@@ -155,7 +156,7 @@ namespace CaritasManager
 
 		private void cb_UserProfile_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			foreach(profile p in profs)
+			foreach(profile p in _profs)
 			{
 				if(cb_UserProfile.Text == p.name)
 				{

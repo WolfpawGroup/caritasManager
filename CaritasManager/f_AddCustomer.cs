@@ -18,6 +18,7 @@ namespace CaritasManager
 	public partial class f_AddCustomer : Form
 	{
 		public	SQLiteConnection	sqlc			{ get; set; }
+		public	SQLiteConnection	sqlc2			{ get; set; }
 		public	profile				login_profile	{ get; set; }
 		public	List<string>		States			{ get; set; }
 		public	string				customerName	= "";
@@ -34,6 +35,7 @@ namespace CaritasManager
 		private	string				_zip			= "";
 
 		private	c_xml				_xml			= new c_xml(Properties.Resources.cities);
+		private mainData			m				= null;
 
 
 		public f_AddCustomer()
@@ -58,7 +60,7 @@ namespace CaritasManager
 			//TODO: load data from DB
 			customerAllData cad = c_DBHandler.getCustomerAllData(sqlc, customer_id);
 
-			mainData m = cad.cust_0_mainData;
+			m = cad.cust_0_mainData;
 
 			Text = "Adatlap Szerkesztése - " + m.nev;
 
@@ -148,7 +150,14 @@ namespace CaritasManager
 
 			if (int.TryParse(vallas, out int _v))
 			{
-				cb_Religion.SelectedIndex	= _v;
+				try
+				{
+					cb_Religion.SelectedIndex = _v;
+				}
+				catch
+				{
+					cb_Religion.SelectedIndex = 0;
+				}
 			}
 			else
 			{
@@ -777,10 +786,15 @@ namespace CaritasManager
 
 		private void btn_DeleteCustomer_Click(object sender, EventArgs e)
 		{
-			f_DeleteCustomer fd = new f_DeleteCustomer();
-			fd.sqlc = sqlc;
-			fd.customerName = customerName;
-			fd.custid = customer_id;
+			f_DeleteCustomer fd = new f_DeleteCustomer
+			{
+				sqlc = sqlc,
+				customerName = customerName,
+				custid = customer_id,
+				maindata = m,
+				sqlc2 = sqlc2,
+				who_deleted = login_profile.name
+			};
 			fd.ShowDialog();
 			if (fd.OK) { reload = true; this.Close(); }
 		}

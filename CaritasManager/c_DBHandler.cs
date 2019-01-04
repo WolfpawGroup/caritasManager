@@ -41,15 +41,6 @@ namespace CaritasManager
 			return lst;
 		}
 
-		/*public static List<c_SomeData> getSomeData(SQLiteConnection sqlc, int custid)
-		{
-			if (!connectioinOpen(sqlc)) { return null; }
-			List<c_SomeData> data = c_Query_DBHandler.getSomeData(sqlc, custid);
-			return data;
-		}*/
-
-		//Changes and deleted customers
-
 		public static List<changes> getDeletedCustomers(SQLiteConnection sqlc2)
 		{
 			return c_Query_DBHandler.getDeletedCustomers(sqlc2, -1);
@@ -192,6 +183,71 @@ namespace CaritasManager
 		
 		//===== Metódusok amik írnak adatokat az adatbázis(ok)ba (új sor vagy update) =====//
 		#region Új Sor és Módosítás
+		
+		//-------------------------- TÖRÖLT ÜGYFÉL
+		public static void addRowToDeletedUserBackupTable(SQLiteConnection sqlc2, mainData cust, string ugyfel_id, string who_deleted, string when_deleted)
+		{
+			if (!connectioinOpen(sqlc2)) { return; }
+			
+			string JSON_CUSTDATA_STRING = Properties.Resources.customer_backup;
+			
+			JSON_CUSTDATA_STRING = JSON_CUSTDATA_STRING
+				.Replace("{id}", cust.id.ToString())
+				.Replace("{nev}", cust.nev)
+				.Replace("{születesi_nev}", cust.születesi_nev)
+				.Replace("{szig_szam}", cust.szig_szam)
+				.Replace("{lakcim_varos}", cust.lakcim_varos)
+				.Replace("{lakcim_uh}", cust.lakcim_uh)
+				.Replace("{lakcim_zip}", cust.lakcim_zip)
+				.Replace("{szul_datum}", cust.szul_datum)
+				.Replace("{szul_hely}", cust.szul_hely)
+				.Replace("{csaladi_allapot}", cust.csaladi_allapot.ToString())
+				.Replace("{anyja_neve}", cust.anyja_neve)
+				.Replace("{vegzettseg}", cust.vegzettseg)
+				.Replace("{foglalkozas}", cust.foglalkozas)
+				.Replace("{szakkepzettseg}", cust.szakkepzettseg)
+				.Replace("{munkaltato}", cust.munkaltato)
+				.Replace("{azonosito}", cust.azonosito)
+				.Replace("{utolso_tamogatas_idopontja}", cust.utolso_tamogatas_idopontja)
+				.Replace("{jovedelem_igazolas}", cust.jovedelem_igazolas ? "T" : "F")
+				.Replace("{elhunyt}", cust.elhunyt ? "T" : "F")
+				.Replace("{allapot}", cust.allapot)
+				.Replace("{vallas}", cust.vallas)
+				.Replace("{környezettanulmanyt_végezte}", cust.környezettanulmanyt_végezte)
+				.Replace("{környezettanulmany_idopontja}", cust.környezettanulmany_idopontja)
+				.Replace("{hozzaadas_datuma}", cust.hozzaadas_datuma)
+				.Replace("{felvevo_profil}", cust.felvevo_profil)
+				.Replace("{legutobb_modositotta}", cust.legutobb_modositotta)
+				.Replace("{legutobbi_modositas_datuma}", cust.legutobbi_modositas_datuma);
+
+			string command = $@"INSERT INTO deleted_customers 
+			(
+				ugyfel_id,
+				customer_data,
+				who_deleted,
+				when_deleted
+			)
+			VALUES
+			(
+				'{ugyfel_id}',
+				'{JSON_CUSTDATA_STRING}',
+				'{who_deleted}',
+				'{when_deleted}'
+			)";
+
+			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc2);
+
+			try
+			{
+				sqlk.ExecuteNonQuery();
+				Console.WriteLine("Deleted customer data saved to backup!");
+			}
+			catch(Exception ex)
+			{
+				Console.WriteLine("Deleted customer data could not be saved");
+				Console.Error.WriteLine(ex.Message);
+			}
+		}
 
 		//-------------------------- PASSWORD
 		/// <summary>
@@ -232,7 +288,7 @@ namespace CaritasManager
 			if(p.name.Length < 1) { return "ERROR:NONAME"; }
 			//TODO: NE ENGEDJÜK MEG, HOGY ÜRES LEGYEN A NEVE!!!!!
 
-			string command = string.Format("SELECT id FROM profilok WHERE lower(profil_name)='{0}'", p.name.ToLower());
+			string command = $"SELECT id FROM profilok WHERE lower(profil_name)='{p.name.ToLower()}'";
 			SQLiteCommand sqlk = new SQLiteCommand(command, sqlc);
 
 			if (!edit)
@@ -1066,7 +1122,27 @@ namespace CaritasManager
 										"felvevo_profil					TEXT,								"	+
 										"legutobb_modositotta			TEXT,								"	+
 										"legutobbi_modositas_datuma		TEXT								"	+
-									")";
+									");\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX ugyfel_id_index ON ugyfel(id);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX ugyfel_nev_index ON ugyfel(nev);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX ugyfel_varos_index ON ugyfel(lakcim_varos);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX ugyfel_azonosito_index ON ugyfel(azonosito);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX ugyfel_lasthelp_index ON ugyfel(utolso_tamogatas_idopontja);";
 
 				executeNonQuery(sqlk);
 			}
@@ -1096,6 +1172,14 @@ namespace CaritasManager
 									")";
 
 				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX vagyon_id_index ON vagyon(id);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX vagyon_userid_index ON vagyon(ugyfel_id);\r\n";
+
+				executeNonQuery(sqlk);
 			}
 
 
@@ -1109,6 +1193,14 @@ namespace CaritasManager
 										"altalanos_szoc_helyzet INTEGER, " +
 										"rendszeres_segitsegre_szorul INTEGER" +
 									")";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX szoc_helyzet_id_index ON szoc_helyzet(id);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX szoc_helyzet_userid_index ON szoc_helyzet(ugyfel_id);\r\n";
 
 				executeNonQuery(sqlk);
 			}
@@ -1126,6 +1218,14 @@ namespace CaritasManager
 									")";
 
 				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX haztartasban_elok_id_index ON haztartasban_elok(id);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX haztartasban_elok_userid_index ON haztartasban_elok(ugyfel_id);\r\n";
+
+				executeNonQuery(sqlk);
 			}
 
 
@@ -1141,6 +1241,14 @@ namespace CaritasManager
 										"tamogatas_egysége TEXT, " +
 										"megjegyzes TEXT" +
 									")";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX tamogatasok_id_index ON tamogatasok(id);\r\n";
+
+				executeNonQuery(sqlk);
+
+				sqlk.CommandText = "CREATE INDEX tamogatasok_userid_index ON tamogatasok(ugyfel_id);\r\n";
 
 				executeNonQuery(sqlk);
 			}
@@ -1195,18 +1303,42 @@ namespace CaritasManager
 									")";
 
 				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX changelog_id_index ON changelog(id);\r\n";
+
+				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX changelog_userid_index ON changelog(ugyfel_id);\r\n";
+
+				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX changelog_table_index ON changelog(\"table\");\r\n";
+
+				executeNonQuery(sqlk2);
 			}
 
 			if (!tableExists(sqlc2, "deleted_customers"))             //------- deleted_customers
 			{
 				sqlk2.CommandText = "CREATE TABLE deleted_customers " +
 									"( " +
-										"id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-										"ugyfel_id TEXT, " +
-										"customer_data TEXT, " +
-										"who_deleted TEXT, " +
-										"when_deleted TEXT " +
+										"id				INTEGER PRIMARY KEY AUTOINCREMENT, " +
+										"ugyfel_id		TEXT, " +
+										"customer_data	TEXT, " +
+										"who_deleted	TEXT, " +
+										"when_deleted	TEXT " +
 									")";
+
+				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX deleted_id_index ON deleted_customers(id);\r\n";
+
+				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX deleted_userid_index ON deleted_customers(ugyfel_id);\r\n";
+
+				executeNonQuery(sqlk2);
+
+				sqlk2.CommandText = "CREATE INDEX deleted_data_index ON deleted_customers(customer_data);\r\n";
 
 				executeNonQuery(sqlk2);
 			}

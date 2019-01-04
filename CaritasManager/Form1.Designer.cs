@@ -657,7 +657,6 @@
 			// 
 			// ch_CustomerName
 			// 
-			this.ch_CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
 			this.ch_CustomerName.HeaderText = "Ügyfél Név";
 			this.ch_CustomerName.MinimumWidth = 200;
 			this.ch_CustomerName.Name = "ch_CustomerName";
@@ -689,8 +688,7 @@
 			this.ch_PlaceOfResidence.Width = 200;
 			// 
 			// ch_State
-			// 
-			this.ch_State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			//
 			this.ch_State.HeaderText = "Állapot";
 			this.ch_State.Name = "ch_State";
 			this.ch_State.ReadOnly = true;
@@ -709,8 +707,7 @@
 			this.ch_LastSupport.Width = 165;
 			// 
 			// ch_AddSupport
-			// 
-			this.ch_AddSupport.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+			//
 			this.ch_AddSupport.HeaderText = "Támogatás";
 			this.ch_AddSupport.MinimumWidth = 100;
 			this.ch_AddSupport.Name = "ch_AddSupport";

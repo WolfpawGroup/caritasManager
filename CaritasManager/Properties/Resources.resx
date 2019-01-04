@@ -16445,4 +16445,42 @@ Zsurk</value>
   <data name="q_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\q_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="customer_backup" xml:space="preserve">
+    <value>{
+"id": "{id}",
+"nev": "{nev}",
+"születesi_nev": "{születesi_nev}",
+"szig_szam": "{szig_szam}",
+"lakcim_varos": "{lakcim_varos}",
+"lakcim_uh": "{lakcim_uh}",
+"lakcim_zip": "{lakcim_zip}",
+"szul_datum": "{szul_datum}",
+"szul_hely": "{szul_hely}",
+"csaladi_allapot": "{csaladi_allapot}",
+"anyja_neve": "{anyja_neve}",
+"vegzettseg": "{vegzettseg}",
+"foglalkozas": "{foglalkozas}",
+"szakkepzettseg": "{szakkepzettseg}",
+"munkaltato": "{munkaltato}",
+"azonosito": "{azonosito}",
+"utolso_tamogatas_idopontja": "{utolso_tamogatas_idopontja}",
+"jovedelem_igazolas": "{jovedelem_igazolas}",
+"elhunyt": "{elhunyt}",
+"allapot": "{allapot}",
+"vallas": "{vallas}",
+"környezettanulmanyt_végezte": "{környezettanulmanyt_végezte}",
+"környezettanulmany_idopontja": "{környezettanulmany_idopontja}",
+"hozzaadas_datuma": "{hozzaadas_datuma}",
+"felvevo_profil": "{felvevo_profil}",
+"legutobb_modositotta": "{legutobb_modositotta}",
+"legutobbi_modositas_datuma": "{legutobbi_modositas_datuma}"
+}
+</value>
+  </data>
+  <data name="cb" xml:space="preserve">
+    <value>{
+	"customer":{
+		"id":							"{id}",		"nev":							"{nev}",		"születesi_nev":				"{születesi_nev}",		"szig_szam":					"{szig_szam}",		"lakcim_varos":					"{lakcim_varos}",		"lakcim_uh":					"{lakcim_uh}",		"lakcim_zip":					"{lakcim_zip}",		"szul_datum":					"{szul_datum}",		"szul_hely":					"{szul_hely}",		"csaladi_allapot":				"{csaladi_allapot}",		"anyja_neve":					"{anyja_neve}",		"vegzettseg":					"{vegzettseg}",		"foglalkozas":					"{foglalkozas}",		"szakkepzettseg":				"{szakkepzettseg}",		"munkaltato":					"{munkaltato}",		"azonosito":					"{azonosito}",		"utolso_tamogatas_idopontja":	"{utolso_tamogatas_idopontja}",		"jovedelem_igazolas":			"{jovedelem_igazolas}",		"elhunyt":						"{elhunyt}",		"allapot":						"{allapot}",		"vallas":						"{vallas}",		"környezettanulmanyt_végezte":	"{környezettanulmanyt_végezte}",		"környezettanulmany_idopontja":	"{környezettanulmany_idopontja}",		"hozzaadas_datuma":				"{hozzaadas_datuma}",		"felvevo_profil":				"{felvevo_profil}",		"legutobb_modositotta":			"{legutobb_modositotta}",		"legutobbi_modositas_datuma":	"{legutobbi_modositas_datuma}"	}
+}</value>
+  </data>
 </root>

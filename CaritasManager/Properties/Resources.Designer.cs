@@ -151,6 +151,17 @@ namespace CaritasManager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {
+        ///	&quot;customer&quot;:{
+        ///		&quot;id&quot;:							&quot;{id}&quot;,        ///		&quot;nev&quot;:							&quot;{nev}&quot;,        ///		&quot;születesi_nev&quot;:				&quot;{születesi_nev}&quot;,        ///		&quot;szig_szam&quot;:					&quot;{szig_szam}&quot;,        ///		&quot;lakcim_varos&quot;:					&quot;{lakcim_varos}&quot;,        ///		&quot;lakcim_uh&quot;:					&quot;{lakcim_uh}&quot;,        ///		&quot;lakcim_zip&quot;:					&quot;{lakcim_zip}&quot;,        ///		&quot;szul_datum&quot;:					&quot;{szul_datum}&quot;,        ///		&quot;szul_hely&quot;:					&quot;{szul_hely}&quot;,        ///		&quot;csaladi_allapot&quot;:				&quot;{csaladi_allapot}&quot;,        ///		&quot;anyja_neve&quot;:					&quot;{anyja_neve}&quot;,        ///		&quot;vegzettseg&quot;:					&quot;{vegzettseg}&quot;,        ///		&quot;foglalkozas&quot;:					&quot;{foglalkozas}&quot;,        ///		&quot;szakkepzettseg&quot;:				&quot;{szakkepzettse [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string cb {
+            get {
+                return ResourceManager.GetString("cb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ccby40 {
@@ -330,6 +341,32 @@ namespace CaritasManager.Properties {
             get {
                 object obj = ResourceManager.GetObject("csv_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
+        ///&quot;id&quot;: &quot;{id}&quot;,
+        ///&quot;nev&quot;: &quot;{nev}&quot;,
+        ///&quot;születesi_nev&quot;: &quot;{születesi_nev}&quot;,
+        ///&quot;szig_szam&quot;: &quot;{szig_szam}&quot;,
+        ///&quot;lakcim_varos&quot;: &quot;{lakcim_varos}&quot;,
+        ///&quot;lakcim_uh&quot;: &quot;{lakcim_uh}&quot;,
+        ///&quot;lakcim_zip&quot;: &quot;{lakcim_zip}&quot;,
+        ///&quot;szul_datum&quot;: &quot;{szul_datum}&quot;,
+        ///&quot;szul_hely&quot;: &quot;{szul_hely}&quot;,
+        ///&quot;csaladi_allapot&quot;: &quot;{csaladi_allapot}&quot;,
+        ///&quot;anyja_neve&quot;: &quot;{anyja_neve}&quot;,
+        ///&quot;vegzettseg&quot;: &quot;{vegzettseg}&quot;,
+        ///&quot;foglalkozas&quot;: &quot;{foglalkozas}&quot;,
+        ///&quot;szakkepzettseg&quot;: &quot;{szakkepzettseg}&quot;,
+        ///&quot;munkaltato&quot;: &quot;{munkaltato}&quot;,
+        ///&quot;azonosito&quot;: &quot;{azonosito}&quot;,
+        ///&quot;utolso_tamogatas_ido [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string customer_backup {
+            get {
+                return ResourceManager.GetString("customer_backup", resourceCulture);
             }
         }
         
