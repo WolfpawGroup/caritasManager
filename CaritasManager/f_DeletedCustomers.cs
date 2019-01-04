@@ -39,14 +39,55 @@ namespace CaritasManager
 
 			foreach(changes c in lst)
 			{
-				ListViewItem lvi = new ListViewItem();
+				var definition = new
+				{
+					id =							00,
+					nev =							"",
+					születesi_nev =					"",
+					szig_szam =						"",
+					lakcim_varos =					"",
+					lakcim_uh =						"",
+					lakcim_zip =					"",
+					szul_datum =					"",
+					szul_hely =						"",
+					csaladi_allapot =				00,
+					anyja_neve =					"",
+					vegzettseg =					"",
+					foglalkozas =					"",
+					szakkepzettseg =				"",
+					munkaltato =					"",
+					azonosito =						"",
+					utolso_tamogatas_idopontja =	"",
+					jovedelem_igazolas =			"",
+					elhunyt =						"",
+					allapot =						"",
+					vallas =						00,
+					környezettanulmanyt_végezte =	"",
+					környezettanulmany_idopontja =	"",
+					hozzaadas_datuma =				"",
+					felvevo_profil =				"",
+					legutobb_modositotta =			"",
+					legutobbi_modositas_datuma =	""
+				};
 
-				var conv = JsonConvert.DeserializeObject<mainData>(c.before);
+				var conv = JsonConvert.DeserializeAnonymousType(c.before, definition);
 
-				//TODO: parse	
-				//TODO: Fill LVI with data
-				//TODO: Set lvi style
+				ListViewItem lvi = new ListViewItem() {
+					Tag = conv,
+					Text = conv.azonosito,
+					BackColor = listView1.Items.Count % 2 == 0 ? Color.LightGray : Color.LightYellow
+				};
 
+				lvi.SubItems.AddRange(new ListViewItem.ListViewSubItem[] {
+					new ListViewItem.ListViewSubItem(){ Text = conv.nev },															//ch_CustomerName
+					new ListViewItem.ListViewSubItem(){ Text = conv.lakcim_varos + " " + conv.lakcim_zip + " " + conv.lakcim_uh},	//ch_Address
+					new ListViewItem.ListViewSubItem(){ Text = conv.szul_datum },													//ch_Birth
+					new ListViewItem.ListViewSubItem(){ Text = conv.anyja_neve },													//ch_MothersName
+					new ListViewItem.ListViewSubItem(){ Text = conv.utolso_tamogatas_idopontja },									//ch_LastAid
+					new ListViewItem.ListViewSubItem(){ Text = conv.elhunyt == "T" ? "PIPA" : "IKSZ" },								//ch_PassedAway
+					new ListViewItem.ListViewSubItem(){ Text = c.whochanged },														//ch_WhoDeleted
+					new ListViewItem.ListViewSubItem(){ Text = c.whenchanged },														//ch_WhenDeleted
+				});
 				
 				listView1.Items.Add(lvi);
 			}

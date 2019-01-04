@@ -239,7 +239,7 @@
 			// 
 			// btn_Save
 			// 
-			this.btn_Save.Location = new System.Drawing.Point(386, 210);
+			this.btn_Save.Location = new System.Drawing.Point(15, 210);
 			this.btn_Save.Name = "btn_Save";
 			this.btn_Save.Size = new System.Drawing.Size(75, 23);
 			this.btn_Save.TabIndex = 15;
@@ -249,7 +249,7 @@
 			// 
 			// btn_Cancel
 			// 
-			this.btn_Cancel.Location = new System.Drawing.Point(15, 210);
+			this.btn_Cancel.Location = new System.Drawing.Point(386, 210);
 			this.btn_Cancel.Name = "btn_Cancel";
 			this.btn_Cancel.Size = new System.Drawing.Size(75, 23);
 			this.btn_Cancel.TabIndex = 16;
@@ -304,7 +304,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(473, 242);
+			this.ClientSize = new System.Drawing.Size(473, 245);
 			this.Controls.Add(this.btn_ShowDeletedCustomers);
 			this.Controls.Add(this.btn_BrowseFolder);
 			this.Controls.Add(this.tb_BackupFolder);

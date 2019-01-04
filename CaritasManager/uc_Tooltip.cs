@@ -26,7 +26,8 @@ namespace CaritasManager
 
 		private void Uc_Tooltip_Load(object sender, EventArgs e)
 		{
-			Hide(); 
+			show(new Point(500,500));
+			//Hide(); 
 		}
 
 		private Size getSize(string text)
@@ -41,6 +42,7 @@ namespace CaritasManager
 
 		public void show(Point position)
 		{
+			hide();
 			show(this.text, position);
 		}
 

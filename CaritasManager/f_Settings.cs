@@ -17,6 +17,7 @@ namespace CaritasManager
 		public SQLiteConnection sqlc { get; set; }
 		public SQLiteConnection sqlc2 { get; set; }
 		public profile prof { get; set; }
+		public bool OK = false;
 
 		public f_Settings()
 		{
@@ -61,12 +62,15 @@ namespace CaritasManager
 
 		private void btn_Cancel_Click(object sender, EventArgs e)
 		{
+			OK = false;
 			this.Close();
 		}
 
 		private void btn_Save_Click(object sender, EventArgs e)
 		{
+			OK = true;
 			//TODO: Don't forget to add settings
+			this.Close();
 		}
 	}
 }

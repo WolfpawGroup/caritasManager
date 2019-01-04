@@ -38,9 +38,11 @@ namespace CaritasManager
 			Splashscreen.incrementLoad();
 
 			Load += Form1_Load;
+
+			
 			
 			dg_DataTable.CellMouseLeave		+= dg_DataTable_CellMouseLeave;
-			dg_DataTable.CellMouseEnter		+= dg_DataTable_CellMouseEnter;
+			//dg_DataTable.CellMouseEnter		+= dg_DataTable_CellMouseEnter;
 			dg_DataTable.CellClick			+= dg_DataTable_CellClick;
 			dg_DataTable.CellContentClick	+= dg_DataTable_CellContentClick;
 			dg_DataTable.CellDoubleClick	+= dg_DataTable_CellDoubleClick;
@@ -505,7 +507,11 @@ namespace CaritasManager
 
 			dg_DataTable.colors = new Color[] { Color.FromArgb(Convert.ToInt32(Login_profile.color_1)), Color.FromArgb(Convert.ToInt32(Login_profile.color_2)), Color.FromArgb(Convert.ToInt32(Login_profile.color_3)) };
 
-			fillMainList();
+			if (fs.OK)
+			{
+				fillMainList();
+			}
+			GC.Collect();
 		}
 
 		private void dg_DataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
