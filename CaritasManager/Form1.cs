@@ -498,7 +498,10 @@ namespace CaritasManager
 
 		private void dg_DataTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			btn_Edit_Click(null,null);
+			if (e.RowIndex > -1)
+			{
+				btn_Edit_Click(null, null);
+			}
 		}
 
 		private void dg_DataTable_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -635,6 +638,17 @@ namespace CaritasManager
 		{
 			f_help h = new f_help();
 			h.ShowDialog();
+		}
+
+		private void dg_DataTable_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
+		{
+			dg_DataTable.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+			dg_DataTable.Columns[e.ColumnIndex].AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet;
+		}
+
+		private void btn_FullScreen_Click(object sender, EventArgs e)
+		{
+			fullscreen();
 		}
 	}
 }

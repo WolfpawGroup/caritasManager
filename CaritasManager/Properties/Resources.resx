@@ -16433,4 +16433,16 @@ Zsurk</value>
   <data name="skype_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\skype_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="i_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\i_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="i_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\i_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="q_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\q_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="q_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\q_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

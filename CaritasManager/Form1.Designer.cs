@@ -29,8 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.ts_Tools = new System.Windows.Forms.ToolStrip();
 			this.btn_NewCustomer = new System.Windows.Forms.ToolStripButton();
 			this.btn_Exit = new System.Windows.Forms.ToolStripButton();
@@ -77,6 +76,9 @@
 			this.lb_SelectedCustomer_State = new System.Windows.Forms.ListBox();
 			this.lb_SelectedCustomer_Kin = new System.Windows.Forms.ListBox();
 			this.dg_DataTable = new CaritasManager.myDataGridView();
+			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.btn_FullScreen = new System.Windows.Forms.ToolStripButton();
 			this.ch_CustomerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_jovedelemig = new System.Windows.Forms.DataGridViewImageColumn();
 			this.ch_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,7 +87,6 @@
 			this.ch_DateAdded = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_LastSupport = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ch_AddSupport = new System.Windows.Forms.DataGridViewButtonColumn();
-			this.tt_Tooltip = new CaritasManager.uc_Tooltip();
 			this.ts_Tools.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.p_FilterContainer.SuspendLayout();
@@ -101,15 +102,17 @@
 			this.ts_Tools.ImageScalingSize = new System.Drawing.Size(40, 40);
 			this.ts_Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btn_NewCustomer,
-            this.btn_Exit,
+            this.btn_FullScreen,
             this.btn_Help,
+            this.toolStripSeparator1,
+            this.btn_Exit,
             this.btn_Settings,
             this.btn_DatabaseBackup,
             this.btn_Edit});
 			this.ts_Tools.Location = new System.Drawing.Point(0, 0);
 			this.ts_Tools.Name = "ts_Tools";
 			this.ts_Tools.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.ts_Tools.Size = new System.Drawing.Size(966, 50);
+			this.ts_Tools.Size = new System.Drawing.Size(989, 50);
 			this.ts_Tools.TabIndex = 0;
 			this.ts_Tools.Text = "toolStrip1";
 			// 
@@ -137,12 +140,14 @@
 			// btn_Help
 			// 
 			this.btn_Help.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_Help.AutoSize = false;
 			this.btn_Help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btn_Help.Image = ((System.Drawing.Image)(resources.GetObject("btn_Help.Image")));
+			this.btn_Help.Image = global::CaritasManager.Properties.Resources.q_32;
 			this.btn_Help.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_Help.Margin = new System.Windows.Forms.Padding(0);
 			this.btn_Help.Name = "btn_Help";
-			this.btn_Help.Size = new System.Drawing.Size(44, 47);
-			this.btn_Help.Text = "toolStripButton2";
+			this.btn_Help.Size = new System.Drawing.Size(36, 32);
+			this.btn_Help.Text = "Segítség";
 			this.btn_Help.Click += new System.EventHandler(this.btn_Help_Click);
 			// 
 			// btn_Settings
@@ -188,14 +193,14 @@
             this.lbl_LoggedInAs});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 477);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(966, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(989, 22);
 			this.statusStrip1.TabIndex = 4;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
 			// lbl_NumOfCustomers
 			// 
 			this.lbl_NumOfCustomers.Name = "lbl_NumOfCustomers";
-			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(872, 17);
+			this.lbl_NumOfCustomers.Size = new System.Drawing.Size(895, 17);
 			this.lbl_NumOfCustomers.Spring = true;
 			this.lbl_NumOfCustomers.Text = "Ügyfelek száma: ";
 			this.lbl_NumOfCustomers.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -253,7 +258,7 @@
 			this.p_FilterContainer.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.p_FilterContainer.Location = new System.Drawing.Point(0, 423);
 			this.p_FilterContainer.Name = "p_FilterContainer";
-			this.p_FilterContainer.Size = new System.Drawing.Size(966, 54);
+			this.p_FilterContainer.Size = new System.Drawing.Size(989, 54);
 			this.p_FilterContainer.TabIndex = 5;
 			// 
 			// p_FilterContainerInner
@@ -270,7 +275,7 @@
 			this.p_FilterContainerInner.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.p_FilterContainerInner.Location = new System.Drawing.Point(0, 19);
 			this.p_FilterContainerInner.Name = "p_FilterContainerInner";
-			this.p_FilterContainerInner.Size = new System.Drawing.Size(966, 35);
+			this.p_FilterContainerInner.Size = new System.Drawing.Size(989, 35);
 			this.p_FilterContainerInner.TabIndex = 28;
 			// 
 			// cb_Filter_State
@@ -311,7 +316,7 @@
 			// btn_ClearFilter
 			// 
 			this.btn_ClearFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_ClearFilter.Location = new System.Drawing.Point(785, 6);
+			this.btn_ClearFilter.Location = new System.Drawing.Point(808, 6);
 			this.btn_ClearFilter.Name = "btn_ClearFilter";
 			this.btn_ClearFilter.Size = new System.Drawing.Size(91, 23);
 			this.btn_ClearFilter.TabIndex = 15;
@@ -343,7 +348,7 @@
 			// btn_Filter
 			// 
 			this.btn_Filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btn_Filter.Location = new System.Drawing.Point(882, 6);
+			this.btn_Filter.Location = new System.Drawing.Point(905, 6);
 			this.btn_Filter.Name = "btn_Filter";
 			this.btn_Filter.Size = new System.Drawing.Size(75, 23);
 			this.btn_Filter.TabIndex = 11;
@@ -375,7 +380,7 @@
 			this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label9.AutoSize = true;
 			this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label9.Location = new System.Drawing.Point(736, 19);
+			this.label9.Location = new System.Drawing.Point(759, 19);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(97, 13);
 			this.label9.TabIndex = 25;
@@ -386,7 +391,7 @@
 			this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label7.AutoSize = true;
 			this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.label7.Location = new System.Drawing.Point(500, 19);
+			this.label7.Location = new System.Drawing.Point(523, 19);
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(132, 13);
 			this.label7.TabIndex = 24;
@@ -397,7 +402,7 @@
 			this.lbl_AdditionalInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.lbl_AdditionalInfo.FlatAppearance.BorderSize = 0;
 			this.lbl_AdditionalInfo.FlatStyle = System.Windows.Forms.FlatStyle.System;
-			this.lbl_AdditionalInfo.Location = new System.Drawing.Point(855, -1);
+			this.lbl_AdditionalInfo.Location = new System.Drawing.Point(878, -1);
 			this.lbl_AdditionalInfo.Name = "lbl_AdditionalInfo";
 			this.lbl_AdditionalInfo.Size = new System.Drawing.Size(111, 17);
 			this.lbl_AdditionalInfo.TabIndex = 10;
@@ -413,7 +418,7 @@
 			this.p_FilterPartition.BackColor = System.Drawing.SystemColors.ActiveBorder;
 			this.p_FilterPartition.Location = new System.Drawing.Point(-2, 16);
 			this.p_FilterPartition.Name = "p_FilterPartition";
-			this.p_FilterPartition.Size = new System.Drawing.Size(973, 3);
+			this.p_FilterPartition.Size = new System.Drawing.Size(996, 3);
 			this.p_FilterPartition.TabIndex = 9;
 			// 
 			// lbl_SelectedCustomer_Dwelling_Street
@@ -567,7 +572,7 @@
 			this.lb_SelectedCustomer_State.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.lb_SelectedCustomer_State.FormattingEnabled = true;
-			this.lb_SelectedCustomer_State.Location = new System.Drawing.Point(739, 32);
+			this.lb_SelectedCustomer_State.Location = new System.Drawing.Point(762, 32);
 			this.lb_SelectedCustomer_State.Name = "lb_SelectedCustomer_State";
 			this.lb_SelectedCustomer_State.Size = new System.Drawing.Size(227, 4);
 			this.lb_SelectedCustomer_State.TabIndex = 30;
@@ -577,7 +582,7 @@
 			this.lb_SelectedCustomer_Kin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.lb_SelectedCustomer_Kin.FormattingEnabled = true;
-			this.lb_SelectedCustomer_Kin.Location = new System.Drawing.Point(503, 32);
+			this.lb_SelectedCustomer_Kin.Location = new System.Drawing.Point(526, 32);
 			this.lb_SelectedCustomer_Kin.Name = "lb_SelectedCustomer_Kin";
 			this.lb_SelectedCustomer_Kin.Size = new System.Drawing.Size(227, 4);
 			this.lb_SelectedCustomer_Kin.TabIndex = 29;
@@ -598,14 +603,14 @@
             this.ch_DateAdded,
             this.ch_LastSupport,
             this.ch_AddSupport});
-			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dg_DataTable.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.dg_DataTable.DefaultCellStyle = dataGridViewCellStyle2;
 			this.dg_DataTable.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dg_DataTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.dg_DataTable.Location = new System.Drawing.Point(0, 50);
@@ -615,16 +620,49 @@
 			this.dg_DataTable.RowHeadersVisible = false;
 			this.dg_DataTable.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dg_DataTable.ShowEditingIcon = false;
-			this.dg_DataTable.Size = new System.Drawing.Size(966, 373);
+			this.dg_DataTable.Size = new System.Drawing.Size(989, 373);
 			this.dg_DataTable.TabIndex = 7;
+			this.dg_DataTable.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.dg_DataTable_ColumnDividerDoubleClick);
 			this.dg_DataTable.MouseEnter += new System.EventHandler(this.dg_DataTable_MouseEnter);
+			// 
+			// tt_Tooltip
+			// 
+			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
+			this.tt_Tooltip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.tt_Tooltip.font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+			this.tt_Tooltip.Location = new System.Drawing.Point(-100, -100);
+			this.tt_Tooltip.Name = "tt_Tooltip";
+			this.tt_Tooltip.position = new System.Drawing.Point(10, 10);
+			this.tt_Tooltip.Size = new System.Drawing.Size(13, 18);
+			this.tt_Tooltip.TabIndex = 3;
+			this.tt_Tooltip.text = "poop";
+			this.tt_Tooltip.title = null;
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 50);
+			// 
+			// btn_FullScreen
+			// 
+			this.btn_FullScreen.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+			this.btn_FullScreen.AutoSize = false;
+			this.btn_FullScreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.btn_FullScreen.Image = global::CaritasManager.Properties.Resources.expand_32;
+			this.btn_FullScreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.btn_FullScreen.Name = "btn_FullScreen";
+			this.btn_FullScreen.Size = new System.Drawing.Size(36, 32);
+			this.btn_FullScreen.Click += new System.EventHandler(this.btn_FullScreen_Click);
 			// 
 			// ch_CustomerName
 			// 
-			this.ch_CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.ch_CustomerName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
 			this.ch_CustomerName.HeaderText = "Ügyfél Név";
+			this.ch_CustomerName.MinimumWidth = 200;
 			this.ch_CustomerName.Name = "ch_CustomerName";
 			this.ch_CustomerName.ReadOnly = true;
+			this.ch_CustomerName.Width = 200;
 			// 
 			// ch_jovedelemig
 			// 
@@ -633,22 +671,26 @@
 			this.ch_jovedelemig.ReadOnly = true;
 			this.ch_jovedelemig.Resizable = System.Windows.Forms.DataGridViewTriState.True;
 			this.ch_jovedelemig.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.ch_jovedelemig.Width = 22;
+			this.ch_jovedelemig.Width = 37;
 			// 
 			// ch_ID
 			// 
 			this.ch_ID.HeaderText = "Azonosító";
 			this.ch_ID.Name = "ch_ID";
 			this.ch_ID.ReadOnly = true;
+			this.ch_ID.Width = 80;
 			// 
 			// ch_PlaceOfResidence
 			// 
 			this.ch_PlaceOfResidence.HeaderText = "Lakhely";
+			this.ch_PlaceOfResidence.MinimumWidth = 200;
 			this.ch_PlaceOfResidence.Name = "ch_PlaceOfResidence";
 			this.ch_PlaceOfResidence.ReadOnly = true;
+			this.ch_PlaceOfResidence.Width = 200;
 			// 
 			// ch_State
 			// 
+			this.ch_State.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.ch_State.HeaderText = "Állapot";
 			this.ch_State.Name = "ch_State";
 			this.ch_State.ReadOnly = true;
@@ -664,31 +706,21 @@
 			this.ch_LastSupport.HeaderText = "Legutóbbi Támogatás időpontja";
 			this.ch_LastSupport.Name = "ch_LastSupport";
 			this.ch_LastSupport.ReadOnly = true;
+			this.ch_LastSupport.Width = 165;
 			// 
 			// ch_AddSupport
 			// 
+			this.ch_AddSupport.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
 			this.ch_AddSupport.HeaderText = "Támogatás";
+			this.ch_AddSupport.MinimumWidth = 100;
 			this.ch_AddSupport.Name = "ch_AddSupport";
 			this.ch_AddSupport.ReadOnly = true;
-			// 
-			// tt_Tooltip
-			// 
-			this.tt_Tooltip.BackColor = System.Drawing.Color.LightYellow;
-			this.tt_Tooltip.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.tt_Tooltip.font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-			this.tt_Tooltip.Location = new System.Drawing.Point(-100, -100);
-			this.tt_Tooltip.Name = "tt_Tooltip";
-			this.tt_Tooltip.position = new System.Drawing.Point(10, 10);
-			this.tt_Tooltip.Size = new System.Drawing.Size(13, 18);
-			this.tt_Tooltip.TabIndex = 3;
-			this.tt_Tooltip.text = "poop";
-			this.tt_Tooltip.title = null;
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(966, 499);
+			this.ClientSize = new System.Drawing.Size(989, 499);
 			this.Controls.Add(this.dg_DataTable);
 			this.Controls.Add(this.p_FilterContainer);
 			this.Controls.Add(this.tt_Tooltip);
@@ -761,6 +793,11 @@
 		private System.Windows.Forms.TextBox tb_Filter_Name;
 		private System.Windows.Forms.Label label1;
 		private myDataGridView dg_DataTable;
+		private System.Windows.Forms.ListBox lb_SelectedCustomer_State;
+		private System.Windows.Forms.ListBox lb_SelectedCustomer_Kin;
+		private System.Windows.Forms.ToolStripButton btn_Help;
+		private System.Windows.Forms.ToolStripButton btn_FullScreen;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_CustomerName;
 		private System.Windows.Forms.DataGridViewImageColumn ch_jovedelemig;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_ID;
@@ -769,9 +806,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_DateAdded;
 		private System.Windows.Forms.DataGridViewTextBoxColumn ch_LastSupport;
 		private System.Windows.Forms.DataGridViewButtonColumn ch_AddSupport;
-		private System.Windows.Forms.ListBox lb_SelectedCustomer_State;
-		private System.Windows.Forms.ListBox lb_SelectedCustomer_Kin;
-		private System.Windows.Forms.ToolStripButton btn_Help;
 	}
 }
 
